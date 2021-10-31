@@ -13,3 +13,129 @@
  *= require_tree .
  *= require_self
  */
+ table, td, th { vertical-align: middle; border: none; }
+ th { border-bottom: 1px solid #DDD; }
+ body { 
+ margin: 0 0 0 0; 
+ margin-bottom: 20px;
+ }
+
+nav {
+    min-height: 38px;
+    background-color: snow;
+    font-weight: bolder;
+    background-color: #333;
+  }
+
+nav a {
+  margin-left: 15px;
+  }
+
+nav .dropdown {
+  margin-left: 15px;
+}
+nav .dropdown:hover > .dropdown-content {
+    display: block;
+  }
+
+  nav .dropdown-content {
+    display: none;
+    position: absolute;
+    font-size: 18px;
+  }
+
+  nav .dropdown-content a {
+    padding-bottom: 5px;
+    color: white;
+    background-color: #333;
+  }
+
+ nav a.navbar-brand {
+    font-size: 27px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+ }
+
+nav a.navbar-brand:hover {
+ color: white;
+ background-color: gray;
+ font-family: Arial, Helvetica, sans-serif;
+ text-decoration: none;
+}
+
+nav a.navbar-brand:visited {
+ color: white;
+ background-color: gray;
+ font-family: Arial, Helvetica, sans-serif;
+ text-decoration: none;
+}
+
+nav a {
+margin-right: 15px;
+}
+
+.navbar-info {
+  color: white;
+  right: 0;
+  position: absolute;
+}
+
+.title {
+  background-color: #333;
+  font-size: 5rem;
+  color: white;
+}
+
+.table-title {
+  font-size: 2rem;
+  font-weight: bolder;
+  padding: 10px;
+}
+.footer {
+    background-color:#333;
+    color: white;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+} 
+
+.card-holder {
+  width: 250px;;
+  top: 40%;
+  right: 45%;
+  position: absolute;
+}
+
+.card {
+  padding: 6px;
+  background-color: #333;
+  color: white;
+}
+
+#notice {
+  font-size: 22px;
+  text-align: center;
+  padding: 8px;
+  margin: 12px 0;
+}
+
+.form {
+  position: fixed;
+  top: 250px;
+  left: 35%;
+  width: 600px;
+}
+
+.devise-links {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.devise-links a {
+    margin-right: 15px;
+
+}
