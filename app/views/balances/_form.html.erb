@@ -1,0 +1,35 @@
+<%= form_for @balance do |form| %>
+  <% if balance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(balance.errors.count, "error") %> prohibited this balance from being saved:</h2>
+
+      <ul>
+        <% balance.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <form>
+    <div class="form-group">
+      <%= form.label :balance, class: "input-group-text" %>
+      <%= form.text_field :balance, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :date, class: "input-group-text" %>
+      <%= form.date_field :date, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :account_id, class: "input-group-text" %>
+      <%= form.collection_select(:balanceable_id, Account.all, :id, :name, {}, {class: "custom-select"}) %>
+    </div>
+
+    <div class="form-group">
+      <%= form.hidden_field :balanceable_type, value: "Account" %>
+      <%= form.submit  class: "btn btn-success" %>
+    </div>
+  </form>
+<% end %>
