@@ -7,6 +7,22 @@ Rails.application.routes.draw do
     resources :balances, only: %i[edit destroy]
   end
 
+  resources :stocks do
+    get '/summary', to: 'stocks#summary'
+    resources :dividends, only: [:destroy]
+    resources :prices, only: %i[edit destroy]
+  end
+
+  get '/transactions' => "transactions#index"
+  
+  resources :quotes
+
+  resources :dividends, except: [:destroy]
+
+  resources :prices, except: %i[edit destroy]
+
+  resources :charts, only: %i[index]
+
   resources :balances, except: %i[edit destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

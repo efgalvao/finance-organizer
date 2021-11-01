@@ -1,0 +1,35 @@
+<h1>Wallet <%= @wallet.name %> Details</h1>
+
+<% if !@wallet.transactions.blank? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th> Title </th>
+        <th> Kind </th>
+        <th> Date </th>
+        <th> Category </th>
+        <th> Value </th>
+        <th> Actions </th>
+      </tr>
+      </thead>
+      <tbody>
+        <% for transaction in @wallet.transactions %>
+          <tr>
+            <td> <%= transaction.title %></td>
+            <td> <%= transaction.kind %></td>
+            <td> <%= transaction.date %></td>
+            <td> <%= transaction.category_id %></td>
+            <td> $ <%= transaction.value %></td>
+            <td> <%= link_to "Edit", edit_wallet_transaction_path(id: transaction.id, wallet_id: transaction.wallet.id), :class => "btn btn-primary" %>
+            <%= link_to 'Remove', wallet_transactions_path(id: transaction.id, wallet_id: transaction.wallet.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+      <h1> No transactions in this Wallet </h1>
+      <% end %>
+      </tbody>
+  </table>
+
+<%= link_to "New transaction", new_wallet_transaction_path(wallet_id: @wallet), :class => "btn btn-success" %><br />
+<%= link_to "Back", wallets_path, :class => "btn btn-info" %><br />

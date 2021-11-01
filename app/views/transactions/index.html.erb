@@ -1,0 +1,26 @@
+<h1> Here you can create transactions</h1>
+
+<br />
+
+Please choose a wallet.
+<% if !@wallets.blank? %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Balance </th>
+    </tr>
+    </thead>
+    <tbody>
+      <% for wallet in @wallets %>
+        <tr>
+          <td> <%= link_to wallet.name, wallet_path(id: wallet.id) %></td>
+          <td> $ <%= wallet.updated_balance %></td>
+        </tr>
+      <% end %>
+    <% else %>
+    <h1> No wallets available </h1>
+    <h4>First you need to create a wallet</h4>
+    <% end %>
+    </tbody>
+</table>
