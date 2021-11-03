@@ -29,7 +29,7 @@ class TransactionPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      Account.includes(:transactions).where(user: @user)
+      Transaction.includes(:account).where(account: {user: @user})
     end
   end
 end

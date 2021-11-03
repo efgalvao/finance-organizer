@@ -4,17 +4,16 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    account = Account.find params[:account_id]
-    @transaction = account.transactions.new(transactions_params)
+    @transaction = Transaction.new(transactions_params)
     if @transaction.save
-      redirect_to account_path(account), notice: 'Transaction succesfully created'
+      redirect_to trasaction_path(@transaction), notice: 'Transaction succesfully created'
     else
       render :new
     end
   end
 
   def index
-    @accounts = policy_scope(Account)
+    @transactions = policy_scope(Transaction)
   end
 
   def update
@@ -38,7 +37,7 @@ class TransactionsController < ApplicationController
   private
 
   def transactions_params
-    params.require(:transaction).permit(:title, :accountid, :category_id,
+    params.require(:transaction).permit(:title, :account_id, :category_id,
                                         :value, :kind, :date)
   end
 end

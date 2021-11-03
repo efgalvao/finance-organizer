@@ -1,5 +1,9 @@
-<h1>Edit Wallet</h1>
+<div class="title">
+  Edit Transaction
+</div>
 
-<%= render 'form', transaction: Transacton.find(params[:id]) %>
+<div class="form">
+  <%= render 'form', transaction: Transacton.find(params[:id]) %>
 
-<%= link_to 'Back', wallet_transactions_path, :class => "btn btn-info" %>
+  <%= link_to 'Back', wallet_transactions_path, :class => "btn btn-info" %>
+</div>
