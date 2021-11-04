@@ -22,6 +22,8 @@
           <td> $ <%= transaction.value %></td>
           <td> <%= transaction.date %></td>
           <td> <%= link_to transaction.account.name, account_path(id: transaction.account.id) %></td>
+          <td> <%= link_to 'Edit', edit_account_transaction_path(id: transaction.id, account_id: transaction.account.id), :class => "btn btn-warning" %>
+            <%= link_to 'Delete', transaction_path(id: transaction.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
         </tr>
       <% end %>
     <% else %>

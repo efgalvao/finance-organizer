@@ -3,7 +3,7 @@
 </div>
 
 <div class="form">
-  <%= render 'form', transaction: Transacton.find(params[:id]) %>
+  <%= render 'form', transaction: @transaction %>
 
-  <%= link_to 'Back', wallet_transactions_path, :class => "btn btn-info" %>
+  <%= link_to 'Back', transactions_path, :class => "btn btn-info" %>
 </div>

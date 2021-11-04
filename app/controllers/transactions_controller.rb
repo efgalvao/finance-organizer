@@ -1,7 +1,13 @@
 class TransactionsController < ApplicationController
+  before_action :set_transaction, only: %i[show edit update destroy]
+
   def new
     @transaction = Transaction.new
   end
+
+  def edit; end
+
+  def show; end
 
   def create
     @transaction = Transaction.new(transactions_params)
@@ -13,12 +19,11 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = policy_scope(Transaction)
+    @transactions = policy_scope(Transaction).current_month
   end
 
   def update
-    @transaction = Transaction.find(params[:id])
-    if @transaction.update(params[:transaction])
+    if @transaction.update(transactions_params)
       redirect_to @transaction, notice: 'Transaction updated sucessfully'
     else
       render :edit
@@ -26,9 +31,8 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
-    @transaction = Transaction.find(params[:id])
     if @transaction.destroy
-      redirect_to account_path(id: params[:account_id]), notice: 'Transaction sucessfully deleted'
+      redirect_to transactions_path(id: params[:account_id]), notice: 'Transaction sucessfully deleted'
     else
       render :delete
     end
@@ -40,4 +44,9 @@ class TransactionsController < ApplicationController
     params.require(:transaction).permit(:title, :account_id, :category_id,
                                         :value, :kind, :date)
   end
+
+    def set_transaction
+      @transaction = Transaction.find(params[:id])
+    end
+  
 end

@@ -1,35 +1,27 @@
-<h1>Wallet <%= @account.name %> Details</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th> Title </th>
+      <th> Kind </th>
+      <th> Date </th>
+      <th> Category </th>
+      <th> Value </th>
+      <th> Actions </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td> <%= @transaction.title %></td>
+          <td> <%= @transaction.kind %></td>
+          <td> <%= @transaction.date %></td>
+          <td> <%= @transaction.category_id %></td>
+          <td> $ <%= @transaction.value %></td>
+          <td> <%= link_to "Edit", edit_account_transaction_path(id: @transaction.id, account_id: @transaction.account.id), :class => "btn btn-primary" %>
+          <%= link_to 'Remove', account_transaction_path(id: @transaction.id, account_id: @transaction.account.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+          </td>
+        </tr>
+    </tbody>
+</table>
 
-<% if !@account.transactions.blank? %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th> Title </th>
-        <th> Kind </th>
-        <th> Date </th>
-        <th> Category </th>
-        <th> Value </th>
-        <th> Actions </th>
-      </tr>
-      </thead>
-      <tbody>
-        <% for account in @account.transactions %>
-          <tr>
-            <td> <%= account.title %></td>
-            <td> <%= account.kind %></td>
-            <td> <%= account.date %></td>
-            <td> <%= account.category_id %></td>
-            <td> $ <%= account.value %></td>
-            <td> <%= link_to "Edit", edit_account_transaction_path(id: transaction.id, account_id: transaction.account.id), :class => "btn btn-primary" %>
-            <%= link_to 'Remove', account_transactions_path(id: transaction.id, account_id: transaction.account.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
-            </td>
-          </tr>
-        <% end %>
-      <% else %>
-      <h1> No transactions in this Account </h1>
-      <% end %>
-      </tbody>
-  </table>
-
-<%= link_to "New transaction", new_account_transaction_path(wallet_id: @account), :class => "btn btn-success" %><br />
+<%= link_to "New transaction", new_transaction_path, :class => "btn btn-success" %><br />
 <%= link_to "Back", account_path, :class => "btn btn-info" %><br />
