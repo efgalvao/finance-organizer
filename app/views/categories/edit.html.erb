@@ -1,0 +1,10 @@
+<div class="title">
+  Edit Category
+</div>
+
+<div class="form">
+
+  <%= render 'form', category: Category.find(params[:id]) %>
+
+  <%= link_to 'Back', categories_path, :class => "btn btn-info" %>
+</div>

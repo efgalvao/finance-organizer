@@ -1,0 +1,30 @@
+<div class="title">
+  Categories
+</div>
+
+
+<% if !@categories.blank? %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Actions </th>
+    </tr>
+    </thead>
+    <tbody>
+      <% for category in @categories %>
+        <tr>
+          <td> <%= link_to category.name, category_path(category) %></td>
+          <td> <%= link_to "Edit", edit_category_path(id: category.id), :class => "btn btn-primary"  %>
+          <%= link_to 'Remove', category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+    <h1> Please, create some to organize you transactions.<br/>
+  No categories available </h1>
+    <% end %>
+    </tbody>
+</table>
+
+  <%= link_to "New Category", new_category_path, :class => "btn btn-success" %><br />
