@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<div class="title">
+    <%= @stock.name %> Details
+</div>
+
+<% if !@stock.shares.blank? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th> Aquisition Date </th>
+        <th> Aquisition Value </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for share in @stock.shares %>
+      <tr>
+        <td> <%= share.aquisition_date.strftime('%d %B - %Y') %> </td>
+        <td> <%= share.aquisition_value %> </td>
+        <td> <%= link_to "Edit", edit_share_path(id: share.id), :class => "btn btn-warning"  %>
+             <%= link_to 'Delete', share_path(id: share.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+<h2> No shares for this Stock <h2>
+<% end %>
+
+<div class="buttons">
+<%= link_to 'Back', stocks_path, :class => "btn btn-primary" %>
+
+<%= link_to 'Create share', new_share_path, class: "btn btn-success" %>
+
+  <%= link_to 'Edit', edit_stock_path(@stock), :class => "btn btn-warning" %> 
+
+  <%= link_to 'Delete', @stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
+
+</div>

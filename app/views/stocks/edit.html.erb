@@ -1,0 +1,10 @@
+<div class="title">
+  Editing stock: <%= @stock.name %>
+</div>
+
+<div class="form">
+  <%= render 'form', stock: @stock %>
+
+  <%= link_to 'Details', @stock, class: "btn btn-info" %>
+  <%= link_to 'Back', stocks_path, class: "btn btn-primary" %>
+</div>
