@@ -1,10 +1,10 @@
 <p class=" title">
   <strong>Account: &nbsp</strong>
-  <%= @account.name %>
+  <%= @transactions.first.account.name %>
 </p>
 
 <p class="summary-subtitle">
-  <strong>Transactions of the current month :</strong>
+  <strong>All transactions:</strong>
 </p>
 
 <table class="table table-hover">
@@ -18,18 +18,16 @@
       <th colspan="2">Actions</th>
     </tr>
   <tbody>
-    <% @account.current_month_transactions.each do |transaction| %>
+    <% @transactions.each do |transaction| %>
       <tr>
         <td><%= link_to transaction.title, stock_path(id: transaction.id) %></td>
         <td><%= transaction.value %></td>
         <td><%= transaction.kind %></td>
         <td><%= transaction.date %></td>
-        <td> <%= link_to 'Edit', edit_account_transaction_path(transaction), :class => "btn btn-warning" %>
+        <td> <%= link_to 'Edit', edit_account_transaction_path(account_id: transaction.account_id, id: transaction.id), :class => "btn btn-warning" %>
         <%= link_to 'Delete', transaction_path(id: transaction.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
     <tbody>
 </table>
-<%= link_to 'History', account_transactions_path(@account), :class => "btn btn-warning" %>
-<%= link_to 'Edit', edit_account_path(@account), :class => "btn btn-warning" %>
 <%= link_to 'Back', accounts_path, :class => "btn btn-primary" %>

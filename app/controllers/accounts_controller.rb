@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = policy_scope(Account)
   end
 
   # GET /accounts/1
@@ -65,6 +65,12 @@ class AccountsController < ApplicationController
   # GET/accounts/1/summary
   def summary
     @account = Account.find(params[:account_id])
+  end
+
+  def transactions_history
+    @account = Account.find(params[:account_id])
+    authorize @account
+    @transactions = @account.transactions
   end
 
   private
