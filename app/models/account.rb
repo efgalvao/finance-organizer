@@ -11,13 +11,13 @@ class Account < ApplicationRecord
 
   scope :stocks_accounts, -> { where(savings: false) }
 
-    # VALIDATIONS
-    validates :name, presence: true, uniqueness: true
-    validates :user_id, presence: true
-    validates :balance, presence: true
+  # VALIDATIONS
+  validates :name, presence: true, uniqueness: true
+  validates :user_id, presence: true
+  validates :balance, presence: true
 
   def generate_balance
-    total = stocks.inject(0) { |sum, stock| stock.updated_balance + sum }
+    total = balance + stocks.inject(0) { |sum, stock| stock.updated_balance + sum }
     if balances.current.blank?
       balance = balances.create(balance: total)
     else
@@ -61,5 +61,9 @@ class Account < ApplicationRecord
   def updated_balance
     updated_balance = balance_cents + transactions.income.sum(:value_cents) - transactions.expense.sum(:value_cents)
     Money.new(updated_balance)
+  end
+
+  def current_month_transactions
+    transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
   end
 end
