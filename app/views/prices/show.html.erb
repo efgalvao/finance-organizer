@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<div class="card-holder">
+  <div class="card mb-3">
+    <p>
+      <strong>Date:</strong>
+      <%= @price.date.strftime('%d %B - %Y') %>
+    </p>
+
+    <p>
+      <strong>Price:</strong>
+      <%= @price.price %>
+    </p>
+
+    <p>
+      <strong>Stock:</strong>
+      <%= @price.stock.name.upcase %>
+    </p>
+
+    <%= link_to 'Edit', edit_stock_price_path(id: @price.id, stock_id: @price.stock.id), :class => "btn btn-warning" %>
+    <%= link_to 'Back', prices_path, :class => "btn btn-primary" %>
+
+  </div>
+</div>
