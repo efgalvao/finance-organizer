@@ -1,1 +1,1 @@
-json.array! @balances, partial: "balances/balance", as: :balance
+json.array! @balances, partial: 'balances/balance', as: :balance

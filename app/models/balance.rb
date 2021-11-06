@@ -6,13 +6,13 @@ class Balance < ApplicationRecord
   monetize :balance_cents
 
   scope :past_date, lambda { |date|
-                      where("date BETWEEN ? AND ? ",
+                      where('date BETWEEN ? AND ?',
                             date.beginning_of_month, date.end_of_month)
                     }
 
   # Balance of current month
   scope :current, lambda {
-                    where("date BETWEEN ? AND ? ", DateTime.current.beginning_of_month,
+                    where('date BETWEEN ? AND ?', DateTime.current.beginning_of_month,
                           DateTime.current.end_of_month).limit(1)
                   }
 

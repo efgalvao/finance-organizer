@@ -4,7 +4,7 @@ class BalancesController < ApplicationController
   # GET /balances
   # GET /balances.json
   def index
-    @accounts = Account.includes(:balances).order('name asc').all
+    @accounts = policy_scope(Account).includes(:balances).order('name asc').all
   end
 
   # GET /balances/1

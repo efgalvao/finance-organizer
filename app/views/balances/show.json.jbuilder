@@ -1,1 +1,1 @@
-json.partial! "balances/balance", balance: @balance
+json.partial! 'balances/balance', balance: @balance
