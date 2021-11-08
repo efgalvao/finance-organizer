@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :accounts do
     get '/summary', to: 'accounts#summary'
+    get '/transactions', to: 'accounts#transactions_history'
     resources :balances, only: %i[edit destroy]
     resources :transactions, only: %i[edit destroy]
   end
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
 
   get '/transactions' => "transactions#index"
 
-  resources :quotes
+  resources :shares
 
   resources :dividends, except: [:destroy]
 
@@ -30,5 +31,4 @@ Rails.application.routes.draw do
 
   resources :categories
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
 end
