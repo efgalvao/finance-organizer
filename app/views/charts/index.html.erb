@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<div class="title">
+  <h1>Summary</h1>
+</div>
+
+<div class="total">
+  <%= number_to_currency(total, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(free_total, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(locked_total, unit: 'R$', separator: ',', delimiter: '') %>
+</div>
+
+<% @accounts.each do |account| %>
+  <div class="summary-subtitle">
+    <%= link_to account.name, account_summary_path(account) %>
+            <a href="" data-toggle="collapse" data-target="#collapse-<%= account.id %>" aria-expanded="false"
+                aria-controls="collapse"> &darr;</a>
+  </div>
+
+<div class="collapse" id="collapse-<%= account.id %>">
+  <div class="account">
+    <div class="chart-title">
+      Monhly account balance:
+    </div>
+  
+    <div class="summary-chart">
+      <%= line_chart account.monthly_balance, precision: 6 %>
+    </div>
+
+    <% if account.savings == false %>
+      <%= render 'stock_chart', account: account %>
+    <% end %>
+
+  </div>
+</div>
+<% end%>

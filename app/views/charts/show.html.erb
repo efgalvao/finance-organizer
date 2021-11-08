@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<div class="stock-summary">
+  <div class="stock-summary title">
+  <h1><strong>Details about <%= @stock.name %>:</strong></h1>
+  </div>
+<div class="stock-item">
+total amount of shares bought:
+</div>
+<%= @stock.quotes.size %>
+
+<div class="stock-item">
+Quotes bought this month:
+<%= @stock.quotes.bought_this_month.size %>
+</div>
+
+<div class="stock-item">
+Total amount invested:
+<%= number_to_currency(@stock.quotes.sum(:aquisition_value), unit: 'R$', separator: ',', delimiter: '') %>
+</div>
+
+<div class="stock-item">
+Average paid price:
+<%= number_to_currency(@stock.quotes.average_price, unit: 'R$', separator: ',', delimiter: '') %>
+</div>
+
+<div class="stock-item">
+Current price per share:
+<%= number_to_currency(@stock.prices.last.price, unit: 'R$', separator: ',', delimiter: '') %>
+</div>
+
+<div class="stock-item">
+Current total value:
+<%= number_to_currency(@stock.prces.sum(:price), unit: 'R$', separator: ',', delimiter: '') %>
+</div>
+
+<div class="stock-item">
+Total dividends received:
+<%= number_to_currency(@stock.dividends.sum(:value), unit: 'R$', separator: ',', delimiter: '') %>
+</div>
+</div>
+
+<div class="stock-charts">
+<h3> Price in the last 12 months:</h3>
+<%= line_chart @stock.prices.monthly_price %>
+
+
+<h3> Dividends:</h3>
+<%= line_chart @stock.dividends.monthly_dividend %>
+
+<h3><strong>Quotes Quantity:</strong></h3>
+<%= line_chart @stock.quotes.month_qty %>
+</div>

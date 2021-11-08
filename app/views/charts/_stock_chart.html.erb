@@ -1,0 +1,15 @@
+<div class="chart-title">
+  Monthly stocks value:
+</div>
+
+<div class="summary-chart">
+  <%= line_chart account.stocks.map { |stock| {
+      name: stock.name, data: stock.prices.monthly_price
+      } }, precision: 5 %>
+</div>
+
+<% account.stocks.each do |stock| %>
+  <div class="summary-stocks">
+    <%= link_to stock.name, stock_summary_path(stock), class:"summary-stock" %>
+  </div>
+<% end %>
