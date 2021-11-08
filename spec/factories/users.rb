@@ -1,0 +1,8 @@
+FactoryBot.define do
+  factory :user do
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    password { 12_345_678 }
+    password_confirmation { 123_456_78 }
+  end
+end
