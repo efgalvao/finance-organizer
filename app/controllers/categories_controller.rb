@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: %i[show update destroy]
   def new
     @category = Category.new
   end
@@ -43,7 +43,7 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :user_id)
+    params.require(:category).permit(:name, :user_id).merge(user_id: current_user.id)
   end
 
   def set_category

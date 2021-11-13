@@ -41,7 +41,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 5.0'
-  gem 'shoulda-matchers', '~> 4.5'
+  gem 'shoulda-matchers'
   gem 'rails-erd' # Visualize the database structure with `bundle exec erd --open`
 end
 

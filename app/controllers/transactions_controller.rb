@@ -12,7 +12,7 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transactions_params)
     if @transaction.save
-      redirect_to trasaction_path(@transaction), notice: 'Transaction succesfully created'
+      redirect_to transaction_path(@transaction), notice: 'Transaction succesfully created'
     else
       render :new
     end
@@ -45,8 +45,7 @@ class TransactionsController < ApplicationController
                                         :value, :kind, :date)
   end
 
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
-  
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
 end

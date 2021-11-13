@@ -20,7 +20,7 @@
   <tbody>
     <% @account.current_month_transactions.each do |transaction| %>
       <tr>
-        <td><%= link_to transaction.title, stock_path(id: transaction.id) %></td>
+        <td><%= link_to transaction.title, transaction_path(id: transaction.id) %></td>
         <td><%= transaction.value %></td>
         <td><%= transaction.kind %></td>
         <td><%= transaction.date %></td>

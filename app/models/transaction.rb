@@ -19,7 +19,7 @@ class Transaction < ApplicationRecord
   scope :income, -> { where(kind: 'income') }
 
   scope :current_month, lambda {
-    where("date >= ? AND date <= ?",
+    where('date >= ? AND date <= ?',
           Date.current.beginning_of_month,
           Date.current.end_of_month)
   }
@@ -33,8 +33,10 @@ class Transaction < ApplicationRecord
   end
 
   def set_date
-    unless self.date.present?
-      self.date = Date.current
-    end
+    return if date.present?
+
+    self.date = Date.current
   end
+
+  
 end

@@ -430,7 +430,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   scss_lint
   selenium-webdriver
-  shoulda-matchers (~> 4.5)
+  shoulda-matchers
   simplecov (~> 0.11)
   spring
   sqlite3 (~> 1.4)
