@@ -4,7 +4,7 @@ class DividendsController < ApplicationController
   # GET /dividends
   # GET /dividends.json
   def index
-    @dividends = Dividend.all.order('date desc').limit(10)
+    @stocks = policy_scope(Stock).includes(:dividends)
   end
 
   # GET /dividends/1
