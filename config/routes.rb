@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get '/summary', to: 'accounts#summary'
     get '/transactions', to: 'accounts#transactions_history'
     resources :balances, only: %i[edit destroy]
-    resources :transactions, only: %i[edit destroy]
+    resources :transactions, only: %i[edit]
   end
 
   resources :stocks do
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :balances, except: %i[edit destroy]
 
-  resources :transactions, except: %i[edit destroy]
+  resources :transactions, except: %i[edit]
 
   resources :categories
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
