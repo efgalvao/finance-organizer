@@ -8,7 +8,6 @@ class Account < ApplicationRecord
   monetize :balance_cents
 
   scope :savings_accounts, -> { where(savings: true) }
-
   scope :stocks_accounts, -> { where(savings: false) }
 
   # VALIDATIONS
@@ -16,16 +15,18 @@ class Account < ApplicationRecord
   validates :user_id, presence: true
   validates :balance, presence: true
 
-  def generate_balance
-    total = balance + stocks.inject(0) { |sum, stock| stock.updated_balance + sum }
-    if balances.current.blank?
-      balance = balances.create(balance: total)
-    else
-      balance = balances.current.first
-      balance.balance = total
-    end
-    balance.save
-    balance
+  def create_balance
+    value = balances.newest_balance&.balance || 0
+
+    balances.create(balance: value)
+  end
+
+  def update_balance(value)
+    current_month_balance = balances.current.any? ? balances.current.first : create_balance
+
+    current_month_balance.balance += value
+    current_month_balance.date = DateTime.current
+    current_month_balance.save
   end
 
   def total_invested
@@ -40,19 +41,16 @@ class Account < ApplicationRecord
     generate_balance if balances.empty?
     balancos = {}
     balances.each do |balance|
-      # puts("+++++++++++++++++++++ ", balance.balance, "\n")
-
-      balancos["#{balance.date.strftime("%B %d, %Y")}"] = balance.balance.to_f
+      balancos[balance.date.strftime('%B %d, %Y').to_s] = balance.balance.to_f
     end
-    # puts(">>>>>>>>>>>>>>>>>> ", balancos, "\n")
     # balances.group_by_month(:date, last: 12, current: true).maximum(humanized_money @money_object	)
     balancos
   end
 
   def generate_past_balance(month, year)
     date = DateTime.new(year, month, -1)
-    incomes = transactions.where(date: date.beginning_of_month...date.end_of_month, kind: "income").sum(:value_cents)
-    expenses = transactions.where(date: date.beginning_of_month...date.end_of_month, kind: "expense").sum(:value_cents)
+    incomes = transactions.where(date: date.beginning_of_month...date.end_of_month, kind: 'income').sum(:value_cents)
+    expenses = transactions.where(date: date.beginning_of_month...date.end_of_month, kind: 'expense').sum(:value_cents)
     total = (incomes - expenses) / 100.0
     total += stocks.inject(0) { |sum, stock| stock.past_stock_balance(date) + sum }
     if balances.past_date(date).first.blank?
@@ -70,8 +68,7 @@ class Account < ApplicationRecord
   end
 
   def updated_balance
-    updated_balance = balance_cents + transactions.income.sum(:value_cents) - transactions.expense.sum(:value_cents)
-    Money.new(updated_balance)
+    Money.new(balances.newest_balance.balance)
   end
 
   def current_month_transactions

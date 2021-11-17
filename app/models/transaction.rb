@@ -5,6 +5,8 @@ class Transaction < ApplicationRecord
 
   before_save :set_date
 
+  after_save :update_balance
+
   # VALIDATIONS
   validates :title, presence: true
   validates :account_id, presence: true
@@ -38,5 +40,11 @@ class Transaction < ApplicationRecord
     self.date = Date.current
   end
 
-  
+  def update_balance
+    if kind == 'income'
+      account.update_balance(value)
+    else
+      account.update_balance(-value)
+    end
+  end
 end

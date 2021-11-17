@@ -18,7 +18,7 @@
   </thead>
 
   <tbody>
-    <% account.balances.limit(12).each do |balance| %>
+    <% account.balances.order('date desc').limit(12).each do |balance| %>
       <tr>
         <td><%= balance.balance %></td>
         <td><%= balance.date.strftime('%d %B - %Y') %></td>

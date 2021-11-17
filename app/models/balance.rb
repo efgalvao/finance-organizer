@@ -22,11 +22,8 @@ class Balance < ApplicationRecord
     generate_balance if balances.empty?
     balancos = {}
     balances.each do |balance|
-      puts("+++++++++++++++++++++ ", balance.balance, "\n")
-
-      balancos["#{balance.date.strftime("%B/%Y")}"] = balance.balance.to_f
+      balancos[balance.date.strftime('%B/%Y').to_s] = balance.balance.to_f
     end
-    puts(">>>>>>>>>>>>>>>>>> ", balancos, "\n")
     # balances.group_by_month(:date, last: 12, current: true).maximum(humanized_money @money_object	)
     balancos
   end
