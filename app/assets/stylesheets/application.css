@@ -117,10 +117,11 @@ margin-right: 15px;
 }
 
 #notice {
-  font-size: 22px;
+  font-size: 30px;
+  font-weight: 700;
   text-align: center;
-  padding: 8px;
-  margin: 12px 0;
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
 .form {
