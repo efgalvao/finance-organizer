@@ -1,0 +1,26 @@
+<div class="summary">
+  <div class="summary-subtitle">
+    Summary for <%= @account.name %> account:
+  </div>
+</di>
+
+<div class="summary-item">
+  Current total value:<br />
+  <div class="item-value">
+  <%= number_to_currency(@account.updated_balance, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+   Total invested:<br />
+  <div class="item-value">
+  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="chart-title">
+Balance in the last 12 months:<br />
+</div>
+<div class="summary-chart">
+<%= line_chart @account.monthly_balance %>
+</div>
