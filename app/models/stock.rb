@@ -21,6 +21,7 @@ class Stock < ApplicationRecord
               prices.order('date desc').first&.price
             end
     return 0 if price.nil?
+
     (price * shares.count).round(2)
   end
 
@@ -54,5 +55,9 @@ class Stock < ApplicationRecord
             end
     shares_count = shares.past_date(date).count
     price * shares_count
+  end
+
+  def name_with_account
+    "#{name} (#{account.name})"
   end
 end
