@@ -14,7 +14,7 @@
 <div class="summary-item">
   Current total value:<br />
   <div class="item-value">
-  <%= number_to_currency(@account.last_balance, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency((@account.last_balance.balance + current_total_value(@account.id)), unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
@@ -58,3 +58,19 @@ Balance in the last 12 months:<br />
 <div class="summary-chart">
 <%= line_chart @account.monthly_balance %>
 </div>
+
+<div class="chart-title">
+  Monthly stocks value:
+</div>
+
+<div class="summary-chart">
+  <%= line_chart @account.stocks.map { |stock| {
+      name: stock.name, data: stock.monthly_price
+      } }, precision: 9 %>
+</div>
+
+<% @account.stocks.each do |stock| %>
+  <div class="summary-stocks">
+    <%= link_to stock.name, stock_summary_path(stock), class:"summary-stock" %>
+  </div>
+<% end %>
