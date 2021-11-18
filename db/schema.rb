@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 2021_11_04_101234) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_stocks_on_account_id"
-    t.index ["name"], name: "index_stocks_on_name", unique: true
   end
 
   create_table "transactions", force: :cascade do |t|
