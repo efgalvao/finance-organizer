@@ -14,7 +14,7 @@
 <div class="summary-item">
   Current total value:<br />
   <div class="item-value">
-  <%= number_to_currency(@account.updated_balance, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(@account.last_balance, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
@@ -33,7 +33,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Quotes</th>
+        <th>Shares</th>
         <th>Total Invested</th>
         <th>Current value</th>
       </tr>
@@ -42,7 +42,7 @@
       <% @account.stocks.each do |stock| %>
         <tr>
           <td><%= stock.name %></td>
-          <td><%= stock.quotes.count %></td>
+          <td><%= stock.shares.count %></td>
           <td><%= stock.total_invested %></td>
           <td><%= stock.updated_balance %></td>
         </tr>

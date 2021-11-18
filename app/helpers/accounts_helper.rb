@@ -4,7 +4,7 @@ module AccountsHelper
     Account.where(user: current_user).includes(:balances).all.each do |account|
       # next if account.balances.newest_balance.blank?
 
-      total += account.updated_balance
+      total += account.last_balance
     end
     total
   end

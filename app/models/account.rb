@@ -16,7 +16,7 @@ class Account < ApplicationRecord
   validates :balance, presence: true
 
   def create_balance
-    value = balances.newest_balance&.balance || 0
+    value = balances.newest_balance.first&.balance || 0
 
     balances.create(balance: value)
   end
@@ -67,8 +67,13 @@ class Account < ApplicationRecord
     user == asker
   end
 
-  def updated_balance
-    Money.new(balances.newest_balance.balance)
+  def last_balance
+    if balances.newest_balance.first.nil?
+      return create_balance
+    else
+      balances.newest_balance.first
+    end
+
   end
 
   def current_month_transactions

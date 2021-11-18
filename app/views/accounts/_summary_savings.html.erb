@@ -7,7 +7,7 @@
 <div class="summary-item">
   Current total value:<br />
   <div class="item-value">
-  <%= number_to_currency(@account.updated_balance, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(@account.last_balance, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 

@@ -16,7 +16,7 @@ class Balance < ApplicationRecord
                           DateTime.current.end_of_month).limit(1)
                   }
 
-  scope :newest_balance, -> { order('date desc').first }
+  scope :newest_balance, -> { order('date desc').limit(1) }
 
   def self.monthly_balance
     generate_balance if balances.empty?
