@@ -1,14 +1,23 @@
-<p id="notice"><%= notice %></p>
-
 <div class="title">
   <h1>Summary</h1>
 </div>
 
-<div class="total">
-  <%= number_to_currency(total, unit: 'R$', separator: ',', delimiter: '') %>
-  <%= number_to_currency(free_total, unit: 'R$', separator: ',', delimiter: '') %>
-  <%= number_to_currency(locked_total, unit: 'R$', separator: ',', delimiter: '') %>
-</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Total Balance</th>
+      <th>Free</th>
+      <th>In stocks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= number_to_currency(total, unit: 'R$', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(free_total, unit: 'R$', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(locked_total, unit: 'R$', separator: ',', delimiter: '') %></td>
+    </tr>
+  </tbody>
+</table>
 
 <% @accounts.each do |account| %>
   <div class="summary-subtitle">
