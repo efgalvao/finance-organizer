@@ -14,10 +14,10 @@
     <tbody>
       <% for share in @stock.shares %>
       <tr>
-        <td> <%= share.aquisition_date.strftime('%d %B - %Y') %> </td>
+        <td> <%= share.aquisition_date.strftime('%B %d, %Y') %> </td>
         <td> <%= share.aquisition_value %> </td>
-        <td> <%= link_to "Edit", edit_share_path(id: share.id), :class => "btn btn-warning"  %>
-             <%= link_to 'Delete', share_path(id: share.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+        <td> <%= link_to "Edit share", edit_share_path(id: share.id), :class => "btn btn-warning"  %>
+             <%= link_to 'Delete share', share_path(id: share.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
       <% end %>
     </tbody>
   </table>
@@ -30,8 +30,8 @@
 
 <%= link_to 'Create share', new_share_path, class: "btn btn-success" %>
 
-  <%= link_to 'Edit', edit_stock_path(@stock), :class => "btn btn-warning" %> 
+  <%= link_to 'Edit stock', edit_stock_path(@stock), :class => "btn btn-warning" %> 
 
-  <%= link_to 'Delete', @stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
+  <%= link_to 'Delete stock', @stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
 
 </div>

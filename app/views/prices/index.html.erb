@@ -16,7 +16,7 @@
       <% stock.prices.order('date desc').limit(10).each do |price| %>
         <tr>
           <td><%= price.stock.name %></td>
-          <td><%= price.date.strftime('%d %B - %Y') %></td>
+          <td><%= price.date.strftime('%B %d, %Y') %></td>
           <td><%= price.price %></td>
           <td><%= link_to 'Edit', edit_stock_price_path(id: price.id, stock_id: price.stock.id), :class => "btn btn-warning" %>
           <%= link_to 'Delete', stock_price_path(id: price.id, id: price.id, stock_id: price.stock.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>

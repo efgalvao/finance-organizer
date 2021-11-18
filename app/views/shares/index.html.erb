@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="title">
   Shares
 </div>
@@ -7,7 +5,7 @@
 <% @stocks.each do |stock| %>
 
 <table class="table table-hover">
-  <label class="table table-title"> Shares for <%= stock.name %>: </label>
+  <label class="table table-title"> Shares for <%= "#{stock.name} / #{stock.account.name}" %>: </label>
   <thead>
 
     <tr>
@@ -21,7 +19,7 @@
   <tbody>
     <% stock.shares.order('aquisition_date desc').limit(10).each do |share| %>
       <tr>
-        <td><%= share.aquisition_date.strftime('%d %B - %Y') %></td>
+        <td><%= share.aquisition_date.strftime('%B %d, %Y') %></td>
         <td><%= share.aquisition_value %></td>
         <td><%= share.stock.name %></td>
         <td><%= link_to 'Edit', edit_share_path(id: share.id), :class => "btn btn-warning" %>

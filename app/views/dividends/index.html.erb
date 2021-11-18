@@ -17,7 +17,7 @@
     <tbody>
       <% stock.dividends.order('date desc').limit(10).each do |dividend| %>
         <tr>
-          <td><%= dividend.date.strftime('%d %B - %Y') %></td>
+          <td><%= dividend.date.strftime('%B %d, %Y') %></td>
           <td><%= dividend.value %></td>
           <td><%= dividend.stock.name %></td>
           <td><%= link_to 'Edit', edit_dividend_path(dividend), :class => "btn btn-warning" %>
