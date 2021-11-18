@@ -35,7 +35,8 @@
         <th>Name</th>
         <th>Shares</th>
         <th>Total Invested</th>
-        <th>Current value</th>
+        <th>Current share value</th>
+        <th>Current total amount</th>
       </tr>
     </thead>
     <tbody>
@@ -44,6 +45,7 @@
           <td><%= stock.name %></td>
           <td><%= stock.shares.count %></td>
           <td><%= stock.total_invested %></td>
+          <td><%= stock.individual_price %></td>
           <td><%= stock.updated_balance %></td>
         </tr>
       <% end %>

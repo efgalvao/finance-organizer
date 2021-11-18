@@ -25,6 +25,17 @@ class Stock < ApplicationRecord
     (price * shares.count).round(2)
   end
 
+  def individual_price
+    price = if prices.order('date desc').first.nil?
+              shares.order('aquisition_date desc').first&.aquisition_value
+            else
+              prices.order('date desc').first&.price
+            end
+    return 0 if price.nil?
+
+    price.round(2)
+  end
+
   def current_price
     if prices.order('date desc').first&.price.nil?
       shares.order('aquisition_date desc').first&.aquisition_value
@@ -40,11 +51,19 @@ class Stock < ApplicationRecord
   end
 
   def monthly_price
-    if prices.empty?
-      shares.group_by_month(:aquisition_date, last: 12, current: true).average('aquisition_value')
-    else
-      pricess.group_by_month(:date, last: 12, current: true).average('price')
+    grouped_prices = {}
+    prices.each do |price|
+      grouped_prices[price.date.strftime('%B %d, %Y').to_s] = price.price.to_f
     end
+    grouped_prices
+  end
+
+  def monthly_dividends
+    grouped_dividends = {}
+    dividends.each do |dividend|
+      grouped_dividends[dividend.date.strftime('%B %d, %Y').to_s] = dividend.value.to_f
+    end
+    grouped_dividends
   end
 
   def past_stock_balance(date)

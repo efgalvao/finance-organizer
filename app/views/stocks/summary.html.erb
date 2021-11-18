@@ -7,14 +7,14 @@
 <div class="summary-item">
 total amount of shares bought:<br />
 <div class="item-value">
-<%= @stock.quotes.size %>
+<%= @stock.shares.size %>
 </div>
 </div>
 
 <div class="summary-item">
-Quotes bought this month:
+Shares bought this month:
 <div class="item-value">
-<%= @stock.quotes.bought_this_month.size %>
+<%= @stock.shares.bought_this_month.size %>
 </div>
 </div>
 
@@ -28,28 +28,28 @@ Total amount invested:<br />
 <div class="summary-item">
 Average paid price:<br />
 <div class="item-value">
-<%= number_to_currency(@stock.quotes.average_price, unit: 'R$', separator: ',', delimiter: '') %>
+<%= number_to_currency(@stock.shares.average_price, unit: 'R$', separator: ',', delimiter: '') %>
 </div>
 </div>
 
 <div class="summary-item">
 Current value per share:<br />
 <div class="item-value">
-<%= number_to_currency(@stock.current_value, unit: 'R$', separator: ',', delimiter: '') %>
+<%= number_to_currency(@stock.individual_price, unit: 'R$', separator: ',', delimiter: '') %>
 </div>
 </div>
 
 <div class="summary-item">
 Current total value:<br />
 <div class="item-value">
-<%= number_to_currency(@stock.total_current_value, unit: 'R$', separator: ',', delimiter: '') %>
+<%= number_to_currency(@stock.updated_balance, unit: 'R$', separator: ',', delimiter: '') %>
 </div>
 </div>
 
 <div class="summary-item">
 Total dividends received:<br />
 <div class="item-value">
-<%= number_to_currency(@stock.dividends.sum(:value), unit: 'R$', separator: ',', delimiter: '') %>
+<%= number_to_currency(@stock.dividends.sum(:value_cents), unit: 'R$', separator: ',', delimiter: '') %>
 </div>
 </div>
 </div>
@@ -58,16 +58,16 @@ Total dividends received:<br />
 <div class="chart-title">
 Average value in the last 12 months:
 </div>
-  <%= line_chart @stock.monthly_value, precision: 5, curve: false %>
+  <%= line_chart @stock.monthly_price, precision: 5, curve: false %>
 
   <div class="chart-title">
   Dividends:
   </div>
-  <%= line_chart @stock.dividends.monthly_dividend %>
+  <%= line_chart @stock.monthly_dividends %>
 
   <div class="chart-title">
 
-  Quotes Quantity:
+  <%# Shares Quantity:
   </div>
-  <%= column_chart @stock.quotes.month_qty %>
+  <%= column_chart @stock.shares.month_qty %>
   </div>
