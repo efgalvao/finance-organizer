@@ -1,73 +1,52 @@
-<p id="notice"><%= notice %></p>
-
 <div class="stock-summary">
   <div class="title">
-  <h1><strong>Details about <%= @stock.name %>:</strong></h1>
+    <h1><strong>Details about <%= @stock.name %>:</strong></h1>
   </div>
-<div class="summary-item">
-total amount of shares bought:<br />
-<div class="item-value">
-<%= @stock.shares.size %>
-</div>
-</div>
+  
+  <div class="summary-item">
+    Current amount of shares:<br />
+    <div class="item-value">
+      <%= @stock.shares.size %>
+    </div>
+  </div>
 
-<div class="summary-item">
-Shares bought this month:
-<div class="item-value">
-<%= @stock.shares.bought_this_month.size %>
-</div>
-</div>
+  <div class="summary-item green">
+    Total amount invested:<br />
+    <div class="item-value">
+      <%= number_to_currency(@stock.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
+    </div>
+  </div>
 
-<div class="summary-item green">
-Total amount invested:<br />
-<div class="item-value">
-<%= number_to_currency(@stock.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
-</div>
-</div>
+  <div class="summary-item">
+    Average paid price:<br />
+    <div class="item-value">
+      <%= number_to_currency(@stock.average_aquisition_price, unit: 'R$', separator: ',', delimiter: '') %>
+    </div>
+  </div>
 
-<div class="summary-item">
-Average paid price:<br />
-<div class="item-value">
-<%= number_to_currency(@stock.shares.average_price, unit: 'R$', separator: ',', delimiter: '') %>
-</div>
-</div>
+  <div class="summary-item">
+    Current value per share:<br />
+    <div class="item-value">
+      <%= number_to_currency(@stock.individual_price, unit: 'R$', separator: ',', delimiter: '') %>
+    </div>
+  </div>
 
-<div class="summary-item">
-Current value per share:<br />
-<div class="item-value">
-<%= number_to_currency(@stock.individual_price, unit: 'R$', separator: ',', delimiter: '') %>
-</div>
-</div>
-
-<div class="summary-item">
-Current total value:<br />
-<div class="item-value">
-<%= number_to_currency(@stock.updated_balance, unit: 'R$', separator: ',', delimiter: '') %>
-</div>
-</div>
-
-<div class="summary-item">
-Total dividends received:<br />
-<div class="item-value">
-<%= number_to_currency(@stock.dividends.sum(:value_cents), unit: 'R$', separator: ',', delimiter: '') %>
-</div>
-</div>
+  <div class="summary-item">
+    Current total value:<br />
+    <div class="item-value">
+      <%= number_to_currency(@stock.updated_balance, unit: 'R$', separator: ',', delimiter: '') %>
+    </div>
+  </div>
 </div>
 
 <div class="stock-charts">
-<div class="chart-title">
-Average value in the last 12 months:
-</div>
+  <div class="chart-title">
+    Average value in the last 12 months:
+  </div>
   <%= line_chart @stock.monthly_price, precision: 5, curve: false %>
 
   <div class="chart-title">
-  Dividends:
+    Dividends:
   </div>
-  <%= line_chart @stock.monthly_dividends %>
-
-  <div class="chart-title">
-
-  <%# Shares Quantity:
-  </div>
-  <%= column_chart @stock.shares.month_qty %>
-  </div>
+    <%= line_chart @stock.monthly_dividends %>
+</div>

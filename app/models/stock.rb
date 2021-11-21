@@ -11,7 +11,11 @@ class Stock < ApplicationRecord
   end
 
   def total_invested
-    shares.sum(:aquisition_value_cents).round(2)
+    Money.new(shares.sum(:aquisition_value_cents))
+  end
+
+  def average_aquisition_price
+    total_invested / shares.count
   end
 
   def updated_balance
