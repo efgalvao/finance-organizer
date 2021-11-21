@@ -71,8 +71,10 @@ Balance in the last 12 months:<br />
       } }, precision: 9 %>
 </div>
 
-<% @account.stocks.each do |stock| %>
-  <div class="summary-stocks">
-    <%= link_to stock.name, stock_summary_path(stock), class:"summary-stock" %>
-  </div>
-<% end %>
+<div class="summary-stocks">
+  <% @account.stocks.each do |stock| %>
+    <div class="summary-stock">
+      <%= link_to stock.name, stock_summary_path(stock), class:"summary-stock" %>
+    </div>
+  <% end %>
+</div>
