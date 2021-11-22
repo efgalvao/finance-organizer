@@ -1,9 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Balance, type: :model do
-  # let(:user) { create(:user) }
-  # let(:account) { create(:account, user_id: user_id) }
+  describe 'associations' do
+    it { is_expected.to belong_to(:balanceable) }
+  end
 
-  # it { is_expected.to validate_presence_of(:name) }
-  # it { is_expected.to validate_presence_of(:user_id) }
+  describe '.set_date' do
+    let(:account) { create(:account) }
+    let(:balance) { build(:balance, balanceable_type: 'Account', balanceable_id: account.id, date: nil) }
+
+    it 'set the current date' do
+      balance.save
+      expect(balance.date).not_to be_nil
+    end
+  end
 end

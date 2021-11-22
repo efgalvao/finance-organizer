@@ -11,17 +11,12 @@ RSpec.describe Share, type: :model do
     it { is_expected.to belong_to(:stock) }
   end
 
-  # describe "scopes" do
-  #   it "bought_this_month" do
-  #     expect(Share.bought_this_month).to include(share_bougth_this_month)
-  #     expect(Share.bought_this_month).not_to include(share_bought_last_month)
-  #   end
+  describe '.set_date' do
+    let(:share) { build(:share, aquisition_date: nil) }
 
-  #   it "bought_last_month" do
-  #     expect(Share.bought_this_month).to include(share_bought_last_month)
-  #     expect(Share.bought_this_month).not_to include(share_bougth_this_month)
-  #   end
-    
-  # end
-  
+    it 'set the current date' do
+      share.save
+      expect(share.aquisition_date).not_to be_nil
+    end
+  end
 end

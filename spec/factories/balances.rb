@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :balance do
-    name { Faker::Company.name }
-    savings { true }
-    balance { Faker::Number.decimal(2) }
+    balance { Faker::Number.number(9) }
   end
 end

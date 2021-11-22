@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
-  let(:user) { create(:user) }
-  let(:account) { create(:account, user_id: user_id) }
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:transactions) }
+    it { is_expected.to have_many(:balances) }
+    it { is_expected.to have_many(:stocks) }
+  end
 
-  it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_presence_of(:user_id) }
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:name) }
+  end
 end

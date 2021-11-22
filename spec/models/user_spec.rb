@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { create(:user) }
+  describe 'associations' do
+    it { is_expected.to have_many(:accounts) }
+    it { is_expected.to have_many(:balances) }
+  end
 
-  it { is_expected.to validate_presence_of(:email) }
-  it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_presence_of(:password) }
-
-  it { is_expected.to have_many(:accounts) }
-  it { is_expected.to have_many(:balances) }
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:password) }
+  end
 end
