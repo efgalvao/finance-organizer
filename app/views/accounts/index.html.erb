@@ -8,17 +8,17 @@
       <th>Name</th>
       <th>Balance</th>
       <th>Date of last balance</th>
-      <th colspan="3"></th>
+      <th> Actions </th>
     </tr>
   </thead>
 
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= link_to account.name, account_path(account), class:"account" %></td>
+        <td><%= link_to account.name, account_summary_path(account_id: account.id), class:"account" %></td>
         <td >$ <%= account.last_balance.balance + current_total_value(account.id) %></td>
         <td ><%= account.last_balance.date.strftime('%B %d, %Y') %></td>
-        <td><%= link_to "Summary", account_summary_path(account_id: account.id), class:"btn btn-primary" %>
+        <td><%= link_to "Transactions", account_transactions_path(account), class:"btn btn-primary" %>
         <%= link_to 'Edit', edit_account_path(account), :class => "btn btn-warning" %>
         <%= link_to 'Delete', account, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>

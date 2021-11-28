@@ -30,6 +30,7 @@
     <% end %>
     <tbody>
 </table>
+<%= link_to 'New transaction', new_transaction_path, :class => "btn btn-success" %>
 <%= link_to 'History', account_transactions_path(@account), :class => "btn btn-warning" %>
 <%= link_to 'Edit', edit_account_path(@account), :class => "btn btn-warning" %>
 <%= link_to 'Back', accounts_path, :class => "btn btn-primary" %>

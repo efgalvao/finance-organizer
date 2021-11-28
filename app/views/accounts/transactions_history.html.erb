@@ -1,6 +1,6 @@
 <p class=" title">
   <strong>Account: &nbsp</strong>
-  <%= @transactions.first.account.name %>
+  <%= @account.name %>
 </p>
 
 <p class="summary-subtitle">
@@ -18,13 +18,13 @@
       <th colspan="2">Actions</th>
     </tr>
   <tbody>
-    <% @transactions.each do |transaction| %>
+    <% @account.transactions.each do |transaction| %>
       <tr>
         <td><%= link_to transaction.title, stock_path(id: transaction.id) %></td>
         <td><%= transaction.value %></td>
         <td><%= transaction.kind %></td>
         <td><%= transaction.date %></td>
-        <td> <%= link_to 'Edit', edit_account_transaction_path(account_id: transaction.account_id, id: transaction.id), :class => "btn btn-warning" %>
+        <td> <%= link_to 'Edit', edit_account_transaction_path(account_id: @account.id, id: transaction.id), :class => "btn btn-warning" %>
         <%= link_to 'Delete', transaction_path(id: transaction.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>

@@ -12,11 +12,9 @@ class Account < ApplicationRecord
 
   # VALIDATIONS
   validates :name, presence: true, uniqueness: true
-  validates :user_id, presence: true
-  validates :balance, presence: true
 
   def create_balance
-    value = balances.newest_balance.first&.balance || 0
+    value = balances.newest_balance.first&.balance || balance
 
     balances.create(balance: value)
   end
@@ -39,14 +37,32 @@ class Account < ApplicationRecord
 
   def monthly_balance
     generate_balance if balances.empty?
-    balancos = {}
+    grouped_balances = {}
     balances.each do |balance|
-      balancos[balance.date.strftime('%B %d, %Y').to_s] = balance.balance.to_f
+      grouped_balances[balance.date.strftime('%B %d, %Y').to_s] = balance.balance.to_f
     end
-    # balances.group_by_month(:date, last: 12, current: true).maximum(humanized_money @money_object	)
-    balancos
+    grouped_balances
   end
 
+  
+  def owner?(asker)
+    user == asker
+  end
+  
+  def last_balance
+    return create_balance if balances.current.blank?
+    
+    current_month_balance = balances.current.first
+    current_month_balance.date = DateTime.current
+    current_month_balance.save
+    current_month_balance
+  end
+  
+  def current_month_transactions
+    transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
+  end
+
+  # Refactor this method with methods incomes and expenses
   def generate_past_balance(month, year)
     date = DateTime.new(year, month, -1)
     incomes = transactions.where(date: date.beginning_of_month...date.end_of_month, kind: 'income').sum(:value_cents)
@@ -63,20 +79,15 @@ class Account < ApplicationRecord
     balance
   end
 
-  def owner?(asker)
-    user == asker
+  def incomes(date)
+    Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month, kind: 'income').sum(:value_cents))
   end
 
-  def last_balance
-    if balances.newest_balance.first.nil?
-      return create_balance
-    else
-      balances.newest_balance.first
-    end
-
+  def expenses(date)
+    Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month, kind: 'expense').sum(:value_cents))
   end
-
-  def current_month_transactions
-    transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
+  
+  def total_balance(date)
+    Money.new(incomes(date) - expenses(date))
   end
 end

@@ -7,20 +7,38 @@
 <div class="summary-item">
   Current total value:<br />
   <div class="item-value">
-  <%= number_to_currency(@account.last_balance, unit: 'R$', separator: ',', delimiter: '') %>
+    <%= number_to_currency(@account.last_balance.balance, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
 <div class="summary-item">
-   Total invested:<br />
-  <div class="item-value">
-  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
-  </div>
+   Incomes and expenses: <br />
+  <table class='table table-hover'>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Incomes</th>
+        <th>Expenses</th>
+        <th>Final</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% (0...12).each do |month| %>
+      <% date = DateTime.current - month.month%>
+      <tr>
+        <td><%= date.strftime('%B, %Y') %></td>
+        <td><%= number_to_currency(@account.incomes(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+        <td><%= number_to_currency(@account.expenses(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+        <td><%= number_to_currency(@account.total_balance(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <div class="chart-title">
-Balance in the last 12 months:<br />
+  Balance in the last 12 months:<br />
 </div>
 <div class="summary-chart">
-<%= line_chart @account.monthly_balance %>
+  <%= line_chart @account.monthly_balance %>
 </div>
