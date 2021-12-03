@@ -54,7 +54,7 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Exclude:
-    - spec/views/**/*
+    - spec/**/*
 
 Metrics/MethodLength:
   Max: 20
@@ -103,7 +103,7 @@ RSpec/LetSetup:
 
 RSpec/ExampleLength:
   Exclude:
-    - spec/views/**/*
+    - spec/**/*
 
 RSpec/InstanceVariable:
   Exclude:
