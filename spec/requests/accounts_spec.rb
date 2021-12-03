@@ -57,7 +57,6 @@ RSpec.describe 'Account', type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.body).to match(expected_name.to_json)
       end
-
       context 'with invalid data' do
         let(:new_account) do
           put account_path(account), params: {
@@ -86,8 +85,6 @@ RSpec.describe 'Account', type: :request do
         end
       end
     end
-
-    context 'with unauthenticated request' do
       it 'cannot update an account' do
         put account_path(account), params: {
           casa_admin: {
