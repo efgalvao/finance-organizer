@@ -42,7 +42,7 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1.json
   def update
     respond_to do |format|
-      if @account.update(name: account_params[:name].upcase)
+      if @account.update(name: account_params[:name])
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
       else
@@ -70,7 +70,6 @@ class AccountsController < ApplicationController
   def transactions_history
     @account = Account.find(params[:account_id])
     authorize @account
-    @transactions = @account.transactions
   end
 
   private
