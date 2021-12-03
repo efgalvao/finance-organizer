@@ -6,7 +6,7 @@ RSpec.describe 'Account', type: :request do
 
   describe 'GET /accounts/:id/edit' do
     context 'when logged in' do
-      it 'can successfully access a account edit page' do
+      it 'can successfully access an account edit page' do
         sign_in(user)
 
         get edit_account_path(account)
@@ -26,12 +26,9 @@ RSpec.describe 'Account', type: :request do
 
   describe 'PUT /accounts/:id' do
     context 'when logged' do
-      let(:casa_admin) { create(:casa_admin) }
       let(:expected_name) { 'Account 1' }
 
-      before do
-        sign_in(user)
-      end
+      before { sign_in(user) }
 
       it 'can successfully update an account', :aggregate_failures do
         put account_path(account), params: {
@@ -57,34 +54,31 @@ RSpec.describe 'Account', type: :request do
         expect(response).to have_http_status(:ok)
         expect(response.body).to match(expected_name.to_json)
       end
-      context 'with invalid data' do
-        let(:new_account) do
-          put account_path(account), params: {
-            account: {
-              name: nil
-            }
+    end
+
+    context 'with invalid data' do
+      before { sign_in(user) }
+
+      it 'does not update account' do
+        put account_path(account), params: {
+          account: {
+            name: nil
           }
-        end
+        }
 
-        it 'does not update account' do
-          put account_path(account), params: {
-            account: {
-              name: nil
-            }
-          }
+        account.reload
+        expect(account.name).not_to be_nil
+      end
 
-          account.reload
-          expect(account.name).not_to be_nil
-        end
+      it 'also respond to json', :aggregate_failures do
+        put account_path(account, format: :json), params: { account: { name: nil } }
 
-        it 'also respond to json', :aggregate_failures do
-          put account_path(account, format: :json), params: { account: { name: nil } }
-
-          expect(response.content_type).to eq('application/json; charset=utf-8')
-          expect(response).to have_http_status(:unprocessable_entity)
-        end
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
+
+    context 'with unauthenticated request' do
       it 'cannot update an account' do
         put account_path(account), params: {
           casa_admin: {
@@ -132,7 +126,6 @@ RSpec.describe 'Account', type: :request do
 
     context 'with invalid data' do
       let(:invalid_account) { build(:account, user: nil) }
-      let(:new_account) { post accounts_path, params: { account: { name: nil } } }
 
       it 'does not create a new account' do
         invalid_account.user = nil
