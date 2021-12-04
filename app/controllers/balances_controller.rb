@@ -23,7 +23,6 @@ class BalancesController < ApplicationController
   # POST /balances.json
   def create
     @balance = Balance.new(balance_params)
-
     respond_to do |format|
       if @balance.save
         format.html { redirect_to balances_path, notice: 'Balance was successfully created.' }
@@ -54,7 +53,7 @@ class BalancesController < ApplicationController
   def destroy
     @balance.destroy
     respond_to do |format|
-      format.html { redirect_to balances_path, notice: 'Balance was successfully destroyed.' }
+      format.html { redirect_to balances_path, notice: 'Balance was successfully removed.' }
       format.json { head :no_content }
     end
   end
