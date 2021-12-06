@@ -16,9 +16,10 @@ class Dividend < ApplicationRecord
   end
 
   def create_transaction
+    category = Category.find_or_create_by(name: 'Dividends')
     Transaction.create(
       account: stock.account,
-      category_id: Category.find_by(name: 'Dividends').id,
+      category_id: category.id,
       value_cents: (value_cents * stock.shares.count),
       kind: 'income',
       title: "#{stock.name} Dividend",
