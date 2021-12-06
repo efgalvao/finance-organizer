@@ -26,7 +26,7 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       if @price.save
-        format.html { redirect_to prices_path, notice: 'Price was successfully created.' }
+        format.html { redirect_to prices_path, notice: 'Price successfully created.' }
         format.json { render :show, status: :created, location: @price }
       else
         format.html { render :new }
@@ -41,7 +41,7 @@ class PricesController < ApplicationController
     respond_to do |format|
       if @price.update(price_params)
         format.html do
-          redirect_to prices_path, notice: 'Price was successfully updated.'
+          redirect_to price_path(@price), notice: 'Price successfully updated.'
         end
         format.json { render :show, status: :ok, location: @price }
       else
@@ -57,7 +57,7 @@ class PricesController < ApplicationController
     @price.destroy
     respond_to do |format|
       format.html do
-        redirect_to prices_path, notice: 'Price was successfully destroyed.'
+        redirect_to prices_path, notice: 'Price successfully removed.'
       end
       format.json { head :no_content }
     end

@@ -7,10 +7,6 @@ class Price < ApplicationRecord
 
   monetize :price_cents
 
-  def self.monthly_price
-    group_by_month(:date, last: 12, current: true).last
-  end
-
   private
 
   def set_date
