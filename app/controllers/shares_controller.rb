@@ -29,7 +29,7 @@ class SharesController < ApplicationController
         Share.transaction do
           quantity.times { Share.create(share_params) }
         end
-        format.html { redirect_to shares_path, notice: 'Share was successfully created.' }
+        format.html { redirect_to shares_path, notice: 'Share successfully created.' }
         format.json { render :show, status: :created, location: @share }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class SharesController < ApplicationController
   def update
     respond_to do |format|
       if @share.update(share_params)
-        format.html { redirect_to share_path(@share), notice: 'Share was successfully updated.' }
+        format.html { redirect_to share_path(@share), notice: 'Share successfully updated.' }
         format.json { render :show, status: :ok, location: @share }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class SharesController < ApplicationController
   def destroy
     @share.destroy
     respond_to do |format|
-      format.html { redirect_to shares_path, notice: 'Share was successfully destroyed.' }
+      format.html { redirect_to shares_path, notice: 'Share successfully removed.' }
       format.json { head :no_content }
     end
   end
