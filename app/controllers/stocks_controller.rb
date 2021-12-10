@@ -22,11 +22,11 @@ class StocksController < ApplicationController
   # POST /stocks
   # POST /stocks.json
   def create
-    @stock = Stock.new(account_id: stock_params[:account_id], name: stock_params[:name].upcase)
+    @stock = Stock.new(stock_params)
 
     respond_to do |format|
       if @stock.save
-        format.html { redirect_to @stock, notice: 'Stock was successfully created.' }
+        format.html { redirect_to @stock, notice: 'Stock successfully created.' }
         format.json { render :show, status: :created, location: @stock }
       else
         format.html { render :new }
@@ -39,8 +39,8 @@ class StocksController < ApplicationController
   # PATCH/PUT /stocks/1.json
   def update
     respond_to do |format|
-      if @stock.update(name: stock_params[:name].upcase)
-        format.html { redirect_to @stock, notice: 'Stock was successfully updated.' }
+      if @stock.update(name: stock_params[:name])
+        format.html { redirect_to @stock, notice: 'Stock successfully updated.' }
         format.json { render :show, status: :ok, location: @stock }
       else
         format.html { render :edit }
@@ -54,7 +54,7 @@ class StocksController < ApplicationController
   def destroy
     @stock.destroy
     respond_to do |format|
-      format.html { redirect_to stocks_url, notice: 'Stock was successfully destroyed.' }
+      format.html { redirect_to stocks_url, notice: 'Stock successfully removed.' }
       format.json { head :no_content }
     end
   end

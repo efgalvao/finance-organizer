@@ -4,11 +4,8 @@ class Stock < ApplicationRecord
   has_many :prices, dependent: :destroy
   belongs_to :account, touch: true
 
-  def sell(amount, price)
-    total_value = amount * price
-    account.balance += total_value
-    shares.first(amount).destroy
-  end
+  validates :name, presence: true
+  validates :account, presence: true
 
   def total_invested
     Money.new(shares.sum(:aquisition_value_cents))
