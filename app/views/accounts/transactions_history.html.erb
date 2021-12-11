@@ -18,7 +18,7 @@
       <th colspan="2">Actions</th>
     </tr>
   <tbody>
-    <% @account.transactions.each do |transaction| %>
+    <% @account.transactions.order('date desc').each do |transaction| %>
       <tr>
         <td><%= link_to transaction.title, stock_path(id: transaction.id) %></td>
         <td><%= transaction.value %></td>
