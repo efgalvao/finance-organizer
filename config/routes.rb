@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: "accounts#index"
   devise_for :users
+  get '/user/summary' => "users#summary"
 
   resources :accounts do
     get '/summary', to: 'accounts#summary'
@@ -30,5 +31,6 @@ Rails.application.routes.draw do
   resources :transactions, except: %i[edit]
 
   resources :categories
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

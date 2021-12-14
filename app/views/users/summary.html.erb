@@ -1,0 +1,47 @@
+<%= @user.name %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Total Balance</th>
+      <th>Free</th>
+      <th>In stocks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= number_to_currency(current_user.total_amount, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(current_user.total_in_savings, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(current_user.total_in_stocks, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Free</th>
+      <th>In stocks</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.accounts.each do |account| %>
+    <tr>
+      <td><%= account.name %></td>
+      <td><%= number_to_currency(account.last_balance.balance, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(account.total_stock_value, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(account.stock_plus_balance, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="chart-title">
+  Balance in the last 12 months:<br />
+</div>
+<div class="summary-chart">
+  <%= line_chart @user.monthly_balance %>
+</div>
