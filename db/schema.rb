@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_101234) do
+ActiveRecord::Schema.define(version: 2021_12_14_115439) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,17 @@ ActiveRecord::Schema.define(version: 2021_11_04_101234) do
     t.index ["category_id"], name: "index_transactions_on_category_id"
   end
 
+  create_table "user_reports", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "savings_cents", default: 0, null: false
+    t.integer "stocks_cents", default: 0, null: false
+    t.integer "total_cents", default: 0, null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_reports_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -111,4 +122,5 @@ ActiveRecord::Schema.define(version: 2021_11_04_101234) do
   add_foreign_key "stocks", "accounts"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"
+  add_foreign_key "user_reports", "users"
 end
