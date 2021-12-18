@@ -12,6 +12,7 @@
     <tr>
       <th>Name</th>
       <th>Total value</th>
+      <th>Category</th>
       <th>Kind</th>
       <th>Date</th>
 
@@ -22,6 +23,7 @@
       <tr>
         <td><%= link_to transaction.title, stock_path(id: transaction.id) %></td>
         <td><%= transaction.value %></td>
+        <td><%= transaction.category %></td>
         <td><%= transaction.kind %></td>
         <td><%= transaction.date %></td>
         <td> <%= link_to 'Edit', edit_account_transaction_path(account_id: @account.id, id: transaction.id), :class => "btn btn-warning" %>
