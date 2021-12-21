@@ -184,6 +184,7 @@ GEM
     parser (3.0.2.0)
       ast (~> 2.4.1)
     path_expander (1.1.0)
+    pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -352,7 +353,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -413,6 +413,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   money-rails (~> 1.12)
+  pg
   pry-byebug
   pry-rails
   puma (~> 5.0)
@@ -433,7 +434,6 @@ DEPENDENCIES
   shoulda-matchers
   simplecov (~> 0.11)
   spring
-  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

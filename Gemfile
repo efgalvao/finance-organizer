@@ -6,7 +6,7 @@ ruby '3.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -25,7 +25,7 @@ gem 'money-rails', '~>1.12'
 gem 'devise'
 gem 'pundit'
 gem 'dotenv-rails'
-
+gem 'pg'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
