@@ -1,0 +1,56 @@
+version: 2.1 # Use 2.1 to enable using orbs and other features.
+ 
+# Declare the orbs that we'll use in our config.
+# read more about orbs: https://circleci.com/docs/2.0/orb-intro/
+orbs:
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
+ 
+jobs:
+  build: 
+    docker:
+      - image: cimg/ruby:2.7-node
+
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+ 
+  test:
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:2.7-node
+        environment:
+          RAILS_ENV: test
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: finance_test
+          POSTGRES_PASSWORD: postgres
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      - ruby/rspec-test
+ 
+# We use workflows to orchestrate the jobs that we declared above.
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
