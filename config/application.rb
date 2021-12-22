@@ -18,5 +18,9 @@ module FinanceOrganizer
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    Money.locale_backend = :i18n
+    Money.default_currency = Money::Currency.new("BRL")
+    Money.rounding_mode = BigDecimal::ROUND_HALF_UP
+
   end
 end
