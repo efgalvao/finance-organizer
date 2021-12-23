@@ -21,7 +21,7 @@
         <td> <%= stock.updated_balance %> </td>
         <td> <%= stock.shares.size %> </td>
         <td> <%= stock.account.name %> </td>
-        <td> <%= link_to "Details", stock_path(stock), class:"btn btn-info" %>
+        <td> <%= link_to "Shares", stock_path(stock), class:"btn btn-info" %>
         <%= link_to "Summary", stock_summary_path(stock_id: stock.id), class:"btn btn-primary" %>
              <%= link_to "Edit", edit_stock_path(stock), class:"btn btn-warning" %>
              <%= link_to "Delete", stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %> </td>

@@ -1,5 +1,5 @@
 <div class="title">
-    <%= @stock.name %> Details
+    <%= @stock.name %> shares
 </div>
 
 <% if !@stock.shares.blank? %>
@@ -26,12 +26,6 @@
 <% end %>
 
 <div class="buttons">
-<%= link_to 'Back', stocks_path, :class => "btn btn-primary" %>
-
-<%= link_to 'Create share', new_share_path, class: "btn btn-success" %>
-
-  <%= link_to 'Edit stock', edit_stock_path(@stock), :class => "btn btn-warning" %> 
-
-  <%= link_to 'Delete stock', @stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger"  %>
-
+  <%= link_to 'Back', stocks_path, :class => "btn btn-primary" %>
+  <%= link_to 'Create share', new_share_path(stock_id: @stock.id), class: "btn btn-success" %>
 </div>
