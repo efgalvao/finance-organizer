@@ -1,7 +1,5 @@
-version: 2.1 # Use 2.1 to enable using orbs and other features.
- 
-# Declare the orbs that we'll use in our config.
-# read more about orbs: https://circleci.com/docs/2.0/orb-intro/
+version: 2.1 
+
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
@@ -10,7 +8,6 @@ jobs:
   build: 
     docker:
       - image: cimg/ruby:3.0.3-node
-
     steps:
       - checkout
       - ruby/install-deps
@@ -19,7 +16,6 @@ jobs:
           cache-key: "yarn.lock"
  
   test:
-    parallelism: 3
     docker:
       - image: cimg/ruby:3.0.3-node
         environment:
