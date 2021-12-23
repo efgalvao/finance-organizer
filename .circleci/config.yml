@@ -21,7 +21,7 @@ jobs:
   test:
     parallelism: 3
     docker:
-      - image: cimg/ruby:2.7-node
+      - image: cimg/ruby:3.0.3-node
         environment:
           RAILS_ENV: test
           DB_USERNAME: postgres
