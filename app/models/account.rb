@@ -36,7 +36,7 @@ class Account < ApplicationRecord
   end
 
   def monthly_balance
-    generate_balance if balances.empty?
+    create_balance if balances.empty?
     grouped_balances = {}
     balances.each do |balance|
       grouped_balances[balance.date.strftime('%B %d, %Y').to_s] = balance.balance.to_f
@@ -44,20 +44,28 @@ class Account < ApplicationRecord
     grouped_balances
   end
 
-  
+  def monthly_dividends_received
+    grouped_dividends = {}
+    stocks.each do |stock|
+      dividends = stock.monthly_dividends_total
+      grouped_dividends = grouped_dividends.merge(dividends) { |_k, a_value, b_value| a_value + b_value }
+    end
+    grouped_dividends
+  end
+
   def owner?(asker)
     user == asker
   end
-  
+
   def last_balance
     return create_balance if balances.current.blank?
-    
+
     current_month_balance = balances.current.first
     current_month_balance.date = DateTime.current
     current_month_balance.save
     current_month_balance
   end
-  
+
   def current_month_transactions
     transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
   end
@@ -86,8 +94,18 @@ class Account < ApplicationRecord
   def expenses(date)
     Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month, kind: 'expense').sum(:value_cents))
   end
-  
+
   def total_balance(date)
     Money.new(incomes(date) - expenses(date))
   end
+
+  def total_stock_value
+    total = 0
+    total += stocks.inject(0) { |sum, stock| stock.updated_balance + sum }
+    total
+  end
+
+  def stock_plus_balance
+    total_stock_value + last_balance.balance
+  end  
 end

@@ -12,6 +12,7 @@ class Stock < ApplicationRecord
   end
 
   def average_aquisition_price
+    return 0 if shares.count.zero?
     total_invested / shares.count
   end
 
@@ -59,10 +60,18 @@ class Stock < ApplicationRecord
     grouped_prices
   end
 
-  def monthly_dividends
+  def monthly_dividends_per_share
     grouped_dividends = {}
     dividends.each do |dividend|
-      grouped_dividends[dividend.date.strftime('%B %d, %Y').to_s] = dividend.value.to_f
+      grouped_dividends[dividend.date.strftime('%B/%Y').to_s] = dividend.value.to_f
+    end
+    grouped_dividends
+  end
+
+  def monthly_dividends_total
+    grouped_dividends = {}
+    dividends.each do |dividend|
+      grouped_dividends[dividend.date.strftime('%B/%Y').to_s] = dividend.value.to_f * shares.where('aquisition_date <= ?', dividend.date).count
     end
     grouped_dividends
   end

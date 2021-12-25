@@ -64,4 +64,13 @@ class User < ApplicationRecord
     end
     grouped_reports
   end
+
+  def total_dividends_past_months
+    grouped_dividends = {}
+    accounts.each do |account|
+      dividends = account.monthly_dividends_received
+      grouped_dividends = grouped_dividends.merge(dividends) { |_k, a_value, b_value| a_value + b_value }
+    end
+    grouped_dividends
+  end
 end
