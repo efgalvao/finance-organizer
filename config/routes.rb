@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: "accounts#index"
   devise_for :users
+  get '/user/overview', to: 'users#overview'
   get '/user/summary' => "users#summary"
 
   resources :accounts do
@@ -23,8 +24,6 @@ Rails.application.routes.draw do
   resources :dividends, except: [:destroy]
 
   resources :prices, except: %i[edit destroy]
-
-  resources :charts, only: %i[index]
 
   resources :balances, except: %i[edit destroy]
 

@@ -1,13 +1,9 @@
 class UsersController < ApplicationController
+  def overview
+    @accounts = policy_scope(Account).includes(:stocks).order('name asc').all
+  end
 
   def summary
     @user = current_user
-  end
-
-  private
-
-  def users_params
-    params.require(:transaction).permit(:title, :account_id, :category_id,
-                                        :value, :kind, :date)
   end
 end
