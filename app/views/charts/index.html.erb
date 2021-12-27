@@ -19,7 +19,7 @@
     </div>
   
     <div class="summary-chart">
-      <%= line_chart account.monthly_balance, precision: 6 %>
+      <%= line_chart account.monthly_balance, precision: 8 %>
     </div>
 
     <% if account.savings == false %>

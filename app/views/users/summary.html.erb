@@ -47,11 +47,11 @@
       {name: 'Total', data: @user.monthly_report_total},
       {name: 'Savings', data: @user.monthly_report_savings},
       {name: 'Stocks', data: @user.monthly_report_stocks}
-      ], precision: 9 %></div>
+      ], precision: 8 %></div>
 
 <div class="chart-title">
   Dividends in the last 12 months:<br />
 </div>
 <div class="summary-chart">
-  <%= line_chart @user.total_dividends_past_months %>
+  <%= line_chart @user.total_dividends_past_months, precision: 8 %>
 </div>

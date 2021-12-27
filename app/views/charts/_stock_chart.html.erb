@@ -5,7 +5,7 @@
 <div class="summary-chart">
   <%= line_chart account.stocks.map { |stock| {
       name: stock.name, data: stock.monthly_price
-      } }, precision: 9 %>
+      } }, precision: 8 %>
 </div>
 
 <div class="summary-stocks">

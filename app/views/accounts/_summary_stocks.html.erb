@@ -61,7 +61,7 @@
   Dividends in the last 12 months:<br />
 </div>
 <div class="summary-chart">
-  <%= line_chart @account.monthly_dividends_received %>
+  <%= line_chart @account.monthly_dividends_received, precision: 8 %>
 </div>
 
 <div class="chart-title">
@@ -71,7 +71,7 @@
 <div class="summary-chart">
   <%= line_chart @account.stocks.map { |stock| {
       name: stock.name, data: stock.monthly_price
-      } }, precision: 9 %>
+      } }, precision: 8 %>
 </div>
 
 <div class="summary-stocks">
