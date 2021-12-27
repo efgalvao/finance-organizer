@@ -172,4 +172,24 @@ RSpec.describe 'Category', type: :request do
       end
     end
   end
+
+  describe 'GET /categories/new' do
+    context 'when logged in' do
+      it 'can successfully access new category' do
+        sign_in(user)
+
+        get new_category_path
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access a new category page' do
+        get new_category_path
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end

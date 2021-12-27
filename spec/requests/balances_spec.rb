@@ -79,7 +79,7 @@ RSpec.describe 'Balance', type: :request do
     end
 
     context 'with unauthenticated request' do
-      it 'cannot update an account' do
+      it 'can not update a balance' do
         put balance_path(balance), params: {
           balance: {
             balance: 10_000
@@ -126,7 +126,7 @@ RSpec.describe 'Balance', type: :request do
     context 'with invalid data' do
       let(:invalid_balance) { build(:balance, :for_account) }
 
-      it 'does not create a new account' do
+      it 'does not create a new balance' do
         invalid_balance.balanceable_id = nil
 
         expect(invalid_balance).not_to be_valid
@@ -155,7 +155,7 @@ RSpec.describe 'Balance', type: :request do
     end
   end
 
-  describe 'GET /baances' do
+  describe 'GET /balances' do
     context 'when logged in' do
       it 'can successfully access index balances page' do
         sign_in(user)
@@ -169,6 +169,26 @@ RSpec.describe 'Balance', type: :request do
     context 'with unauthenticated request' do
       it 'cannot access a balances index page' do
         get balances_path
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe 'GET /balances/new' do
+    context 'when logged in' do
+      it 'can successfully access a new balance page' do
+        sign_in(user)
+
+        get new_balance_path
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access a new balance page' do
+        get new_balance_path
 
         expect(response).to redirect_to new_user_session_path
       end

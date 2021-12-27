@@ -81,7 +81,7 @@ RSpec.describe 'Account', type: :request do
     context 'with unauthenticated request' do
       it 'cannot update an account' do
         put account_path(account), params: {
-          casa_admin: {
+          account: {
             name: 'Account 2'
           }
         }
@@ -190,6 +190,46 @@ RSpec.describe 'Account', type: :request do
     context 'with unauthenticated request' do
       it 'cannot access a account transactions page' do
         get account_transactions_path(account)
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe 'GET /accounts/new' do
+    context 'when logged in' do
+      it 'can successfully access new account page' do
+        sign_in(user)
+
+        get new_account_path
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access a new account page' do
+        get new_account_path
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe 'GET /accounts' do
+    context 'when logged in' do
+      it 'can successfully access accounts index page' do
+        sign_in(user)
+
+        get accounts_path
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access an accounts index page' do
+        get accounts_path
 
         expect(response).to redirect_to new_user_session_path
       end

@@ -172,4 +172,44 @@ RSpec.describe 'Stock', type: :request do
       end
     end
   end
+
+  describe 'GET /stocks/:id/summary' do
+    context 'when logged in' do
+      it 'can successfully access stock summary index page' do
+        sign_in(user)
+
+        get stock_summary_path(stock)
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access a stock summary page' do
+        get stock_summary_path(stock)
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe 'GET /stocks/new' do
+    context 'when logged in' do
+      it 'can successfully access an new stock page' do
+        sign_in(user)
+
+        get new_stock_path
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access a new stock page' do
+        get new_stock_path
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end
