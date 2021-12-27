@@ -5,10 +5,6 @@ class Dividend < ApplicationRecord
 
   monetize :value_cents
 
-  # def self.monthly_dividend
-  #   group_by_month(:date, last: 12, current: true).maximum('value')
-  # end
-
   private
 
   def set_date
@@ -20,7 +16,7 @@ class Dividend < ApplicationRecord
     Transaction.create(
       account: stock.account,
       category_id: category.id,
-      value_cents: (value_cents * stock.shares.count),
+      value: (value * stock.shares.past_date(date).count),
       kind: 'income',
       title: "#{stock.name} Dividend",
       date: date
