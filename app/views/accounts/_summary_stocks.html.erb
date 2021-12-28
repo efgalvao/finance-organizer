@@ -2,26 +2,40 @@
   <div class="summary-subtitle">
     Summary for <%= @account.name %> account:
   </div>
-</di>
+</div>
+
+<div class="summary-item">
+  Current TOTAL balance(account + stocks):<br />
+  <div class="item-value">
+  <%= number_to_currency(@account.stock_plus_balance, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+  Account balance:<br />
+  <div class="item-value">
+  <%= number_to_currency((@account.last_balance.balance), unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+  Current total stocks value:<br />
+  <div class="item-value">
+  <%= number_to_currency(@account.total_stock_value, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+  Total invested:<br />
+  <div class="item-value">
+  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
 
 <div class="summary-item">
   Total amount of stocks:<br />
   <div class="item-value">
   <%= @account.stocks.size %>
-  </div>
-</div>
-
-<div class="summary-item">
-  Current total value:<br />
-  <div class="item-value">
-  <%= number_to_currency((@account.last_balance.balance + current_total_value(@account.id)), unit: 'R$', separator: ',', delimiter: '') %>
-  </div>
-</div>
-
-<div class="summary-item">
-   Total invested:<br />
-  <div class="item-value">
-  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
@@ -35,6 +49,7 @@
         <th>Name</th>
         <th>Shares</th>
         <th>Total Invested</th>
+        <th>Average Price</th>
         <th>Current share value</th>
         <th>Current total amount</th>
       </tr>
@@ -42,9 +57,10 @@
     <tbody>
       <% @account.stocks.each do |stock| %>
         <tr>
-          <td><%= stock.name %></td>
+          <td><%= link_to stock.name, stock_summary_path(stock) %></td>
           <td><%= stock.shares.count %></td>
           <td><%= stock.total_invested %></td>
+          <td><%= stock.average_aquisition_price %></td>
           <td><%= stock.current_price %></td>
           <td><%= stock.updated_balance %></td>
         </tr>
