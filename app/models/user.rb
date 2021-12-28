@@ -20,7 +20,6 @@ class User < ApplicationRecord
   def total_in_savings
     total = 0
     accounts.includes(:balances).find_each do |account|
-      # print("#{account.name}, #{account.last_balance.balance}")
       total += account.last_balance.balance
     end
     total
@@ -38,8 +37,17 @@ class User < ApplicationRecord
     user_reports.create(total: total_amount, savings: total_in_savings, stocks: total_in_stocks)
   end
 
+  def update_current_user_report
+    user_report = user_reports.current_month
+    user_report.total = total_amount
+    user_report.savings = total_in_savings
+    user_report.stocks = total_in_stocks
+    user_report.save
+  end
+
   def monthly_report_total
     create_report if user_reports.empty? || user_reports.last.date.month != DateTime.current.month
+    update_current_user_report
     grouped_reports = {}
     user_reports.each do |report|
       grouped_reports[report.date.strftime('%B %d, %Y').to_s] = report.total.to_f
@@ -49,6 +57,7 @@ class User < ApplicationRecord
 
   def monthly_report_savings
     create_report if user_reports.last.date.month != DateTime.current.month || user_reports.empty?
+    update_current_user_report
     grouped_reports = {}
     user_reports.each do |report|
       grouped_reports[report.date.strftime('%B %d, %Y').to_s] = report.savings.to_f
@@ -58,6 +67,7 @@ class User < ApplicationRecord
 
   def monthly_report_stocks
     create_report if user_reports.empty? || user_reports.last.date.month != DateTime.current.month
+    update_current_user_report
     grouped_reports = {}
     user_reports.each do |report|
       grouped_reports[report.date.strftime('%B %d, %Y').to_s] = report.stocks.to_f
