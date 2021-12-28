@@ -19,7 +19,7 @@
           <td> <%= @transaction.title %></td>
           <td> <%= @transaction.kind %></td>
           <td> <%= @transaction.date %></td>
-          <td> <%= @transaction.category_id %></td>
+          <td> <%= @transaction.category %></td>
           <td> $ <%= @transaction.value %></td>
           <td> <%= link_to @transaction.account.name %>
           <td> <%= link_to "Edit", edit_account_transaction_path(id: @transaction.id, account_id: @transaction.account.id), :class => "btn btn-primary" %>

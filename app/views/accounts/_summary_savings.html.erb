@@ -5,7 +5,7 @@
 </di>
 
 <div class="summary-item">
-  Current total value:<br />
+  Current balance:<br />
   <div class="item-value">
     <%= number_to_currency(@account.last_balance.balance, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
@@ -23,8 +23,8 @@
       </tr>
     </thead>
     <tbody>
-      <% (0...12).each do |month| %>
-      <% date = DateTime.current - month.month%>
+      <% (0...12).each do |n| %>
+      <% date = DateTime.current - n.month%>
       <tr>
         <td><%= date.strftime('%B, %Y') %></td>
         <td><%= number_to_currency(@account.incomes(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
