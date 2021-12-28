@@ -77,7 +77,7 @@ class Stock < ApplicationRecord
   end
 
   def past_stock_balance(date)
-    price = if pricess.past_date(date).order('date desc').first.nil?
+    price = if prices.past_date(date).order('date desc').first.nil?
               shares.past_date(date).order('aquisition_date desc').first&.aquisition_value
             else
               prices.past_date(date).order('date desc').first&.price

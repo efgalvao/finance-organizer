@@ -2,7 +2,6 @@ module AccountsHelper
   def total
     total = 0
     Account.where(user: current_user).includes(:balances).all.each do |account|
-
       total += account.last_balance.balance
     end
     total
@@ -30,7 +29,7 @@ module AccountsHelper
 
   def current_total_value(id)
     total = 0
-    total += Account.find(id).stocks.inject(0) {|sum, stock| stock.updated_balance + sum }
+    total += Account.find(id).stocks.inject(0) { |sum, stock| stock.updated_balance + sum }
     total
   end
 end
