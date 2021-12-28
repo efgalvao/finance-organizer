@@ -12,9 +12,19 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transactions_params)
     if @transaction.save
-      redirect_to transaction_path(@transaction), notice: 'Transaction succesfully created'
+      respond_to do |format|
+        format.html do
+          redirect_to transaction_path(@transaction),
+                      notice: 'Transaction successfully created.'
+        end
+        format.json { render json: @transaction, status: :created }
+      end
+
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -24,17 +34,36 @@ class TransactionsController < ApplicationController
 
   def update
     if @transaction.update(transactions_params)
-      redirect_to @transaction, notice: 'Transaction updated sucessfully'
+      respond_to do |format|
+        format.html do
+          redirect_to @transaction,
+                      notice: 'Transaction successfully updated.'
+        end
+        format.json { render json: @transaction, status: :ok }
+      end
+
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     if @transaction.destroy
-      redirect_to transactions_path(id: params[:account_id]), notice: 'Transaction sucessfully deleted'
+      respond_to do |format|
+        format.html do
+          redirect_to transactions_path(id: params[:account_id]),
+                      notice: 'Transaction successfully removed.'
+        end
+        format.json { head :no_content, status: :ok }
+      end
     else
-      render :delete
+      respond_to do |format|
+        format.html { render :delete }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
     end
   end
 
