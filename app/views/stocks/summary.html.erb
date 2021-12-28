@@ -27,7 +27,7 @@
   <div class="summary-item">
     Current value per share:<br />
     <div class="item-value">
-      <%= number_to_currency(@stock.individual_price, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency(@stock.current_price, unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 
