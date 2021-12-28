@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Category', type: :request do
   let(:user) { create(:user) }
-  let!(:category) { create(:category) }
+  let!(:category) { create(:category, user: user) }
 
   describe 'POST /categories' do
-    let(:new_category) { post categories_path, params: { category: { name: Faker::Commerce.department } } }
+    let(:new_category) { post categories_path, params: { category: { name: Faker::Commerce.department }, user: user } }
 
     before { sign_in(user) }
 
@@ -140,7 +140,7 @@ RSpec.describe 'Category', type: :request do
   end
 
   describe 'DELETE /category/id:/delete' do
-    let!(:new_category) { create(:category) }
+    let!(:new_category) { create(:category, user: user) }
 
     before { sign_in(user) }
 
