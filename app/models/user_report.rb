@@ -10,6 +10,13 @@ class UserReport < ApplicationRecord
   # VALIDATIONS
   validates :user_id, presence: true
 
+  # SCOPES
+  scope :current_month, lambda {
+    where('date >= ? AND date <= ?',
+          Date.current.beginning_of_month,
+          Date.current.end_of_month).order('date desc').first
+  }
+
   before_save :set_date
 
   def set_date

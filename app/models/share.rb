@@ -9,7 +9,7 @@ class Share < ApplicationRecord
                                     DateTime.current.end_of_month)
                             }
 
-  scope :past_date, ->(date) { where('aquisition_date <= ?', date) }
+  scope :past_date, ->(date) { where('aquisition_date <= ?', date - 7.days) }
 
   monetize :aquisition_value_cents
 
