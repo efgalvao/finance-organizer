@@ -22,17 +22,16 @@
 
 nav {
     min-height: 38px;
-    background-color: snow;
-    font-weight: bolder;
     background-color: #333;
+    font-weight: bolder;
   }
 
 nav a {
-  margin-left: 15px;
+  margin-left: 5px;
   }
 
 nav .dropdown {
-  margin-left: 15px;
+  margin-left: 5px;
 }
 nav .dropdown:hover > .dropdown-content {
     display: block;
@@ -53,30 +52,18 @@ nav .dropdown:hover > .dropdown-content {
  nav a.navbar-brand {
     font-size: 27px;
     font-family: Arial, Helvetica, sans-serif;
-    color: black;
- }
-
-nav a.navbar-brand:hover {
- color: white;
- background-color: gray;
- font-family: Arial, Helvetica, sans-serif;
- text-decoration: none;
-}
-
-nav a.navbar-brand:visited {
- color: white;
- background-color: gray;
- font-family: Arial, Helvetica, sans-serif;
- text-decoration: none;
+    color: white;
+    text-decoration: none;
+    background-color: #333;
 }
 
 nav a {
-margin-right: 15px;
+margin-right: 5px;
 }
 
 .navbar-info {
   color: white;
-  right: 0;
+  left: 300px;
   position: absolute;
 }
 
@@ -139,4 +126,8 @@ margin-right: 15px;
 .devise-links a {
     margin-right: 15px;
 
+}
+
+.navbar-toggler-icon {
+  background-image: url('https://mdbcdn.b-cdn.net/img/svg/hamburger3.svg?color=BFE100');
 }

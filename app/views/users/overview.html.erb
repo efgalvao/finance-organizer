@@ -2,9 +2,10 @@
   <h1>Summary</h1>
 </div>
 
-    <%= link_to 'Summary', user_summary_path %>
-
-
+  <div class="summary-subtitle user">
+    <%= link_to "#{current_user.name} summary", user_summary_path %>
+  </div>
+    
 <% @accounts.each do |account| %>
   <div class="summary-subtitle">
     <%= link_to account.name, account_summary_path(account) %>
