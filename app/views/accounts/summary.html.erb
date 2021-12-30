@@ -1,3 +1,7 @@
+<div class="title">
+  <%= @account.name %>
+</div>
+
 <% if @account.savings? %>
   <%= render 'summary_savings' %>
 <% else %>
