@@ -1,25 +1,21 @@
-<div class="card-holder">
-  <div class="card">
+<div class="form-group">
+  <div class="input-group-text">
+    <strong>Account:</strong>
+    <%= @balance.account.name %>
+  </div>
 
-    <p>
-      <strong>Account:</strong>
-      <%= @balance.balanceable.name %>
-    </p>
+  <div class="input-group-text">
+    <strong>Balance:</strong>
+    <%= @balance.balance %>
+    </div>
 
-    <p>
-      <strong>Balance:</strong>
-        <%= @balance.balance %>
+  <div class="input-group-text">
+    <strong>Date:</strong>
+    <%= @balance.date.strftime('%B %d, %Y') %>
+  </div>
 
-    </p>
-
-    <p>
-      <strong>Date:</strong>
-      <%= @balance.date.strftime('%B %d, %Y') %>
-
-    </p>
-
-    <%= link_to 'Edit', edit_account_balance_path(id: @balance.id, account_id: @balance.balanceable.id), :class => "btn btn-warning" %>
+  <div>
+    <%= link_to 'Edit', edit_account_balance_path(id: @balance.id, account_id: @balance.account_id), :class => "btn btn-warning" %>
     <%= link_to 'Back', balances_path, :class => "btn btn-primary" %>
-
   </div>
 </div>
