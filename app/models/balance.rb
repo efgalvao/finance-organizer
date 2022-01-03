@@ -13,13 +13,6 @@ class Balance < ApplicationRecord
 
   scope :newest_balance, -> { order('date desc').limit(1) }
 
-  def self.remove_polymorphic
-    Balance.all.each do |balance|
-      balance.account_id = balance.account_id
-      balance.save
-    end
-  end
-
   private
 
   def set_date
