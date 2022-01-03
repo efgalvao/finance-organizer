@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Balance, type: :model do
   describe 'associations' do
-    it { is_expected.to belong_to(:balanceable) }
+    it { is_expected.to belong_to(:account) }
   end
 
   describe '.set_date' do
     let(:account) { create(:account) }
-    let(:balance) { build(:balance, balanceable_type: 'Account', balanceable_id: account.id, date: nil) }
+    let(:balance) { build(:balance, account_id: account.id, date: nil) }
 
     it 'set the current date' do
       balance.save

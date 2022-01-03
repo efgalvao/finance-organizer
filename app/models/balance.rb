@@ -1,14 +1,9 @@
 class Balance < ApplicationRecord
-  belongs_to :balanceable, polymorphic: true, touch: true
+  belongs_to :account
 
   before_create :set_date
 
   monetize :balance_cents
-
-  scope :past_date, lambda { |date|
-                      where('date BETWEEN ? AND ?',
-                            date.beginning_of_month, date.end_of_month)
-                    }
 
   # Balance of current month
   scope :current, lambda {
@@ -18,14 +13,11 @@ class Balance < ApplicationRecord
 
   scope :newest_balance, -> { order('date desc').limit(1) }
 
-  def self.monthly_balance
-    generate_balance if balances.empty?
-    balancos = {}
-    balances.each do |balance|
-      balancos[balance.date.strftime('%B/%Y').to_s] = balance.balance.to_f
+  def self.remove_polymorphic
+    Balance.all.each do |balance|
+      balance.account_id = balance.account_id
+      balance.save
     end
-    # balances.group_by_month(:date, last: 12, current: true).maximum(humanized_money @money_object	)
-    balancos
   end
 
   private

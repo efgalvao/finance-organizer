@@ -9,7 +9,7 @@ RSpec.describe 'Balance', type: :request do
       it 'can successfully access an balance edit page' do
         sign_in(user)
 
-        get edit_account_balance_path(balance, account_id: balance.balanceable_id)
+        get edit_account_balance_path(balance, account_id: balance.account_id)
 
         expect(response).to be_successful
       end
@@ -17,7 +17,7 @@ RSpec.describe 'Balance', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access a balance edit page' do
-        get edit_account_balance_path(balance, account_id: balance.balanceable_id)
+        get edit_account_balance_path(balance, account_id: balance.account_id)
 
         expect(response).to redirect_to new_user_session_path
       end
@@ -59,19 +59,8 @@ RSpec.describe 'Balance', type: :request do
     context 'with invalid data' do
       before { sign_in(user) }
 
-      it 'does not update balance' do
-        put balance_path(balance), params: {
-          balance: {
-            balanceable_id: nil
-          }
-        }
-
-        balance.reload
-        expect(balance.balanceable_id).not_to be_nil
-      end
-
-      it 'also respond to json', :aggregate_failures do
-        put balance_path(balance, format: :json), params: { balance: { balanceable_id: nil } }
+      it 'does not update balance', :aggregate_failures do
+        put balance_path(balance, format: :json), params: { balance: { account_id: nil } }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(response).to have_http_status(:unprocessable_entity)
@@ -93,7 +82,7 @@ RSpec.describe 'Balance', type: :request do
 
   describe 'POST /balances' do
     let(:account) { create(:account) }
-    let(:params)  { { balanceable_id: account.id, balanceable_type: 'Account', balance: 1000 } }
+    let(:params)  { { account_id: account.id, balance: 1000 } }
     let(:new_balance) { post balances_path, params: { balance: params } }
 
     before { sign_in(user) }
@@ -127,13 +116,13 @@ RSpec.describe 'Balance', type: :request do
       let(:invalid_balance) { build(:balance, :for_account) }
 
       it 'does not create a new balance' do
-        invalid_balance.balanceable_id = nil
+        invalid_balance.account_id = nil
 
         expect(invalid_balance).not_to be_valid
       end
 
       it 'also respond to json', :aggregate_failures do
-        post balances_path(format: :json), params: { balance: { balanceable_id: nil } }
+        post balances_path(format: :json), params: { balance: { account_id: nil } }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(response).to have_http_status(:unprocessable_entity)
@@ -148,7 +137,7 @@ RSpec.describe 'Balance', type: :request do
 
     context 'when successfully' do
       it 'deletes a balance', :aggregate_failures do
-        expect { delete account_balance_path(new_balance, account_id: new_balance.balanceable_id) }.to change(Balance, :count).by(-1)
+        expect { delete account_balance_path(new_balance, account_id: new_balance.account_id) }.to change(Balance, :count).by(-1)
         expect(flash[:notice]).to eq 'Balance was successfully removed.'
         expect(response).to redirect_to balances_path
       end

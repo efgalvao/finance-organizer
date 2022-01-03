@@ -59,18 +59,7 @@ RSpec.describe 'Dividend', type: :request do
     context 'with invalid data' do
       before { sign_in(user) }
 
-      it 'does not update dividend' do
-        put dividend_path(dividend), params: {
-          dividend: {
-            stock_id: nil
-          }
-        }
-
-        dividend.reload
-        expect(dividend.stock_id).not_to be_nil
-      end
-
-      it 'also respond to json', :aggregate_failures do
+      it 'does not update dividend', :aggregate_failures do
         put dividend_path(dividend, format: :json), params: { dividend: { stock_id: nil } }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')

@@ -59,18 +59,7 @@ RSpec.describe 'Price', type: :request do
     context 'with invalid data' do
       before { sign_in(user) }
 
-      it 'does not update price' do
-        put price_path(price), params: {
-          price: {
-            stock_id: nil
-          }
-        }
-
-        price.reload
-        expect(price.stock_id).not_to be_nil
-      end
-
-      it 'also respond to json', :aggregate_failures do
+      it 'does not update price', :aggregate_failures do
         put price_path(price, format: :json), params: { price: { stock_id: nil } }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')

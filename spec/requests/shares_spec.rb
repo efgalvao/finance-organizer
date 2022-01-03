@@ -59,18 +59,7 @@ RSpec.describe 'Share', type: :request do
     context 'with invalid data' do
       before { sign_in(user) }
 
-      it 'does not update share' do
-        put share_path(share), params: {
-          share: {
-            stock_id: nil
-          }
-        }
-
-        share.reload
-        expect(share.stock_id).not_to be_nil
-      end
-
-      it 'also respond to json', :aggregate_failures do
+      it 'does not update share', :aggregate_failures do
         put share_path(share, format: :json), params: { share: { stock_id: nil } }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
