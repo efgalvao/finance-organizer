@@ -4,7 +4,7 @@ class PricesController < ApplicationController
   # GET /prices
   # GET /prices.json
   def index
-    @stocks = policy_scope(Stock).includes(:prices).all
+    @stocks = policy_scope(Stock).includes(:prices).all.order(name: :asc)
   end
 
   # GET /prices/1

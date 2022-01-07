@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = policy_scope(Transaction).current_month
+    @transactions = policy_scope(Transaction).current_month.order(date: :desc)
   end
 
   def update

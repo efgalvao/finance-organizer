@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[edit show update destroy]
+
   def new
     @category = Category.new
   end
@@ -18,7 +19,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = policy_scope(Category).all
+    @categories = policy_scope(Category).all.order(name: :asc)
   end
 
   def update

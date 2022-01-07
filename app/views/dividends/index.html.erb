@@ -18,7 +18,7 @@
     </thead>
 
     <tbody>
-      <% stock.dividends.order('date desc').limit(10).each do |dividend| %>
+      <% stock.dividends.order('date desc').limit(5).each do |dividend| %>
         <tr>
           <td><%= dividend.date.strftime('%B %d, %Y') %></td>
           <td><%= dividend.value %></td>
@@ -31,3 +31,5 @@
 
 <br>
 <% end%>
+
+<%= link_to 'Add dividend', new_dividend_path, class: 'btn btn-success'%>

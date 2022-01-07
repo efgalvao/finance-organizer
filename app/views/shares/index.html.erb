@@ -5,7 +5,7 @@
 <% @stocks.each do |stock| %>
 
   <div class="summary-subtitle">
-    <%= "#{stock.name} (#{stock.account.name})" %>
+    <%= link_to "#{stock.name} (#{stock.account.name})", stock_path(stock) %>
   </div>
 
   <table class="table table-hover">
@@ -13,17 +13,15 @@
       <tr>
         <th>Aquisition date</th>
         <th>Aquisition value</th>
-        <th>Stock</th>
         <th></th>
       </tr>
     </thead>
 
     <tbody>
-      <% stock.shares.order('aquisition_date desc').limit(10).each do |share| %>
+      <% stock.shares.order('aquisition_date desc').limit(5).each do |share| %>
         <tr>
           <td><%= share.aquisition_date.strftime('%B %d, %Y') %></td>
           <td><%= share.aquisition_value %></td>
-          <td><%= share.stock.name %></td>
           <td><%= link_to 'Edit', edit_share_path(id: share.id), :class => "btn btn-warning" %>
           <%= link_to 'Remove', share_path(id: share.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
         </tr>
@@ -31,3 +29,5 @@
     </tbody>
   </table>
 <% end %>
+
+<%= link_to 'Add new share', new_share_path, class: 'btn btn-success' %>
