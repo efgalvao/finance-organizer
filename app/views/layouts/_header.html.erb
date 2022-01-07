@@ -1,89 +1,29 @@
-<nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="/">ZUKUNFT</a>
-  <a class="btn btn-outline-success" href="/user/overview" role="button">SUMMARY
-    </a>
-  <div class="dropdown">
-    <button class="btn btn-outline-primary">ACCOUNTS
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a class="btn btn-outline-primary" href="/accounts">Overview</a>
-      <a class="btn btn-outline-primary" href="/accounts/new">Create Account</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="btn btn-outline-primary">TRANSACTIONS
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a class="btn btn-outline-primary" href="/transactions">Overview</a>
-      <a class="btn btn-outline-primary" href="/transactions/new">Create transactions</a>
-    </div>
-  </div>
-    <div class="dropdown">
-    <button class="btn btn-outline-primary">CATEGORIES
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a class="btn btn-outline-primary" href="/categories">Categories</a>
-      <a class="btn btn-outline-primary" href="/categories/new">Create category</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="btn btn-outline-primary">STOCKS
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a class="btn btn-outline-primary" href="/stocks">Overview</a>
-      <a class="btn btn-outline-primary" href="/stocks/new">New Stock</a>
-    </div>
-  </div>
-    <div class="dropdown">
-    <button class="btn btn-outline-primary">SHARES
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a class="btn btn-outline-primary" href="/shares">Overview</a>
-      <a class="btn btn-outline-primary" href="/shares/new">Buy Shares</a>
-      <a class="btn btn-outline-primary" href="#">Sell Shares</a>
-    </div>
-  </div>
-    <div class="dropdown">
-    <button class="btn btn-outline-primary">DIVIDENDS
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a class="btn btn-outline-primary" href="/dividends">Overview</a>
-      <a class="btn btn-outline-primary" href="/dividends/new">Register Dividend</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="btn btn-outline-primary">PRICES
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a class="btn btn-outline-primary" href="/prices">Overview</a>
-      <a class="btn btn-outline-primary" href="/prices/new">Register New Price</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <button class="btn btn-outline-primary">BALANCES
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a class="btn btn-outline-primary" href="/balances">Overview</a>
-      <a class="btn btn-outline-primary" href="/balances/new">Register new balance</a>
-    </div>
-  </div>
+<nav class="navbar navbar-dark dark-blue darken-4">
+  <a class="navbar-brand" href="/user/overview">ZUKUNFT</a>
 
-  <div class="navbar-info">
-    <% if user_signed_in? %>
-      <a>Logged in as &nbsp<strong><%= current_user.name %></strong>.</a>
-      <%= link_to 'Edit profile', edit_user_registration_path, :class => "btn btn-info" %> 
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-danger'  %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %>
-      <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-    <% end %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+    aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    
+  <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+    <ul class='navbar-nav mr-auto'>
+      <a class="btn btn-outline-primary" href="/accounts">ACCOUNTS</a>
+
+      <a class="btn btn-outline-primary" href="/transactions">TRANSACTIONS</a>
+
+      <a class="btn btn-outline-primary" href="/categories">CATEGORIES</a>
+
+      <a class="btn btn-outline-primary" href="/stocks">STOCKS</a>
+
+      <a class="btn btn-outline-primary" href="/shares">SHARES</a>
+
+      <a class="btn btn-outline-primary" href="/dividends">DIVIDENDS</a>
+
+      <a class="btn btn-outline-primary" href="/prices">PRICES</a>
+
+      <a class="btn btn-outline-primary" href="/balances">BALANCES</a>
+
+      <%= link_to 'EDIT PROFILE', edit_user_registration_path, class:'btn btn-outline-primary' %> 
+      <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class:'btn btn-outline-primary'  %>
+    </ul>
   </div>
 </nav>
