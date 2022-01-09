@@ -24,6 +24,9 @@
 .summary-stocks {
   display: flex;
   margin: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .summary-stock {

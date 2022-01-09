@@ -14,12 +14,7 @@ button:hover{
   border-color: #FFFFFF;
   text-decoration: none;
 }
-@media all and (max-width:30em){
- button {
-    display:block;
-    margin:0.2em auto;
-  }
-}
+
 .new {
   background-color:#007BFF;
   display:inline-block;
@@ -37,10 +32,4 @@ button:hover{
 }
 button:hover{
   border-color: #FFFFFF;
-}
-@media all and (max-width:30em){
- button {
-    display:block;
-    margin:0.2em auto;
-  }
 }

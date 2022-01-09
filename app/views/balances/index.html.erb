@@ -13,7 +13,7 @@
     <tr>
       <th>Balance</th>
       <th>Date</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -22,8 +22,7 @@
       <tr>
         <td><%= balance.balance %></td>
         <td><%= balance.date.strftime('%B %d, %Y') %></td>
-        <td><%= link_to 'Details',  balance_path(balance), class: 'btn btn-info' %>
-          <%= link_to 'Edit', edit_account_balance_path(id: balance.id, account_id: balance.account_id), class: 'btn btn-warning' %>
+        <td><%= link_to 'Edit', edit_account_balance_path(id: balance.id, account_id: balance.account_id), class: 'btn btn-warning' %>
           <%= link_to 'Delete', account_balance_path(id: balance.id, account_id: balance.account_id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
@@ -32,4 +31,4 @@
 <% end %>
 <br>
 
-<%= link_to 'New Balance', new_balance_path, class: "btn btn-success" %>
+<%= link_to 'New Balance', new_balance_path, class: "btn btn-success ml-3" %>
