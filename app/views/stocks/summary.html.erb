@@ -42,6 +42,7 @@
 <div>
   <%= link_to 'Add shares', new_share_path(stock_id: @stock.id), class: 'btn btn-success' %>
   <%= link_to 'Register new Price', new_price_path(stock_id: @stock.id), class: 'btn btn-success' %>
+  <%= link_to 'Get new Price', stock_current_price_path(@stock), class: 'btn btn-success' %>
 </div>
 
 <div class="stock-charts">

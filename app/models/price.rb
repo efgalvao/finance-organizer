@@ -7,6 +7,10 @@ class Price < ApplicationRecord
 
   monetize :price_cents
 
+  def self.get_current_price(ticker)
+    PriceUpdater.get_price(ticker)
+  end
+
   private
 
   def set_date

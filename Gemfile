@@ -26,6 +26,7 @@ gem 'devise'
 gem 'pundit'
 gem 'dotenv-rails'
 gem 'pg'
+gem 'rest-client'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

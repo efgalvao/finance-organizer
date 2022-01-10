@@ -20,7 +20,7 @@ class Share < ApplicationRecord
   private
 
   def set_aquisition_date
-    self.aquisition_date = DateTime.current unless aquisition_date
+    self.aquisition_date = Date.current unless aquisition_date
   end
 
   def set_first_price

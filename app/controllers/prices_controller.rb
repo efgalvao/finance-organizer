@@ -63,6 +63,18 @@ class PricesController < ApplicationController
     end
   end
 
+  def current_price
+    @stock = Stock.find(params[:stock_id])
+    new_price = Price.get_current_price(@stock.name)
+    @stock.prices.new(price: new_price)
+
+    if @stock.save
+      redirect_to stock_summary_path(@stock), notice: 'Price successfully updated.'
+    else
+      redirect_to stock_summary_path(@stock), notice: 'Price not updated.'
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

@@ -11,6 +11,7 @@ AllCops:
     - 'db/migrate/**'
     - 'db/schema.rb'
     - 'db/seeds.rb'
+    - 'db/seeds/*'
     - 'doc/**/*'
     - 'Gemfile'
     - 'Guardfile'

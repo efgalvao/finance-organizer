@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :stocks do
     get '/summary', to: 'stocks#summary'
+    get '/current_price', to: 'prices#current_price'
     resources :dividends, only: [:destroy]
     resources :prices, only: %i[edit destroy]
   end
