@@ -24,7 +24,7 @@ class Share < ApplicationRecord
   end
 
   def set_first_price
-    return unless Price.find_by(date: aquisition_date).nil?
+    return unless Price.find_by(date: aquisition_date, stock_id: stock.id).nil?
 
     Price.create(
       date: aquisition_date,
