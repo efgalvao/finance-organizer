@@ -74,19 +74,19 @@
 </div>
 
 <div class="chart-title">
-  Dividends in the last 12 months:<br />
+  Dividends received by month(last 6 months):<br />
 </div>
 <div class="summary-chart">
-  <%= line_chart @account.monthly_dividends_received, precision: 8 %>
+  <%= line_chart @account.last_semester_total_dividends_received, precision: 8 %>
 </div>
 
 <div class="chart-title">
-  Monthly stocks value:
+  Stocks prices(last 6 months):
 </div>
 
 <div class="summary-chart">
   <%= line_chart @account.stocks.map { |stock| {
-      name: stock.name, data: stock.monthly_price
+      name: stock.name, data: stock.last_semester_prices
       } }, precision: 8 %>
 </div>
 

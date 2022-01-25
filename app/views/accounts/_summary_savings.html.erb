@@ -41,8 +41,8 @@
 </div>
 
 <div class="chart-title">
-  Balance in the last 12 months:<br />
+  Monthly balance(last 6 months):<br />
 </div>
 <div class="summary-chart">
-  <%= line_chart @account.monthly_balance, precision: 8 %>
+  <%= line_chart @account.last_semester_balances, precision: 8 %>
 </div>

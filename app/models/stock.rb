@@ -40,38 +40,38 @@ class Stock < ApplicationRecord
     price * shares.count
   end
 
-  def monthly_price
+  def last_semester_prices
     grouped_prices = {}
-    prices.each do |price|
+    semester_prices.each do |price|
       grouped_prices[price.date.strftime('%B %d, %Y').to_s] = price.price.to_f
     end
     grouped_prices
   end
 
-  def monthly_dividends_per_share
+  def last_semester_individual_dividends
     grouped_dividends = {}
-    dividends.each do |dividend|
+    last_semester_dividends.each do |dividend|
       grouped_dividends[dividend.date.strftime('%B/%Y').to_s] = dividend.value.to_f
     end
     grouped_dividends
   end
 
-  def monthly_dividends_total
+  def semester_total_dividends
     grouped_dividends = {}
-    dividends.each do |dividend|
+    last_semester_dividends.each do |dividend|
       grouped_dividends[dividend.date.strftime('%B/%Y').to_s] =
         dividend.value.to_f * shares.where('aquisition_date <= ?', dividend.date).count
     end
     grouped_dividends
   end
 
-  def past_stock_balance(date)
-    price = if prices.past_date(date).order('date desc').first.nil?
-              shares.past_date(date).order('aquisition_date desc').first&.aquisition_value
-            else
-              prices.past_date(date).order('date desc').first&.price
-            end
-    shares_count = shares.past_date(date).count
-    price * shares_count
+  private
+
+  def semester_prices
+    prices.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
+  end
+
+  def last_semester_dividends
+    dividends.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
   end
 end

@@ -16,11 +16,11 @@
 <div class="collapse" id="collapse-<%= account.id %>">
   <div class="account">
     <div class="chart-title">
-      Monhly account balance:
+      Monhly balance(last 6 months):
     </div>
   
     <div class="summary-chart">
-      <%= line_chart account.monthly_balance, precision: 8 %>
+      <%= line_chart account.last_semester_balances, precision: 8 %>
     </div>
 
     <% if account.savings == false %>
