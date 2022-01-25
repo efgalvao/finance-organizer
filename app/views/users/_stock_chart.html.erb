@@ -1,10 +1,10 @@
 <div class="chart-title">
-  Monthly stocks value:
+  Monthly stocks value( last 6 months):
 </div>
 
 <div class="summary-chart">
   <%= line_chart account.stocks.map { |stock| {
-      name: stock.name, data: stock.monthly_price
+      name: stock.name, data: stock.last_semester_prices
       } }, precision: 8 %>
 </div>
 

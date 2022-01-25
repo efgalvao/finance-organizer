@@ -6,14 +6,14 @@
   <thead>
     <tr>
       <th>Total Balance</th>
-      <th>Free</th>
+      <th>Balance</th>
       <th>In stocks</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><%= number_to_currency(current_user.total_amount, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-      <td><%= number_to_currency(current_user.total_in_savings, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(current_user.total_balance, unit: 'R$ ', separator: ',', delimiter: '') %></td>
       <td><%= number_to_currency(current_user.total_in_stocks, unit: 'R$ ', separator: ',', delimiter: '') %></td>
     </tr>
   </tbody>
@@ -42,18 +42,18 @@
 </table>
 
 <div class="chart-title">
-  Balance in the last 12 months:<br />
+  Monthly balance(last 6 months):<br />
 </div>
 <div class="summary-chart">
  <%= line_chart [
-      {name: 'Total', data: @user.monthly_report_total},
-      {name: 'Savings', data: @user.monthly_report_savings},
-      {name: 'Stocks', data: @user.monthly_report_stocks}
+      {name: 'Total', data: @user.last_semester_reports_total},
+      {name: 'Savings', data: @user.last_semester_reports_savings},
+      {name: 'Stocks', data: @user.last_semester_reports_stocks}
       ], precision: 8 %></div>
 
 <div class="chart-title">
-  Dividends in the last 12 months:<br />
+  Monthly dividends received(last 6 months):<br />
 </div>
 <div class="summary-chart">
-  <%= line_chart @user.total_dividends_past_months, precision: 8 %>
+  <%= line_chart @user.last_semester_total_dividends, precision: 8 %>
 </div>

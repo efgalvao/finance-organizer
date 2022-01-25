@@ -22,7 +22,6 @@ class AccountPolicy < ApplicationPolicy
   def transactions_history?
     account_owner?
   end
-  
 
   class Scope < Scope
     def resolve

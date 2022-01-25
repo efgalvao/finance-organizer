@@ -35,19 +35,19 @@ class Account < ApplicationRecord
     total
   end
 
-  def monthly_balance
+  def last_semester_balances
     create_balance if balances.empty?
     grouped_balances = {}
-    balances.each do |balance|
+    semester_balances.each do |balance|
       grouped_balances[balance.date.strftime('%B %d, %Y').to_s] = balance.balance.to_f
     end
     grouped_balances
   end
 
-  def monthly_dividends_received
+  def last_semester_total_dividends_received
     grouped_dividends = {}
     stocks.each do |stock|
-      dividends = stock.monthly_dividends_total
+      dividends = stock.semester_total_dividends
       grouped_dividends = grouped_dividends.merge(dividends) { |_k, a_value, b_value| a_value + b_value }
     end
     grouped_dividends
@@ -90,5 +90,11 @@ class Account < ApplicationRecord
 
   def stock_plus_balance
     total_stock_value + last_balance.balance
+  end
+
+  private
+
+  def semester_balances
+    balances.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
   end
 end

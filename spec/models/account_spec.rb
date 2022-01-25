@@ -65,4 +65,15 @@ RSpec.describe Account, type: :model do
       expect(account.current_month_transactions).to eq([transaction1])
     end
   end
+
+  describe '#last_semester_total_dividends_received' do
+    let(:stock1) { create(:stock, account: account) }
+    let!(:share1) { create_list(:share, 2, stock: stock1, aquisition_value: 100, aquisition_date: DateTime.current - 10.days) }
+    let!(:dividend1) { create(:dividend, stock: stock1, value: 50, date: DateTime.current - 2.days) }
+
+    it 'returns the total dividends received in the last semester as a hash', :aggregate_failures do
+      expect(account.last_semester_total_dividends_received).to be_instance_of(Hash)
+      expect(account.last_semester_total_dividends_received).not_to be_empty
+    end
+  end
 end

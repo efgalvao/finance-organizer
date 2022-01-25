@@ -47,19 +47,19 @@
 
 <div class="stock-charts">
   <div class="chart-title">
-    Average value in the last 12 months:
+    Stock price(last 6 months):
   </div>
-  <%= line_chart @stock.monthly_price, precision: 8, curve: false %>
+  <%= line_chart @stock.last_semester_prices, precision: 8, curve: false %>
 
   <div class="chart-title">
-    Dividend per share:
+    Dividend per share(last 6 months):
   </div>
-    <%= line_chart @stock.monthly_dividends_per_share, precision: 8 %>
+    <%= line_chart @stock.last_semester_individual_dividends, precision: 8 %>
 </div>
 
 <div class="stock-charts">
   <div class="chart-title">
-    Dividends total:
+    Total dividends(last 6 months):
   </div>
-    <%= line_chart @stock.monthly_dividends_total, precision: 8 %>
+    <%= line_chart @stock.semester_total_dividends, precision: 8 %>
 </div>
