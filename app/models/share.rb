@@ -3,19 +3,9 @@ class Share < ApplicationRecord
 
   before_create :set_aquisition_date, :set_first_price
 
-  scope :bought_this_month, lambda {
-                              where('aquisition_date BETWEEN ? AND ?',
-                                    DateTime.current.beginning_of_month,
-                                    DateTime.current.end_of_month)
-                            }
-
   scope :past_date, ->(date) { where('aquisition_date <= ?', date - 7.days) }
 
   monetize :aquisition_value_cents
-
-  # def self.average_price
-  #   average('aquisition_value_cents')
-  # end
 
   private
 

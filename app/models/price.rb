@@ -3,13 +3,7 @@ class Price < ApplicationRecord
 
   before_create :set_date
 
-  scope :past_date, ->(date) { where('date <= ?', date) }
-
   monetize :price_cents
-
-  def self.get_current_price(ticker)
-    PriceUpdater.get_price(ticker)
-  end
 
   private
 

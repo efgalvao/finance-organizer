@@ -1,26 +1,17 @@
 class PricesController < ApplicationController
   before_action :set_price, only: %i[show edit update destroy]
+  before_action :set_stock, only: %i[current_price]
 
-  # GET /prices
-  # GET /prices.json
   def index
     @stocks = policy_scope(Stock).includes(:prices).all.order(name: :asc)
   end
 
-  # GET /prices/1
-  # GET /prices/1.json
-  def show; end
-
-  # GET /prices/new
   def new
     @price = Price.new
   end
 
-  # GET /prices/1/edit
   def edit; end
 
-  # POST /prices
-  # POST /prices.json
   def create
     @price = Price.new(price_params)
 
@@ -35,8 +26,6 @@ class PricesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /prices/1
-  # PATCH/PUT /prices/1.json
   def update
     respond_to do |format|
       if @price.update(price_params)
@@ -51,8 +40,6 @@ class PricesController < ApplicationController
     end
   end
 
-  # DELETE /prices/1
-  # DELETE /prices/1.json
   def destroy
     @price.destroy
     respond_to do |format|
@@ -64,8 +51,7 @@ class PricesController < ApplicationController
   end
 
   def current_price
-    @stock = Stock.find(params[:stock_id])
-    new_price = Price.get_current_price(@stock.name)
+    new_price = PriceUpdater.get_price(@stock.name)
     @stock.prices.new(price: new_price)
 
     if @stock.save
@@ -77,12 +63,14 @@ class PricesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_price
     @price = Price.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  def set_stock
+    @stock = Stock.find(params[:stock_id])
+  end
+
   def price_params
     params.require(:price).permit(:date, :price, :stock_id)
   end
