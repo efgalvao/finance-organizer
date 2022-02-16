@@ -72,6 +72,10 @@ class User < ApplicationRecord
     grouped_dividends
   end
 
+  def incomes_expenses_report
+    Statements::CreateIncomesExpenses.new(self).perform
+  end
+
   private
 
   def update_current_user_report

@@ -12,9 +12,9 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= number_to_currency(current_user.total_amount, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-      <td><%= number_to_currency(current_user.total_balance, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-      <td><%= number_to_currency(current_user.total_in_stocks, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(current_user.total_amount, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(current_user.total_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(current_user.total_in_stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
     </tr>
   </tbody>
 </table>
@@ -33,13 +33,15 @@
     <% @user.accounts.each do |account| %>
     <tr>
       <td><%= link_to account.name, account_summary_path(account) %></td>
-      <td><%= number_to_currency(account.last_balance.balance, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-      <td><%= number_to_currency(account.total_stock_value, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-      <td><%= number_to_currency(account.stock_plus_balance, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+      <td><%= number_to_currency(account.last_balance.balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(account.total_stock_value, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(account.stock_plus_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= render 'incomes_expenses' %>
 
 <div class="chart-title">
   Monthly balance(last 6 months):<br />

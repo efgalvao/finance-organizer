@@ -1,0 +1,25 @@
+<div class="summary-item">
+  <div class="chart-title">
+    Incomes and expenses:
+  </div>
+  <table class='table table-hover'>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Incomes</th>
+        <th>Expenses</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.incomes_expenses_report.each do |month, data| %>
+        <tr>
+          <td><%= month %></td>
+          <td><%= number_to_currency(data[:incomes], unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(data[:expenses], unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(data[:total], unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
