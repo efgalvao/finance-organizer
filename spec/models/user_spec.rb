@@ -67,10 +67,12 @@ RSpec.describe User, type: :model do
     context 'with dividends' do
       let(:stock_account) { create(:account, :stocks_account, user: user) }
       let(:stock) { create(:stock, account: stock_account) }
-      let!(:share) { create_list(:share, 3, stock: stock, aquisition_value: 100, aquisition_date: DateTime.current - 10.days) }
-      let!(:dividend) { create(:dividend, stock: stock, date: Time.zone.today, value: 123) }
+      let!(:share) { create_list(:share, 3, stock: stock, aquisition_value: 100, aquisition_date: DateTime.new(2022, 01, 21)) }
+      let!(:dividend) { create(:dividend, stock: stock, date: DateTime.new(2022, 01, 30), value: 123) }
 
       it 'return hash', :aggregate_failures do
+        travel_to(Time.new(2022, 01, 31))
+
         expect(user.last_semester_total_dividends).to eq({ 'January/2022' => 369.0 })
         expect(user.last_semester_total_dividends).not_to eq({})
       end

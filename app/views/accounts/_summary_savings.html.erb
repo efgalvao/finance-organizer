@@ -11,30 +11,7 @@
   </div>
 </div>
 
-<div class="summary-item">
-   Incomes and expenses: <br />
-  <table class='table table-hover'>
-    <thead>
-      <tr>
-        <th>Month</th>
-        <th>Incomes</th>
-        <th>Expenses</th>
-        <th>Final</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% (0...12).each do |n| %>
-      <% date = DateTime.current - n.month%>
-      <tr>
-        <td><%= date.strftime('%B, %Y') %></td>
-        <td><%= number_to_currency(@account.incomes(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-        <td><%= number_to_currency(@account.expenses(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-        <td><%= number_to_currency(@account.total_balance(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<%= render 'incomes_expenses' %>
 
 <div>
   <%= link_to 'Transactions', account_transactions_path(@account), class:'btn btn-success' %>
