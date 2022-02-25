@@ -1,0 +1,32 @@
+<div class="title">
+  Transactions
+</div>
+
+<br />
+
+<% if !@transferences.blank? %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th> Amount </th>
+      <th> Date </th>
+      <th> Sender </th>
+      <th> Receiver </th>
+    </tr>
+  </thead>
+    <tbody>
+      <% for transference in @transferences %>
+        <tr>
+          <td> <%= transference.date %></td>
+          <td> $ <%= transference.amount %></td>
+          <td> <%= transference.sender.name %></td>
+          <td> <%= transference.receiver.name %></td>
+        </tr>
+      <% end %>
+    <% else %>
+    <h1> No transferences in this month. </h1>
+    <% end %>
+    </tbody>
+</table>
+
+<%= link_to 'Create new transference', new_transference_path, class:"btn btn-success ml-3" %>
