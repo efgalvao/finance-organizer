@@ -11,6 +11,10 @@ RSpec.describe Transaction, type: :model do
     it { is_expected.to define_enum_for(:kind) }
   end
 
+  describe 'monetize' do
+    it { is_expected.to monetize(:value) }
+  end
+
   describe '.set_date' do
     let(:transaction) { build(:transaction, date: nil) }
 
