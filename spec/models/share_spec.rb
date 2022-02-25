@@ -11,6 +11,10 @@ RSpec.describe Share, type: :model do
     it { is_expected.to belong_to(:stock) }
   end
 
+  describe 'monetize' do
+    it { is_expected.to monetize(:aquisition_value) }
+  end
+
   describe '.set_date' do
     let(:share) { build(:share, aquisition_date: nil) }
 

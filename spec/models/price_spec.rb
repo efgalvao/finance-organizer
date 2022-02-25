@@ -5,6 +5,10 @@ RSpec.describe Price, type: :model do
     it { is_expected.to belong_to(:stock) }
   end
 
+  describe 'monetize' do
+    it { is_expected.to monetize(:price) }
+  end
+
   describe '.set_date' do
     let(:price) { build(:price, date: nil) }
 

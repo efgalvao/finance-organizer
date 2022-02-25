@@ -16,6 +16,10 @@ RSpec.describe Account, type: :model do
     it { is_expected.to validate_presence_of(:name) }
   end
 
+  describe 'monetize' do
+    it { is_expected.to monetize(:balance) }
+  end
+
   describe '#total_invested' do
     let(:stock1) { create(:stock, account: account) }
     let!(:share1) { create_list(:share, 2, stock: stock1, aquisition_value: 100) }
