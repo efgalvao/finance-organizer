@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_120320) do
+ActiveRecord::Schema.define(version: 2022_02_22_210901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,19 @@ ActiveRecord::Schema.define(version: 2022_01_03_120320) do
     t.index ["category_id"], name: "index_transactions_on_category_id"
   end
 
+  create_table "transferences", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.bigint "user_id"
+    t.date "date"
+    t.integer "amount_cents", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["receiver_id"], name: "index_transferences_on_receiver_id"
+    t.index ["sender_id"], name: "index_transferences_on_sender_id"
+    t.index ["user_id"], name: "index_transferences_on_user_id"
+  end
+
   create_table "user_reports", force: :cascade do |t|
     t.datetime "date"
     t.integer "savings_cents", default: 0, null: false
@@ -125,5 +138,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_120320) do
   add_foreign_key "stocks", "accounts"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"
+  add_foreign_key "transferences", "users"
   add_foreign_key "user_reports", "users"
 end

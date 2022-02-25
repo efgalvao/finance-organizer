@@ -3,12 +3,14 @@
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
     aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-    
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent1">
     <ul class='navbar-nav mr-auto'>
       <a class="btn btn-outline-primary" href="/accounts">ACCOUNTS</a>
 
       <a class="btn btn-outline-primary" href="/transactions">TRANSACTIONS</a>
+
+      <a class="btn btn-outline-primary" href="/transferences">TRANSFERENCES</a>
 
       <a class="btn btn-outline-primary" href="/categories">CATEGORIES</a>
 
@@ -22,7 +24,7 @@
 
       <a class="btn btn-outline-primary" href="/balances">BALANCES</a>
 
-      <%= link_to 'EDIT PROFILE', edit_user_registration_path, class:'btn btn-outline-primary' %> 
+      <%= link_to 'EDIT PROFILE', edit_user_registration_path, class:'btn btn-outline-primary' %>
       <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class:'btn btn-outline-primary'  %>
     </ul>
   </div>

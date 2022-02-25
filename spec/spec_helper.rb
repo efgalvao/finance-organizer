@@ -2,6 +2,7 @@ require 'simplecov' unless ENV['COVERAGE'] == '0'
 require 'pry-byebug'
 require 'capybara/rspec'
 require 'dotenv'
+require 'money-rails/test_helpers'
 
 SimpleCov.start 'rails' do
   minimum_coverage 50
