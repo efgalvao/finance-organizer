@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<%= render 'incomes_expenses' %>
+<%= render 'incomes_expenses', account: account %>
 
 <div>
   <%= link_to 'Transactions', account_transactions_path(account), class:'btn btn-success' %>

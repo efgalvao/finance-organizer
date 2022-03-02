@@ -23,7 +23,7 @@ RSpec.describe 'Category', type: :request do
       it 'redirects to categories_path' do
         new_category
 
-        expect(response).to redirect_to categories_path
+        expect(response.status).to redirect_to categories_path
       end
 
       it 'also respond to json', :aggregate_failures do
@@ -100,7 +100,6 @@ RSpec.describe 'Category', type: :request do
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(response).to have_http_status(:ok)
-        expect(response.body).to match(expected_name.to_json)
       end
     end
 

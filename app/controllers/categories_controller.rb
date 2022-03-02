@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_path, notice: 'Category successfully created.' }
-        format.json { render :show, status: :created, location: @category }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @category.errors, status: :unprocessable_entity }
@@ -26,7 +26,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to @category, notice: 'Category successfully updated.' }
-        format.json { render :show, status: :ok, location: @category }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @category.errors, status: :unprocessable_entity }
