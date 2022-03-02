@@ -38,7 +38,7 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Exclude:
     - 'lib/tasks/**/*'
-    
+
 Metrics/AbcSize:
   Max: 201
   Exclude:
@@ -179,7 +179,7 @@ Lint/IdentityComparison: # (new in 0.91)
   Enabled: true
 
 Lint/MissingSuper: # (new in 0.89)
-  Enabled: true
+  Enabled: false
 
 Lint/MixedRegexpCaptureTypes: # (new in 0.85)
   Enabled: true
@@ -312,3 +312,15 @@ Rails/WhereExists: # (new in 2.7)
 
 Rails/WhereNot: # (new in 2.8)
   Enabled: true
+
+Rails/InverseOf: # (new in 2.7)
+  Enabled: false
+
+RSpec/NestedGroups: # (new in 2.7)
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false

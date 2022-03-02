@@ -1,5 +1,5 @@
 class PricesController < ApplicationController
-  before_action :set_price, only: %i[show edit update destroy]
+  before_action :set_price, only: %i[edit update destroy]
   before_action :set_stock, only: %i[current_price]
 
   def index

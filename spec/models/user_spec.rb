@@ -72,7 +72,7 @@ RSpec.describe User, type: :model do
       let!(:dividend) { create(:dividend, stock: stock, date: DateTime.new(2022, 1, 30), value: 123) }
 
       it 'return hash', :aggregate_failures do
-        travel_to(Time.new(2022, 1, 31))
+        travel_to(Time.zone.local(2022, 1, 31))
 
         expect(user.last_semester_total_dividends).to eq({ 'January/2022' => 369.0 })
         expect(user.last_semester_total_dividends).not_to eq({})
