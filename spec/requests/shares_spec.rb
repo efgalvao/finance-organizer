@@ -81,15 +81,15 @@ RSpec.describe 'Share', type: :request do
   end
 
   describe 'POST /shares' do
-    let!(:stock) { create(:stock) }
-    let!(:params) { { stock_id: stock.id, aquisition_value: 1_000 } }
-    let(:new_share) { post shares_path, params: { share: params } }
+    let(:stock) { create(:stock) }
+    let(:params) { { stock_id: stock.id, aquisition_value: 1_000 } }
+    let(:new_share) { post shares_path, params: { share: params, quantity: 2 } }
 
     before { sign_in(user) }
 
     context 'with valid data' do
       it 'creates a new Share' do
-        expect { new_share }.to change(Share, :count).by(1)
+        expect { new_share }.to change(Share, :count).by(2)
       end
 
       it 'has flash notice' do
@@ -105,7 +105,7 @@ RSpec.describe 'Share', type: :request do
       end
 
       it 'also respond to json', :aggregate_failures do
-        post shares_path(format: :json), params: { share: params }
+        post shares_path(format: :json), params: { share: params, quantity: 2 }
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(response).to have_http_status(:created)

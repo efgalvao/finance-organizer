@@ -5,16 +5,11 @@ class Transaction < ApplicationRecord
 
   before_save :set_date
 
-  after_save :update_balance
-
-  # VALIDATIONS
   validates :title, presence: true
   validates :account_id, presence: true
   validates :kind, presence: true
 
-  enum kind: { expense: 0, income: 1 }
-
-  # SCOPE
+  enum kind: { expense: 0, income: 1, transfer: 2, investment: 3 }
 
   scope :expense, -> { where(kind: 'expense') }
 
@@ -41,9 +36,10 @@ class Transaction < ApplicationRecord
   end
 
   def update_balance
-    if kind == 'income'
+    case kind
+    when 'income'
       account.update_balance(value)
-    else
+    when 'expense'
       account.update_balance(-value)
     end
   end

@@ -10,7 +10,7 @@ class TransactionsController < ApplicationController
   def show; end
 
   def create
-    @transaction = Transaction.new(transactions_params)
+    @transaction = Transactions::CreateTransaction.perform(transactions_params)
     if @transaction.save
       respond_to do |format|
         format.html do
