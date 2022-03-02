@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'Transferences', type: :request do
   let(:user) { create(:user) }
-  # let!(:transference) { create(:transference) }
 
   describe 'POST /transferences' do
     let!(:sender) { create(:account) }

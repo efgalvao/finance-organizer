@@ -1,36 +1,25 @@
 class SharesController < ApplicationController
   before_action :set_share, only: %i[show edit update destroy]
 
-  # GET /shares
-  # GET /shares.json
   def index
     @stocks = policy_scope(Stock).includes(:shares).all.order(name: :asc)
   end
 
-  # GET /shares/1
-  # GET /shares/1.json
   def show; end
 
-  # GET /shares/new
   def new
     @share = Share.new
   end
 
-  # GET /shares/1/edit
   def edit; end
 
-  # POST /shares
-  # POST /shares.json
   def create
-    @share = Share.new(share_params)
-    quantity = params[:quantity].to_i - 1
+    @share = Transactions::CreateInvestment.perform(share_params, params[:quantity].to_i)
     respond_to do |format|
-      if @share.save
-        Share.transaction do
-          quantity.times { Share.create(share_params) }
-        end
+      if @share.valid?
+
         format.html { redirect_to shares_path, notice: 'Share successfully created.' }
-        format.json { render :show, status: :created, location: @share }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @share.errors, status: :unprocessable_entity }
@@ -38,8 +27,6 @@ class SharesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /shares/1
-  # PATCH/PUT /shares/1.json
   def update
     respond_to do |format|
       if @share.update(share_params)
@@ -52,8 +39,6 @@ class SharesController < ApplicationController
     end
   end
 
-  # DELETE /shares/1
-  # DELETE /shares/1.json
   def destroy
     @share.destroy
     respond_to do |format|
@@ -64,12 +49,10 @@ class SharesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_share
     @share = Share.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def share_params
     params.require(:share).permit(:aquisition_date, :aquisition_value, :stock_id, :quantity)
   end
