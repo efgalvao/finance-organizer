@@ -94,3 +94,6 @@ workflows:
       - rubocop:
           requires:
             - build
+      - rails_best_practices:
+          requires:
+            - build
