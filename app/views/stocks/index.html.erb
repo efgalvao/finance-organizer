@@ -20,7 +20,7 @@
         <td> <%= stock.total_invested %> </td>
         <td> <%= stock.updated_balance %> </td>
         <td> <%= stock.shares.size %> </td>
-        <td> <%= stock.account.name %> </td>
+        <td> <%= stock.account_name %> </td>
         <td> <%= link_to "Shares", stock_path(stock), class:"btn btn-info" %>
              <%= link_to "Edit", edit_stock_path(stock), class:"btn btn-warning" %>
              <%= link_to "Delete", stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %> </td>

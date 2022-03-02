@@ -2,7 +2,7 @@
   <div class="card mb-3">
     <p>
       <strong>Stock:</strong>
-      <%= @dividend.stock.name %>
+      <%= @dividend.stock_name %>
     </p>
 
     <p>
@@ -15,7 +15,7 @@
       <%= @dividend.value %>
     </p>
 
-    <%= link_to 'Edit', edit_dividend_path(id: @dividend.id, stock_id: @dividend.stock.id), :class => "btn btn-warning" %>
+    <%= link_to 'Edit', edit_dividend_path(id: @dividend.id, stock_id: @dividend.stock_id), :class => "btn btn-warning" %>
     <%= link_to 'Back', dividends_path, :class => "btn btn-primary" %>
 
   </div>

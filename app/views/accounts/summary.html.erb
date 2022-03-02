@@ -3,8 +3,8 @@
 </div>
 
 <% if @account.savings? %>
-  <%= render 'summary_savings' %>
+  <%= render 'summary_savings', account: @account %>
 <% else %>
-  <%= render 'summary_stocks' %>
-  <%= render 'incomes_expenses' %>
+  <%= render 'summary_stocks', account: @account %>
+  <%= render 'incomes_expenses', account: @account %>
 <% end %>

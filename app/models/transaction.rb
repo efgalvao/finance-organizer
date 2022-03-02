@@ -11,15 +11,13 @@ class Transaction < ApplicationRecord
 
   enum kind: { expense: 0, income: 1, transfer: 2, investment: 3 }
 
-  scope :expense, -> { where(kind: 'expense') }
-
-  scope :income, -> { where(kind: 'income') }
-
   scope :current_month, lambda {
     where('date >= ? AND date <= ?',
           Date.current.beginning_of_month,
           Date.current.end_of_month)
   }
+
+  delegate :name, to: :account, prefix: true
 
   def category
     if category_id.nil?

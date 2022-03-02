@@ -5,6 +5,8 @@ class Price < ApplicationRecord
 
   monetize :price_cents
 
+  delegate :name, to: :stock, prefix: true
+
   private
 
   def set_date

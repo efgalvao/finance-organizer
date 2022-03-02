@@ -1,10 +1,10 @@
-<%= form_for @transference do |form| %>
-  <% if @transference.errors.any? %>
+<%= form_for transference do |form| %>
+  <% if transference.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@transference.errors.count, "error") %> prohibited this transference from being saved:</h2>
+      <h2><%= pluralize(transference.errors.count, "error") %> prohibited this transference from being saved:</h2>
 
       <ul>
-        <% @transference.errors.full_messages.each do |message| %>
+        <% transference.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>il
       </ul>

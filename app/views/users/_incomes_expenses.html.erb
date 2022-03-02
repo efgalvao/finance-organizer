@@ -8,11 +8,11 @@
         <th>Month</th>
         <th>Incomes</th>
         <th>Expenses</th>
-        <th>Total</th>
+        <th>Totalll</th>
       </tr>
     </thead>
     <tbody>
-      <% @user.incomes_expenses_report.each do |month, data| %>
+      <% user.incomes_expenses_report.each do |month, data| %>
         <tr>
           <td><%= month %></td>
           <td><%= number_to_currency(data[:incomes], unit: 'R$ ', separator: ',', delimiter: '.') %></td>

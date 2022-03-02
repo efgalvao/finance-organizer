@@ -1,26 +1,26 @@
 <div class="summary">
   <div class="summary-subtitle">
-    Summary for <%= @account.name %> account:
+    Summary for <%= account.name %> account:
   </div>
 </div>
 
 <div class="summary-item">
   Current balance:<br />
   <div class="item-value">
-    <%= number_to_currency(@account.last_balance.balance, unit: 'R$', separator: ',', delimiter: '') %>
+    <%= number_to_currency(account.last_balance.balance, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
 <%= render 'incomes_expenses' %>
 
 <div>
-  <%= link_to 'Transactions', account_transactions_path(@account), class:'btn btn-success' %>
-  <%= link_to 'Create new transaction', new_transaction_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
+  <%= link_to 'Transactions', account_transactions_path(account), class:'btn btn-success' %>
+  <%= link_to 'Create new transaction', new_transaction_path(account_id: account.id), :class => "btn btn-success ml-3" %>
 </div>
 
 <div class="chart-title">
   Monthly balance(last 6 months):<br />
 </div>
 <div class="summary-chart">
-  <%= line_chart @account.last_semester_balances, precision: 8 %>
+  <%= line_chart account.last_semester_balances, precision: 8 %>
 </div>

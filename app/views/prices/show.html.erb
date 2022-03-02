@@ -12,10 +12,10 @@
 
     <p>
       <strong>Stock:</strong>
-      <%= @price.stock.name.upcase %>
+      <%= @price.stock_name.upcase %>
     </p>
 
-    <%= link_to 'Edit', edit_stock_price_path(id: @price.id, stock_id: @price.stock.id), :class => "btn btn-warning" %>
+    <%= link_to 'Edit', edit_stock_price_path(id: @price.id, stock_id: @price.stock_id), :class => "btn btn-warning" %>
     <%= link_to 'Back', prices_path, :class => "btn btn-primary" %>
 
   </div>

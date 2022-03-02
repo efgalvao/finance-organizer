@@ -7,6 +7,8 @@ class Stock < ApplicationRecord
   validates :name, presence: true
   validates :account, presence: true
 
+  delegate :name, to: :account, prefix: true
+
   def name_with_account
     "#{name} (#{account.name})"
   end
@@ -25,12 +27,6 @@ class Stock < ApplicationRecord
     return 0 if shares.count.zero?
 
     total_invested / shares.count
-  end
-
-  def total_current_price
-    return 0 if current_price.nil?
-
-    current_price * shares.count
   end
 
   def updated_balance

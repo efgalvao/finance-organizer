@@ -5,7 +5,8 @@ class Balance < ApplicationRecord
 
   monetize :balance_cents
 
-  # Balance of current month
+  delegate :name, to: :account, prefix: true
+
   scope :current, lambda {
                     where('date BETWEEN ? AND ?', DateTime.current.beginning_of_month,
                           DateTime.current.end_of_month).limit(1)

@@ -5,7 +5,7 @@
 <% @stocks.each do |stock| %>
 
   <div class="summary-subtitle">
-    <%= link_to "#{stock.name} (#{stock.account.name})", stock_summary_path(stock) %>
+    <%= link_to "#{stock.name} (#{stock.account_name})", stock_summary_path(stock) %>
   </div>
 
   <table class="table table-hover">
@@ -23,7 +23,7 @@
           <td><%= dividend.date.strftime('%B %d, %Y') %></td>
           <td><%= dividend.value %></td>
           <td><%= link_to 'Edit', edit_dividend_path(dividend), :class => "btn btn-warning" %>
-          <%= link_to 'Delete', stock_dividend_path(stock_id: dividend.stock.id, id: dividend.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+          <%= link_to 'Delete', stock_dividend_path(stock_id: dividend.stock_id, id: dividend.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
         </tr>
       <% end %>
     </tbody>

@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[edit show update destroy]
+  before_action :set_category, only: %i[edit update destroy]
 
   def new
     @category = Category.new
@@ -42,8 +42,6 @@ class CategoriesController < ApplicationController
       end
     end
   end
-
-  def show; end
 
   def edit; end
 

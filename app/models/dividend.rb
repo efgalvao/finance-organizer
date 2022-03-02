@@ -3,6 +3,8 @@ class Dividend < ApplicationRecord
 
   before_create :set_date, :create_transaction
 
+  delegate :name, to: :stock, prefix: true
+
   monetize :value_cents
 
   private

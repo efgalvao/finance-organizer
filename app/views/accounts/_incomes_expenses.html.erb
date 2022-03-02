@@ -14,9 +14,9 @@
       <% date = DateTime.current - n.month%>
       <tr>
         <td><%= date.strftime('%B, %Y') %></td>
-        <td><%= number_to_currency(@account.incomes(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-        <td><%= number_to_currency(@account.expenses(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-        <td><%= number_to_currency(@account.total_balance(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+        <td><%= number_to_currency(account.incomes(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+        <td><%= number_to_currency(account.expenses(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+        <td><%= number_to_currency(account.total_balance(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
       </tr>
       <% end %>
     </tbody>

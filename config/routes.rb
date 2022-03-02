@@ -24,13 +24,13 @@ Rails.application.routes.draw do
 
   resources :dividends, except: [:destroy]
 
-  resources :prices, except: %i[edit destroy]
+  resources :prices, except: %i[edit destroy show]
 
   resources :balances, except: %i[edit destroy]
 
   resources :transactions, except: %i[edit]
 
-  resources :categories
+  resources :categories, except: %i[show]
 
   resources :transferences, only: %i[new create index]
 

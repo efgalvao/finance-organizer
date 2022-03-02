@@ -14,7 +14,7 @@
     <tbody>
       <% for category in @categories %>
         <tr>
-          <td> <%= link_to category.name, category_path(category) %></td>
+          <td> <%= category.name %></td>
           <td> <%= link_to "Edit", edit_category_path(id: category.id), :class => "btn btn-primary"  %>
           <%= link_to 'Remove', category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
           </td>

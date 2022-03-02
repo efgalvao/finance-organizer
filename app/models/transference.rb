@@ -12,6 +12,9 @@ class Transference < ApplicationRecord
 
   before_save :set_date
 
+  delegate :name, to: :sender, prefix: true
+  delegate :name, to: :receiver, prefix: true
+
   def different_accounts
     errors.add :base, 'Accounts must be different' if sender_id == receiver_id
   end

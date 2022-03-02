@@ -1,26 +1,18 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[show edit update destroy]
 
-  # GET /stocks
-  # GET /stocks.json
   def index
     @stocks = policy_scope(Stock).all.order(name: :asc)
   end
 
-  # GET /stocks/1
-  # GET /stocks/1.json
   def show; end
 
-  # GET /stocks/new
   def new
     @stock = Stock.new
   end
 
-  # GET /stocks/1/edit
   def edit; end
 
-  # POST /stocks
-  # POST /stocks.json
   def create
     @stock = Stock.new(stock_params)
 
@@ -35,8 +27,6 @@ class StocksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /stocks/1
-  # PATCH/PUT /stocks/1.json
   def update
     respond_to do |format|
       if @stock.update(name: stock_params[:name])
@@ -49,8 +39,6 @@ class StocksController < ApplicationController
     end
   end
 
-  # DELETE /stocks/1
-  # DELETE /stocks/1.json
   def destroy
     @stock.destroy
     respond_to do |format|
@@ -59,22 +47,17 @@ class StocksController < ApplicationController
     end
   end
 
-  # GET/stocks/1/summary
   def summary
     @stock = Stock.find(params[:stock_id])
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_stock
     @stock = Stock.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def stock_params
     params.require(:stock).permit(:name, :account_id)
   end
-
-  def main; end
 end

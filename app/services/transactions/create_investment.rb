@@ -12,7 +12,7 @@ module Transactions
           quantity.times do
             Share.create(params)
             Transaction.create(account: share.stock.account, value: share.aquisition_value, kind: 'investment',
-                               title: "Purchase share of Stock #{share.stock.name}", date: share.aquisition_date)
+                               title: "Purchase share of Stock #{share.stock_name}", date: share.aquisition_date)
             share.stock.account.update_balance(-share.aquisition_value)
           end
         end

@@ -1,5 +1,4 @@
 class Account < ApplicationRecord
-  # ASSOCIATIONS
   belongs_to :user
   has_many :stocks, dependent: :destroy
   has_many :transactions, dependent: :destroy
@@ -9,10 +8,8 @@ class Account < ApplicationRecord
 
   monetize :balance_cents
 
-  scope :savings_accounts, -> { where(savings: true) }
   scope :stocks_accounts, -> { where(savings: false) }
 
-  # VALIDATIONS
   validates :name, presence: true, uniqueness: true
 
   def create_balance

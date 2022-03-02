@@ -7,6 +7,8 @@ class Share < ApplicationRecord
 
   monetize :aquisition_value_cents
 
+  delegate :name, to: :stock, prefix: true
+
   private
 
   def set_aquisition_date
