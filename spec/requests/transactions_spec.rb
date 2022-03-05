@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Transaction', type: :request do
   let(:user) { create(:user) }
-  let!(:transaction) { create(:transaction) }
+  let(:account) { create(:account, user: user) }
+  let!(:transaction) { create(:transaction, account: account) }
 
   describe 'GET /transactions/:id/edit' do
     context 'when logged in' do
@@ -142,7 +143,7 @@ RSpec.describe 'Transaction', type: :request do
   end
 
   describe 'DELETE /transactions/:id   ' do
-    let!(:new_transaction) { create(:transaction) }
+    let!(:new_transaction) { create(:transaction, account: account) }
 
     before { sign_in(user) }
 

@@ -1,10 +1,10 @@
-class CategoryPolicy < ApplicationPolicy
-  attr_reader :user, :category
+class DividendPolicy < ApplicationPolicy
+  attr_reader :user, :dividend
 
-  def initialize(user, category)
+  def initialize(user, dividend)
     super
     @user = user
-    @category = category
+    @dividend = dividend
   end
 
   def show?

@@ -7,16 +7,24 @@ class StockPolicy < ApplicationPolicy
     @stock = stock
   end
 
+  def edit?
+    owner?
+  end
+
   def show?
-    account_owner?
+    owner?
   end
 
   def update?
-    account_owner?
+    owner?
   end
 
   def destroy?
-    account_owner?
+    owner?
+  end
+
+  def summary?
+    owner?
   end
 
   class Scope < Scope
@@ -27,7 +35,7 @@ class StockPolicy < ApplicationPolicy
 
   private
 
-  def account_owner?
-    stock.account.owner?(user)
+  def owner?
+    stock.user == user
   end
 end

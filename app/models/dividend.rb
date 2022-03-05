@@ -5,6 +5,8 @@ class Dividend < ApplicationRecord
 
   monetize :value_cents
 
+  delegate :user, to: :'stock.account'
+
   private
 
   def set_date

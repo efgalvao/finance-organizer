@@ -5,9 +5,13 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
   end
 
-  def edit; end
+  def edit
+    authorize @transaction
+  end
 
-  def show; end
+  def show
+    authorize @transaction
+  end
 
   def create
     @transaction = Transactions::CreateTransaction.perform(transactions_params)
@@ -33,6 +37,8 @@ class TransactionsController < ApplicationController
   end
 
   def update
+    authorize @transaction
+
     if @transaction.update(transactions_params)
       respond_to do |format|
         format.html do
@@ -51,6 +57,8 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
+    authorize @transaction
+
     if @transaction.destroy
       respond_to do |format|
         format.html do

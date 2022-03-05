@@ -23,6 +23,8 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    authorize @category
+
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to @category, notice: 'Category successfully updated.' }
@@ -35,6 +37,8 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    authorize @category
+
     respond_to do |format|
       if @category.destroy
         format.html { redirect_to categories_path, notice: 'Category successfully removed.' }
@@ -43,9 +47,13 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    authorize @category
+  end
 
-  def edit; end
+  def edit
+    authorize @category
+  end
 
   private
 

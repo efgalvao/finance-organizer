@@ -1,14 +1,10 @@
-class CategoryPolicy < ApplicationPolicy
-  attr_reader :user, :category
+class SharePolicy < ApplicationPolicy
+  attr_reader :user, :share
 
-  def initialize(user, category)
+  def initialize(user, share)
     super
     @user = user
-    @category = category
-  end
-
-  def show?
-    owner?
+    @share = share
   end
 
   def update?

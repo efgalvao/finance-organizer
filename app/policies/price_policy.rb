@@ -1,14 +1,10 @@
-class CategoryPolicy < ApplicationPolicy
-  attr_reader :user, :category
+class PricePolicy < ApplicationPolicy
+  attr_reader :user, :price
 
-  def initialize(user, category)
+  def initialize(user, price)
     super
     @user = user
-    @category = category
-  end
-
-  def show?
-    owner?
+    @price = price
   end
 
   def update?

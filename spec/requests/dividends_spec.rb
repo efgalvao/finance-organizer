@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Dividend', type: :request do
   let(:user) { create(:user) }
-  let!(:dividend) { create(:dividend) }
+  let(:account) { create(:account, user: user) }
+  let(:stock) { create(:stock, account: account) }
+  let!(:dividend) { create(:dividend, stock: stock) }
 
   describe 'GET /dividends/:id/edit' do
     context 'when logged in' do
@@ -131,7 +133,7 @@ RSpec.describe 'Dividend', type: :request do
   end
 
   describe 'DELETE /stocks/:stock_id/dividends/:id   ' do
-    let!(:new_dividend) { create(:dividend) }
+    let!(:new_dividend) { create(:dividend, stock: stock) }
 
     before { sign_in(user) }
 

@@ -1,30 +1,23 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[show edit update destroy]
+  before_action :set_account, only: %i[show edit update destroy summary transactions]
 
-  # GET /accounts
-  # GET /accounts.json
   def index
     @accounts = policy_scope(Account).order(name: :asc)
   end
 
-  # GET /accounts/1
-  # GET /accounts/1.json
-  def show; end
+  def show
+    authorize(@account)
+  end
 
-  # GET /accounts/new
   def new
     @account = Account.new
   end
 
-  # GET /accounts/1/edit
-  def edit; end
+  def edit
+    authorize(@account)
+  end
 
-  # POST /accounts
-  # POST /accounts.json
   def create
-    # @account = Account.new(name: account_params[:name].upcase,
-    #                        savings: account_params[:savings],
-    #                        user_id: current_user)
     @account = current_user.accounts.new(account_params)
 
     respond_to do |format|
@@ -38,9 +31,9 @@ class AccountsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /accounts/1
-  # PATCH/PUT /accounts/1.json
   def update
+    authorize(@account)
+
     respond_to do |format|
       if @account.update(name: account_params[:name])
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
@@ -52,9 +45,9 @@ class AccountsController < ApplicationController
     end
   end
 
-  # DELETE /accounts/1
-  # DELETE /accounts/1.json
   def destroy
+    authorize(@account)
+
     @account.destroy
     respond_to do |format|
       format.html { redirect_to accounts_path, notice: 'Account was successfully removed.' }
@@ -62,24 +55,20 @@ class AccountsController < ApplicationController
     end
   end
 
-  # GET/accounts/1/summary
   def summary
-    @account = Account.find(params[:account_id])
+    authorize(@account)
   end
 
-  def transactions_history
-    @account = Account.find(params[:account_id])
-    authorize @account
+  def transactions
+    authorize(@account)
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_account
     @account = Account.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def account_params
     params.require(:account).permit(:name, :balance, :savings, :user_id)
   end

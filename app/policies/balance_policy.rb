@@ -1,17 +1,13 @@
-class AccountPolicy < ApplicationPolicy
+class BalancePolicy < ApplicationPolicy
   attr_reader :user, :account
 
-  def initialize(user, account)
+  def initialize(user, balance)
     super
     @user = user
-    @account = account
+    @account = balance.account
   end
 
   def show?
-    account_owner?
-  end
-
-  def edit?
     account_owner?
   end
 
@@ -23,11 +19,7 @@ class AccountPolicy < ApplicationPolicy
     account_owner?
   end
 
-  def summary?
-    account_owner?
-  end
-
-  def transactions?
+  def edit?
     account_owner?
   end
 
