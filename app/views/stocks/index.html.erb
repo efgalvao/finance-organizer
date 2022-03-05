@@ -16,7 +16,7 @@
   <tbody>
     <% @stocks.each do |stock| %>
       <tr>
-        <td> <%= link_to stock.name, stock_summary_path(stock_id: stock.id) %> </td>
+        <td> <%= link_to stock.name, summary_stock_path(stock) %> </td>
         <td> <%= stock.total_invested %> </td>
         <td> <%= stock.updated_balance %> </td>
         <td> <%= stock.shares.size %> </td>

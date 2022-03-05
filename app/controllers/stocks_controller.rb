@@ -1,26 +1,22 @@
 class StocksController < ApplicationController
-  before_action :set_stock, only: %i[show edit update destroy]
+  before_action :set_stock, only: %i[show edit update destroy summary]
 
-  # GET /stocks
-  # GET /stocks.json
   def index
     @stocks = policy_scope(Stock).all.order(name: :asc)
   end
 
-  # GET /stocks/1
-  # GET /stocks/1.json
-  def show; end
+  def show
+    authorize @stock
+  end
 
-  # GET /stocks/new
   def new
     @stock = Stock.new
   end
 
-  # GET /stocks/1/edit
-  def edit; end
+  def edit
+    authorize @stock
+  end
 
-  # POST /stocks
-  # POST /stocks.json
   def create
     @stock = Stock.new(stock_params)
 
@@ -35,9 +31,9 @@ class StocksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /stocks/1
-  # PATCH/PUT /stocks/1.json
   def update
+    authorize @stock
+
     respond_to do |format|
       if @stock.update(name: stock_params[:name])
         format.html { redirect_to @stock, notice: 'Stock successfully updated.' }
@@ -49,9 +45,9 @@ class StocksController < ApplicationController
     end
   end
 
-  # DELETE /stocks/1
-  # DELETE /stocks/1.json
   def destroy
+    authorize @stock
+
     @stock.destroy
     respond_to do |format|
       format.html { redirect_to stocks_url, notice: 'Stock successfully removed.' }
@@ -59,22 +55,17 @@ class StocksController < ApplicationController
     end
   end
 
-  # GET/stocks/1/summary
   def summary
-    @stock = Stock.find(params[:stock_id])
+    authorize @stock
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_stock
     @stock = Stock.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def stock_params
     params.require(:stock).permit(:name, :account_id)
   end
-
-  def main; end
 end

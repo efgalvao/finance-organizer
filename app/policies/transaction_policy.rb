@@ -7,29 +7,31 @@ class TransactionPolicy < ApplicationPolicy
     @transaction = transaction
   end
 
-  def index?
-    transaction
-  end
-
   def show?
-    transaction_user?
+    owner?
   end
 
   def update?
-    transaction_user?
+    owner?
   end
 
   def edit?
-    transaction_user?
+    owner?
   end
 
   def destroy?
-    transaction_user?
+    owner?
   end
 
   class Scope < Scope
     def resolve
-      Transaction.includes(:account).where(account: { user: @user })
+      Transaction.includes(:account).where(account: { user: user })
     end
+  end
+
+  private
+
+  def owner?
+    transaction.user == user
   end
 end

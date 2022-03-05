@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Stock', type: :request do
   let(:user) { create(:user) }
-  let!(:stock) { create(:stock) }
+  let(:account) { create(:account, user: user) }
+  let!(:stock) { create(:stock, account: account) }
 
   describe 'GET /stocks/:id/edit' do
     context 'when logged in' do
@@ -140,7 +141,7 @@ RSpec.describe 'Stock', type: :request do
   end
 
   describe 'DELETE /stocks/:id   ' do
-    let!(:new_stock) { create(:stock) }
+    let!(:new_stock) { create(:stock, account: account) }
 
     before { sign_in(user) }
 
@@ -178,7 +179,7 @@ RSpec.describe 'Stock', type: :request do
       it 'can successfully access stock summary index page' do
         sign_in(user)
 
-        get stock_summary_path(stock)
+        get summary_stock_path(stock)
 
         expect(response).to be_successful
       end
@@ -186,7 +187,7 @@ RSpec.describe 'Stock', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access a stock summary page' do
-        get stock_summary_path(stock)
+        get summary_stock_path(stock)
 
         expect(response).to redirect_to new_user_session_path
       end

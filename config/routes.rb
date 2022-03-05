@@ -2,17 +2,17 @@ Rails.application.routes.draw do
   root to: "accounts#index"
   devise_for :users
   get '/user/overview', to: 'users#overview'
-  get '/user/summary' => "users#summary"
+  get '/user/summary', to: 'users#summary'
 
   resources :accounts do
-    get '/summary', to: 'accounts#summary'
-    get '/transactions', to: 'accounts#transactions_history'
+    get 'summary', on: :member
+    get 'transactions', on: :member
     resources :balances, only: %i[edit destroy]
     resources :transactions, only: %i[edit]
   end
 
   resources :stocks do
-    get '/summary', to: 'stocks#summary'
+    get 'summary', on: :member
     get '/current_price', to: 'prices#current_price'
     resources :dividends, only: [:destroy]
     resources :prices, only: %i[edit destroy]

@@ -161,7 +161,7 @@ RSpec.describe 'Account', type: :request do
       it 'can successfully access a account summary page' do
         sign_in(user)
 
-        get account_summary_path(account)
+        get summary_account_path(account)
 
         expect(response).to be_successful
       end
@@ -169,7 +169,7 @@ RSpec.describe 'Account', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access a account summary page' do
-        get account_summary_path(account)
+        get summary_account_path(account)
 
         expect(response).to redirect_to new_user_session_path
       end
@@ -181,7 +181,7 @@ RSpec.describe 'Account', type: :request do
       it 'can successfully access a account transactions page' do
         sign_in(user)
 
-        get account_transactions_path(account)
+        get transactions_account_path(account)
 
         expect(response).to be_successful
       end
@@ -189,7 +189,7 @@ RSpec.describe 'Account', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access a account transactions page' do
-        get account_transactions_path(account)
+        get transactions_account_path(account)
 
         expect(response).to redirect_to new_user_session_path
       end

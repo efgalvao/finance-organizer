@@ -10,7 +10,9 @@ class PricesController < ApplicationController
     @price = Price.new
   end
 
-  def edit; end
+  def edit
+    authorize @price
+  end
 
   def create
     @price = Price.new(price_params)
@@ -27,6 +29,8 @@ class PricesController < ApplicationController
   end
 
   def update
+    authorize @price
+
     respond_to do |format|
       if @price.update(price_params)
         format.html do
@@ -41,6 +45,8 @@ class PricesController < ApplicationController
   end
 
   def destroy
+    authorize @price
+
     @price.destroy
     respond_to do |format|
       format.html do

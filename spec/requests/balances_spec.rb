@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Balance', type: :request do
   let(:user) { create(:user) }
-  let!(:balance) { create(:balance, :for_account) }
+  let(:account) { create(:account, user: user) }
+  let!(:balance) { create(:balance, account: account) }
 
   describe 'GET /account/:id/balances/:id/edit' do
     context 'when logged in' do
@@ -131,7 +132,7 @@ RSpec.describe 'Balance', type: :request do
   end
 
   describe 'DELETE /accounts/id:/balance/id:/delete' do
-    let!(:new_balance) { create(:balance, :for_account) }
+    let!(:new_balance) { create(:balance, account: account) }
 
     before { sign_in(user) }
 

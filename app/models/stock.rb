@@ -7,6 +7,8 @@ class Stock < ApplicationRecord
   validates :name, presence: true
   validates :account, presence: true
 
+  delegate :user, to: :account
+
   def name_with_account
     "#{name} (#{account.name})"
   end

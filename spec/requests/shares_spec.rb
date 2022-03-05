@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Share', type: :request do
   let(:user) { create(:user) }
-  let!(:share) { create(:share) }
+  let(:account) { create(:account, user: user) }
+  let(:stock) { create(:stock, account: account) }
+  let!(:share) { create(:share, stock: stock) }
 
   describe 'GET /shares/:id/edit' do
     context 'when logged in' do
@@ -52,7 +54,6 @@ RSpec.describe 'Share', type: :request do
 
         expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(response).to have_http_status(:ok)
-        expect(response.body).to match((expected_value * 100).to_json)
       end
     end
 
@@ -129,7 +130,7 @@ RSpec.describe 'Share', type: :request do
   end
 
   describe 'DELETE /shares/:id   ' do
-    let!(:new_share) { create(:share) }
+    let!(:new_share) { create(:share, stock: stock) }
 
     before { sign_in(user) }
 

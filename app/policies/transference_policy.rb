@@ -7,26 +7,6 @@ class TransferencePolicy < ApplicationPolicy
     @transference = transference
   end
 
-  def index?
-    transference
-  end
-
-  def show?
-    transference_user?
-  end
-
-  def update?
-    transference_user?
-  end
-
-  def edit?
-    transference_user?
-  end
-
-  def destroy?
-    transference_user?
-  end
-
   class Scope < Scope
     def resolve
       Transference.where(user: @user)
