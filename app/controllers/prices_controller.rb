@@ -61,9 +61,9 @@ class PricesController < ApplicationController
     @stock.prices.new(price: new_price)
 
     if @stock.save
-      redirect_to stock_summary_path(@stock), notice: 'Price successfully updated.'
+      redirect_to summary_stock_path(@stock), notice: 'Price successfully updated.'
     else
-      redirect_to stock_summary_path(@stock), notice: 'Price not updated.'
+      redirect_to summary_stock_path(@stock), notice: 'Price not updated.'
     end
   end
 

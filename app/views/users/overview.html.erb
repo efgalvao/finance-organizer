@@ -5,10 +5,10 @@
   <div class="summary-subtitle user">
     <%= link_to "#{current_user.name} summary", user_summary_path %>
   </div>
-    
+
 <% @accounts.each do |account| %>
   <div class="summary-subtitle">
-    <%= link_to account.name, account_summary_path(account) %>
+    <%= link_to account.name, summary_account_path(account) %>
             <a href="" data-toggle="collapse" data-target="#collapse-<%= account.id %>" aria-expanded="false"
                 aria-controls="collapse"> &darr;</a>
   </div>
@@ -18,7 +18,7 @@
     <div class="chart-title">
       Monhly balance(last 6 months):
     </div>
-  
+
     <div class="summary-chart">
       <%= line_chart account.last_semester_balances, precision: 8 %>
     </div>

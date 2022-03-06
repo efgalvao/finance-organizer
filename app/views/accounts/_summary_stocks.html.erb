@@ -57,7 +57,7 @@
     <tbody>
       <% @account.stocks.each do |stock| %>
         <tr>
-          <td><%= link_to stock.name, stock_summary_path(stock) %></td>
+          <td><%= link_to stock.name, summary_stock_path(stock) %></td>
           <td><%= stock.shares.count %></td>
           <td><%= stock.total_invested %></td>
           <td><%= stock.average_aquisition_price %></td>
@@ -70,7 +70,7 @@
 </div>
 
 <div>
-  <%= link_to 'Transactions', account_transactions_path(@account), class:'btn btn-success' %>
+  <%= link_to 'Transactions', transactions_account_path(@account), class:'btn btn-success' %>
   <%= link_to 'Create new transaction', new_transaction_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
 </div>
 
@@ -94,7 +94,7 @@
 <div class="summary-stocks">
   <% @account.stocks.each do |stock| %>
     <div class="summary-stock">
-      <%= link_to stock.name, stock_summary_path(stock), class:"summary-stock" %>
+      <%= link_to stock.name, summary_stock_path(stock), class:"summary-stock" %>
     </div>
   <% end %>
 </div>

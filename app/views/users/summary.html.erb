@@ -32,7 +32,7 @@
   <tbody>
     <% @user.accounts.each do |account| %>
     <tr>
-      <td><%= link_to account.name, account_summary_path(account) %></td>
+      <td><%= link_to account.name, summary_account_path(account) %></td>
       <td><%= number_to_currency(account.last_balance.balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
       <td><%= number_to_currency(account.total_stock_value, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
       <td><%= number_to_currency(account.stock_plus_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
