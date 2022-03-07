@@ -90,3 +90,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Charts
 gem 'chartkick'
 gem 'groupdate'
+
+# ActiveAdmin
+gem 'activeadmin'

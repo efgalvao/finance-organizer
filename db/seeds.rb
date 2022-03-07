@@ -1,1 +1,2 @@
 load(Rails.root.join( 'db', 'seeds', "#{Rails.env.downcase}.rb"))
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

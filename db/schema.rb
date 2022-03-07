@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_22_210901) do
+ActiveRecord::Schema.define(version: 2022_03_06_161653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,38 @@ ActiveRecord::Schema.define(version: 2022_02_22_210901) do
   create_table "accounts", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "savings"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.integer "balance_cents", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_accounts_on_name", unique: true
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "balances", force: :cascade do |t|
@@ -39,7 +65,7 @@ ActiveRecord::Schema.define(version: 2022_02_22_210901) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["name"], name: "index_categories_on_name", unique: true
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
@@ -47,7 +73,7 @@ ActiveRecord::Schema.define(version: 2022_02_22_210901) do
   create_table "dividends", force: :cascade do |t|
     t.datetime "date"
     t.integer "value_cents", default: 0, null: false
-    t.integer "stock_id", null: false
+    t.bigint "stock_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stock_id"], name: "index_dividends_on_stock_id"
@@ -56,7 +82,7 @@ ActiveRecord::Schema.define(version: 2022_02_22_210901) do
   create_table "prices", force: :cascade do |t|
     t.datetime "date"
     t.integer "price_cents", default: 0, null: false
-    t.integer "stock_id", null: false
+    t.bigint "stock_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stock_id"], name: "index_prices_on_stock_id"
@@ -65,7 +91,7 @@ ActiveRecord::Schema.define(version: 2022_02_22_210901) do
   create_table "shares", force: :cascade do |t|
     t.datetime "aquisition_date"
     t.integer "aquisition_value_cents", default: 0, null: false
-    t.integer "stock_id", null: false
+    t.bigint "stock_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["stock_id"], name: "index_shares_on_stock_id"
@@ -73,15 +99,15 @@ ActiveRecord::Schema.define(version: 2022_02_22_210901) do
 
   create_table "stocks", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "account_id", null: false
+    t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_stocks_on_account_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "account_id", null: false
-    t.integer "category_id"
+    t.bigint "account_id", null: false
+    t.bigint "category_id"
     t.integer "value_cents", default: 0, null: false
     t.integer "kind", default: 0, null: false
     t.string "title", null: false
@@ -110,7 +136,7 @@ ActiveRecord::Schema.define(version: 2022_02_22_210901) do
     t.integer "savings_cents", default: 0, null: false
     t.integer "stocks_cents", default: 0, null: false
     t.integer "total_cents", default: 0, null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_reports_on_user_id"
