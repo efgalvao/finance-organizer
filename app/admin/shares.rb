@@ -4,7 +4,7 @@ ActiveAdmin.register Share do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :aquisition_date, :aquisition_value_cents, :stock_id
+  permit_params :aquisition_date, :aquisition_value_cents
   #
   # or
   #

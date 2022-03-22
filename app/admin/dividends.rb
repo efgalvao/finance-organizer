@@ -4,7 +4,7 @@ ActiveAdmin.register Dividend do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :date, :value_cents, :stock_id
+  permit_params :date, :value_cents
   #
   # or
   #

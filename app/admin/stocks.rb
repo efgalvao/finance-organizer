@@ -4,7 +4,7 @@ ActiveAdmin.register Stock do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :account_id
+  permit_params :name
   #
   # or
   #

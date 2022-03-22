@@ -4,7 +4,7 @@ ActiveAdmin.register Account do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :savings, :user_id, :balance_cents
+  permit_params :name, :savings, :balance_cents
   #
   # or
   #

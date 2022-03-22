@@ -4,7 +4,7 @@ ActiveAdmin.register Balance do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :balance_cents, :date, :account_id
+  permit_params :balance_cents, :date
   #
   # or
   #

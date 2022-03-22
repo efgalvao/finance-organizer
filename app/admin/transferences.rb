@@ -4,7 +4,7 @@ ActiveAdmin.register Transference do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :sender_id, :receiver_id, :user_id, :date, :amount_cents
+  permit_params :date
   #
   # or
   #
