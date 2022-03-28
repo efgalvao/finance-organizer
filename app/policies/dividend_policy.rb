@@ -25,7 +25,7 @@ class DividendPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      @scope.where(user_id: @user.id)
+      Stock.includes(:account, :dividends).where(account: { user_id: @user.id }).order(:name)
     end
   end
 

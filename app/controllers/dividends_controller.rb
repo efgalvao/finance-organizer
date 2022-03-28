@@ -2,7 +2,7 @@ class DividendsController < ApplicationController
   before_action :set_dividend, only: %i[show edit update destroy]
 
   def index
-    @stocks = policy_scope(Stock).includes(:dividends).order(name: :asc)
+    @stocks = policy_scope(Dividend)
   end
 
   def show
@@ -18,10 +18,10 @@ class DividendsController < ApplicationController
   end
 
   def create
-    @dividend = Dividend.new(dividend_params)
+    @dividend = Dividend.create(dividend_params)
 
     respond_to do |format|
-      if @dividend.save
+      if @dividend.valid?
         format.html { redirect_to dividends_path, notice: 'Dividend successfully created.' }
         format.json { render :show, status: :created, location: @dividend }
       else
