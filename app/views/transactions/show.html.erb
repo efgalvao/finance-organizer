@@ -29,4 +29,5 @@
     </tbody>
 </table>
 
-<%= link_to "Back", transactions_path, :class => "btn btn-info" %><br />
+<%= link_to "Back", transactions_path, :class => "btn btn-info" %>
+<%= link_to 'Create new transaction', new_transaction_path(account_id: @transaction.account.id), :class => "btn btn-success ml-3" %>
