@@ -2,7 +2,7 @@ class DividendsController < ApplicationController
   before_action :set_dividend, only: %i[show edit update destroy]
 
   def index
-    @stocks = policy_scope(Stock).includes(:dividends).order(name: :asc)
+    @stocks = policy_scope(Dividend)
   end
 
   def show
