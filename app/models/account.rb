@@ -73,15 +73,22 @@ class Account < ApplicationRecord
   end
 
   def incomes(date)
-    Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month, kind: 'income').sum(:value_cents))
+    Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                 kind: 'income').sum(:value_cents))
   end
 
   def expenses(date)
-    Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month, kind: 'expense').sum(:value_cents))
+    Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                 kind: 'expense').sum(:value_cents))
   end
 
   def total_balance(date)
     Money.new(incomes(date) - expenses(date))
+  end
+
+  def invested(date)
+    Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                 kind: 'investment').sum(:value_cents))
   end
 
   def total_stock_value

@@ -8,6 +8,7 @@
         <th>Month</th>
         <th>Incomes</th>
         <th>Expenses</th>
+        <th>Invested</th>
         <th>Total</th>
       </tr>
     </thead>
@@ -17,6 +18,7 @@
           <td><%= month %></td>
           <td><%= number_to_currency(data[:incomes], unit: 'R$ ', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(data[:expenses], unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(data[:invested], unit: 'R$ ', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(data[:total], unit: 'R$ ', separator: ',', delimiter: '.') %></td>
         </tr>
       <% end %>
