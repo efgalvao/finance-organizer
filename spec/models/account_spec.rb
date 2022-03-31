@@ -64,7 +64,7 @@ RSpec.describe Account, type: :model do
   end
 
   describe '#current_month_transactions' do
-    let(:transaction1) { create(:transaction, account: account) }
+    let(:transaction1) { create(:transaction, account: account, date: DateTime.current.beginning_of_month) }
     let(:transaction2) { create(:transaction, account: account, date: DateTime.current - 1.month) }
 
     it 'returns current month transaction' do
