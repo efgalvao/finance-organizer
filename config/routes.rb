@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/user/summary', to: 'users#summary'
 
   resources :accounts do
-    get 'summary', on: :member
+    get 'month_transactions', on: :member
     get 'transactions', on: :member
     resources :balances, only: %i[edit destroy]
     resources :transactions, only: %i[edit]

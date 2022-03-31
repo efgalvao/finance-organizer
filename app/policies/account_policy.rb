@@ -23,7 +23,7 @@ class AccountPolicy < ApplicationPolicy
     account_owner?
   end
 
-  def summary?
+  def month_transactions?
     account_owner?
   end
 

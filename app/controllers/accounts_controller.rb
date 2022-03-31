@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[show edit update destroy summary transactions]
+  before_action :set_account, only: %i[show edit update destroy month_transactions transactions]
 
   def index
     @accounts = policy_scope(Account).order(name: :asc)
@@ -55,7 +55,7 @@ class AccountsController < ApplicationController
     end
   end
 
-  def summary
+  def month_transactions
     authorize(@account)
   end
 

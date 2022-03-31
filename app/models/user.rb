@@ -81,6 +81,7 @@ class User < ApplicationRecord
 
   def update_current_user_report
     user_report = user_reports.current_month
+
     user_report.date = DateTime.current
     user_report.total = total_amount
     user_report.savings = total_balance

@@ -13,8 +13,8 @@ class UserReport < ApplicationRecord
   # SCOPES
   scope :current_month, lambda {
     where('date >= ? AND date <= ?',
-          Date.current.beginning_of_month,
-          Date.current.end_of_month).order('date desc').first
+          DateTime.current.beginning_of_month,
+          DateTime.current.end_of_month).order('date asc').first
   }
 
   before_save :set_date

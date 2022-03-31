@@ -11,9 +11,10 @@
   </div>
 </div>
 
-<%= render 'incomes_expenses' %>
+<%= render 'show_table' %>
 
 <div>
+  <%= link_to 'Month Transactions', month_transactions_account_path(@account), :class => "btn btn-warning" %>
   <%= link_to 'Transactions', transactions_account_path(@account), class:'btn btn-success' %>
   <%= link_to 'Create new transaction', new_transaction_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
   <%= link_to 'Create new transference', new_transference_path, :class => "btn btn-success ml-3" %>
