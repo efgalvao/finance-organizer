@@ -19,7 +19,7 @@
         <td >$ <%= account.stock_plus_balance %></td>
         <td ><%= account.last_balance.date.strftime('%B %d, %Y') %></td>
         <td>
-        <%= link_to 'Month Transactions', month_transactions_account_path(@account), :class => "btn btn-warning" %>
+        <%= link_to 'Month Transactions', month_transactions_account_path(account), :class => "btn btn-warning" %>
         <%= link_to "Transactions", transactions_account_path(account), class:"btn btn-primary" %>
         <%= link_to 'Edit', edit_account_path(account), :class => "btn btn-warning" %>
         <%= link_to 'Delete', account, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
