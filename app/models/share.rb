@@ -1,5 +1,5 @@
 class Share < ApplicationRecord
-  belongs_to :stock, touch: true
+  belongs_to :stock, touch: true, counter_cache: true
 
   before_create :set_aquisition_date, :set_first_price
 

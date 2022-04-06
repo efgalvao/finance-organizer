@@ -39,7 +39,7 @@ class Account < ApplicationRecord
   def last_semester_balances
     create_balance if balances.empty?
     grouped_balances = {}
-    semester_balances.each do |balance|
+    semester_balances.find_each do |balance|
       grouped_balances[balance.date.strftime('%B %d, %Y').to_s] = balance.balance.to_f
     end
     grouped_balances
@@ -92,7 +92,7 @@ class Account < ApplicationRecord
 
   def total_stock_value
     total = 0
-    total += stocks.inject(0) { |sum, stock| stock.updated_balance + sum }
+    total += stocks.includes(:prices).inject(0) { |sum, stock| stock.updated_balance + sum }
     total
   end
 
