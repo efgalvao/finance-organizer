@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   def total_amount
     total = 0
-    accounts.includes(:balances).find_each do |account|
+    accounts.includes(:stocks).find_each do |account|
       total += account.stock_plus_balance
     end
     total
@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   def total_balance
     total = 0
-    accounts.includes(:balances).find_each do |account|
+    accounts.find_each do |account|
       total += account.last_balance.balance
     end
     total
@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   def total_in_stocks
     total = 0
-    accounts.includes(:balances).find_each do |account|
+    accounts.find_each do |account|
       total += account.total_stock_value
     end
     total

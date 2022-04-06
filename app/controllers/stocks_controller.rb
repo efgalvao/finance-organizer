@@ -2,7 +2,7 @@ class StocksController < ApplicationController
   before_action :set_stock, only: %i[show edit update destroy summary]
 
   def index
-    @stocks = policy_scope(Stock).all.order(name: :asc)
+    @stocks = policy_scope(Stock).all.includes(:prices).order(name: :asc)
   end
 
   def show

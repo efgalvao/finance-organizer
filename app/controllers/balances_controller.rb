@@ -2,7 +2,7 @@ class BalancesController < ApplicationController
   before_action :set_balance, only: %i[show edit update destroy]
 
   def index
-    @accounts = policy_scope(Account).includes(:balances).order(name: :asc).all
+    @accounts = policy_scope(Account).order(name: :asc).all
   end
 
   def show
