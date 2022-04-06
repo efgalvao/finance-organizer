@@ -21,7 +21,7 @@
           <td> <%= @transaction.date %></td>
           <td> <%= @transaction.category %></td>
           <td> $ <%= @transaction.value %></td>
-          <td> <%= link_to @transaction.account.name %>
+          <td> <%= link_to @transaction.account_name %>
           <td> <%= link_to "Edit", edit_account_transaction_path(id: @transaction.id, account_id: @transaction.account.id), :class => "btn btn-primary" %>
           <%= link_to 'Remove', transaction_path(id: @transaction.id, account_id: @transaction.account.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
           </td>

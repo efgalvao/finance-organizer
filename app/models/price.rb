@@ -6,6 +6,7 @@ class Price < ApplicationRecord
   monetize :price_cents
 
   delegate :user, to: :'stock.account'
+  delegate :name, to: :stock, prefix: 'stock'
 
   private
 

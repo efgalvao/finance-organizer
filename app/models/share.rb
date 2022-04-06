@@ -8,6 +8,7 @@ class Share < ApplicationRecord
   monetize :aquisition_value_cents
 
   delegate :user, to: :'stock.account'
+  delegate :name, :account, to: :stock, prefix: 'stock'
 
   private
 

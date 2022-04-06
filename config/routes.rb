@@ -22,11 +22,11 @@ Rails.application.routes.draw do
 
   get '/transactions' => "transactions#index"
 
-  resources :shares
+  resources :shares, except: [:show]
 
   resources :dividends, except: [:destroy]
 
-  resources :prices, except: %i[edit destroy]
+  resources :prices, except: %i[show edit destroy]
 
   resources :balances, except: %i[edit destroy]
 

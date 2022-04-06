@@ -4,7 +4,7 @@
 
 <div class="form">
 
-  <%= render 'form', category: Category.find(params[:id]) %>
+  <%= render 'form', category: @category %>
 
   <%= link_to 'Back', categories_path, :class => "btn btn-info" %>
 </div>

@@ -54,21 +54,6 @@ RSpec.describe Stock, type: :model do
     end
   end
 
-  describe '#total_current_price' do
-    context 'without shares/prices' do
-      it 'returns 0' do
-        expect(stock.total_current_price).to eq(0)
-      end
-    end
-
-    context 'with shares/prices' do
-      let!(:share2) { create(:share, stock: stock, aquisition_value_cents: 50) }
-
-      it 'return newest aquisition price' do
-        expect(stock.total_current_price.fractional).to eq(50)
-      end
-    end
-
     describe '#updated_balance' do
       context 'without shares/prices' do
         it 'returns 0' do
