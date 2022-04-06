@@ -9,7 +9,6 @@ class Account < ApplicationRecord
 
   monetize :balance_cents
 
-  scope :savings_accounts, -> { where(savings: true) }
   scope :stocks_accounts, -> { where(savings: false) }
 
   # VALIDATIONS

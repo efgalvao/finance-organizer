@@ -12,7 +12,7 @@
 
     <p>
       <strong>Stock:</strong>
-      <%= @price.stock.name.upcase %>
+      <%= @dividend.stock_name.upcase %>
     </p>
 
     <%= link_to 'Edit', edit_stock_price_path(id: @price.id, stock_id: @price.stock.id), :class => "btn btn-warning" %>

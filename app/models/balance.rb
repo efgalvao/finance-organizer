@@ -13,6 +13,8 @@ class Balance < ApplicationRecord
 
   scope :newest_balance, -> { order('date desc').limit(1) }
 
+  delegate :name, to: :account, prefix: 'account'
+
   private
 
   def set_date

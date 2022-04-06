@@ -54,10 +54,10 @@ RSpec.describe Stock, type: :model do
     end
   end
 
-  describe '#total_current_price' do
+  describe '#updated_balance' do
     context 'without shares/prices' do
       it 'returns 0' do
-        expect(stock.total_current_price).to eq(0)
+        expect(stock.updated_balance).to eq(0)
       end
     end
 
@@ -65,56 +65,40 @@ RSpec.describe Stock, type: :model do
       let!(:share2) { create(:share, stock: stock, aquisition_value_cents: 50) }
 
       it 'return newest aquisition price' do
-        expect(stock.total_current_price.fractional).to eq(50)
+        expect(stock.updated_balance.fractional).to eq(50)
+      end
+    end
+  end
+
+  describe '#last_semester_prices' do
+    context 'without prices' do
+      it 'returns empty hash' do
+        expect(stock.last_semester_prices).to eq({})
       end
     end
 
-    describe '#updated_balance' do
-      context 'without shares/prices' do
-        it 'returns 0' do
-          expect(stock.updated_balance).to eq(0)
-        end
+    context 'with prices' do
+      let!(:price) { create(:price, stock: stock, date: Date.new(2022, 0o1, 0o2), price: 123) }
+
+      it 'returns last semester prices' do
+        expect(stock.last_semester_prices).to eq({ 'January 02, 2022' => 123.0 })
       end
+    end
+  end
 
-      context 'with shares/prices' do
-        let!(:share2) { create(:share, stock: stock, aquisition_value_cents: 50) }
-
-        it 'return newest aquisition price' do
-          expect(stock.updated_balance.fractional).to eq(50)
-        end
+  describe '#last_semester_individual_dividends' do
+    context 'without dividends' do
+      it 'returns empty hash' do
+        expect(stock.last_semester_individual_dividends).to eq({})
       end
     end
 
-    describe '#last_semester_prices' do
-      context 'without prices' do
-        it 'returns empty hash' do
-          expect(stock.last_semester_prices).to eq({})
-        end
-      end
+    context 'with prices' do
+      let!(:dividend) { create(:dividend, stock: stock, date: Date.new(2022, 0o1, 0o2), value: 123) }
 
-      context 'with prices' do
-        let!(:price) { create(:price, stock: stock, date: Date.new(2022, 0o1, 0o2), price: 123) }
-
-        it 'returns last semester prices' do
-          expect(stock.last_semester_prices).to eq({ 'January 02, 2022' => 123.0 })
-        end
-      end
-    end
-
-    describe '#last_semester_individual_dividends' do
-      context 'without dividends' do
-        it 'returns empty hash' do
-          expect(stock.last_semester_individual_dividends).to eq({})
-        end
-      end
-
-      context 'with prices' do
-        let!(:dividend) { create(:dividend, stock: stock, date: Date.new(2022, 0o1, 0o2), value: 123) }
-
-        it 'returns last semester prices', :agreggate_failures do
-          expect(stock.last_semester_individual_dividends).to eq({ 'January/2022' => 123.0 })
-          expect(stock.last_semester_individual_dividends).not_to be({})
-        end
+      it 'returns last semester prices', :agreggate_failures do
+        expect(stock.last_semester_individual_dividends).to eq({ 'January/2022' => 123.0 })
+        expect(stock.last_semester_individual_dividends).not_to be({})
       end
     end
   end

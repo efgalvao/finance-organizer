@@ -4,6 +4,7 @@ class Dividend < ApplicationRecord
   monetize :value_cents
 
   delegate :user, to: :'stock.account'
+  delegate :name, to: :stock, prefix: 'stock'
 
   def self.create(params)
     new(params).tap do |dividend|
