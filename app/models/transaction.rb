@@ -17,7 +17,7 @@ class Transaction < ApplicationRecord
           Date.current.end_of_month)
   }
 
-  delegate :user, :name, to: :account
+  delegate :user, :name, to: :account, prefix: 'account'
 
   def category
     if category_id.nil?

@@ -36,6 +36,6 @@ class StockPolicy < ApplicationPolicy
   private
 
   def owner?
-    stock.user == user
+    stock.account.user == user
   end
 end

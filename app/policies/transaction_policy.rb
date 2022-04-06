@@ -32,6 +32,6 @@ class TransactionPolicy < ApplicationPolicy
   private
 
   def owner?
-    transaction.user == user
+    transaction.account_user == user
   end
 end
