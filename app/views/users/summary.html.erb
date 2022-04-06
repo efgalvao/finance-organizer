@@ -6,15 +6,15 @@
   <thead>
     <tr>
       <th>Total Balance</th>
-      <th>Balance</th>
+      <th>Cash</th>
       <th>In stocks</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><%= number_to_currency(current_user.total_amount, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-      <td><%= number_to_currency(current_user.total_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-      <td><%= number_to_currency(current_user.total_in_stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(@user.total_amount, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(@user.total_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(@user.total_in_stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
     </tr>
   </tbody>
 </table>
@@ -48,9 +48,9 @@
 </div>
 <div class="summary-chart">
  <%= line_chart [
-      {name: 'Total', data: @user.last_semester_reports_total},
-      {name: 'Savings', data: @user.last_semester_reports_savings},
-      {name: 'Stocks', data: @user.last_semester_reports_stocks}
+      { name: 'Total', data: @user.semester_summary[:total] },
+      { name: 'Savings', data: @user.semester_summary[:savings] },
+      { name: 'Stocks', data: @user.semester_summary[:stocks] }
       ], precision: 8 %></div>
 
 <div class="chart-title">

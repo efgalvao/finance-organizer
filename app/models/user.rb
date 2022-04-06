@@ -34,34 +34,10 @@ class User < ApplicationRecord
     total
   end
 
-  def last_semester_reports_total
+  def semester_summary
     create_report if user_reports.empty? || user_reports.last.date.month != DateTime.current.month
     update_current_user_report
-    grouped_reports = {}
-    semester_reports.each do |report|
-      grouped_reports[report.date.strftime('%B %d, %Y').to_s] = report.total.to_f
-    end
-    grouped_reports
-  end
-
-  def last_semester_reports_savings
-    create_report if user_reports.last.date.month != DateTime.current.month || user_reports.empty?
-    update_current_user_report
-    grouped_reports = {}
-    semester_reports.each do |report|
-      grouped_reports[report.date.strftime('%B %d, %Y').to_s] = report.savings.to_f
-    end
-    grouped_reports
-  end
-
-  def last_semester_reports_stocks
-    create_report if user_reports.empty? || user_reports.last.date.month != DateTime.current.month
-    update_current_user_report
-    grouped_reports = {}
-    semester_reports.each do |report|
-      grouped_reports[report.date.strftime('%B %d, %Y').to_s] = report.stocks.to_f
-    end
-    grouped_reports
+    Statements::CreateUserSummary.new(semester_reports).perform
   end
 
   def last_semester_total_dividends
