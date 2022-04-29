@@ -4,13 +4,13 @@ ActiveAdmin.register Transaction do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :kind, :title, :date
+  # permit_params :kind, :title, :date
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:account_id, :category_id, :value_cents, :kind, :title, :date]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params do
+    permitted = [:account_id, :category_id, :value_cents, :kind, :title, :date]
+    permitted << :other if params[:action] == 'create' && current_user.admin?
+    permitted
+  end
 end
