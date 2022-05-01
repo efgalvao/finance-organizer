@@ -9,7 +9,7 @@ ActiveAdmin.register Transaction do
   # or
   #
   permit_params do
-    permitted = [:account_id, :category_id, :value_cents, :kind, :title, :date]
+    permitted = %i[account_id category_id value_cents kind title date]
     permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end

@@ -9,7 +9,7 @@ ActiveAdmin.register Share do
   # or
   #
   permit_params do
-    permitted = [:aquisition_date, :aquisition_value_cents, :stock_id]
+    permitted = %i[aquisition_date aquisition_value_cents stock_id]
     permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end

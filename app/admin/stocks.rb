@@ -9,7 +9,7 @@ ActiveAdmin.register Stock do
   # or
   #
   permit_params do
-    permitted = [:name, :account_id]
+    permitted = %i[name account_id]
     permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end
