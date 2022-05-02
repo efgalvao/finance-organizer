@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_180304) do
+ActiveRecord::Schema.define(version: 2022_05_01_234409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,26 @@ ActiveRecord::Schema.define(version: 2022_04_06_180304) do
     t.index ["stock_id"], name: "index_dividends_on_stock_id"
   end
 
+  create_table "negotiations", force: :cascade do |t|
+    t.bigint "treasury_id", null: false
+    t.integer "kind", default: 0, null: false
+    t.datetime "date"
+    t.integer "value_cents", default: 0, null: false
+    t.integer "shares", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["treasury_id"], name: "index_negotiations_on_treasury_id"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.bigint "treasury_id", null: false
+    t.datetime "date", null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["treasury_id"], name: "index_positions_on_treasury_id"
+  end
+
   create_table "prices", force: :cascade do |t|
     t.datetime "date"
     t.integer "price_cents", default: 0, null: false
@@ -132,6 +152,17 @@ ActiveRecord::Schema.define(version: 2022_04_06_180304) do
     t.index ["user_id"], name: "index_transferences_on_user_id"
   end
 
+  create_table "treasuries", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "account_id", null: false
+    t.integer "invested_value_cents", default: 0, null: false
+    t.integer "current_value_cents", default: 0, null: false
+    t.integer "shares", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_treasuries_on_account_id"
+  end
+
   create_table "user_reports", force: :cascade do |t|
     t.datetime "date"
     t.integer "savings_cents", default: 0, null: false
@@ -160,11 +191,14 @@ ActiveRecord::Schema.define(version: 2022_04_06_180304) do
   add_foreign_key "balances", "accounts"
   add_foreign_key "categories", "users"
   add_foreign_key "dividends", "stocks"
+  add_foreign_key "negotiations", "treasuries"
+  add_foreign_key "positions", "treasuries"
   add_foreign_key "prices", "stocks"
   add_foreign_key "shares", "stocks"
   add_foreign_key "stocks", "accounts"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"
   add_foreign_key "transferences", "users"
+  add_foreign_key "treasuries", "accounts"
   add_foreign_key "user_reports", "users"
 end
