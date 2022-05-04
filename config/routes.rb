@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root to: "accounts#index"
+  root to: 'accounts#index'
   devise_for :users
   get '/user/overview', to: 'users#overview'
   get '/user/summary', to: 'users#summary'
@@ -13,14 +13,21 @@ Rails.application.routes.draw do
     resources :transactions, only: %i[edit]
   end
 
-  resources :stocks do
-    get 'summary', on: :member
-    get '/current_price', to: 'prices#current_price'
-    resources :dividends, only: [:destroy]
-    resources :prices, only: %i[edit destroy]
+  namespace :investments do
+    resources :stocks do
+      get 'summary', on: :member
+      get '/current_price', to: 'prices#current_price'
+      resources :dividends, only: [:destroy]
+      resources :prices, only: %i[edit destroy]
+    end
+
+    resources :treasuries do
+      resources :negotiations, only: %i[create edit destroy]
+      resources :positions, only: %i[create edit destroy]
+    end
   end
 
-  get '/transactions' => "transactions#index"
+  get '/transactions' => 'transactions#index'
 
   resources :shares, except: [:show]
 
