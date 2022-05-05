@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   namespace :investments do
+    get '/', to: 'investments#index'
     resources :stocks do
       get 'summary', on: :member
       get '/current_price', to: 'prices#current_price'

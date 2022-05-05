@@ -19,9 +19,9 @@
         <td> <%= negotiation.date.strftime('%B %d, %Y') %> </td>
         <td> <%= negotiation.value %> </td>
         <td> <%= negotiation.kind %> </td>
-        <td> <%= negotiation.negotiations %> </td>
-        <td> <%= link_to "Edit negotiation", edit_negotiation_path(id: negotiation.id), :class => "btn btn-warning"  %>
-             <%= link_to 'Delete negotiation', negotiation_path(id: negotiation.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+        <td> <%= negotiation.shares %> </td>
+        <td> <%= link_to "Edit negotiation", edit_investments_treasury_negotiation_path(negotiation), :class => "btn btn-warning"  %>
+             <%= link_to 'Delete negotiation', investments_treasury_negotiation_path(negotiation), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
       <% end %>
     </tbody>
   </table>
@@ -30,6 +30,6 @@
 <% end %>
 
 <div class="buttons">
-  <%= link_to 'Create negotiation', new_negotiation_path(treasury_id: @treasury.id), class: "btn btn-success ml-3" %>
-  <%= link_to 'Back', treasuries_path, :class => "btn btn-primary ml-3" %>
+  <%= link_to 'Create negotiation', new_investments_treasury_negotiation_path(treasury_id: @treasury.id), class: "btn btn-success ml-3" %>
+  <%= link_to 'Back', investments_treasuries_path, :class => "btn btn-primary ml-3" %>
 </div>

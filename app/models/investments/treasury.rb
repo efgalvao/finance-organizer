@@ -9,7 +9,7 @@ module Investments
     monetize :invested_value_cents
     monetize :current_value_cents
 
-    delegate :name, to: :account, prefix: 'account'
+    delegate :user, :name, to: :account, prefix: 'account'
 
     def name_with_account
       "#{name} (#{account.name})"
