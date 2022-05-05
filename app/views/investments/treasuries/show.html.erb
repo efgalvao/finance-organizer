@@ -1,0 +1,35 @@
+<div class="title">
+    <%= @treasury.name %> negotiations
+</div>
+
+<% if @treasury.shares > 0 %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th> Negotiation Date </th>
+        <th> Negotiation Value </th>
+        <th> Kind </th>
+        <th> Shares </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for negotiation in @treasury.negotiations %>
+      <tr>
+        <td> <%= negotiation.date.strftime('%B %d, %Y') %> </td>
+        <td> <%= negotiation.value %> </td>
+        <td> <%= negotiation.kind %> </td>
+        <td> <%= negotiation.negotiations %> </td>
+        <td> <%= link_to "Edit negotiation", edit_negotiation_path(id: negotiation.id), :class => "btn btn-warning"  %>
+             <%= link_to 'Delete negotiation', negotiation_path(id: negotiation.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+<h2> No negotiations for this treasury <h2>
+<% end %>
+
+<div class="buttons">
+  <%= link_to 'Create negotiation', new_negotiation_path(treasury_id: @treasury.id), class: "btn btn-success ml-3" %>
+  <%= link_to 'Back', treasuries_path, :class => "btn btn-primary ml-3" %>
+</div>

@@ -3,7 +3,9 @@ module Investments
     before_action :set_treasury, only: %i[show edit update destroy summary]
 
     def index
-      @treasuries = policy_scope(Investments::Treasury).all.includes(:positions).order(name: :asc)
+      # TODO: create policies
+      # @treasuries = policy_scope(Investments::Treasury).all.includes(:positions).order(name: :asc)
+      @treasuries = Investments::Treasury.all.includes(:positions).order(name: :asc)
     end
 
     def show
@@ -66,8 +68,9 @@ module Investments
       @treasury = Investments::Treasury.find(params[:id])
     end
 
-    def stock_params
-      params.require(:stock).permit(:name, :account_id)
+    def treasury_params
+      # TODO: change param to only treasury
+      params.require(:investments_treasury).permit(:name, :account_id)
     end
   end
 end

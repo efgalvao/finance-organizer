@@ -1,0 +1,9 @@
+<div class="title">
+  <%= @treasury.name %>
+</div>
+
+<div class="form">
+  <%= render 'form', treasury: @treasury %>
+
+  <%= link_to 'Back', investments_treasuries_path, class: "btn btn-primary" %>
+</div>

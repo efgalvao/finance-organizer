@@ -1,0 +1,50 @@
+<div class="stock-summary">
+  <div class="title">
+    <%= @treasury.name %>
+  </div>
+
+  <div class="summary-item">
+    Current amount of shares:<br />
+    <div class="item-value">
+      <%= @treasury.shares %>
+    </div>
+  </div>
+
+  <div class="summary-item green">
+    Total amount invested:<br />
+    <div class="item-value">
+      <%= number_to_currency(@treasury.invested_value, unit: 'R$', separator: ',', delimiter: '') %>
+    </div>
+  </div>
+
+  <div class="summary-item">
+    Current value:<br />
+    <div class="item-value">
+      <%= number_to_currency(@treasury.current_value, unit: 'R$', separator: ',', delimiter: '') %>
+    </div>
+  </div>
+</div>
+
+<div>
+  <%= link_to 'Add shares', new_negotiation_path(treasury_id: @treasury.id), class: 'btn btn-success' %>
+  <%= link_to 'Register current value', new_position_path(treasury_id: @treasury.id), class: 'btn btn-success' %>
+</div>
+
+<div class="stock-charts">
+  <div class="chart-title">
+    Treasury amount(last 6 months):
+  </div>
+  <%= line_chart @treasury.last_semester_prices, precision: 8, curve: false %>
+
+  <div class="chart-title">
+    Dividend per share(last 6 months):
+  </div>
+    <%= line_chart @treasury.last_semester_individual_dividends, precision: 8 %>
+</div>
+
+<div class="stock-charts">
+  <div class="chart-title">
+    Total dividends(last 6 months):
+  </div>
+    <%= line_chart @treasury.semester_total_dividends, precision: 8 %>
+</div>

@@ -1,0 +1,32 @@
+<div class="title">
+  Treasuries
+</div>
+
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Total invested</th>
+      <th>Current value</th>
+      <th>Shares</th>
+      <th>Account</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @treasuries.each do |treasury| %>
+      <tr>
+        <td> <%= link_to treasury.name, summary_investments_treasury_path(treasury) %> </td>
+        <td> <%= treasury.invested_value %> </td>
+        <td> <%= treasury.current_value %> </td>
+        <td> <%= treasury.shares %> </td>
+        <td> <%= treasury.account_name %> </td>
+        <td> <%= link_to "Shares", investments_treasuries_path(treasury), class:"btn btn-info" %>
+             <%= link_to "Edit", investments_treasuries_path(treasury), class:"btn btn-warning" %>
+             <%= link_to "Delete", treasury, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Create new treasury', new_investments_treasury_path, class:"btn btn-success ml-3" %>

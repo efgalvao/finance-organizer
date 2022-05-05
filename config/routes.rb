@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :stocks do
       get 'summary', on: :member
       get '/current_price', to: 'prices#current_price'
-      resources :dividends, only: [:destroy]
+      resources :dividends, only: %i[edit destroy]
       resources :prices, only: %i[edit destroy]
     end
 
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   resources :shares, except: [:show]
 
-  resources :dividends, except: [:destroy]
+  resources :dividends, except: %i[edit destroy]
 
   resources :prices, except: %i[show edit destroy]
 
