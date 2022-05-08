@@ -1,11 +1,9 @@
 module Investments
   class TreasuriesController < ApplicationController
-    before_action :set_treasury, only: %i[show edit update destroy summary]
+    before_action :set_treasury, only: %i[show edit destroy]
 
     def index
-      # TODO: create policies
-      # @treasuries = policy_scope(Investments::Treasury).all.includes(:positions).order(name: :asc)
-      @treasuries = Investments::Treasury.all.includes(:positions).order(name: :asc)
+      @treasuries = policy_scope(Investments::Treasury).all.includes(:positions).order(name: :asc)
     end
 
     def show
@@ -21,45 +19,34 @@ module Investments
     end
 
     def create
-      @treasury = Investments::Treasury.new(treasury_params)
-
-      respond_to do |format|
-        if @treasury.save
-          format.html { redirect_to @treasury, notice: 'Treasury successfully created.' }
-          format.json { render :show, status: :created, location: @treasury }
-        else
-          format.html { render :new }
-          format.json { render json: @treasury.errors, status: :unprocessable_entity }
-        end
+      @treasury = Investments::CreateTreasury.new(treasury_params).perform
+      if @treasury
+        redirect_to account_path(id: treasury_params['account_id']),
+                    notice: 'Treasury successfully created.'
+      else
+        render :new
       end
     end
 
     def update
       authorize @treasury
+      @treasury = Investments::UpdateTreasury.new(treasury_params).perform
 
-      respond_to do |format|
-        if @treasury.update(name: treasury_params[:name])
-          format.html { redirect_to @treasury, notice: 'Treasury successfully updated.' }
-          format.json { render :show, status: :ok, location: @treasury }
-        else
-          format.html { render :edit }
-          format.json { render json: @treasury.errors, status: :unprocessable_entity }
-        end
+      if @treasury
+        redirect_to investments_treasury_path(id: treasury_params[:id]),
+                    notice: 'Treasury successfully updated.'
+      else
+        render :edit
       end
     end
 
     def destroy
       authorize @treasury
 
-      @streasury.destroy
-      respond_to do |format|
-        format.html { redirect_to treasury_url, notice: 'Treasure successfully removed.' }
-        format.json { head :no_content }
+      if @streasury.destroy
+        redirect_to account_path(id: @treasury.account_id),
+                    notice: 'Treasure successfully removed.'
       end
-    end
-
-    def summary
-      authorize @treasury
     end
 
     private

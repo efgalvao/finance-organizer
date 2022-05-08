@@ -16,7 +16,7 @@
   <tbody>
     <% @treasuries.each do |treasury| %>
       <tr>
-        <td> <%= link_to treasury.name, summary_investments_treasury_path(treasury) %> </td>
+        <td> <%= link_to treasury.name, investments_treasury_path(treasury) %> </td>
         <td> <%= treasury.invested_value %> </td>
         <td> <%= treasury.current_value %> </td>
         <td> <%= treasury.shares %> </td>
