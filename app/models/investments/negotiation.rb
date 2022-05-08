@@ -7,5 +7,7 @@ module Investments
     monetize :value_cents
 
     validates :kind, :date, :treasury, presence: true
+
+    delegate :user, to: :'treasury.account'
   end
 end

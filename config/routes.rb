@@ -23,8 +23,7 @@ Rails.application.routes.draw do
     end
 
     resources :treasuries do
-      get 'summary', on: :member
-      resources :negotiations, only: %i[new edit destroy]
+      resources :negotiations, only: %i[index new create]
       resources :positions, only: %i[new edit destroy]
     end
   end
