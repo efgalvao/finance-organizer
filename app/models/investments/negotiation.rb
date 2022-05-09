@@ -4,7 +4,7 @@ module Investments
 
     enum kind: { buy: 0, sell: 1 }
 
-    monetize :value_cents
+    monetize :amount_cents
 
     validates :kind, :date, :treasury, presence: true
 

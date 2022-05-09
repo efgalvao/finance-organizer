@@ -23,7 +23,7 @@ module Investments
     private
 
     def negotiation_params
-      params.require(:investments_negotiation).permit(:date, :value, :kind, :shares, :treasury_id)
+      params.require(:investments_negotiation).permit(:date, :amount, :kind, :shares, :treasury_id)
     end
   end
 end

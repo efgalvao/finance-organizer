@@ -13,7 +13,7 @@ module Investments
     def create_negotiation(params)
       ActiveRecord::Base.transaction do
         Investments::Negotiation.create(params)
-        Investments::UpdateTreasury.new(params).perform
+        Investments::CreatePosition.new(params).perform
       end
     end
 
