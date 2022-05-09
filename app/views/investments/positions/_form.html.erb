@@ -1,10 +1,10 @@
-<%= form_with(model:dividend, local:true) do |form| %>
-  <% if dividend.errors.any? %>
+<%= form_with(model: position, url: investments_treasury_positions_path(id: position.treasury.id), local:true) do |form| %>
+  <% if position.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(dividend.errors.count, "error") %> prohibited this dividend from being saved:</h2>
+      <h2><%= pluralize(position.errors.count, "error") %> prohibited this position from being saved:</h2>
 
       <ul>
-        <% dividend.errors.full_messages.each do |message| %>
+        <% position.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -18,13 +18,15 @@
     </div>
 
     <div class="form-group">
-      <%= form.label :value, class: "input-group-text" %>
-      <%= form.text_field :value, class: "form-control" %>
+      <%= form.label :amount, class: "input-group-text" %>
+      <%= form.text_field :amount, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :stock_id, class: "input-group-text" %>
-      <%= form.collection_select(:stock_id, policy_scope(Stock).all, :id, :name_with_account, {prompt: 'Choose a stock'}, {class: "custom-select"}) %>
+      <%= form.label :treasury_id, class: "input-group-text" %>
+      <%= form.collection_select(:treasury_id, Investments::Treasury.all, :id,:name, {prompt: 'Choose a treasury'}, {class: "custom-select"}) %>
+
+      <%# <%= form.collection_select(:treasury_id, policy_scope(Investments::Treasury).all, :id, :name_with_account, {prompt: 'Choose a treasury'}, {class: "custom-select"}) %> %>
     </div>
 
     <div class="form-group">

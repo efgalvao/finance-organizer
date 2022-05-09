@@ -1,8 +1,8 @@
 <div class="title">
-  New dividend
+  New position
 </div>
 
 <div class="form">
-  <%= render 'form', dividend: @dividend %>
-  <%= link_to 'Back', dividends_path, :class => "btn btn-primary" %>
+  <%= render 'form', position: @position %>
+  <%= link_to 'Back', investments_treasury_path(id: @position.treasury.id), :class => "btn btn-primary" %>
 </div>

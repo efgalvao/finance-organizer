@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
     resources :treasuries do
       resources :negotiations, only: %i[index new create]
-      resources :positions, only: %i[new edit destroy]
+      resources :positions, only: %i[new create edit destroy]
     end
   end
 
