@@ -16,25 +16,21 @@ Rails.application.routes.draw do
   namespace :investments do
     get '/', to: 'investments#index'
     resources :stocks do
-      get 'summary', on: :member
+      get 'summary', on: :member # Necessario ?
       get '/current_price', to: 'prices#current_price'
-      resources :dividends, only: %i[edit destroy]
-      resources :prices, only: %i[edit destroy]
+      resources :dividends, only: %i[index new create]
+      resources :prices, only: %i[index new create]
     end
 
-    resources :treasuries do
-      resources :negotiations, only: %i[index new create]
-      resources :positions, only: %i[new create]
+    resources :treasuries, controller: 'treasury/treasuries' do
+      resources :negotiations, only: %i[index new create], controller: 'treasury/negotiations'
+      resources :positions, only: %i[new create], controller: 'treasury/positions'
     end
   end
 
   get '/transactions' => 'transactions#index'
 
   resources :shares, except: [:show]
-
-  resources :dividends, except: %i[edit destroy]
-
-  resources :prices, except: %i[show edit destroy]
 
   resources :balances, except: %i[edit destroy]
 

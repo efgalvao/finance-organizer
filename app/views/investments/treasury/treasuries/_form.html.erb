@@ -1,0 +1,29 @@
+<%= form_with(model: treasury, url: investments_treasury_path, local: true) do |form| %>
+  <% if treasury.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(treasury.errors.count, "error") %> prohibited this treasury from being saved:</h2>
+
+      <ul>
+        <% treasury.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <form>
+    <div class="form-group">
+      <%= form.label :name, class: "input-group-text" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :account_id, class: "input-group-text" %>
+      <%= form.collection_select(:account_id, policy_scope(Account), :id, :name, {}, {class: "custom-select"}) %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit class: "btn btn-success" %>
+    </div>
+  </form>
+<% end %>
