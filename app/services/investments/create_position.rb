@@ -18,8 +18,8 @@ module Investments
     end
 
     def position_params(params)
-      params = { treasury_id: params[:treasury_id],
-                 date: params[:date], amount: params[:amount] }
+      { treasury_id: params[:treasury_id],
+        date: params[:date], amount: params[:amount] }
     end
 
     attr_reader :params

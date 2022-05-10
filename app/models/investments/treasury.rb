@@ -11,8 +11,8 @@ module Investments
 
     delegate :user, :name, to: :account, prefix: 'account'
 
-    def name_with_account
-      "#{name} (#{account.name})"
-    end
+    # def name_with_account
+    #   "#{name} (#{account.name})"
+    # end
   end
 end

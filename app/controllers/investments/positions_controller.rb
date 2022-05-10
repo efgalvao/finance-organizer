@@ -6,10 +6,6 @@ module Investments
       @position = Investments::Position.new(treasury_id: params[:treasury_id])
     end
 
-    def edit
-      authorize @position
-    end
-
     def create
       @position = Investments::CreatePosition.new(position_params).perform
 
@@ -20,6 +16,10 @@ module Investments
       else
         render :new
       end
+    end
+
+    def edit
+      authorize @position
     end
 
     def update

@@ -1,6 +1,6 @@
 module Investments
   class TreasuriesController < ApplicationController
-    before_action :set_treasury, only: %i[show edit destroy]
+    before_action :set_treasury, only: %i[show edit update destroy]
 
     def index
       @treasuries = policy_scope(Investments::Treasury).all.includes(:positions).order(name: :asc)
@@ -14,10 +14,6 @@ module Investments
       @treasury = Investments::Treasury.new
     end
 
-    def edit
-      authorize @treasury
-    end
-
     def create
       @treasury = Investments::CreateTreasury.new(treasury_params).perform
       if @treasury
@@ -28,12 +24,16 @@ module Investments
       end
     end
 
+    def edit
+      authorize @treasury
+    end
+
     def update
       authorize @treasury
-      @treasury = Investments::UpdateTreasury.new(treasury_params).perform
+      @updated_treasury = Investments::UpdateTreasury.new(treasury_params.merge(treasury_id: params[:id])).perform
 
-      if @treasury
-        redirect_to investments_treasury_path(id: treasury_params[:id]),
+      if @updated_treasury
+        redirect_to investments_treasury_path(id: params[:id]),
                     notice: 'Treasury successfully updated.'
       else
         render :edit
@@ -43,10 +43,10 @@ module Investments
     def destroy
       authorize @treasury
 
-      if @streasury.destroy
-        redirect_to account_path(id: @treasury.account_id),
-                    notice: 'Treasure successfully removed.'
-      end
+      return unless @treasury.destroy
+
+      redirect_to account_path(id: @treasury.account_id),
+                  notice: 'Treasury successfully removed.'
     end
 
     private

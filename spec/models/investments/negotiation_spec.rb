@@ -6,6 +6,6 @@ RSpec.describe Investments::Negotiation, type: :model do
   end
 
   describe 'monetize' do
-    it { is_expected.to monetize(:value) }
+    it { is_expected.to monetize(:amount) }
   end
 end

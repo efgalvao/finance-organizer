@@ -15,4 +15,5 @@ module Investments
     private
 
     attr_reader :user
+  end
 end

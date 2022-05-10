@@ -11,6 +11,8 @@ module Investments
     private
 
     def update_treasury(params)
+      # puts '---------UPDATE---------', params.inspect
+
       ActiveRecord::Base.transaction do
         treasury = Investments::Treasury.find(params[:treasury_id])
         treasury.name = params.fetch(:name) { treasury.name }
