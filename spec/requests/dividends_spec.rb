@@ -4,13 +4,14 @@ RSpec.describe 'Dividend', type: :request do
   let(:user) { create(:user) }
   let(:account) { create(:account, user: user) }
   let(:stock) { create(:stock, account: account) }
+  let(:dividend) { create(:dividend, stock: stock) }
 
   describe 'GET /investments/stocks/:id/dividends' do
     context 'when logged in' do
       it 'can successfully access dividends index page' do
         sign_in(user)
 
-        get investments_stock_dividends_path(stock_id: stock.id)
+        get edit_dividend_path(dividend)
 
         expect(response).to be_successful
       end
@@ -18,7 +19,7 @@ RSpec.describe 'Dividend', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access a dividends index page' do
-        get investments_stock_dividends_path
+        get edit_dividend_path(dividend)
 
         expect(response).to redirect_to new_user_session_path
       end
