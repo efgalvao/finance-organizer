@@ -16,7 +16,7 @@ module Investments
           redirect_to investments_treasury_path(id: negotiation_params[:treasury_id]),
                       notice: 'Negotiation successfully created.'
         else
-          format.html { render :new }
+          render :new
         end
       end
 
