@@ -1,0 +1,8 @@
+<div class="title">
+  New position
+</div>
+
+<div class="form">
+  <%= render 'form', position: @position %>
+  <%= link_to 'Back', investments_treasury_path(id: @position.treasury.id), :class => "btn btn-primary" %>
+</div>

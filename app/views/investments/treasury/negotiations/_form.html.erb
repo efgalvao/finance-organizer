@@ -1,0 +1,40 @@
+<%# <%= form_for negotiation, url: {action: "create"}  do |form| %>
+<%= form_with(model: @negotiation, url: investments_treasury_negotiations_path(negotiation.treasury.id), local:true) do |form| %>
+  <% if negotiation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(negotiation.errors.count, "error") %> prohibited this negotiation from being saved:</h2>
+
+      <ul>
+        <% negotiation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <form>
+    <div class="form-group">
+      <%= form.label :date, class: "input-group-text" %>
+      <%= form.date_field :date, class: "form-control", value: Time.now.strftime('%Y-%m-%d') %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :invested, class: "input-group-text" %>
+      <%= form.text_field :invested, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :kind, class: "input-group-text" %>
+      <%= form.text_field :kind, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :shares, class: "input-group-text" %>
+      <%= form.text_field :shares, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit class: "btn btn-success" %>
+    </div>
+  </form>
+<% end %>

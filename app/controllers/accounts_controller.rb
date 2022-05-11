@@ -49,10 +49,7 @@ class AccountsController < ApplicationController
     authorize(@account)
 
     @account.destroy
-    respond_to do |format|
-      format.html { redirect_to accounts_path, notice: 'Account was successfully removed.' }
-      format.json { head :no_content }
-    end
+    redirect_to accounts_path, notice: 'Account was successfully removed.'
   end
 
   def month_transactions

@@ -40,6 +40,6 @@ class AccountPolicy < ApplicationPolicy
   private
 
   def account_owner?
-    account.owner?(user)
+    record.owner?(user)
   end
 end
