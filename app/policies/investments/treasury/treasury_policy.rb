@@ -10,7 +10,7 @@ module Investments
       end
 
       def edit?
-        owner? z
+        owner?
       end
 
       def show?

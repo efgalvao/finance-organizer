@@ -16,7 +16,7 @@
       <% for negotiation in @treasury.negotiations %>
       <tr>
         <td> <%= negotiation.date.strftime('%B %d, %Y') %> </td>
-        <td> <%= negotiation.amount %> </td>
+        <td> <%= negotiation.invested %> </td>
         <td> <%= negotiation.kind %> </td>
         <td> <%= negotiation.shares %> </td>
       <% end %>

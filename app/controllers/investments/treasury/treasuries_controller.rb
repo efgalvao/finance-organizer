@@ -31,7 +31,9 @@ module Investments
 
       def update
         authorize @treasury
-        @updated_treasury = Investments::Treasury::UpdateTreasury.new(treasury_params.merge(treasury_id: params[:id])).perform
+        @updated_treasury = Investments::Treasury::UpdateTreasury.new(
+          treasury_params.merge(treasury_id: params[:id])
+        ).perform
 
         if @updated_treasury
           redirect_to investments_treasury_path(id: params[:id]),

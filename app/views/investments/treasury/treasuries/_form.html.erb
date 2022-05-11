@@ -1,4 +1,4 @@
-<%= form_with(model: treasury, url: investments_treasury_path, local: true) do |form| %>
+<%= form_with(model: treasury, url: '/investments/treasuries', local: true) do |form| %>
   <% if treasury.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(treasury.errors.count, "error") %> prohibited this treasury from being saved:</h2>

@@ -19,7 +19,8 @@ module Investments
       private
 
       def position_params
-        params.require(:investments_position).permit(:date, :amount, :treasury_id)
+        params.require(:investments_position).permit(:date, :amount,
+                                                     :treasury_id).merge(treasury_id: params[:treasury_id])
       end
     end
   end

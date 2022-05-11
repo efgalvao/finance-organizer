@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_05_01_234409) do
     t.bigint "treasury_id", null: false
     t.integer "kind", default: 0, null: false
     t.datetime "date"
-    t.integer "amount_cents", default: 0, null: false
+    t.integer "invested_cents", default: 0, null: false
     t.integer "shares", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
