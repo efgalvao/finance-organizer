@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Dividend, type: :model do
+RSpec.describe Investments::Stock::Dividend, type: :model do
   describe 'associtaions' do
     it { is_expected.to belong_to(:stock) }
   end
