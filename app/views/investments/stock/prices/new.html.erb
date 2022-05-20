@@ -1,0 +1,8 @@
+<div class="title">
+  Reister new price
+</div>
+
+<div class="form">
+  <%= render 'form', price: @price %>
+  <%= link_to 'Back', stock_path(@price.stock), :class => "btn btn-primary" %>
+</div>

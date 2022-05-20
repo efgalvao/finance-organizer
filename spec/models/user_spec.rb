@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
     context 'with balance' do
       let(:stock_account) { create(:account, :stocks_account, user: user) }
       let(:stock) { create(:stock, account: stock_account) }
-      let!(:share) { create(:share, stock: stock, aquisition_value: 100) }
+      let!(:share) { create(:share, stock: stock, value: 100) }
 
       it 'return current total stock amount' do
         expect(user.total_in_stocks.fractional).to eq(10_000)
@@ -68,7 +68,7 @@ RSpec.describe User, type: :model do
     context 'with dividends' do
       let(:stock_account) { create(:account, :stocks_account, user: user) }
       let(:stock) { create(:stock, account: stock_account) }
-      let!(:share) { create_list(:share, 3, stock: stock, aquisition_value: 100, aquisition_date: DateTime.new(2022, 1, 21)) }
+      let!(:share) { create_list(:share, 3, stock: stock, value: 100, date: DateTime.new(2022, 1, 21)) }
       let!(:dividend) { create(:dividend, stock: stock, date: DateTime.new(2022, 1, 30), value: 123) }
 
       it 'return hash', :aggregate_failures do

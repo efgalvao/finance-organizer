@@ -1,0 +1,37 @@
+<div class="title">
+  <%= @stock.ticker %>
+</div>
+
+<div class="form">
+<%= form_with(url: stock_path(@stock), scope: :stock, method: :patch, local: true) do |form| %>
+  <% if @stock.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stock.errors.count, "error") %> prohibited this stock from being saved:</h2>
+
+      <ul>
+        <% @stock.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <form>
+    <div class="form-group">
+      <%= form.label :ticker, class: "input-group-text" %>
+      <%= form.text_field :ticker, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :account_id, class: "input-group-text" %>
+      <%= form.collection_select(:account_id, policy_scope(Account).stocks_accounts, :id, :name, {}, {class: "custom-select"}) %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit class: "btn btn-success" %>
+    </div>
+  </form>
+<% end %>
+
+  <%= link_to 'Back', stocks_path, class: "btn btn-primary" %>
+</div>

@@ -1,0 +1,9 @@
+<div class="title">
+  Add share
+</div>
+
+<div class="form">
+  <%= render 'form', share: @share %>
+
+  <%= link_to 'Back', stock_path(@share.stock), :class => "btn btn-primary" %>
+</div>

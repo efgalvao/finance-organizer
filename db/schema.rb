@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_01_234409) do
+ActiveRecord::Schema.define(version: 2022_05_15_171424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2022_05_01_234409) do
 
   create_table "prices", force: :cascade do |t|
     t.datetime "date"
-    t.integer "price_cents", default: 0, null: false
+    t.integer "value_cents", default: 0, null: false
     t.bigint "stock_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -109,20 +109,24 @@ ActiveRecord::Schema.define(version: 2022_05_01_234409) do
   end
 
   create_table "shares", force: :cascade do |t|
-    t.datetime "aquisition_date"
-    t.integer "aquisition_value_cents", default: 0, null: false
+    t.datetime "date"
+    t.integer "invested_cents", default: 0, null: false
     t.bigint "stock_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity", default: 0, null: false
     t.index ["stock_id"], name: "index_shares_on_stock_id"
   end
 
   create_table "stocks", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "ticker", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "shares_count"
+    t.integer "invested_value_cents", default: 0, null: false
+    t.integer "current_value_cents", default: 0, null: false
+    t.integer "shares_total", default: 0
     t.index ["account_id"], name: "index_stocks_on_account_id"
   end
 

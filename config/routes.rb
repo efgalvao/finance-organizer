@@ -13,16 +13,18 @@ Rails.application.routes.draw do
     resources :transactions, only: %i[edit]
   end
 
-  resources :stocks do
-    get 'summary', on: :member
-    get '/current_price', to: 'prices#current_price'
-    resources :dividends, only: [:destroy]
-    resources :prices, only: %i[edit destroy]
+  scope module: 'investments', path: '/investments' do
+    get '/investments/', to: 'investments#index'
+
+    resources :stocks, controller: 'stock/stocks' do
+      get 'current_price', on: :member
+      resources :dividends, controller: 'stock/dividends', only: %i[index new create]
+      resources :prices, controller: 'stock/prices', only: %i[new create]
+      resources :shares, controller: 'stock/shares', only: %i[new create]
+    end
   end
 
   namespace :investments do
-    get '/', to: 'investments#index'
-
     resources :treasuries, controller: 'treasury/treasuries' do
       resources :negotiations, only: %i[index new create], controller: 'treasury/negotiations'
       resources :positions, only: %i[new create], controller: 'treasury/positions'
@@ -30,12 +32,6 @@ Rails.application.routes.draw do
   end
 
   get '/transactions' => 'transactions#index'
-
-  resources :dividends, except: [:destroy]
-
-  resources :prices, except: %i[show edit destroy]
-
-  resources :shares, except: [:show]
 
   resources :balances, except: %i[edit destroy]
 

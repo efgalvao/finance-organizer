@@ -1,0 +1,8 @@
+<div class="title">
+  New dividend
+</div>
+
+<div class="form">
+  <%= render 'form', dividend: @dividend %>
+  <%= link_to 'Back', stock_path(@dividend.stock), :class => "btn btn-primary" %>
+</div>
