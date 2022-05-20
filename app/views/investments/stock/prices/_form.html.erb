@@ -1,5 +1,4 @@
-
-<%= form_with(model: @price, url: stock_prices_path(price.stock.id), local:true) do |form| %>
+<%= form_with(url: stock_prices_path, scope: :price, local:true) do |form| %>
   <% if price.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(price.errors.count, "error") %> prohibited this price from being saved:</h2>

@@ -30,8 +30,8 @@ RSpec.describe 'Dividend', type: :request do
 
   # CREATE
   describe 'POST /investents/stock/:id/dividends' do
-    let!(:params) { { stock_id: stock.id, value: 1_000 } }
-    let(:new_dividend) { post stock_dividends_path(stock_id: stock.id), params: { investments_stock_dividend: params } }
+    let!(:params) { { stock_id: stock.id, value: 1_000, date: Date.current } }
+    let(:new_dividend) { post stock_dividends_path(stock_id: stock.id), params: { dividend: params } }
 
     before { sign_in(user) }
 
@@ -54,13 +54,15 @@ RSpec.describe 'Dividend', type: :request do
     end
 
     context 'with invalid data' do
-      let(:invalid_params) { { stock_id: stock.id, value: 'abc' } }
+      let(:invalid_params) { { stock_id: stock.id, value: 'abc', date: Date.current } }
       let(:invalid_dividend) do
-        post stock_dividends_path(stock_id: stock.id), params: { investments_stock_dividend: invalid_params }
+        post stock_dividends_path(stock_id: stock.id),
+             params: { dividend: invalid_params }
       end
 
       it 'does not create a new dividend', :aggregate_failures do
-        expect { invalid_dividend }.to raise_error(ActiveRecord::RecordInvalid)
+        # binding.pry
+        expect { invalid_dividend }.not_to change(Transaction, :count)
         expect { invalid_dividend }.not_to change(Investments::Stock::Dividend, :count)
       end
     end

@@ -6,7 +6,7 @@ RSpec.describe Investments::Stock::CreatePrice, type: :service do
 
   describe '#perform' do
     context 'with valid data' do
-      let(:params) { { stock_id: stock.id, value: 1 } }
+      let(:params) { { stock_id: stock.id, value: 1, date: Date.current } }
 
       it 'creates a new Price' do
         expect { described_class.new(params).perform }.to change(Investments::Stock::Price, :count).by(1)
@@ -22,7 +22,7 @@ RSpec.describe Investments::Stock::CreatePrice, type: :service do
     end
 
     context 'with invalid data' do
-      let(:invalid_params) { { stock_id: stock.id, value: 'abc' } }
+      let(:invalid_params) { { stock_id: stock.id, value: 'abc', date: Date.current } }
 
       it 'creates a new Price' do
         expect { described_class.new(invalid_params).perform }.to change(Investments::Stock::Price, :count).by(0)

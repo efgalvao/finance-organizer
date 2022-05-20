@@ -1,9 +1,9 @@
 module Transactions
-  class CreateIncome < ApplicationService
+  class CreateExpense < ApplicationService
     def initialize(params)
       @account = Account.find(params[:account_id])
       @value = params.fetch(:value, 0)
-      @kind = params.fetch(:kind, 'income')
+      @kind = params.fetch(:kind, 'expense')
       @date = params.fetch(:date, Time.zone.today)
       @title = params.fetch(:title)
     end
@@ -24,7 +24,7 @@ module Transactions
     end
 
     def update_account_balance
-      account.balance_cents += (value * 100).to_i
+      account.balance_cents -= (value * 100).to_i
       account.save
     end
   end

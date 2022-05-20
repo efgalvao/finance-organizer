@@ -6,24 +6,24 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Account</th>
       <th>Total invested</th>
       <th>Balance</th>
       <th>Shares</th>
-      <th>Account</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% @stocks.each do |stock| %>
       <tr>
-        <td> <%= link_to stock.name, summary_stock_path(stock) %> </td>
-        <td> <%= stock.total_invested %> </td>
-        <td> <%= stock.updated_balance %> </td>
-        <td> <%= stock.shares.size %> </td>
+        <td> <%= link_to stock.ticker, stock_path(stock) %> </td>
         <td> <%= stock.account_name %> </td>
-        <td> <%= link_to "Shares", stock_path(stock), class:"btn btn-info" %>
+        <td> <%= stock.invested_value_cents / 100.0 %> </td>
+        <td> <%= stock.current_value_cents / 100.0 %> </td>
+        <td> <%= stock.shares_total %> </td>
+        <td> <%= link_to "Details", stock_path(stock), class:"btn btn-info" %>
              <%= link_to "Edit", edit_stock_path(stock), class:"btn btn-warning" %>
-             <%= link_to "Delete", stock, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %> </td>
+             <%= link_to "Delete", stock_path(stock), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %> </td>
       </tr>
     <% end %>
   </tbody>

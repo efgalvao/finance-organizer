@@ -12,10 +12,10 @@ module Transactions
           quantity.times do
             Share.create(params)
             Transactions::CreateTransaction.perform(
-              account: share.stock_account, value: share.aquisition_value,
+              account: share.stock_account, value: share.value,
               kind: 'investment',
               title: "Purchase share of Stock #{share.stock_name}",
-              date: share.aquisition_date
+              date: share.date
             ).save!
           end
         end

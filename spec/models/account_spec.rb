@@ -22,9 +22,9 @@ RSpec.describe Account, type: :model do
 
   describe '#total_invested' do
     let(:stock1) { create(:stock, account: account) }
-    let!(:share1) { create_list(:share, 2, stock: stock1, aquisition_value: 100) }
+    let!(:share1) { create_list(:share, 2, stock: stock1, invested: 100) }
     let(:stock2) { create(:stock, account: account) }
-    let!(:share2) { create_list(:share, 2, stock: stock2, aquisition_value: 100) }
+    let!(:share2) { create_list(:share, 2, stock: stock2, invested: 100) }
 
     it 'returns the total invested in the account' do
       expect(account.total_invested.fractional).to eq(40_000)
@@ -33,20 +33,20 @@ RSpec.describe Account, type: :model do
 
   describe '#total_stock_value' do
     let(:stock1) { create(:stock, account: account) }
-    let!(:share1) { create_list(:share, 2, stock: stock1, aquisition_value: 100) }
+    let!(:share1) { create_list(:share, 2, stock: stock1, invested: 100) }
     let(:stock2) { create(:stock, account: account) }
-    let!(:share2) { create_list(:share, 2, stock: stock2, aquisition_value: 100) }
+    let!(:share2) { create_list(:share, 2, stock: stock2, invested: 100) }
 
     it 'returns the total invested in the account' do
-      expect(account.total_stock_value.fractional).to eq(40_000)
+      expect(account.total_stock_value_cents).to eq(40_000)
     end
   end
 
   describe '#stock_plus_balance' do
     let(:stock1) { create(:stock, account: account) }
-    let!(:share1) { create_list(:share, 2, stock: stock1, aquisition_value: 100) }
+    let!(:share1) { create_list(:share, 2, stock: stock1, invested: 100) }
     let(:stock2) { create(:stock, account: account) }
-    let!(:share2) { create_list(:share, 2, stock: stock2, aquisition_value: 100) }
+    let!(:share2) { create_list(:share, 2, stock: stock2, invested: 100) }
 
     it 'returns the total invested in the account' do
       expect(account.stock_plus_balance.fractional).to eq(50_000)
@@ -74,7 +74,7 @@ RSpec.describe Account, type: :model do
 
   describe '#last_semester_total_dividends_received' do
     let(:stock1) { create(:stock, account: account) }
-    let!(:share1) { create_list(:share, 2, stock: stock1, aquisition_value: 100, aquisition_date: DateTime.current - 10.days) }
+    let!(:share1) { create_list(:share, 2, stock: stock1, invested: 100, date: DateTime.current - 10.days) }
     let!(:dividend1) { create(:dividend, stock: stock1, value: 50, date: DateTime.current - 2.days) }
 
     it 'returns the total dividends received in the last semester as a hash', :aggregate_failures do

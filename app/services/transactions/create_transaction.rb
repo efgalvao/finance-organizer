@@ -15,7 +15,9 @@ module Transactions
     attr_reader :params
 
     def create_transaction(params)
-      Transaction.new(params)
+      ActiveRecord::Base.transaction do
+        Transaction.create(params)
+      end
     end
 
     def update_account_balance(transaction)

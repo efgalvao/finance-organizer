@@ -13,7 +13,6 @@ module Investments
           redirect_to stock_path(@stock), notice: 'Price successfully created.'
         else
           render :new
-
         end
       end
 
@@ -24,7 +23,7 @@ module Investments
       end
 
       def price_params
-        params.require(:investments_stock_price).permit(:date, :value, :stock_id).merge(stock_id: params[:stock_id])
+        params.require(:price).permit(:date, :value).merge(stock_id: params[:stock_id])
       end
     end
   end

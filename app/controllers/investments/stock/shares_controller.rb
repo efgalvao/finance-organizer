@@ -1,14 +1,15 @@
 module Investments
   module Stock
     class SharesController < ApplicationController
+      before_action :set_stock, only: %i[new create]
       def new
-        @share = Share.new
+        @share = @stock.shares.new
       end
 
       def create
-        @share = Transactions::CreateInvestment.perform(share_params, params[:quantity].to_i)
-        if @share.valid?
-          redirect_to shares_path, notice: 'Share successfully created.'
+        @share = Investments::Stock::CreateShares.perform(share_params)
+        if @share
+          redirect_to stock_path(@stock), notice: 'Share successfully created.'
         else
           render :new
         end
@@ -16,8 +17,12 @@ module Investments
 
       private
 
+      def set_stock
+        @stock = Investments::Stock::Stock.find(params[:stock_id])
+      end
+
       def share_params
-        params.require(:share).permit(:aquisition_date, :aquisition_value, :stock_id, :quantity)
+        params.require(:share).permit(:date, :invested, :quantity).merge(stock_id: params[:stock_id])
       end
     end
   end

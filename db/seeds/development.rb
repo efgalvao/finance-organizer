@@ -35,8 +35,8 @@ stocks_accounts.each do |account|
     stock = Stock.create(account_id: account.id, name: Faker::Finance.ticker)
     (0..3).each do |n|
       stock.dividends.create(value: rand, date: DateTime.current - n.months)
-      stock.shares.create(aquisition_date: DateTime.current - n.months,
-                          aquisition_value: rand(1..100))
+      stock.shares.create(date: DateTime.current - n.months,
+                          value: rand(1..100))
       stock.prices.create(date: DateTime.current - n.months,
                           price: rand(1..100))
     end

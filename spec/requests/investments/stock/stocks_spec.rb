@@ -25,35 +25,23 @@ RSpec.describe 'Stock', type: :request do
     end
   end
 
-  describe 'PUT /stocks/:id' do
+  describe 'PUT /investments/stocks/stocks/:id' do
     context 'when logged' do
-      let(:expected_name) { 'NFLX' }
+      let(:expected_ticker) { 'NFLX' }
 
       before { sign_in(user) }
 
-      it 'can successfully update a stock', :aggregate_failures do
+      it 'can successfully update a stock' do
         put stock_path(stock), params: {
           stock: {
-            name: expected_name
+            ticker: expected_ticker
           }
         }
 
         stock.reload
-        expect(stock.name).to eq(expected_name)
+        expect(stock.ticker).to eq(expected_ticker)
         expect(response).to redirect_to stock_path(stock)
         expect(response.request.flash[:notice]).to eq 'Stock successfully updated.'
-      end
-
-      it 'also respond as json', :aggregate_failures do
-        put stock_path(stock, format: :json), params: {
-          stock: {
-            name: expected_name
-          }
-        }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to match(expected_name.to_json)
       end
     end
 
@@ -68,14 +56,7 @@ RSpec.describe 'Stock', type: :request do
         }
 
         stock.reload
-        expect(stock.name).not_to be_nil
-      end
-
-      it 'also respond to json', :aggregate_failures do
-        put stock_path(stock, format: :json), params: { stock: { name: nil } }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(stock.ticker).not_to be_nil
       end
     end
 
@@ -94,14 +75,14 @@ RSpec.describe 'Stock', type: :request do
 
   describe 'POST /stocks' do
     let!(:account) { create(:account) }
-    let!(:params) { { name: 'SLFI', account_id: account.id } }
+    let!(:params) { { ticker: 'SLFI', account_id: account.id } }
     let(:new_stock) { post stocks_path, params: { stock: params } }
 
     before { sign_in(user) }
 
     context 'with valid data' do
       it 'creates a new Stock' do
-        expect { new_stock }.to change(Stock, :count).by(1)
+        expect { new_stock }.to change(Investments::Stock::Stock, :count).by(1)
       end
 
       it 'has flash notice' do
@@ -110,32 +91,19 @@ RSpec.describe 'Stock', type: :request do
         expect(flash[:notice]).to eq('Stock successfully created.')
       end
 
-      it 'redirects to stocks_path' do
+      it 'redirects to stock_path' do
         new_stock
 
-        expect(response).to redirect_to stock_path(Stock.find_by(name: 'SLFI'))
-      end
-
-      it 'also respond to json', :aggregate_failures do
-        post stocks_path(format: :json), params: { stock: params }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:created)
+        expect(response).to redirect_to stock_path(Investments::Stock::Stock.find_by(ticker: 'SLFI'))
       end
     end
 
     context 'with invalid data' do
+      let!(:invalid_params) { { ticker: nil, account_id: account.id } }
+      let(:invalid_stock) { post stocks_path, params: { stock: invalid_params } }
+
       it 'does not create a new stock' do
-        post stocks_path(format: :json), params: { stock: { name: nil } }
-
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-      it 'also respond to json', :aggregate_failures do
-        post stocks_path(format: :json), params: { stock: { name: nil } }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect { invalid_stock }.not_to change(Investments::Stock::Stock, :count)
       end
     end
   end
@@ -147,7 +115,7 @@ RSpec.describe 'Stock', type: :request do
 
     context 'when successfully' do
       it 'deletes a stock', :aggregate_failures do
-        expect { delete stock_path(new_stock) }.to change(Stock, :count).by(-1)
+        expect { delete stock_path(new_stock) }.to change(Investments::Stock::Stock, :count).by(-1)
         expect(flash[:notice]).to eq 'Stock successfully removed.'
         expect(response).to redirect_to stocks_path
       end
@@ -174,12 +142,12 @@ RSpec.describe 'Stock', type: :request do
     end
   end
 
-  describe 'GET /stocks/:id/summary' do
+  describe 'GET /stocks/:id' do
     context 'when logged in' do
-      it 'can successfully access stock summary index page' do
+      it 'can successfully access stock show page' do
         sign_in(user)
 
-        get summary_stock_path(stock)
+        get stock_path(stock)
 
         expect(response).to be_successful
       end
@@ -187,7 +155,7 @@ RSpec.describe 'Stock', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access a stock summary page' do
-        get summary_stock_path(stock)
+        get stock_path(stock)
 
         expect(response).to redirect_to new_user_session_path
       end

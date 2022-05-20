@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2022_05_15_171424) do
     t.bigint "stock_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity", default: 0, null: false
     t.index ["stock_id"], name: "index_shares_on_stock_id"
   end
 

@@ -12,7 +12,7 @@ module Investments
       end
 
       def new
-        @stock = Stock.new
+        @stock = Investments::Stock::Stock.new
       end
 
       def edit
@@ -20,10 +20,10 @@ module Investments
       end
 
       def create
-        @stock = Stock.new(stock_params)
+        @stock = Investments::Stock::CreateStock.new(stock_params).perform
 
-        if @stock.save
-          redirect_to @stock, notice: 'Stock successfully created.'
+        if @stock.valid?
+          redirect_to stock_path(@stock), notice: 'Stock successfully created.'
         else
           render :new
         end
@@ -32,8 +32,8 @@ module Investments
       def update
         authorize @stock
 
-        if @stock.update(name: stock_params[:name])
-          redirect_to @stock, notice: 'Stock successfully updated.'
+        if @stock.update(ticker: stock_params[:ticker])
+          redirect_to stock_path(@stock), notice: 'Stock successfully updated.'
         else
           render :edit
         end
@@ -47,8 +47,8 @@ module Investments
       end
 
       def current_price
-        new_price = PriceUpdater.get_price(@stock.name)
-        @stock.prices.new(price: new_price)
+        new_price = PriceUpdater.get_price(@stock.ticker)
+        @stock.values.new(price: new_price)
 
         if @stock.save
           redirect_to summary_stock_path(@stock), notice: 'Price successfully updated.'
@@ -64,7 +64,7 @@ module Investments
       end
 
       def stock_params
-        params.require(:stock).permit(:name, :account_id)
+        params.require(:stock).permit(:ticker, :account_id)
       end
     end
   end

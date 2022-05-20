@@ -4,14 +4,14 @@
 
 <div class="summary-chart">
   <%= line_chart account.stocks.map { |stock| {
-      name: stock.name, data: stock.last_semester_prices
+      name: stock.ticker, data: stock.last_semester_prices
       } }, precision: 8 %>
 </div>
 
 <div class="summary-stocks">
   <% account.stocks.each do |stock| %>
     <div class="summary-stock">
-      <%= link_to stock.name, summary_stock_path(stock), class:"summary-stock" %>
+      <%= link_to stock.ticker, summary_stock_path(stock), class:"summary-stock" %>
     </div>
   <% end %>
 </div>

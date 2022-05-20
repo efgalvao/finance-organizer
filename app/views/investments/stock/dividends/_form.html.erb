@@ -1,4 +1,4 @@
-<%= form_with(model: @dividend, url: stock_dividends_path(dividend.stock.id), local:true) do |form| %>
+<%= form_with(url: stock_dividends_path, scope: :dividend, local:true) do |form| %>
   <% if dividend.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(dividend.errors.count, "error") %> prohibited this dividend from being saved:</h2>

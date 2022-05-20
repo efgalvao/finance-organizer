@@ -6,8 +6,8 @@ RSpec.describe 'Price', type: :request do
   let(:stock) { create(:stock, account: account) }
 
   describe 'POST /investments/stocks/:id/prices' do
-    let!(:params) { { stock_id: stock.id, price: 1_000 } }
-    let(:new_price) { post stock_prices_path(stock), params: { investments_stock_price: params } }
+    let!(:params) { { stock_id: stock.id, price: 1_000, date: Date.current } }
+    let(:new_price) { post stock_prices_path(stock), params: { price: params } }
 
     before { sign_in(user) }
 
@@ -30,9 +30,9 @@ RSpec.describe 'Price', type: :request do
     end
 
     context 'with invalid data' do
-      let(:invalid_params) { { stock_id: stock.id, value: 'abc' } }
+      let(:invalid_params) { { stock_id: stock.id, value: 'abc', date: Date.current } }
       let(:invalid_price) do
-        post stock_prices_path(stock_id: stock.id), params: { investments_stock_price: invalid_params }
+        post stock_prices_path(stock_id: stock.id), params: { price: invalid_params }
       end
 
       it 'does not create a new price' do

@@ -17,7 +17,7 @@ module Investments
         if @dividend
           redirect_to stock_path(@stock), notice: 'Dividend successfully created.'
         else
-          render :new
+          render :new, object: @dividend
         end
       end
 
@@ -28,7 +28,7 @@ module Investments
       end
 
       def dividend_params
-        params.require(:investments_stock_dividend).permit(:date, :value).merge(stock_id: params[:stock_id])
+        params.require(:dividend).permit(:date, :value).merge(stock_id: params[:stock_id])
       end
     end
   end
