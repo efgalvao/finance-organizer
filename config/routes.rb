@@ -6,11 +6,13 @@ Rails.application.routes.draw do
   get '/user/overview', to: 'users#overview'
   get '/user/summary', to: 'users#summary'
 
-  resources :accounts do
-    get 'month_transactions', on: :member
-    get 'transactions', on: :member
-    resources :balances, only: %i[edit destroy]
-    resources :transactions, only: %i[edit]
+  scope module: 'accounts' do
+    resources :accounts do
+      resources :balances, only: %i[new create edit]
+      resources :categories, except: %i[show]
+      resources :transactions, only: %i[index new create]
+      resources :transferences, only: %i[new create]
+    end
   end
 
   scope module: 'investments', path: '/investments' do
@@ -31,15 +33,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/transactions' => 'transactions#index'
-
-  resources :balances, except: %i[edit destroy]
-
-  resources :transactions, except: %i[edit]
-
-  resources :categories
-
-  resources :transferences, only: %i[new create index]
+  resources :transferences, only: %i[index]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
