@@ -1,6 +1,6 @@
 module Account
   class AccountsController < ApplicationController
-    before_action :set_account, only: %i[show edit update destroy month_transactions transactions]
+    before_action :set_account, only: %i[show edit update destroy]
 
     def index
       @accounts = policy_scope(Account).order(name: :asc)
@@ -21,28 +21,21 @@ module Account
     def create
       @account = current_user.accounts.new(account_params)
 
-      respond_to do |format|
-        if @account.save
-          format.html { redirect_to @account, notice: 'Account was successfully created.' }
-          format.json { render :show, status: :created, location: @account }
-        else
-          format.html { render :new }
-          format.json { render json: @account.errors, status: :unprocessable_entity }
-        end
+      if @account.save
+        redirect_to account_path(@account), notice: 'Account was successfully created.'
+      else
+        render :new
       end
     end
 
     def update
       authorize(@account)
 
-      respond_to do |format|
-        if @account.update(name: account_params[:name])
-          format.html { redirect_to @account, notice: 'Account was successfully updated.' }
-          format.json { render :show, status: :ok, location: @account }
-        else
-          format.html { render :edit }
-          format.json { render json: @account.errors, status: :unprocessable_entity }
-        end
+      if @account.update(account_params)
+        redirect_to account_path(@account), notice: 'Account was successfully updated.'
+      else
+        render :edit
+
       end
     end
 
@@ -51,14 +44,6 @@ module Account
 
       @account.destroy
       redirect_to accounts_path, notice: 'Account was successfully removed.'
-    end
-
-    def month_transactions
-      authorize(@account)
-    end
-
-    def transactions
-      authorize(@account)
     end
 
     private

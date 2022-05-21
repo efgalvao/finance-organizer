@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root to: 'accounts#index'
+  root to: 'account/accounts#index'
   devise_for :users
   get '/user/overview', to: 'users#overview'
   get '/user/summary', to: 'users#summary'
 
-  scope module: 'accounts' do
+  scope module: 'account' do
     resources :accounts do
       resources :balances, only: %i[new create edit]
       resources :categories, except: %i[show]
       resources :transactions, only: %i[index new create]
-      resources :transferences, only: %i[new create]
     end
   end
 
@@ -33,7 +32,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :transferences, only: %i[index]
+  resources :transferences, only: %i[index new create]
+
+  resources :balances, controller: 'account/balances', only: %i[index]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -4,8 +4,6 @@ module Account
 
     monetize :value_cents
 
-    before_save :set_date
-
     validates :title, presence: true
     validates :account_id, presence: true
     validates :kind, presence: true
@@ -26,12 +24,6 @@ module Account
       else
         Category.find(category_id).name
       end
-    end
-
-    def set_date
-      return if date.present?
-
-      self.date = Date.current
     end
 
     def update_balance

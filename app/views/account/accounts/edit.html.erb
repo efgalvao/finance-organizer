@@ -1,10 +1,16 @@
-<%= form_with(model: account, local: true) do |form| %>
-  <% if account.errors.any? %>
+<div class="title">
+  <%= @account.name %>
+</div>
+
+<div class="form">
+<div class="form">
+<%= form_with(url: account_path(@account), method: :patch, scope: :account, local: true) do |form| %>
+  <% if @account.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
 
       <ul>
-        <% account.errors.full_messages.each do |message| %>
+        <% @account.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -32,3 +38,6 @@
     </div>
   </form>
 <% end %>
+
+<%= link_to 'Back', accounts_path, class: "btn btn-primary" %>
+</div>
