@@ -59,7 +59,7 @@ RSpec.describe 'Account', type: :request do
       it 'has flash notice' do
         new_account
 
-        expect(flash[:notice]).to eq('Account was successfully created.')
+        expect(flash[:notice]).to eq('Account successfully created.')
       end
 
       it 'redirects to account_path' do
@@ -101,22 +101,30 @@ RSpec.describe 'Account', type: :request do
   end
 
   describe 'PUT /accounts/:id' do
+    subject(:update_account) { put account_path(account), params: { account: params } }
+
     context 'when logged' do
-      let(:expected_name) { 'Account 1' }
+      let(:params) { { name: 'Account 1', balance_cents: 111 } }
 
       before { sign_in(user) }
 
-      it 'can successfully update an account', :aggregate_failures do
-        put account_path(account), params: {
-          account: {
-            name: expected_name
-          }
-        }
+      it { is_expected.to redirect_to account_path(account) }
+
+      it 'can successfully update an account name', :aggregate_failures do
+        update_account
 
         account.reload
-        expect(account.name).to eq expected_name
-        expect(response).to redirect_to account_path(account)
-        expect(response.request.flash[:notice]).to eq 'Account was successfully updated.'
+
+        expect(account.name).to eq('Account 1')
+        expect(response.request.flash[:notice]).to eq 'Account successfully updated.'
+      end
+
+      it 'can not update account balance' do
+        update_account
+
+        account.reload
+
+        expect(account.balance_cents).not_to eq(params[:balance_cents])
       end
     end
 
@@ -156,7 +164,7 @@ RSpec.describe 'Account', type: :request do
     context 'when successfully' do
       it 'deletes an account', :aggregate_failures do
         expect { delete account_path(new_account) }.to change(Account::Account, :count).by(-1)
-        expect(flash[:notice]).to eq 'Account was successfully removed.'
+        expect(flash[:notice]).to eq 'Account successfully removed.'
         expect(response).to redirect_to accounts_path
       end
     end

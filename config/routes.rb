@@ -15,7 +15,6 @@ Rails.application.routes.draw do
 
   scope module: 'investments', path: '/investments' do
     get '/investments/', to: 'investments#index'
-
     resources :stocks, controller: 'stock/stocks' do
       get 'current_price', on: :member
       resources :dividends, controller: 'stock/dividends', only: %i[index new create]

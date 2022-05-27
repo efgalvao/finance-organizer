@@ -19,10 +19,10 @@ module Account
     end
 
     def create
-      @account = current_user.accounts.new(account_params)
+      @account = Account::CreateAccount.new(account_params)
 
       if @account.save
-        redirect_to account_path(@account), notice: 'Account was successfully created.'
+        redirect_to account_path(@account), notice: 'Account successfully created.'
       else
         render :new
       end
@@ -31,8 +31,8 @@ module Account
     def update
       authorize(@account)
 
-      if @account.update(account_params)
-        redirect_to account_path(@account), notice: 'Account was successfully updated.'
+      if @account.update(name: params[:account][:name])
+        redirect_to account_path(@account), notice: 'Account successfully updated.'
       else
         render :edit
 
@@ -43,7 +43,7 @@ module Account
       authorize(@account)
 
       @account.destroy
-      redirect_to accounts_path, notice: 'Account was successfully removed.'
+      redirect_to accounts_path, notice: 'Account successfully removed.'
     end
 
     private
@@ -53,7 +53,7 @@ module Account
     end
 
     def account_params
-      params.require(:account).permit(:name, :balance, :savings, :user_id)
+      params.require(:account).permit(:name, :balance, :savings).merge(user_id: current_user.id)
     end
   end
 end

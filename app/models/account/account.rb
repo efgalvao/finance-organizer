@@ -1,6 +1,5 @@
 module Account
   class Account < ApplicationRecord
-    # ASSOCIATIONS
     belongs_to :user
     has_many :transactions, dependent: :destroy
     has_many :balances, dependent: :destroy
@@ -13,7 +12,6 @@ module Account
 
     scope :stocks_accounts, -> { where(savings: false) }
 
-    # VALIDATIONS
     validates :name, presence: true, uniqueness: true
 
     def create_balance
