@@ -16,6 +16,17 @@ module Investments
         end
       end
 
+      def current_price
+        new_price = Investments::Stock::PriceUpdater.get_price(@stock.ticker)
+        @stock.prices.new(price: new_price)
+
+        if @stock.save
+          redirect_to stock_path(@stock), notice: 'Price successfully updated.'
+        else
+          redirect_to stock_path(@stock), notice: 'Price not updated.'
+        end
+      end
+
       private
 
       def set_stock
