@@ -32,7 +32,6 @@ Rails.application.routes.draw do
 
   resources :transferences, only: %i[index new create]
 
-  resources :balances, controller: 'account/balances', only: %i[index]
-
+  resources :categories, except: %i[show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
