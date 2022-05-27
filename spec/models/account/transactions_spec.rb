@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Transaction, type: :model do
+RSpec.describe Account::Transaction, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:account) }
   end
@@ -13,14 +13,5 @@ RSpec.describe Transaction, type: :model do
 
   describe 'monetize' do
     it { is_expected.to monetize(:value) }
-  end
-
-  describe '.set_date' do
-    let(:transaction) { build(:transaction, date: nil) }
-
-    it 'set the current date' do
-      transaction.save
-      expect(transaction.date).not_to be_nil
-    end
   end
 end

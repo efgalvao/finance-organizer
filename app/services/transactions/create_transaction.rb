@@ -5,29 +5,15 @@ module Transactions
     end
 
     def perform
-      transaction = create_transaction(params)
-      update_account_balance(transaction) if transaction.valid?
-      transaction
+      if params[:kind] == 'income'
+        Transactions::CreateIncome.new(params).perform
+      else
+        Transactions::CreateExpense.new(params).perform
+      end
     end
 
     private
 
     attr_reader :params
-
-    def create_transaction(params)
-      ActiveRecord::Base.transaction do
-        Transaction.create(params)
-      end
-    end
-
-    def update_account_balance(transaction)
-      account = transaction.account
-      amount = transaction.value
-      if transaction.kind == 'income'
-        account.update_balance(amount)
-      else
-        account.update_balance(-amount)
-      end
-    end
   end
 end

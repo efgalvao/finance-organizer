@@ -8,9 +8,7 @@ Rails.application.routes.draw do
 
   scope module: 'account' do
     resources :accounts do
-      resources :balances, only: %i[new create edit]
-      resources :categories, except: %i[show]
-      resources :transactions, only: %i[index new create]
+      resources :transactions, only: %i[index new create edit update]
     end
   end
 

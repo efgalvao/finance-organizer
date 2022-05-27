@@ -8,19 +8,11 @@ module Account
       @transaction = transaction
     end
 
-    def show?
-      owner?
-    end
-
     def update?
       owner?
     end
 
     def edit?
-      owner?
-    end
-
-    def destroy?
       owner?
     end
 

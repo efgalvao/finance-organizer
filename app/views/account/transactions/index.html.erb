@@ -20,14 +20,14 @@
     <tbody>
       <% for transaction in @transactions %>
         <tr>
-          <td> <%= link_to transaction.title, transaction_path(id: transaction.id) %></td>
+          <td> <%= transaction.title %></td>
           <td> $ <%= transaction.value %></td>
           <td> <%= transaction.date %></td>
           <td> <%= transaction.kind %></td>
           <td> <%= transaction.category %></td>
           <td> <%= link_to transaction.account_name, account_path(id: transaction.account.id) %></td>
           <td> <%= link_to 'Edit', edit_account_transaction_path(id: transaction.id, account_id: transaction.account.id), :class => "btn btn-warning" %>
-            <%= link_to 'Delete', transaction_path(id: transaction.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+            </td>
         </tr>
       <% end %>
     <% else %>
@@ -36,4 +36,4 @@
     </tbody>
 </table>
 
-<%= link_to 'Create new transaction', new_transaction_path, class:"btn btn-success ml-3" %>
+<%= link_to 'Create new transaction', new_account_transaction_path(params[:account_id]), class:"btn btn-success ml-3" %>
