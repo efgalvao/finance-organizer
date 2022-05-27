@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :balance do
+  factory :balance, class: 'Account::Balance' do
     balance { Faker::Number.number(digits: 7) }
     for_account
 

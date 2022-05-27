@@ -1,68 +1,32 @@
 module Account
   class BalancesController < ApplicationController
-    before_action :set_balance, only: %i[show edit update destroy]
-
     def index
-      @accounts = policy_scope(Account).order(name: :asc).all
-    end
-
-    def show
-      authorize(@balance)
+      account = policy_scope(Account).find(params[:account_id])
+      @balances = account.balances.order(date: :desc)
     end
 
     def new
+      # account = policy_scope(Account).find(params[:account_id])
       @balance = Balance.new
     end
 
-    def edit
-      authorize(@balance)
-    end
-
     def create
-      @balance = Balance.new(balance_params)
-      respond_to do |format|
-        if @balance.save
-          format.html { redirect_to balances_path, notice: 'Balance was successfully created.' }
-          format.json { render :show, status: :created, location: @balance }
-        else
-          format.html { render :new }
-          format.json { render json: @balance.errors, status: :unprocessable_entity }
-        end
-      end
-    end
+      # puts '-------------------', balance_params
 
-    def update
-      authorize(@balance)
+      @balance = CreateBalance.new(balance_params).perform
+      # binding.pry
 
-      respond_to do |format|
-        if @balance.update(balance_params)
-          format.html { redirect_to @balance, notice: 'Balance was successfully updated.' }
-          format.json { render :show, status: :ok, location: @balance }
-        else
-          format.html { render :edit }
-          format.json { render json: @balance.errors, status: :unprocessable_entity }
-        end
-      end
-    end
-
-    def destroy
-      authorize(@balance)
-
-      @balance.destroy
-      respond_to do |format|
-        format.html { redirect_to balances_path, notice: 'Balance was successfully removed.' }
-        format.json { head :no_content }
+      if @balance.valid?
+        redirect_to account_path(@balance.account.id), notice: 'Balance successfully created.'
+      else
+        render :new
       end
     end
 
     private
 
-    def set_balance
-      @balance = Balance.find(params[:id])
-    end
-
     def balance_params
-      params.require(:balance).permit(:balance, :date, :account_id)
+      params.require(:balance).permit(:balance, :date).merge(account_id: params[:account_id])
     end
   end
 end
