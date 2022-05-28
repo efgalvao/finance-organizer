@@ -23,12 +23,12 @@
 
   <div class="form-group">
     <%= form.label :sender, class: "input-group-text" %>
-    <%= form.collection_select :sender_id, policy_scope(Account).all.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
+    <%= form.collection_select :sender_id, policy_scope(Account::Account).all.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
   </div>
 
   <div class="form-group">
     <%= form.label :receiver, class: "input-group-text" %>
-    <%= form.collection_select :receiver_id, policy_scope(Account).all.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
+    <%= form.collection_select :receiver_id, policy_scope(Account::Account).all.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
   </div>
 
   <br >
