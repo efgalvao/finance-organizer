@@ -22,7 +22,8 @@ module Account
         account = Account.create!(name: name, balance: balance, savings: savings, user_id: user_id)
         account.balances.create!(balance: balance)
       end
-    rescue ActiveRecord::RecordInvalid => e
+    rescue ActiveRecord::RecordInvalid
+      e
     end
   end
 end

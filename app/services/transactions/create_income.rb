@@ -39,7 +39,6 @@ module Transactions
       return Time.zone.today if params.fetch(:date).empty?
 
       params.fetch(:date)
-      end
     end
   end
 end

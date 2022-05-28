@@ -25,14 +25,5 @@ module Account
         Category.find(category_id).name
       end
     end
-
-    def update_balance
-      case kind
-      when 'income'
-        account.update_balance(value)
-      when 'expense'
-        account.update_balance(-value)
-      end
-    end
   end
 end

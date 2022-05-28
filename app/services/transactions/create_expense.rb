@@ -10,8 +10,8 @@ module Transactions
       @category_id = params.fetch(:category_id, nil)
     end
 
-    def self.perform(**args)
-      new(**args).perform
+    def self.perform(params)
+      new(params).perform
     end
 
     def perform
@@ -36,7 +36,7 @@ module Transactions
     end
 
     def set_date
-      return Time.zone.today if params.fetch(:date).empty?
+      return Time.zone.today if params.fetch(:date) == ''
 
       params.fetch(:date)
     end

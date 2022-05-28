@@ -8,7 +8,11 @@ module Investments
         @stock_id = params[:stock_id]
       end
 
-      def perform
+      def self.call(**args)
+        new(**args).call
+      end
+
+      def call
         create_price(params)
       end
 

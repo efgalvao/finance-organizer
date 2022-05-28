@@ -11,7 +11,7 @@ RSpec.describe Category, type: :request do
 
     context 'with valid data' do
       it 'creates a new category' do
-        expect { new_category }.to change(Category, :count).by(1)
+        expect { new_category }.to change(described_class, :count).by(1)
       end
 
       it 'has flash notice' do
@@ -146,7 +146,7 @@ RSpec.describe Category, type: :request do
 
     context 'when successfully' do
       it 'deletes a category', :aggregate_failures do
-        expect { delete category_path(new_category) }.to change(Category, :count).by(-1)
+        expect { delete category_path(new_category) }.to change(described_class, :count).by(-1)
         expect(flash[:notice]).to eq 'Category successfully removed.'
         expect(response).to redirect_to categories_path
       end

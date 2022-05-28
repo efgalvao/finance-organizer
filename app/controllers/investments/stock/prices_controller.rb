@@ -7,7 +7,7 @@ module Investments
       end
 
       def create
-        @price = Investments::Stock::CreatePrice.new(price_params).perform
+        @price = Investments::Stock::CreatePrice.call(price_params)
 
         if @price
           redirect_to stock_path(@stock), notice: 'Price successfully created.'
@@ -16,16 +16,16 @@ module Investments
         end
       end
 
-      def current_price
-        new_price = Investments::Stock::PriceUpdater.get_price(@stock.ticker)
-        @stock.prices.new(price: new_price)
+      # def current_price
+      #   new_price = Investments::Stock::PriceUpdater.get_price(@stock.ticker)
+      #   price = Investments::Stock::CreatePrice.call(stock_id: @stock.id, value: new_price)
 
-        if @stock.save
-          redirect_to stock_path(@stock), notice: 'Price successfully updated.'
-        else
-          redirect_to stock_path(@stock), notice: 'Price not updated.'
-        end
-      end
+      #   if price
+      #     redirect_to stock_path(@stock), notice: 'Price successfully updated.'
+      #   else
+      #     redirect_to stock_path(@stock), notice: 'Price not updated.'
+      #   end
+      # end
 
       private
 

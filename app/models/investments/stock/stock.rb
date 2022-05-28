@@ -4,7 +4,9 @@ module Investments
       has_many :dividends, dependent: :destroy
       has_many :shares, dependent: :destroy
       has_many :prices, dependent: :destroy
-      belongs_to :account, touch: true
+      belongs_to :account, class_name: 'Account::Account', touch: true
+
+      monetize :current_total_value_cents, :invested_value_cents, :current_value_cents
 
       validates :ticker, presence: true
       validates :account, presence: true

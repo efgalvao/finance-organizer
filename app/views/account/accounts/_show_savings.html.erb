@@ -7,17 +7,16 @@
 <div class="summary-item">
   Current balance:<br />
   <div class="item-value">
-    <%= number_to_currency(@account.last_balance.balance, unit: 'R$', separator: ',', delimiter: '') %>
+    <%= number_to_currency(@account.balance, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
 <%= render 'show_table' %>
 
 <div>
-  <%= link_to 'Month Transactions', month_transactions_account_path(@account), :class => "btn btn-warning" %>
-  <%= link_to 'Transactions', transactions_account_path(@account), class:'btn btn-success' %>
-  <%= link_to 'Create new transaction', new_transaction_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
-  <%= link_to 'Create new transference', new_transference_path, :class => "btn btn-success ml-3" %>
+  <%# <%= link_to 'Transactions', transactions_account_path(@account), class:'btn btn-success' %>
+  <%# <%= link_to 'Create new transaction', new_transaction_path(account_id: @account.id), :class => "btn btn-success ml-3" %> %>
+  <%# <%= link_to 'Create new transference', new_transference_path, :class => "btn btn-success ml-3" %> %> %>
 </div>
 
 <div class="chart-title">
