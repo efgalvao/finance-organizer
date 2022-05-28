@@ -10,9 +10,8 @@ module Investments
       end
 
       def perform
-        valido = create_share
-        # binding.pry
-        return unless valido
+        valid_share = create_share
+        return unless valid_share
 
         Transactions::CreateExpense.perform({
                                               account_id: stock.account.id,
@@ -39,11 +38,9 @@ module Investments
       end
 
       def set_date
-        if params[:date] == ''
-          Time.zone.today
-        else
-          params.fetch(:date)
-        end
+        return Time.zone.today if params.fetch(:date).empty?
+
+        params.fetch(:date)
       end
     end
   end
