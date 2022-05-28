@@ -6,6 +6,7 @@ module Investments
         @ticker = params.fetch(:ticker, '')
         @quantity = params.fetch(:quantity, 0)
         @invested = params.fetch(:invested, 0).to_f * 100
+        @value = params.fetch(:value, nil)
         @stock = Investments::Stock::Stock.find(params[:stock_id])
       end
 
@@ -15,7 +16,7 @@ module Investments
 
       private
 
-      attr_reader :params, :stock, :ticker, :quantity, :invested
+      attr_reader :params, :stock, :ticker, :quantity, :invested, :value
 
       def update_stock
         ActiveRecord::Base.transaction do
@@ -29,18 +30,18 @@ module Investments
       end
 
       def new_current_value
-        if params[:value].nil?
+        if value.nil?
           stock.current_value_cents
         else
-          params[:value].to_f * 100
+          value * 100.0
         end
       end
 
       def new_current_total_value
-        if params[:value].nil?
+        if value.nil?
           stock.current_value_cents * stock.shares_total
         else
-          (params[:value].to_f * 100) * stock.shares_total
+          (value * 100.0) * stock.shares_total
         end
       end
     end

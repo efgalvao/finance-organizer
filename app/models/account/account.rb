@@ -31,7 +31,7 @@ module Account
     def total_invested
       total = 0
       stocks.each do |stock|
-        total += stock.total_invested
+        total += stock.invested_value
       end
       total
     end
@@ -92,12 +92,12 @@ module Account
 
     def total_stock_value
       total = 0
-      total += stocks.includes(:prices).inject(0) { |sum, stock| stock.updated_balance + sum }
+      total += stocks.inject(0) { |sum, stock| stock.current_total_value + sum }
       total
     end
 
     def stock_plus_balance
-      total_stock_value + last_balance.balance
+      total_stock_value + balance
     end
 
     private

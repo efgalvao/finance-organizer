@@ -20,7 +20,7 @@
   <div class="summary-item">
     Average paid price:<br />
     <div class="item-value">
-      <%= number_to_currency((@stock.invested_value / @stock.shares_total), unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency((@stock.average_aquisition_price), unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 

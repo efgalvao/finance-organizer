@@ -23,14 +23,14 @@ module Investments
         prices.order('date desc').first&.value
       end
 
-      def total_invested
-        Money.new(shares.sum(:value_cents))
-      end
+      # def total_invested
+      #   Money.new(shares.sum(:balance_cents))
+      # end
 
       def average_aquisition_price
-        return 0 if shares.count.zero?
+        return 0 if shares_total.zero?
 
-        total_invested / shares.count
+        invested_value / shares_total
       end
 
       def updated_balance
