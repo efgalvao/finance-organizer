@@ -28,11 +28,9 @@ module Investments
       end
 
       def set_date
-        if params[:date] == ''
-          Time.zone.today
-        else
+        return Time.zone.today if params.fetch(:date) == ''
+
           params.fetch(:date)
-        end
       end
 
       def price_params
