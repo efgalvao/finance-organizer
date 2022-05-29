@@ -1,7 +1,9 @@
 <nav class="navbar navbar-dark dark-blue darken-4">
-  <a class="navbar-brand" href="/user/overview">ZUKUNFT: <%= current_user.name.upcase %> </a>
-  <span class="navbar-brand"></span>
-
+  <% if current_user %>
+    <a class="navbar-brand" href="/user/overview">ZUKUNFT: <%= current_user.name.upcase %> </a>
+  <% else %>
+    <a class="navbar-brand" href="/">ZUKUNFT</a>
+  <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
     aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
