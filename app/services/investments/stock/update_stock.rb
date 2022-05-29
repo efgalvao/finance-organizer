@@ -33,7 +33,7 @@ module Investments
         if value.nil?
           stock.current_value_cents
         else
-          value * 100.0
+          value.to_f * 100.0
         end
       end
 
@@ -41,7 +41,7 @@ module Investments
         if value.nil?
           stock.current_value_cents * stock.shares_total
         else
-          (value * 100.0) * stock.shares_total
+          (value.to_f * 100) * stock.shares_total
         end
       end
     end

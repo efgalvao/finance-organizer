@@ -1,0 +1,67 @@
+<div class="summary">
+  <div class="summary-subtitle">
+    Summary for <%= @account.name %> account:
+  </div>
+</div>
+
+<div class="summary-item">
+  Current TOTAL balance(account + stocks):<br />
+  <div class="item-value">
+  <%= number_to_currency(@account.stock_plus_balance, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+  Account balance:<br />
+  <div class="item-value">
+  <%= number_to_currency((@account.balance), unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+  Current total stocks value:<br />
+  <div class="item-value">
+  <%= number_to_currency(@account.total_stock_value, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+  Total invested:<br />
+  <div class="item-value">
+  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+  Amount of stocks:<br />
+  <div class="item-value">
+  <%= @account.stocks.size %>
+  </div>
+</div>
+
+<div class="summary-item">
+  Amount of treasuries:<br />
+  <div class="item-value">
+  <%= @account.treasuries.size %>
+  </div>
+</div>
+
+<div>
+  <%= link_to 'Transactions', account_transactions_path(@account), class:'btn btn-success' %>
+  <%= link_to 'Create new transaction', new_account_transaction_path(@account), :class => "btn btn-success ml-3" %>
+  <%= link_to 'Create new transference', new_transference_path, :class => "btn btn-success ml-3" %>
+  <%= link_to 'Create new stock', new_stock_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
+  <%= link_to 'Create new treasury', new_treasury_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
+</div>
+
+</br>
+
+<% if @account.stocks.size > 0 %>
+  <%= render 'stocks_list' %>
+<% end %>
+
+</br>
+
+<% if @account.treasuries.size > 0 %>
+  <%= render 'treasuries_list' %>
+<% end %>

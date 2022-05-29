@@ -9,6 +9,10 @@ module Account
       @user_id = params.fetch(:user_id, nil)
     end
 
+    def self.call(params)
+      new(params).call
+    end
+
     def call
       create_account
     end
@@ -21,6 +25,7 @@ module Account
       ActiveRecord::Base.transaction do
         account = Account.create!(name: name, balance: balance, savings: savings, user_id: user_id)
         account.balances.create!(balance: balance)
+        account
       end
     rescue ActiveRecord::RecordInvalid
       e

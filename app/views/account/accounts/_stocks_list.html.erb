@@ -1,44 +1,3 @@
-<div class="summary">
-  <div class="summary-subtitle">
-    Summary for <%= @account.name %> account:
-  </div>
-</div>
-
-<div class="summary-item">
-  Current TOTAL balance(account + stocks):<br />
-  <div class="item-value">
-  <%= number_to_currency(@account.stock_plus_balance, unit: 'R$', separator: ',', delimiter: '') %>
-  </div>
-</div>
-
-<div class="summary-item">
-  Account balance:<br />
-  <div class="item-value">
-  <%= number_to_currency((@account.balance), unit: 'R$', separator: ',', delimiter: '') %>
-  </div>
-</div>
-
-<div class="summary-item">
-  Current total stocks value:<br />
-  <div class="item-value">
-  <%= number_to_currency(@account.total_stock_value, unit: 'R$', separator: ',', delimiter: '') %>
-  </div>
-</div>
-
-<div class="summary-item">
-  Total invested:<br />
-  <div class="item-value">
-  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
-  </div>
-</div>
-
-<div class="summary-item">
-  Total amount of stocks:<br />
-  <div class="item-value">
-  <%= @account.stocks.size %>
-  </div>
-</div>
-
 <div class="chart-title">
   Stocks:
   </div>
@@ -67,12 +26,6 @@
       <% end %>
     </tbody>
   </table>
-</div>
-
-<div>
-  <%# <%= link_to 'Transactions', transactions_account_path(@account), class:'btn btn-success' %>
-  <%# <%= link_to 'Create new transaction', new_transaction_path(account_id: @account.id), :class => "btn btn-success ml-3" %> %>
-  <%# <%= link_to 'Create new transference', new_transference_path, :class => "btn btn-success ml-3" %> %> %>
 </div>
 
 <div class="chart-title">

@@ -19,9 +19,9 @@ module Account
     end
 
     def create
-      @account = Account::CreateAccount.new(account_params)
+      @account = ::Account::CreateAccount.call(account_params)
 
-      if @account.save
+      if @account.valid?
         redirect_to account_path(@account), notice: 'Account successfully created.'
       else
         render :new

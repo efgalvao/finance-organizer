@@ -3,7 +3,7 @@ module Account
     before_action :set_transaction, only: %i[edit update]
 
     def index
-      @transactions = policy_scope(Transaction).current_month.order(date: :desc)
+      @transactions = policy_scope(Transaction).where(account_id: params[:account_id]).current_month.order(date: :desc)
     end
 
     def new

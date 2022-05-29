@@ -15,15 +15,14 @@ Rails.application.routes.draw do
 
   scope module: 'investments', path: '/investments' do
     get '/investments/', to: 'investments#index'
+
     resources :stocks, controller: 'stock/stocks' do
       get 'current_price', on: :member
       resources :dividends, controller: 'stock/dividends', only: %i[index new create]
       resources :prices, controller: 'stock/prices', only: %i[new create]
       resources :shares, controller: 'stock/shares', only: %i[new create]
     end
-  end
 
-  namespace :investments do
     resources :treasuries, controller: 'treasury/treasuries' do
       resources :negotiations, only: %i[index new create], controller: 'treasury/negotiations'
       resources :positions, only: %i[new create], controller: 'treasury/positions'
