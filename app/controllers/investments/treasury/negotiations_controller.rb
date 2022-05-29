@@ -11,7 +11,7 @@ module Investments
       end
 
       def create
-        @negotiation = Investments::Treasury::CreateNegotiation.new(negotiation_params).perform
+        @negotiation = Investments::Treasury::CreateNegotiation.call(negotiation_params)
 
         if @negotiation
           redirect_to treasury_path(id: negotiation_params[:treasury_id]),

@@ -17,7 +17,7 @@
       <% @account.stocks.each do |stock| %>
         <tr>
           <td><%= link_to stock.ticker, stock_path(stock) %></td>
-          <td><%= stock.shares_count %></td>
+          <td><%= stock.shares_total %></td>
           <td><%= stock.invested_value %></td>
           <td><%= stock.average_aquisition_price %></td>
           <td><%= stock.current_value %></td>
