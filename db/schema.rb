@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2022_05_15_171424) do
     t.integer "shares_count"
     t.integer "invested_value_cents", default: 0, null: false
     t.integer "current_value_cents", default: 0, null: false
+    t.integer "current_total_value_cents", default: 0, null: false
     t.integer "shares_total", default: 0
     t.index ["account_id"], name: "index_stocks_on_account_id"
   end

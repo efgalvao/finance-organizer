@@ -8,6 +8,10 @@ module Investments
         @stock = Investments::Stock::Stock.find(params[:stock_id])
       end
 
+      def self.perform(params)
+        new(params).perform
+      end
+
       def perform
         return create_dividend unless create_dividend.valid?
 
@@ -33,11 +37,9 @@ module Investments
       end
 
       def set_date
-        if params[:date] == ''
-          Time.zone.today
-        else
-          params.fetch(:date)
-        end
+        return Time.zone.today if params.fetch(:date) == ''
+
+        params.fetch(:date)
       end
     end
   end

@@ -47,13 +47,13 @@ module Investments
       end
 
       def current_price
-        new_price = PriceUpdater.get_price(@stock.ticker)
-        @stock.values.new(price: new_price)
+        response = Investments::Stock::PriceUpdater.get_price(@stock.ticker)
+        price = Investments::Stock::CreatePrice.call(response.merge(stock_id: @stock.id))
 
-        if @stock.save
-          redirect_to summary_stock_path(@stock), notice: 'Price successfully updated.'
+        if price
+          redirect_to stock_path(@stock), notice: 'Price successfully updated.'
         else
-          redirect_to summary_stock_path(@stock), notice: 'Price not updated.'
+          redirect_to stock_path(@stock), notice: 'Price not updated.'
         end
       end
 

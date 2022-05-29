@@ -11,7 +11,7 @@
 <div class="summary-stocks">
   <% account.stocks.each do |stock| %>
     <div class="summary-stock">
-      <%= link_to stock.ticker, summary_stock_path(stock), class:"summary-stock" %>
+      <%= link_to stock.ticker, stock_path(stock), class:"summary-stock" %>
     </div>
   <% end %>
 </div>

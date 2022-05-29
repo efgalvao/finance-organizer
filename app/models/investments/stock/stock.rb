@@ -4,7 +4,9 @@ module Investments
       has_many :dividends, dependent: :destroy
       has_many :shares, dependent: :destroy
       has_many :prices, dependent: :destroy
-      belongs_to :account, touch: true
+      belongs_to :account, class_name: 'Account::Account', touch: true
+
+      monetize :current_total_value_cents, :invested_value_cents, :current_value_cents
 
       validates :ticker, presence: true
       validates :account, presence: true
@@ -21,14 +23,14 @@ module Investments
         prices.order('date desc').first&.value
       end
 
-      def total_invested
-        Money.new(shares.sum(:value_cents))
-      end
+      # def total_invested
+      #   Money.new(shares.sum(:balance_cents))
+      # end
 
       def average_aquisition_price
-        return 0 if shares.count.zero?
+        return 0 if shares_total.zero?
 
-        total_invested / shares.count
+        invested_value / shares_total
       end
 
       def updated_balance

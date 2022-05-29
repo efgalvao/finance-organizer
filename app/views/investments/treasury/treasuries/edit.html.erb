@@ -3,7 +3,7 @@
 </div>
 
 <div class="form">
-<%= form_with(model: @treasury, url: "/investments/treasuries/#{@treasury.id}", method: :put) do |form| %>
+<%= form_with(url: treasury_path(@treasury), scope: :treasury, method: :patch, local: true) do |form| %>
   <% if @treasury.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@treasury.errors.count, "error") %> prohibited this treasury from being saved:</h2>
@@ -33,5 +33,5 @@
   </form>
 <% end %>
 
-  <%= link_to 'Back', investments_treasuries_path, class: "btn btn-primary" %>
+  <%= link_to 'Back', :back, class: "btn btn-primary" %>
 </div>

@@ -20,21 +20,21 @@
   <div class="summary-item">
     Average paid price:<br />
     <div class="item-value">
-      <%= number_to_currency(@stock.invested_value_cents / 100.0, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency((@stock.average_aquisition_price), unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 
   <div class="summary-item">
     Current value per share:<br />
     <div class="item-value">
-      <%= number_to_currency(@stock.current_value_cents / 100.0, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency(@stock.current_value, unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 
   <div class="summary-item">
     Current total value:<br />
     <div class="item-value">
-      <%= number_to_currency(@stock.current_value_cents / 100.0, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency(@stock.current_total_value, unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 </div>
@@ -43,7 +43,7 @@
   <%= link_to 'Register dividend', new_stock_dividend_path(@stock), class: 'btn btn-success' %>
   <%= link_to 'Add shares', new_stock_share_path(@stock), class: 'btn btn-success' %>
   <%= link_to 'Register new Price', new_stock_price_path(stock_id: @stock.id), class: 'btn btn-success' %>
-  <%# <%= link_to 'Get new Price', stock_current_price_path(@stock), class: 'btn btn-success' %> %>
+  <%= link_to 'Get new Price', current_price_stock_path(@stock), class: 'btn btn-success' %>
 </div>
 
 <h3> Shares</h3>
@@ -114,5 +114,5 @@
 
 <div class="buttons">
   <%= link_to 'Create share', new_stock_share_path(stock_id: @stock.id), class: "btn btn-success ml-3" %>
-  <%= link_to 'Back', stocks_path, :class => "btn btn-primary ml-3" %>
+  <%= link_to 'Back', :back, :class => "btn btn-primary ml-3" %>
 </div>

@@ -1,0 +1,35 @@
+<div class=" title">
+  <%= @account.name %>
+</div>
+
+<div class="summary-subtitle">
+  <strong>Month Transactions:</strong>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Total value</th>
+      <th>Kind</th>
+      <th>Date</th>
+
+      <th colspan="2">Actions</th>
+    </tr>
+  <tbody>
+    <% @account.current_month_transactions.order('date desc').each do |transaction| %>
+      <tr>
+        <td><%= link_to transaction.title, transaction_path(id: transaction.id) %></td>
+        <td><%= transaction.value %></td>
+        <td><%= transaction.kind %></td>
+        <td><%= transaction.date %></td>
+        <td> <%= link_to 'Edit', edit_account_transaction_path(transaction), :class => "btn btn-warning" %>
+        <%= link_to 'Delete', transaction_path(id: transaction.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+      </tr>
+    <% end %>
+    <tbody>
+</table>
+<%= link_to 'New transaction', new_transaction_path(account_id: @account.id), :class => "btn btn-success" %>
+<%= link_to 'Transactions', transactions_account_path(@account), :class => "btn btn-warning" %>
+<%= link_to 'Edit', edit_account_path(@account), :class => "btn btn-warning" %>
+<%= link_to 'Back', :back, :class => "btn btn-primary" %>

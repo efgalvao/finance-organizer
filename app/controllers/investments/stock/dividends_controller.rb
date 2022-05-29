@@ -12,7 +12,7 @@ module Investments
       end
 
       def create
-        @dividend = Investments::Stock::CreateDividend.new(dividend_params).perform
+        @dividend = Investments::Stock::CreateDividend.perform(dividend_params)
 
         if @dividend
           redirect_to stock_path(@stock), notice: 'Dividend successfully created.'

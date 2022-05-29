@@ -8,7 +8,11 @@ module Investments
         @stock_id = params[:stock_id]
       end
 
-      def perform
+      def self.call(params)
+        new(params).call
+      end
+
+      def call
         create_price(params)
       end
 
@@ -18,17 +22,16 @@ module Investments
 
       def create_price(params)
         ActiveRecord::Base.transaction do
-          Investments::Stock::Price.create(price_params)
+          price = Investments::Stock::Price.create(price_params)
           Investments::Stock::UpdateStock.new(params).perform
+          price
         end
       end
 
       def set_date
-        if params[:date] == ''
-          Time.zone.today
-        else
-          params.fetch(:date)
-        end
+        return Time.zone.today if params.fetch(:date) == ''
+
+        params.fetch(:date)
       end
 
       def price_params

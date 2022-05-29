@@ -1,0 +1,25 @@
+<div class="chart-title">
+  Treasuries:
+  </div>
+<div class="summary-item">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Total Invested</th>
+        <th>Current amount</th>
+        <th>Shares</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @account.treasuries.each do |treasury| %>
+        <tr>
+          <td><%= link_to treasury.name, treasury_path(treasury) %></td>
+          <td><%= treasury.invested_value %></td>
+          <td><%= treasury.current_value %></td>
+          <td><%= treasury.shares %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

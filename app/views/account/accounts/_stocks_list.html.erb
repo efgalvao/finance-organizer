@@ -1,0 +1,54 @@
+<div class="chart-title">
+  Stocks:
+  </div>
+<div class="summary-item">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Shares</th>
+        <th>Total Invested</th>
+        <th>Average Price</th>
+        <th>Current share value</th>
+        <th>Current total amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @account.stocks.each do |stock| %>
+        <tr>
+          <td><%= link_to stock.ticker, stock_path(stock) %></td>
+          <td><%= stock.shares_count %></td>
+          <td><%= stock.invested_value %></td>
+          <td><%= stock.average_aquisition_price %></td>
+          <td><%= stock.current_value %></td>
+          <td><%= stock.current_total_value %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="chart-title">
+  Dividends received by month(last 6 months):<br />
+</div>
+<div class="summary-chart">
+  <%= line_chart @account.last_semester_total_dividends_received, precision: 8 %>
+</div>
+
+<div class="chart-title">
+  Stocks prices(last 6 months):
+</div>
+
+<div class="summary-chart">
+  <%= line_chart @account.stocks.map { |stock| {
+      name: stock.ticker, data: stock.last_semester_prices
+      } }, precision: 8 %>
+</div>
+
+<div class="summary-stocks">
+  <% @account.stocks.each do |stock| %>
+    <div class="summary-stock">
+      <%= link_to stock.ticker, stock_path(stock), class:"summary-stock" %>
+    </div>
+  <% end %>
+</div>

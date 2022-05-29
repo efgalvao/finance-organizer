@@ -5,20 +5,11 @@ class TransferencesController < ApplicationController
 
   def create
     @transference = Transactions::CreateTransference.perform(transferences_params)
-    if @transference.valid?
-      respond_to do |format|
-        format.html do
-          redirect_to transferences_path,
-                      notice: 'Transference successfully created.'
-        end
-        format.json { render json: @transference, status: :created }
-      end
-
+    if @transference
+      redirect_to transferences_path,
+                  notice: 'Transference successfully created.'
     else
-      respond_to do |format|
-        format.html { render :new }
-        format.json { render json: @transference.errors, status: :unprocessable_entity }
-      end
+      render :new
     end
   end
 

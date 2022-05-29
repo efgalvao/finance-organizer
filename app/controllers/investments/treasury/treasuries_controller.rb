@@ -59,7 +59,7 @@ module Investments
       end
 
       def treasury_params
-        params.require(:investments_treasury).permit(:name, :account_id)
+        params.require(:treasury).permit(:name, :account_id)
       end
     end
   end
