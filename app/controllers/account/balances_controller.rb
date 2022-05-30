@@ -6,16 +6,13 @@ module Account
     end
 
     def new
-      # account = policy_scope(Account).find(params[:account_id])
       @balance = Balance.new
     end
 
     def create
-      # puts '-------------------', balance_params
-
       @balance = CreateBalance.new(balance_params).perform
-      # binding.pry
 
+      # binding.pry
       if @balance.valid?
         redirect_to account_path(@balance.account.id), notice: 'Balance successfully created.'
       else

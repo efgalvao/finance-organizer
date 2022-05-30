@@ -16,7 +16,6 @@
       <tr>
         <td><%= balance.balance %></td>
         <td><%= balance.date.strftime('%B %d, %Y') %></td>
-        <td><%= link_to 'Edit', edit_account_balance_path(id: balance.id, account_id: balance.account_id), class: 'btn btn-warning' %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'Balance', type: :request do
+RSpec.describe Account::Balance, type: :request do
   let(:user) { create(:user) }
   let(:account) { create(:account, user: user) }
   let!(:balance) { create(:balance, account: account) }
 
-  describe 'GET /balances/new' do
+  describe 'GET /accounts/:account_id/balances/new' do
     context 'when logged in' do
       it 'can successfully access a new balance page' do
         sign_in(user)
@@ -25,126 +25,58 @@ RSpec.describe 'Balance', type: :request do
     end
   end
 
-  describe 'POST /balances' do
-    let(:account) { create(:account) }
-    let(:params)  { { account_id: account.id, balance: 1000 } }
-    let(:new_balance) { post balances_path, params: { balance: params } }
+  describe 'POST /accounts/:account_id/balances' do
+    subject(:post_balance) { post account_balances_path(account), params: { balance: params } }
 
     before { sign_in(user) }
 
     context 'with valid data' do
+      let(:params) { attributes_for(:balance, account_id: account.id) }
+
       it 'creates a new Balance' do
-        expect { new_balance }.to change(Balance, :count).by(1)
+        expect { post_balance }.to change(described_class, :count).by(1)
       end
 
       it 'has flash notice' do
-        new_balance
+        post_balance
 
-        expect(flash[:notice]).to eq('Balance was successfully created.')
+        expect(flash[:notice]).to eq('Balance successfully created.')
       end
 
       it 'redirects to balances_path' do
-        new_balance
+        post_balance
 
-        expect(response).to redirect_to balances_path
-      end
-
-      it 'also respond to json', :aggregate_failures do
-        post balances_path(format: :json), params: { balance: params }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:created)
+        expect(response).to redirect_to account_path(account)
       end
     end
 
     context 'with invalid data' do
-      let(:invalid_balance) { build(:balance, :for_account) }
+      let!(:params) { attributes_for(:balance, account_id: nil) }
 
       it 'does not create a new balance' do
-        invalid_balance.account_id = nil
+        post_balance
 
-        expect(invalid_balance).not_to be_valid
-      end
-
-      it 'also respond to json', :aggregate_failures do
-        post balances_path(format: :json), params: { balance: { account_id: nil } }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect { post_balance }.to change(described_class, :count).by(0)
       end
     end
   end
 
-  describe 'GET /account/:id/balances/:id/edit' do
+  describe 'GET /accounts/:account_id/balances' do
+    subject(:balances_index) { get account_balances_path(account) }
+
     context 'when logged in' do
-      it 'can successfully access an balance edit page' do
+      it 'can successfully access a new balance page' do
         sign_in(user)
 
-        get edit_account_balance_path(balance, account_id: balance.account_id)
+        balances_index
 
         expect(response).to be_successful
       end
     end
 
     context 'with unauthenticated request' do
-      it 'cannot access a balance edit page' do
-        get edit_account_balance_path(balance, account_id: balance.account_id)
-
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
-
-  describe 'PUT /balances/:id' do
-    context 'when logged' do
-      let(:expected_balance) { 1000 }
-
-      before { sign_in(user) }
-
-      it 'can successfully update a balance', :aggregate_failures do
-        put balance_path(balance), params: {
-          balance: {
-            balance: expected_balance
-          }
-        }
-
-        balance.reload
-        expect(balance.balance_cents).to eq(expected_balance * 100)
-        expect(response).to redirect_to balance_path(balance)
-        expect(response.request.flash[:notice]).to eq 'Balance was successfully updated.'
-      end
-
-      it 'also respond as json', :aggregate_failures do
-        put balance_path(balance, format: :json), params: {
-          balance: {
-            balance: expected_balance
-          }
-        }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to match(expected_balance.to_json)
-      end
-    end
-
-    context 'with invalid data' do
-      before { sign_in(user) }
-
-      it 'does not update balance', :aggregate_failures do
-        put balance_path(balance, format: :json), params: { balance: { account_id: nil } }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-
-    context 'with unauthenticated request' do
-      it 'can not update a balance' do
-        put balance_path(balance), params: {
-          balance: {
-            balance: 10_000
-          }
-        }
+      it 'cannot access a new balance page' do
+        balances_index
 
         expect(response).to redirect_to new_user_session_path
       end
