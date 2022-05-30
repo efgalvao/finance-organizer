@@ -17,27 +17,10 @@ module Investments
         "#{ticker} (#{account.name})"
       end
 
-      def current_price
-        return 0 if prices.empty?
-
-        prices.order('date desc').first&.value
-      end
-
-      # def total_invested
-      #   Money.new(shares.sum(:balance_cents))
-      # end
-
       def average_aquisition_price
         return 0 if shares_total.zero?
 
         invested_value / shares_total
-      end
-
-      def updated_balance
-        return 0 if prices.empty?
-
-        price = prices.order('date desc').first&.value
-        price * shares.count
       end
 
       def last_semester_prices

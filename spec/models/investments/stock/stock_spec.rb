@@ -19,53 +19,19 @@ RSpec.describe Investments::Stock::Stock, type: :model do
     it { expect(stock.ticker_with_account).to eq('Stock 1 (Account 1)') }
   end
 
-  describe '#current_price' do
-    let(:stock2) { create(:stock) }
-
-    context 'without shares/prices' do
-      it 'returns 0' do
-        expect(stock2.current_price).to eq(0)
-      end
-    end
-
-    context 'with shares/prices' do
-      let!(:share2) { create(:share, stock: stock2, invested_cents: 50) }
-
-      it 'return newest aquisition price' do
-        expect(stock2.current_price.fractional).to eq(50)
-      end
-    end
-  end
-
-  describe '#total_invested' do
-    let!(:shares) { create_list(:share, 2, stock: stock, invested_cents: 150) }
-
-    it 'returns sum of aquisition values' do
-      expect(stock.total_invested).to eq(Money.new(300))
-    end
-  end
-
   describe '#average_aquisition_price' do
-    let!(:share1) { create(:share, stock: stock, invested_cents: 200) }
-    let!(:share2) { create(:share, stock: stock, invested_cents: 150) }
+    let(:stock2) { create(:stock, invested_value: 100, shares_total: 10) }
 
-    it 'returns average aquisition value' do
-      expect(stock.average_aquisition_price).to eq(Money.new(175))
-    end
-  end
-
-  describe '#updated_balance' do
-    context 'without shares/prices' do
-      it 'returns 0' do
-        expect(stock.updated_balance).to eq(0)
+    context 'when shares_total is not zero' do
+      it 'returns average aquisition value' do
+        expect(stock2.average_aquisition_price.to_i).to eq(10)
       end
     end
 
-    context 'with shares/prices' do
-      let!(:share2) { create(:share, stock: stock, invested_cents: 50) }
-
-      it 'return newest aquisition price' do
-        expect(stock.updated_balance.fractional).to eq(50)
+    context 'when shares_total is zero' do
+      let(:stock_with_no_shares) { create(:stock, invested_value: 100, shares_total: 0) }
+      it 'returns average aquisition value' do
+        expect(stock.average_aquisition_price.to_i).to eq(0)
       end
     end
   end

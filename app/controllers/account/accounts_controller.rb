@@ -8,6 +8,7 @@ module Account
 
     def show
       authorize(@account)
+      @account.update_balance
     end
 
     def new
