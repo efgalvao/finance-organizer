@@ -30,6 +30,7 @@ RSpec.describe Investments::Stock::Stock, type: :model do
 
     context 'when shares_total is zero' do
       let(:stock_with_no_shares) { create(:stock, invested_value: 100, shares_total: 0) }
+
       it 'returns average aquisition value' do
         expect(stock.average_aquisition_price.to_i).to eq(0)
       end
