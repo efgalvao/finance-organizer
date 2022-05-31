@@ -10,9 +10,8 @@ module Account
     end
 
     def create
-      @balance = CreateBalance.new(balance_params).perform
+      @balance = CreateBalance.call(balance_params)
 
-      # binding.pry
       if @balance.valid?
         redirect_to account_path(@balance.account.id), notice: 'Balance successfully created.'
       else

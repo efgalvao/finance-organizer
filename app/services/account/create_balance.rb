@@ -9,7 +9,11 @@ module Account
       @account_id = params.fetch(:account_id, true)
     end
 
-    def perform
+    def self.call
+      new(params).call
+    end
+
+    def call
       create_balance
     end
 
@@ -24,11 +28,9 @@ module Account
     end
 
     def set_date
-      if params[:date] == ''
-        Time.zone.today
-      else
-        params.fetch(:date)
-      end
+      return Time.zone.today if params.fetch(:date, '').empty?
+
+      params.fetch(:date)
     end
   end
 end

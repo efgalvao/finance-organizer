@@ -24,7 +24,7 @@ module Account
     def create_account
       ActiveRecord::Base.transaction do
         account = Account.create!(name: name, balance: balance, savings: savings, user_id: user_id)
-        account.balances.create!(balance: balance)
+        CreateBalance.call({ balance: balance, account_id: account.id })
         account
       end
     rescue ActiveRecord::RecordInvalid

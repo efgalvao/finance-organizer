@@ -13,9 +13,9 @@ module Transactions
       ActiveRecord::Base.transaction do
         Transference.create(transference_params)
         Account::Transaction.create(sender_params)
-        update_account_balance(sender.id, -amount)
+        Account::UpdateAccountBalance.call(account_id: sender.id, amount: -amount)
         Account::Transaction.create(receiver_params)
-        update_account_balance(receiver.id, amount)
+        Account::UpdateAccountBalance.call(account_id: receiver.id, amount: amount)
       end
     end
 
@@ -35,12 +35,6 @@ module Transactions
     def receiver_params
       { account_id: receiver.id, value: amount, kind: 'transfer',
         title: "Transference from #{sender.name}", date: date }
-    end
-
-    def update_account_balance(account_id, value)
-      account = Account::Account.find(account_id)
-      account.balance_cents += value.to_f * 100
-      account.save
     end
 
     def set_date

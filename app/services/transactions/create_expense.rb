@@ -26,13 +26,8 @@ module Transactions
       ActiveRecord::Base.transaction do
         Account::Transaction.create(account: account, category_id: category_id,
                                     value: value, kind: kind, date: date, title: title)
-        update_account_balance
+        Account::UpdateAccountBalance.call(account_id: account.id, amount: -value)
       end
-    end
-
-    def update_account_balance
-      account.balance_cents -= value.to_f * 100
-      account.save
     end
 
     def set_date
