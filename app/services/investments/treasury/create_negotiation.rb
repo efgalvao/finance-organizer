@@ -40,7 +40,7 @@ module Investments
       end
 
       def set_date
-        return Time.zone.today if params.fetch(:date) == ''
+        return Time.zone.today if params.fetch(:date, '') == ''
 
         params.fetch(:date)
       end

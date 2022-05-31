@@ -10,16 +10,7 @@ module Investments
       end
 
       def perform
-        valid_share = create_share
-        return unless valid_share
-
-        Transactions::CreateExpense.perform({
-                                              account_id: stock.account.id,
-                                              value: invested,
-                                              title: "Invested in #{stock.ticker} shares",
-                                              date: date,
-                                              kind: 'investment'
-                                            })
+        create_share
       end
 
       private
@@ -30,6 +21,13 @@ module Investments
         ActiveRecord::Base.transaction do
           Investments::Stock::Share.create(share_params)
           Investments::Stock::UpdateStock.new(update_stock_params).perform
+          Transactions::CreateExpense.perform({
+                                                account_id: stock.account.id,
+                                                value: invested,
+                                                title: "Invested in #{stock.ticker} shares",
+                                                date: date,
+                                                kind: 'investment'
+                                              })
         end
       end
 

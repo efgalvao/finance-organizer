@@ -4,6 +4,46 @@ RSpec.describe Category, type: :request do
   let(:user) { create(:user) }
   let!(:category) { create(:category, user: user) }
 
+  describe 'GET /categories' do
+    context 'when logged in' do
+      it 'can successfully access categories index page' do
+        sign_in(user)
+
+        get categories_path
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access a balances index page' do
+        get categories_path
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe 'GET /categories/new' do
+    context 'when logged in' do
+      it 'can successfully access new category' do
+        sign_in(user)
+
+        get new_category_path
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access a new category page' do
+        get new_category_path
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
   describe 'POST /categories' do
     let(:new_category) { post categories_path, params: { category: { name: Faker::Commerce.department }, user: user } }
 
@@ -25,13 +65,6 @@ RSpec.describe Category, type: :request do
 
         expect(response).to redirect_to categories_path
       end
-
-      it 'also respond to json', :aggregate_failures do
-        post categories_path(format: :json), params: { category: { name: Faker::Commerce.department } }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:created)
-      end
     end
 
     context 'with invalid data' do
@@ -41,13 +74,6 @@ RSpec.describe Category, type: :request do
         invalid_category.name = nil
 
         expect(invalid_category).not_to be_valid
-      end
-
-      it 'also respond to json', :aggregate_failures do
-        post categories_path(format: :json), params: { category: { name: nil } }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -87,20 +113,8 @@ RSpec.describe Category, type: :request do
 
         category.reload
         expect(category.name).to eq(expected_name)
-        expect(response).to redirect_to category_path(category)
+        expect(response).to redirect_to categories_path
         expect(response.request.flash[:notice]).to eq 'Category successfully updated.'
-      end
-
-      it 'also respond as json', :aggregate_failures do
-        put category_path(category, format: :json), params: {
-          category: {
-            name: expected_name
-          }
-        }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to match(expected_name.to_json)
       end
     end
 
@@ -116,13 +130,6 @@ RSpec.describe Category, type: :request do
 
         category.reload
         expect(category.name).not_to be_nil
-      end
-
-      it 'also respond to json', :aggregate_failures do
-        put category_path(category, format: :json), params: { category: { name: nil } }
-
-        expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
@@ -149,46 +156,6 @@ RSpec.describe Category, type: :request do
         expect { delete category_path(new_category) }.to change(described_class, :count).by(-1)
         expect(flash[:notice]).to eq 'Category successfully removed.'
         expect(response).to redirect_to categories_path
-      end
-    end
-  end
-
-  describe 'GET /categories' do
-    context 'when logged in' do
-      it 'can successfully access categories index page' do
-        sign_in(user)
-
-        get categories_path
-
-        expect(response).to be_successful
-      end
-    end
-
-    context 'with unauthenticated request' do
-      it 'cannot access a balances index page' do
-        get categories_path
-
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
-
-  describe 'GET /categories/new' do
-    context 'when logged in' do
-      it 'can successfully access new category' do
-        sign_in(user)
-
-        get new_category_path
-
-        expect(response).to be_successful
-      end
-    end
-
-    context 'with unauthenticated request' do
-      it 'cannot access a new category page' do
-        get new_category_path
-
-        expect(response).to redirect_to new_user_session_path
       end
     end
   end

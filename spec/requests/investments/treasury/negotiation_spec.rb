@@ -10,7 +10,7 @@ RSpec.describe 'Investments::Treasury::Negotiation', type: :request do
       it 'can successfully access treasuries index page' do
         sign_in(user)
 
-        get investments_treasury_negotiations_path(treasury)
+        get treasury_negotiations_path(treasury)
 
         expect(response).to have_http_status(:success)
       end
@@ -18,7 +18,7 @@ RSpec.describe 'Investments::Treasury::Negotiation', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access treasuries index page' do
-        get investments_treasury_negotiations_path(treasury)
+        get treasury_negotiations_path(treasury)
 
         expect(response).to redirect_to new_user_session_path
       end
@@ -26,30 +26,28 @@ RSpec.describe 'Investments::Treasury::Negotiation', type: :request do
   end
 
   describe 'POST /investments/treasuries/:id/negotiations' do
-    let(:new_negotiation) do
-      post investments_treasury_negotiations_path(treasury), params: { investments_negotiation: valid_params }
+    subject(:post_negotiation) do
+      post treasury_negotiations_path(treasury), params: { negotiation: params }
     end
-    let(:valid_params) { attributes_for(:negotiation).merge(treasury_id: treasury.id) }
 
     before { sign_in(user) }
 
     context 'with valid data' do
+      let(:params) { attributes_for(:negotiation).merge(treasury_id: treasury.id) }
+
       it 'creates a new negotiation', :aggregate_failures do
-        expect { new_negotiation }.to change(Investments::Treasury::Negotiation, :count).by(1)
-        expect(new_negotiation).to be(302)
+        expect { post_negotiation }.to change(Investments::Treasury::Negotiation, :count).by(1)
+        expect(post_negotiation).to be(302)
       end
     end
 
     context 'with invalid data' do
-      let(:invalid_treasury) do
-        post investments_treasury_negotiations_path(treasury), params: { investments_negotiation: invalid_params }
-      end
-      let(:invalid_params) { { amount: 9550, shares: 23, kind: :buy, treasury_id: treasury.id } }
+      let(:params) { { amount: 9550, shares: 23, kind: :buy, treasury_id: treasury.id } }
 
       it 'does not create a new negotiation' do
-        invalid_treasury
+        post_negotiation
 
-        expect { invalid_treasury }.not_to change(Investments::Treasury::Negotiation, :count)
+        expect { post_negotiation }.not_to change(Investments::Treasury::Negotiation, :count)
       end
     end
   end
