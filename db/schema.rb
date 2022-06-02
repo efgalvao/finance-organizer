@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(version: 2022_05_15_171424) do
     t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "shares_count"
     t.integer "invested_value_cents", default: 0, null: false
     t.integer "current_value_cents", default: 0, null: false
     t.integer "current_total_value_cents", default: 0, null: false
