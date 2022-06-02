@@ -3,7 +3,7 @@
 module Account
   class UpdateAccountBalance < ApplicationService
     def initialize(params)
-      @account = Account::Account.find(params[:account_id])
+      @account = Account.find(params[:account_id])
       @amount = params.fetch(:amount, 0)
     end
 
@@ -13,6 +13,7 @@ module Account
 
     def call
       update_account_balance
+      UpdateBalance.call(account_id: account.id, amount: amount)
     end
 
     private
