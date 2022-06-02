@@ -9,7 +9,7 @@ module Account
       @account_id = params.fetch(:account_id, true)
     end
 
-    def self.call
+    def self.call(params)
       new(params).call
     end
 
