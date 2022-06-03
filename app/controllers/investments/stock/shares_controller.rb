@@ -6,8 +6,7 @@ module Investments
       end
 
       def create
-        @share = Investments::Stock::CreateShares.perform(share_params)
-        # binding.pry
+        @share = Investments::Stock::CreateShares.call(share_params)
         if @share
           redirect_to stock_path(id: params[:stock_id]), notice: 'Share successfully created.'
         else

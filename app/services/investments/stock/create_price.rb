@@ -23,7 +23,7 @@ module Investments
       def create_price(params)
         ActiveRecord::Base.transaction do
           price = Investments::Stock::Price.create(price_params)
-          Investments::Stock::UpdateStock.new(params).perform
+          Investments::Stock::UpdateStock.call(params)
           price
         end
       end

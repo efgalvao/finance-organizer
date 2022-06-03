@@ -24,7 +24,7 @@ module Investments
       def create_position(params)
         ActiveRecord::Base.transaction do
           Investments::Treasury::Position.create(position_params(params))
-          Investments::Treasury::UpdateTreasury.new(params).perform
+          Investments::Treasury::UpdateTreasury.call(params)
         end
       end
 

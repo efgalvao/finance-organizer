@@ -16,7 +16,7 @@ module Investments
       end
 
       def create
-        @treasury = Investments::Treasury::CreateTreasury.new(treasury_params).perform
+        @treasury = Investments::Treasury::CreateTreasury.call(treasury_params)
         if @treasury
           redirect_to account_path(id: treasury_params['account_id']),
                       notice: 'Treasury successfully created.'
@@ -31,9 +31,7 @@ module Investments
 
       def update
         authorize @treasury
-        @updated_treasury = Investments::Treasury::UpdateTreasury.new(
-          treasury_params.merge(treasury_id: params[:id])
-        ).perform
+        @updated_treasury = Investments::Treasury::UpdateTreasury.call(treasury_params)
 
         if @updated_treasury
           redirect_to investments_treasury_path(id: params[:id]),
@@ -59,7 +57,7 @@ module Investments
       end
 
       def treasury_params
-        params.require(:treasury).permit(:name, :account_id)
+        params.require(:treasury).permit(:name, :account_id).merge(treasury_id: params[:id]
       end
     end
   end

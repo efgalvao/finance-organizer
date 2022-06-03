@@ -4,11 +4,15 @@ module Transactions
       @params = params
     end
 
-    def perform
+    def self.call(params)
+      new(params).call
+    end
+
+    def call
       if params[:kind] == 'income'
-        Transactions::CreateIncome.new(params).perform
+        Transactions::CreateIncome.call(params)
       else
-        Transactions::CreateExpense.new(params).perform
+        Transactions::CreateExpense.call(params)
       end
     end
 

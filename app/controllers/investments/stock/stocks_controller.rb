@@ -20,7 +20,7 @@ module Investments
       end
 
       def create
-        @stock = Investments::Stock::CreateStock.new(stock_params).perform
+        @stock = Investments::Stock::CreateStock.call(stock_params)
 
         if @stock.valid?
           redirect_to stock_path(@stock), notice: 'Stock successfully created.'

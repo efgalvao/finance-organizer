@@ -10,7 +10,11 @@ module Investments
         @stock = Investments::Stock::Stock.find(params[:stock_id])
       end
 
-      def perform
+      def self.call(params)
+        new(params).call
+      end
+
+      def call
         update_stock
       end
 

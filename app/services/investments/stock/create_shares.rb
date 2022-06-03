@@ -9,7 +9,11 @@ module Investments
         @invested = params.fetch(:invested, 0).to_f
       end
 
-      def perform
+      def self.call(params)
+        new(params).call
+      end
+
+      def call
         create_share
       end
 
@@ -20,14 +24,14 @@ module Investments
       def create_share
         ActiveRecord::Base.transaction do
           Investments::Stock::Share.create(share_params)
-          Investments::Stock::UpdateStock.new(update_stock_params).perform
-          Transactions::CreateExpense.perform({
-                                                account_id: stock.account.id,
-                                                value: invested,
-                                                title: "Invested in #{stock.ticker} shares",
-                                                date: date,
-                                                kind: 'investment'
-                                              })
+          Investments::Stock::UpdateStock.call(update_stock_params)
+          Transactions::CreateExpense.call({
+                                             account_id: stock.account.id,
+                                             value: invested,
+                                             title: "Invested in #{stock.ticker} shares",
+                                             date: date,
+                                             kind: 'investment'
+                                           })
         end
       end
 

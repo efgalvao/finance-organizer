@@ -6,7 +6,11 @@ module Investments
         @account_id = stock_params.fetch(:account_id)
       end
 
-      def perform
+      def self.call(params)
+        new(params).call
+      end
+
+      def call
         create_stock
       end
 

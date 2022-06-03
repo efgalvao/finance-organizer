@@ -9,7 +9,11 @@ module Transactions
       @user_id = params.fetch(:user_id)
     end
 
-    def perform
+    def self.call(params)
+      new(params).call
+    end
+
+    def call
       ActiveRecord::Base.transaction do
         Transference.create(transference_params)
         Account::Transaction.create(sender_params)

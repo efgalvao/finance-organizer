@@ -10,11 +10,11 @@ module Transactions
       @category_id = params.fetch(:category_id, nil)
     end
 
-    def self.perform(params)
-      new(params).perform
+    def self.call(params)
+      new(params).call
     end
 
-    def perform
+    def call
       create_transaction
     end
 

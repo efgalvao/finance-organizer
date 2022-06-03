@@ -17,7 +17,7 @@ module Investments
       # end
 
       def create_transaction
-        Transactions::CreateTransaction.perform(
+        Transactions::CreateTransaction.call(
           account: stock.account,
           value: (value * stock.shares.past_date(date).count),
           kind: 'income',

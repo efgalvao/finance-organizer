@@ -22,7 +22,7 @@ module Investments
         ActiveRecord::Base.transaction do
           Investments::Treasury::Negotiation.create(params)
           Investments::Treasury::CreatePosition.call(params)
-          Transactions::CreateExpense.perform(expense_params)
+          Transactions::CreateExpense.call(expense_params)
         end
       end
 

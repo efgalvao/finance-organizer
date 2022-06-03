@@ -8,20 +8,20 @@ module Investments
         @stock = Investments::Stock::Stock.find(params[:stock_id])
       end
 
-      def self.perform(params)
-        new(params).perform
+      def self.call(params)
+        new(params).call
       end
 
-      def perform
+      def call
         return create_dividend unless create_dividend.valid?
 
-        Transactions::CreateIncome.perform({
-                                             account_id: stock.account.id,
-                                             value: (value.to_f * stock.shares_total),
-                                             title: "#{stock.ticker} dividends",
-                                             date: date,
-                                             kind: 'income'
-                                           })
+        Transactions::CreateIncome.call({
+                                          account_id: stock.account.id,
+                                          value: (value.to_f * stock.shares_total),
+                                          title: "#{stock.ticker} dividends",
+                                          date: date,
+                                          kind: 'income'
+                                        })
       end
 
       private
