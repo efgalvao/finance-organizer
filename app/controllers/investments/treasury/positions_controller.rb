@@ -6,7 +6,7 @@ module Investments
       end
 
       def create
-        @position = Investments::Treasury::CreatePosition.new(position_params).perform
+        @position = Investments::Treasury::CreatePosition.call(position_params)
 
         if @position
           redirect_to treasury_path(id: position_params[:treasury_id]),

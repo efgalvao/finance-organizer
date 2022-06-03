@@ -21,8 +21,7 @@ module Investments
       def create_negotiation(params)
         ActiveRecord::Base.transaction do
           Investments::Treasury::Negotiation.create(params)
-          Investments::Treasury::CreatePosition.new(params).perform
-          # puts '------------------', params
+          Investments::Treasury::CreatePosition.call(params)
           Transactions::CreateExpense.perform(expense_params)
         end
       end
@@ -36,6 +35,14 @@ module Investments
           title: "Invested in #{treasury.name}",
           date: date,
           kind: 'investment'
+        }
+      end
+
+      def create_position_params
+        {
+          treasury_id: treasury.id,
+          amount: invested,
+          date: date
         }
       end
 
