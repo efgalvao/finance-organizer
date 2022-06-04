@@ -1,5 +1,5 @@
 <div class="title">
-  New Transaction
+  <%= t('.new_transaction') %>
 </div>
 
 <div class="form">
@@ -18,44 +18,44 @@
     <% end %>
 
     <div class="form-group">
-      <%= form.label :title, class: "input-group-text" %>
+      <%= form.label t('.title'), class: "input-group-text" %>
       <%= form.text_field :title, :class => "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :date , class: "input-group-text" %>
+      <%= form.label t('.date') , class: "input-group-text" %>
       <%= form.date_field :date, :class => "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :category, class: "input-group-text" %>
+      <%= form.label t('.category'), class: "input-group-text" %>
       <%= form.collection_select :category_id, policy_scope(Category).all.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
     </div>
 
     <br />
 
     <div class="form-group" >
-      <p class="input-group-text" >Kind of transaction:</p>
-      <%= form.label :kind_income, "Income", class: "form-check-label" %>
+      <p class="input-group-text" ><%= t('.kind_of_transaction') %></p>
+      <%= form.label :kind_income, t('.kind_income'), class: "form-check-label" %>
       <%= form.radio_button :kind, "income", class: "form-check-input" %>
       <br />
-      <%= form.label :kind_expense, "Expense", class: "form-check-label" %>
+      <%= form.label :kind_expense, t('.kind_expense'), class: "form-check-label" %>
       <%= form.radio_button :kind, "expense", class: "form-check-input" %>
     </div>
     <br />
 
     <div class="form-group">
-      <%= form.label :value, class: "input-group-text" %>
+      <%= form.label t('.value'), class: "input-group-text" %>
       <%= form.text_field :value, :class => "form-control" %>
     </div>
 
     <br >
     <div class="actions">
-      <%= form.submit :Submit, :class => "btn btn-success" %>
+      <%= form.submit t('.save'), :class => "btn btn-success" %>
     </div>
     <br />
   <% end %>
 
-  <%= link_to 'Back', :back, :class => "btn btn-info" %>
+  <%= link_to t('.cancel'), :back, :class => "btn btn-info" %>
 
 </div>

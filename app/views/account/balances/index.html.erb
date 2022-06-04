@@ -1,20 +1,19 @@
 <div class="title">
-  Balances for <%= @balances[0].account_name%>
+  <%= t('.balances_for') %> <%= @balances[0].account_name%>
 </div>
 
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Balance</th>
-      <th>Date</th>
-      <th colspan="2"></th>
+      <th> <%= t('.balance') %> </th>
+      <th> <%= t('.date') %> </th>
     </tr>
   </thead>
 
   <tbody>
     <% @balances.limit(12).each do |balance| %>
       <tr>
-        <td><%= balance.balance %></td>
+        <td> $ <%= balance.balance %></td>
         <td><%= balance.date.strftime('%B %d, %Y') %></td>
       </tr>
     <% end %>

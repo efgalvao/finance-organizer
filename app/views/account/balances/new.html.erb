@@ -1,5 +1,5 @@
 <div class="title">
-New Balance
+  <%= t('.new_balance') %>
 </div>
 
 <div class="form">
@@ -18,21 +18,21 @@ New Balance
 
   <form>
     <div class="form-group">
-      <%= form.label :balance, class: "input-group-text" %>
+      <%= form.label t('.balance'), class: "input-group-text" %>
       <%= form.text_field :balance, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :date, class: "input-group-text" %>
+      <%= form.label t('.date'), class: "input-group-text" %>
       <%= form.date_field :date, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.submit  class: "btn btn-success" %>
+      <%= form.submit t('.save'), class: "btn btn-success" %>
     </div>
   </form>
 <% end %>
 
-<%= link_to 'Back', :back, class: "btn btn-primary" %>
+<%= link_to t('.cancel'), :back, class: "btn btn-primary" %>
 
 </div>
