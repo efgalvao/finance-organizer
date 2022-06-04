@@ -28,7 +28,7 @@ module Account
         account
       end
     rescue ActiveRecord::RecordInvalid
-      e
+      false
     end
   end
 end

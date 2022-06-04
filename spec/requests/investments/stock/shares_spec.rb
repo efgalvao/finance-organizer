@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Share', type: :request do
   let(:user) { create(:user) }
-  let(:account) { create(:account, user: user) }
+  let(:account) { create(:account, :with_balance, user: user) }
   let(:stock) { create(:stock, account: account) }
 
   describe 'POST /investments/stocks/:id/shares' do
     subject(:post_share) { post stock_shares_path(stock), params: { share: params } }
-    # let(:new_share) { post stock_shares_path(stock), params: { share: params } }
 
     before { sign_in(user) }
 

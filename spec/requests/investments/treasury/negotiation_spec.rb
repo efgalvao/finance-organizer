@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Investments::Treasury::Negotiation', type: :request do
   let(:user) { create(:user) }
-  let(:account) { create(:account, user: user) }
+  let(:account) { create(:account, :with_balance, user: user) }
   let(:treasury) { create(:treasury, account: account) }
 
   describe 'GET /investments/treasuries/:id/negotiations' do

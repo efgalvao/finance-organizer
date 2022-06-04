@@ -23,14 +23,14 @@ module Investments
 
       def create_position(params)
         ActiveRecord::Base.transaction do
-          Investments::Treasury::Position.create(position_params(params))
+          Investments::Treasury::Position.create(position_params)
           Investments::Treasury::UpdateTreasury.call(params)
         end
       end
 
       def position_params
         { treasury_id: treasury.id,
-          date: date, amount: amount.zero? ? invested : amount }
+          date: date, amount: amount.to_i.zero? ? invested : amount }
       end
 
       def set_date

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Investments::Stock::CreateDividend, type: :service do
-  let(:account) { create(:account, balance_cents: 0) }
+  let(:account) { create(:account, :with_balance, balance_cents: 0) }
   let(:stock) { create(:stock, :with_shares, account: account) }
 
   describe '#call' do

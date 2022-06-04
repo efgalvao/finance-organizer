@@ -9,4 +9,10 @@ FactoryBot.define do
   trait :stocks_account do
     savings { false }
   end
+
+  trait :with_balance do
+    after(:build) do |account|
+      account.balances << FactoryBot.build(:balance)
+    end
+  end
 end

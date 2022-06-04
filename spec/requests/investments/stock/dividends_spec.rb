@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Dividend', type: :request do
   let(:user) { create(:user) }
-  let(:account) { create(:account, user: user) }
+  let(:account) { create(:account, :with_balance, user: user) }
   let(:stock) { create(:stock, account: account) }
 
-  # INDEX
   describe 'GET /investments/stocks/:id/dividends' do
     let(:dividend) { create(:dividend, stock: stock) }
 
@@ -28,7 +27,6 @@ RSpec.describe 'Dividend', type: :request do
     end
   end
 
-  # CREATE
   describe 'POST /investents/stock/:id/dividends' do
     let!(:params) { { stock_id: stock.id, value: 1_000, date: Date.current } }
     let(:new_dividend) { post stock_dividends_path(stock_id: stock.id), params: { dividend: params } }

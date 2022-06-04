@@ -50,6 +50,8 @@ RSpec.describe Category, type: :request do
     before { sign_in(user) }
 
     context 'with valid data' do
+      let(:params) { attributes_for(:category) }
+
       it 'creates a new category' do
         expect { new_category }.to change(described_class, :count).by(1)
       end

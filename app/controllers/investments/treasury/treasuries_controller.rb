@@ -34,7 +34,7 @@ module Investments
         @updated_treasury = Investments::Treasury::UpdateTreasury.call(treasury_params)
 
         if @updated_treasury
-          redirect_to investments_treasury_path(id: params[:id]),
+          redirect_to treasury_path(id: params[:id]),
                       notice: 'Treasury successfully updated.'
         else
           render :edit
@@ -57,7 +57,7 @@ module Investments
       end
 
       def treasury_params
-        params.require(:treasury).permit(:name, :account_id).merge(treasury_id: params[:id]
+        params.require(:treasury).permit(:name, :account_id).merge(treasury_id: params[:id])
       end
     end
   end
