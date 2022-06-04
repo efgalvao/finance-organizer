@@ -1,14 +1,14 @@
 <div class="title">
-  Accounts
+  <%= t('.accounts') %>
 </div>
 
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Balance</th>
-      <th>Date of last balance</th>
-      <th> Actions </th>
+      <th><%= t('.name') %></th>
+      <th><%= t('.balance') %></th>
+      <th><%= t('.last_balance_date') %></th>
+      <th><%= t('.actions') %> </th>
     </tr>
   </thead>
 
@@ -19,8 +19,8 @@
         <td >$ <%= account.balance %></td>
         <td ><%= account.updated_at.strftime('%B %d, %Y') %></td>
         <td>
-          <%= link_to 'Edit', edit_account_path(account), class:"btn btn-primary" %>
-          <%= link_to 'Delete', account_path(account), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %> </td>
+          <%= link_to t('.edit_account'), edit_account_path(account), class:"btn btn-primary" %>
+          <%= link_to t('.delete_account'), account_path(account), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %> </td>
 
       </tr>
     <% end %>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Account', new_account_path, :class => "btn btn-success ml-3" %>
+<%= link_to t('.new_account'), new_account_path, :class => "btn btn-success ml-3" %>

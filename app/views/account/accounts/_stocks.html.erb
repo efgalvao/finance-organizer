@@ -1,57 +1,57 @@
 <div class="summary">
   <div class="summary-subtitle">
-    Summary for <%= @account.name %> account:
+    <%= t('.summary_for') %> <%= @account.name %>
   </div>
 </div>
 
 <div class="summary-item">
-  Current TOTAL balance(account + stocks):<br />
+  <%= t('.current_total_balance') %><br />
   <div class="item-value">
   <%= number_to_currency(@account.stock_plus_balance, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
 <div class="summary-item">
-  Account balance:<br />
+  <%= t('.account_balance') %><br />
   <div class="item-value">
   <%= number_to_currency((@account.balance), unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
 <div class="summary-item">
-  Current total stocks value:<br />
+  <%= t('.current_balance_in_stocks') %><br />
   <div class="item-value">
   <%= number_to_currency(@account.total_stock_value, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
 <div class="summary-item">
-  Total invested:<br />
+  <%= t('.total_invested') %><br />
   <div class="item-value">
   <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
 <div class="summary-item">
-  Amount of stocks:<br />
+  <%= t('.stocks_amount') %><br />
   <div class="item-value">
   <%= @account.stocks.size %>
   </div>
 </div>
 
 <div class="summary-item">
-  Amount of treasuries:<br />
+  <%= t('.treasuries_amount') %><br />
   <div class="item-value">
   <%= @account.treasuries.size %>
   </div>
 </div>
 
 <div>
-  <%= link_to 'Transactions', account_transactions_path(@account), class:'btn btn-success' %>
-  <%= link_to 'Create new transaction', new_account_transaction_path(@account), :class => "btn btn-success ml-3" %>
-  <%= link_to 'Create new transference', new_transference_path, :class => "btn btn-success ml-3" %>
-  <%= link_to 'Create new stock', new_stock_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
-  <%= link_to 'Create new treasury', new_treasury_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
+  <%= link_to t('.transactions'), account_transactions_path(@account), class:'btn btn-success' %>
+  <%= link_to t('.new_transaction'), new_account_transaction_path(@account), :class => "btn btn-success ml-3" %>
+  <%= link_to t('.new_transference'), new_transference_path, :class => "btn btn-success ml-3" %>
+  <%= link_to t('.new_stock'), new_stock_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
+  <%= link_to t('.new_treasury'), new_treasury_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
 </div>
 
 </br>

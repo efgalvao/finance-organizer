@@ -1,16 +1,16 @@
 <div class="chart-title">
-  Stocks:
+  <%= t('.stocks') %>
   </div>
 <div class="summary-item">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Shares</th>
-        <th>Total Invested</th>
-        <th>Average Price</th>
-        <th>Current share value</th>
-        <th>Current total amount</th>
+        <th><%= t('.name') %></th>
+        <th><%= t('.shares') %></th>
+        <th><%= t('.total_invested') %></th>
+        <th><%= t('.average_price') %></th>
+        <th><%= t('.current_share_value') %></th>
+        <th><%= t('.current_total_value') %></th>
       </tr>
     </thead>
     <tbody>
@@ -29,14 +29,14 @@
 </div>
 
 <div class="chart-title">
-  Dividends received by month(last 6 months):<br />
+  <%= t('.dividends_received') %><br />
 </div>
 <div class="summary-chart">
   <%= line_chart @account.last_semester_total_dividends_received, precision: 8 %>
 </div>
 
 <div class="chart-title">
-  Stocks prices(last 6 months):
+  <%= t('.stock_prices') %>:
 </div>
 
 <div class="summary-chart">

@@ -1,14 +1,15 @@
 <div class="chart-title">
-  Treasuries:
+  <%= t('.treasuries') %>
   </div>
 <div class="summary-item">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Total Invested</th>
-        <th>Current amount</th>
-        <th>Shares</th>
+        <th><%= t('.name') %></th>
+        <th><%= t('.total_invested') %></th>
+        <th><%= t('.current_value') %></th>
+        <th><%= t('.shares') %></th>
+        <th><%= t('.last_updated') %></th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
           <td><%= treasury.invested_value %></td>
           <td><%= treasury.current_value %></td>
           <td><%= treasury.shares %></td>
+          <td><%= treasury.updated_at %></td>
         </tr>
       <% end %>
     </tbody>

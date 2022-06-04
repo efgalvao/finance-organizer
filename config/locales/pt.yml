@@ -1,0 +1,101 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+pt:
+  hello: "Olá mundo"
+  account:
+    accounts:
+      index:
+        accounts: Contas
+        name: Nome
+        balance: Saldo
+        last_balance_date: Data do último saldo
+        actions: Ações
+        new_account: Nova conta
+        edit_account: Editar conta
+        delete_account: Excluir conta
+      new:
+        new_account: Nova conta
+        name: Nome
+        balance: Saldo
+        save: Salvar
+        cancel: Cancelar
+        savings?: "Conta poupança?"
+      edit:
+        name: Nome
+        save: Salvar
+        cancel: Cancelar
+        savings?: "Conta poupança?"
+      savings:
+        summary_for: Resumo para
+        current_balance: Saldo atual
+        transactions: Transações
+        new_transaction: Nova transação
+        new_transference: Nova transferência
+        monthly_balance: Saldo mensal(últimos 6 meses)
+      show_table:
+        incomes_expenses: Receitas x Despesas
+        month: Mês
+        incomes: Receitas
+        expenses: Despesas
+        invested: Investido
+        balance: Saldo
+      stocks:
+        summary_for: Resumo para
+        current_total_balance: Saldo atual total
+        account_balance: Saldo da conta
+        current_balance_in_stocks: Saldo atual em ações
+        total_invested: Total investido
+        stocks_amount: Quantidade de ações
+        treasuries_amount: Quantidade de tesouros
+        transactions: Transações
+        new_transaction: Nova transação
+        new_transference: Nova transferência
+        new_stock: Nova ação
+        new_treasury: Novo tesouro
+        monthly_balance: Saldo mensal(últimos 6 meses)
+      stocks_list:
+        stocks: Ações
+        name: Nome
+        shares: Cotas
+        total_invested: Total investido
+        average_price: Preço médio de aquisição
+        current_share_value: Valor da cota atual
+        current_total_value: Valor total atual
+        dividends_received: Dividendos recebidos(últimos 6 meses)
+        stock_prices: Preços das ações(últimos 6 meses)
+      treasuries_list:
+        treasuries: Tesouros
+        name: Nome
+        total_invested: Total investido
+        current_value: Valor atual
+        shares: Cotas
+        last_update: Última atualização
