@@ -155,3 +155,82 @@ pt:
     form:
       name: Nome
       save: Salvar
+  investments:
+    investments:
+      index:
+        investments: Investimentos
+        treasuries: Tesouros
+        stocks: Ações
+    stock:
+      dividends:
+        index:
+          title: Dividendos
+          date: Data
+          value: Valor
+          new_dividend: Novo dividendo
+        new:
+          title: Novo dividendo
+          date: Data
+          value: Valor
+          save: Salvar
+          cancel: Cancelar
+      prices:
+        new:
+          title: Novo preço
+          date: Data
+          value: Valor
+          save: Salvar
+          cancel: Cancelar
+      shares:
+        new:
+          title: Nova cota
+          date: Data
+          total_invested: Total investido
+          share_amount: Quantidade de cotas
+          save: Salvar
+          cancel: Cancelar
+      stocks:
+        index:
+          title: Ações
+          ticker: Ticker
+          account: Conta
+          total_invested: Total investido
+          average_paid_price: Preço médio de aquisição
+          current_total_value: Valor total atual
+          current_share_value: Valor médio atual
+          shares: Cotas
+          details: Detalhes
+          edit: Editar
+          remove: Remover
+          new_stock: Nova ação
+        new:
+          title: Nova ação
+          ticker: Ticker
+          account: Conta
+          choose_account: Escolha uma conta
+          save: Salvar
+          cancel: Cancelar
+        edit:
+          ticker: Ticker
+          account: Conta
+          choose_account: Escolha uma conta
+          save: Salvar
+          cancel: Cancelar
+        show:
+          current_amount_shares: Quantidade de cotas atual
+          total_invested: Total investido
+          average_paid_price: Preço médio de aquisição
+          current_total_value: Valor total atual
+          current_share_value: Valor médio atual
+          new_dividend: Novo dividendo
+          new_share: Nova cota
+          new_price: Novo preço
+          get_new_price: Obter preço
+          shares: Cotas
+          date: Data
+          quantity: Quantidade
+          value: Valor
+          no_shares: Não há cotas cadastradas
+          no_prices: Não há preços cadastrados
+          no_dividends: Não há dividendos cadastrados
+          back: Voltar

@@ -67,9 +67,9 @@ module Account
       current_month_balance
     end
 
-    def current_month_transactions
-      transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
-    end
+    # def current_month_transactions
+    #   transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
+    # end
 
     def incomes(date)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,

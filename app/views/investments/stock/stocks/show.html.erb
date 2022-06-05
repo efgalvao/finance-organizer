@@ -4,55 +4,56 @@
   </div>
 
   <div class="summary-item">
-    Current amount of shares:<br />
+    <%= t('.current_amount_shares') %><br />
     <div class="item-value">
       <%= @stock.shares_total %>
     </div>
   </div>
 
   <div class="summary-item green">
-    Total amount invested:<br />
+    <%= t('.total_invested') %><br />
     <div class="item-value">
       <%= number_to_currency(@stock.invested_value_cents / 100.0, unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 
   <div class="summary-item">
-    Average paid price:<br />
+    <%= t('.average_paid_price') %><br />
     <div class="item-value">
       <%= number_to_currency((@stock.average_aquisition_price), unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 
   <div class="summary-item">
-    Current value per share:<br />
-    <div class="item-value">
-      <%= number_to_currency(@stock.current_value, unit: 'R$', separator: ',', delimiter: '') %>
-    </div>
-  </div>
-
-  <div class="summary-item">
-    Current total value:<br />
+    <%= t('.current_total_value') %><br />
     <div class="item-value">
       <%= number_to_currency(@stock.current_total_value, unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 </div>
 
-<div>
-  <%= link_to 'Register dividend', new_stock_dividend_path(@stock), class: 'btn btn-success' %>
-  <%= link_to 'Add shares', new_stock_share_path(@stock), class: 'btn btn-success' %>
-  <%= link_to 'Register new Price', new_stock_price_path(stock_id: @stock.id), class: 'btn btn-success' %>
-  <%= link_to 'Get new Price', current_price_stock_path(@stock), class: 'btn btn-success' %>
+<div class="summary-item">
+  <%= t('.current_share_value') %><br />
+  <div class="item-value">
+    <%= number_to_currency(@stock.current_value, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
 </div>
 
-<h3> Shares</h3>
+<div>
+  <%= link_to t('.new_dividend'), new_stock_dividend_path(@stock), class: 'btn btn-success' %>
+  <%= link_to t('.new_share'), new_stock_share_path(@stock), class: 'btn btn-success' %>
+  <%= link_to t('.new_price'), new_stock_price_path(stock_id: @stock.id), class: 'btn btn-success' %>
+  <%= link_to t('.get_new_price'), current_price_stock_path(@stock), class: 'btn btn-success' %>
+</div>
+
+<h3> <%= t('.shares') %></h3>
 <% if !@stock.shares.blank? %>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th> Aquisition Date </th>
-        <th> Aquisition Value </th>
+        <th><%= t('.date') %></th>
+        <th><%= t('.total_invested') %></th>
+        <th><%= t('.quantity') %></th>
         <th></th>
       </tr>
     </thead>
@@ -61,20 +62,21 @@
       <tr>
         <td> <%= share.date.strftime('%B %d, %Y') %> </td>
         <td> <%= (share.invested_cents.to_f / 100) %> </td>
+        <td> <%= (share.quantity) %> </td>
       <% end %>
     </tbody>
   </table>
 <% else %>
-<h2> No shares for this Stock <h2>
+<h2><%= t('.no_shares') %><h2>
 <% end %>
 
-<h3> Prices</h3>
+<h3><%= t('.prices') %></h3>
 <% if !@stock.prices.blank? %>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th> Date </th>
-        <th> Value </th>
+        <th><%= t('.date') %></th>
+        <th><%= t('.value') %></th>
         <th></th>
       </tr>
     </thead>
@@ -87,16 +89,16 @@
     </tbody>
   </table>
 <% else %>
-<h2> No prices for this Stock <h2>
+<h2><%= t('.no_prices') %><h2>
 <% end %>
 
-<h3> Dividends</h3>
+<h3><%= t('.dividends') %></h3>
 <% if !@stock.dividends.blank? %>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th> Date </th>
-        <th> Value </th>
+        <th><%= t('.date') %></th>
+        <th><%= t('.value') %></th>
         <th></th>
       </tr>
     </thead>
@@ -109,10 +111,9 @@
     </tbody>
   </table>
 <% else %>
-<h2> No dividend for this Stock <h2>
+<h2><%= t('.no_dividends') %><h2>
 <% end %>
 
 <div class="buttons">
-  <%= link_to 'Create share', new_stock_share_path(stock_id: @stock.id), class: "btn btn-success ml-3" %>
-  <%= link_to 'Back', :back, :class => "btn btn-primary ml-3" %>
+  <%= link_to t('.back'), :back, :class => "btn btn-primary ml-3" %>
 </div>

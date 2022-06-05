@@ -1,8 +1,36 @@
 <div class="title">
-  Reister new price
+  <%= t('.title') %>
 </div>
 
 <div class="form">
-  <%= render 'form', price: @price %>
-  <%= link_to 'Back', :back, :class => "btn btn-primary" %>
+  <%= form_with(url: stock_prices_path, scope: :price, local:true) do |form| %>
+  <% if @price.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@price.errors.count, "error") %> prohibited this price from being saved:</h2>
+
+      <ul>
+        <% @price.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <form>
+    <div class="form-group">
+      <%= form.label t('.date'), class: "input-group-text" %>
+      <%= form.date_field :date, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.value'), class: "input-group-text" %>
+      <%= form.text_field :value, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit t('.save'), class: "btn btn-success" %>
+    </div>
+  </form>
+<% end %>
+  <%= link_to t('.cancel'), :back, :class => "btn btn-primary" %>
 </div>

@@ -1,16 +1,18 @@
 <div class="title">
-  Stocks
+  <%= t('.title') %>
 </div>
 
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
-      <th>Ticker</th>
-      <th>Account</th>
-      <th>Total invested</th>
-      <th>Current balance</th>
-      <th>Shares</th>
-      <th></th>
+      <th><%= t('.ticker') %></th>
+      <th><%= t('.account') %></th>
+      <th><%= t('.total_invested') %></th>
+      <th><%= t('.average_paid_price') %></th>
+      <th><%= t('.current_total_value') %></th>
+      <th><%= t('.current_share_value') %></th>
+      <th><%= t('.shares') %></th>
+      <th><%= t('.actions') %></th>
     </tr>
   </thead>
   <tbody>
@@ -19,14 +21,16 @@
         <td> <%= link_to stock.ticker, stock_path(stock) %> </td>
         <td> <%= link_to stock.account_name, account_path(stock.account_id) %> </td>
         <td> $ <%= stock.invested_value_cents / 100.0 %> </td>
+        <td> $ <%= ((stock.invested_value_cents / 100.0) / stock.shares_total).round(2) %> </td>
+        <td> $ <%= stock.current_total_value_cents / 100.0 %> </td>
         <td> $ <%= stock.current_value_cents / 100.0 %> </td>
         <td> <%= stock.shares_total %> </td>
-        <td> <%= link_to "Details", stock_path(stock), class:"btn btn-info" %>
-             <%= link_to "Edit", edit_stock_path(stock), class:"btn btn-warning" %>
-             <%= link_to "Delete", stock_path(stock), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %> </td>
+        <td> <%= link_to t('.details'), stock_path(stock), class:"btn btn-info" %>
+             <%= link_to t('.edit'), edit_stock_path(stock), class:"btn btn-warning" %>
+             <%= link_to t('.remove'), stock_path(stock), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %> </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Create new stock', new_stock_path, class:"btn btn-success ml-3" %>
+<%= link_to t('.new_stock'), new_stock_path, class:"btn btn-success ml-3" %>
