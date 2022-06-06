@@ -10,16 +10,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent1">
     <ul class='navbar-nav mr-auto'>
 
-      <a class="btn btn-outline-primary" href="/accounts">ACCOUNTS</a>
+      <a class="btn btn-outline-primary" href="/accounts"><%= t('.accounts')%></a>
 
-      <a class="btn btn-outline-primary" href="/categories">CATEGORIES</a>
+      <a class="btn btn-outline-primary" href="/categories"><%= t('.categories')%></a>
 
-      <a class="btn btn-outline-primary" href="/investments">INVESTMENTS</a>
+      <a class="btn btn-outline-primary" href="/investments"><%= t('.investments')%></a>
 
-      <a class="btn btn-outline-primary" href="/transferences">TRANSFERENCES</a>
+      <a class="btn btn-outline-primary" href="/transferences"><%= t('.transferences')%></a>
 
-      <%= link_to 'EDIT PROFILE', edit_user_registration_path, class:'btn btn-outline-primary' %>
-      <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class:'btn btn-outline-primary'  %>
+      <%= link_to t('.edit_profile'), edit_user_registration_path, class:'btn btn-outline-primary' %>
+      <%= link_to t('.logout'), destroy_user_session_path, method: :delete, class:'btn btn-outline-primary'  %>
     </ul>
   </div>
 </nav>

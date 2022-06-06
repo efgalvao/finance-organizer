@@ -30,7 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 pt:
-  hello: "Olá mundo"
+  layouts:
+    header:
+      accounts: CONTAS
+      categories: CATEGORIAS
+      investments: INVESTIMENTOS
+      transferences: TRANSFERÊNCIAS
+      edit_profile: EDITAR PERFIL
+      logout: SAIR
   account:
     accounts:
       index:
@@ -297,3 +304,43 @@ pt:
           value: Valor
           no_negotiations: Não há negociações cadastradas
           no_positions: Não há posições cadastradas
+  transferences:
+    index:
+      title: Transferências
+      date: Data
+      value: Valor
+      sender: Remetente
+      receiver: Destinatário
+      no_transferences: Não há transferências cadastradas
+      new_transference: Nova transferência
+    new:
+      title: Nova transferência
+      amount: Valor
+      date: Data
+      sender: Remetente
+      receiver: Destinatário
+      save: Salvar
+      cancel: Cancelar
+  users:
+    overview:
+      title: Sumário
+      monthly_balance: Saldo mensal
+    stock_chart:
+      monthly_stock_value: Valor mensal das ações
+    summary:
+      total_balance: Saldo total
+      total_cash: Em caixa
+      total_stocks: Em ações
+      account: Conta
+      balance: Saldo
+      value_in_stocks: Valor em ações
+      total: Total
+      monthly_balance: Saldo mensal
+      monthly_dividends: Dividendos mensal
+    incomes_expenses:
+      title: Receitas e despesas
+      month: Mês
+      incomes: Receitas
+      expenses: Despesas
+      invested: Investido
+      total: Total

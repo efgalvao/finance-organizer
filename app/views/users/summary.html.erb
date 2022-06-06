@@ -5,9 +5,9 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Total Balance</th>
-      <th>Cash</th>
-      <th>In stocks</th>
+      <th><%= t('.total_balance') %></th>
+      <th><%= t('.total_cash') %></th>
+      <th><%= t('.total_stocks') %></th>
     </tr>
   </thead>
   <tbody>
@@ -23,10 +23,10 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Account</th>
-      <th>Balance</th>
-      <th>In stocks</th>
-      <th>Total</th>
+      <th><%= t('.account') %></th>
+      <th><%= t('.balance') %></th>
+      <th><%= t('.value_in_stocks') %></th>
+      <th><%= t('.total') %></th>
     </tr>
   </thead>
   <tbody>
@@ -44,7 +44,7 @@
 <%= render 'incomes_expenses' %>
 
 <div class="chart-title">
-  Monthly balance(last 6 months):<br />
+  <%= t('.monthly_balance') %><br />
 </div>
 <div class="summary-chart">
  <%= line_chart [
@@ -54,7 +54,7 @@
       ], precision: 8 %></div>
 
 <div class="chart-title">
-  Monthly dividends received(last 6 months):<br />
+  <%= t('.monthly_dividends') %><br />
 </div>
 <div class="summary-chart">
   <%= line_chart @user.last_semester_total_dividends, precision: 8 %>
