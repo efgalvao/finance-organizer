@@ -31,13 +31,13 @@ module Investments
         grouped_prices
       end
 
-      def last_semester_individual_dividends
-        grouped_dividends = {}
-        last_semester_dividends.each do |dividend|
-          grouped_dividends[dividend.date.strftime('%B/%Y').to_s] = dividend.value.to_f
-        end
-        grouped_dividends
-      end
+      # def last_semester_individual_dividends
+      #   grouped_dividends = {}
+      #   last_semester_dividends.each do |dividend|
+      #     grouped_dividends[dividend.date.strftime('%B/%Y').to_s] = dividend.value.to_f
+      #   end
+      #   grouped_dividends
+      # end
 
       def semester_total_dividends
         grouped_dividends = {}

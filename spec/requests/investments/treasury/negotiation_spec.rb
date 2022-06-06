@@ -7,6 +7,7 @@ RSpec.describe 'Investments::Treasury::Negotiation', type: :request do
 
   describe 'GET /investments/treasuries/:id/negotiations' do
     context 'when logged in' do
+      let!(:negotiations) { create_list(:negotiation, 3, treasury: treasury) }
       it 'can successfully access treasuries index page' do
         sign_in(user)
 

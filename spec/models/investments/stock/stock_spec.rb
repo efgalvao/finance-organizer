@@ -53,20 +53,20 @@ RSpec.describe Investments::Stock::Stock, type: :model do
     end
   end
 
-  describe '#last_semester_individual_dividends' do
-    context 'without dividends' do
-      it 'returns empty hash' do
-        expect(stock.last_semester_individual_dividends).to eq({})
-      end
-    end
+  # describe '#last_semester_individual_dividends' do
+  #   context 'without dividends' do
+  #     it 'returns empty hash' do
+  #       expect(stock.last_semester_individual_dividends).to eq({})
+  #     end
+  #   end
 
-    context 'with prices' do
-      let!(:dividend) { create(:dividend, stock: stock, date: Date.new(2022, 0o1, 0o2), value: 123) }
+  #   context 'with prices' do
+  #     let!(:dividend) { create(:dividend, stock: stock, date: Date.new(2022, 0o1, 0o2), value: 123) }
 
-      it 'returns last semester prices', :agreggate_failures do
-        expect(stock.last_semester_individual_dividends).to eq({ 'January/2022' => 123.0 })
-        expect(stock.last_semester_individual_dividends).not_to be({})
-      end
-    end
-  end
+  #     it 'returns last semester prices', :agreggate_failures do
+  #       expect(stock.last_semester_individual_dividends).to eq({ 'January/2022' => 123.0 })
+  #       expect(stock.last_semester_individual_dividends).not_to be({})
+  #     end
+  #   end
+  # end
 end
