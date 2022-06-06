@@ -9,7 +9,8 @@ module Investments
 
       class Scope < Scope
         def resolve
-          @scope.joins(:treasury).where('treasury.account.user_id' => user.id)
+          @scope.includes(:treasury, treasury: :account).joins(:treasury,
+                                                               treasury: :account).where(account: { user_id: user.id })
         end
       end
 

@@ -1,5 +1,5 @@
 <div class="title">
-  New negotiation
+  <%= t('.title') %>
 </div>
 
 <div class="form">
@@ -18,30 +18,30 @@
 
   <form>
     <div class="form-group">
-      <%= form.label :date, class: "input-group-text" %>
+      <%= form.label t('.date'), class: "input-group-text" %>
       <%= form.date_field :date, class: "form-control", value: Time.now.strftime('%Y-%m-%d') %>
     </div>
 
     <div class="form-group">
-      <%= form.label :invested, class: "input-group-text" %>
+      <%= form.label t('.invested'), class: "input-group-text" %>
       <%= form.text_field :invested, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :kind, class: "input-group-text" %>
+      <%= form.label t('.kind'), class: "input-group-text" %>
       <%= form.text_field :kind, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :shares, class: "input-group-text" %>
+      <%= form.label t('.shares'), class: "input-group-text" %>
       <%= form.text_field :shares, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.submit class: "btn btn-success" %>
+      <%= form.submit t('.save'),class: "btn btn-success" %>
     </div>
   </form>
 <% end %>
 
-  <%= link_to 'Back', :back, :class => "btn btn-primary" %>
+  <%= link_to t('.cancel'), :back, :class => "btn btn-primary" %>
 </div>

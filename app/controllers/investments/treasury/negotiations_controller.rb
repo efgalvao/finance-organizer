@@ -2,7 +2,7 @@ module Investments
   module Treasury
     class NegotiationsController < ApplicationController
       def index
-        @negotiations = policy_scope(Investments::Treasury::Negotiation).includes(:treasury).all
+        @negotiations = policy_scope(Investments::Treasury::Negotiation).where(treasury_id: params[:treasury_id])
       end
 
       def new

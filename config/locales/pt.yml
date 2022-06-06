@@ -234,3 +234,66 @@ pt:
           no_prices: Não há preços cadastrados
           no_dividends: Não há dividendos cadastrados
           back: Voltar
+    treasury:
+      negotiations:
+        index:
+          title: Negociações
+          date: Data
+          amount: Valor
+          kind: Tipo
+          shares: Cotas
+        new:
+          title: Nova negociação
+          date: Data
+          invested: Valor
+          kind: Tipo
+          shares: Cotas
+          save: Salvar
+          cancel: Cancelar
+      positions:
+        new:
+          title: Novo preço
+          date: Data
+          amount: Valor
+          save: Salvar
+          cancel: Cancelar
+      treasuries:
+        index:
+          title: Tesouros
+          name: Nome
+          total_invested: Total investido
+          current_amount: Valor atual
+          shares: Cotas
+          account: Conta
+          actions: Ações
+          details: Detalhes
+          edit: Editar
+          remove: Remover
+          new_treasury: Novo tesouro
+        new:
+          title: Novo tesouro
+          name: Nome
+          account: Conta
+          choose_account: Escolha uma conta
+          save: Salvar
+          cancel: Cancelar
+        edit:
+          name: Nome
+          account: Conta
+          save: Salvar
+          cancel: Cancelar
+        show:
+          shares: Cotas
+          total_invested: Total investido
+          current_amount: Valor atual
+          back: Voltar
+          new_negotiation: Nova negociação
+          new_position: Nova posição
+          negotiations: Negociações
+          date: Data
+          amount: Valor
+          kind: Tipo
+          positions: Posições
+          value: Valor
+          no_negotiations: Não há negociações cadastradas
+          no_positions: Não há posições cadastradas
