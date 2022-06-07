@@ -5,7 +5,7 @@ module Investments
         @params = params
         @date = set_date
         @invested = params.fetch(:invested, 0)
-        @treasury = Investments::Treasury::Treasury.find(params[:treasury_id])
+        @treasury = Investments::Treasury::Treasury.find(params.fetch('treasury_id'))
       end
 
       def self.call(params)
