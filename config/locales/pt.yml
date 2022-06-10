@@ -234,6 +234,8 @@ pt:
           new_price: Novo preço
           get_new_price: Obter preço
           shares: Cotas
+          prices: Cotacões
+          dividends: Dividendos
           date: Data
           quantity: Quantidade
           value: Valor

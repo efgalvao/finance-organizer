@@ -46,73 +46,79 @@
   <%= link_to t('.get_new_price'), current_price_stock_path(@stock), class: 'btn btn-success' %>
 </div>
 
-<h3> <%= t('.shares') %></h3>
-<% if !@stock.shares.blank? %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th><%= t('.date') %></th>
-        <th><%= t('.total_invested') %></th>
-        <th><%= t('.quantity') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for share in @stock.shares.order('date desc').limit(5) %>
-      <tr>
-        <td> <%= share.date.strftime('%B %d, %Y') %> </td>
-        <td> <%= (share.invested_cents.to_f / 100) %> </td>
-        <td> <%= (share.quantity) %> </td>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-<h2><%= t('.no_shares') %><h2>
-<% end %>
+<div class="summary-item">
+  <% if !@stock.shares.blank? %>
+    <p class="summary-subtitle"><%= t('.shares') %></p>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('.date') %></th>
+          <th><%= t('.total_invested') %></th>
+          <th><%= t('.quantity') %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for share in @stock.shares.order('date desc').limit(5) %>
+        <tr>
+          <td> <%= share.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= (share.invested_cents.to_f / 100) %> </td>
+          <td> <%= (share.quantity) %> </td>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <h2><%= t('.no_shares') %><h2>
+  <% end %>
+</div>
 
-<h3><%= t('.prices') %></h3>
-<% if !@stock.prices.blank? %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th><%= t('.date') %></th>
-        <th><%= t('.value') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for price in @stock.prices.order('date desc').limit(5) %>
-      <tr>
-        <td> <%= price.date.strftime('%B %d, %Y') %> </td>
-        <td> <%= (price.value_cents.to_d / 100) %> </td>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-<h2><%= t('.no_prices') %><h2>
-<% end %>
+<div class="summary-item">
+  <% if !@stock.prices.blank? %>
+    <p class="summary-subtitle"><%= t('.prices') %></p>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('.date') %></th>
+          <th><%= t('.value') %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for price in @stock.prices.order('date desc').limit(5) %>
+        <tr>
+          <td> <%= price.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= (price.value_cents.to_d / 100) %> </td>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <h2><%= t('.no_prices') %><h2>
+  <% end %>
+</div>
 
-<h3><%= t('.dividends') %></h3>
-<% if !@stock.dividends.blank? %>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th><%= t('.date') %></th>
-        <th><%= t('.value') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for dividend in @stock.dividends.order('date desc').limit(5) %>
-      <tr>
-        <td> <%= dividend.date.strftime('%B %d, %Y') %> </td>
-        <td> <%= (dividend.value_cents.to_f / 100) %> </td>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-<h2><%= t('.no_dividends') %><h2>
-<% end %>
+<div class="summary-item">
+  <% if !@stock.dividends.blank? %>
+    <p class="summary-subtitle"><%= t('.dividends') %></p>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('.date') %></th>
+          <th><%= t('.value') %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for dividend in @stock.dividends.order('date desc').limit(5) %>
+        <tr>
+          <td> <%= dividend.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= (dividend.value_cents.to_f / 100) %> </td>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <h2><%= t('.no_dividends') %><h2>
+  <% end %>
+</div>
 
 <div class="buttons">
   <%= link_to t('.back'), :back, :class => "btn btn-primary ml-3" %>
