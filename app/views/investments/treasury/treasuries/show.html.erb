@@ -70,7 +70,7 @@
         <% for position in @treasury.positions %>
         <tr>
           <td> <%= position.date.strftime('%B %d, %Y') %> </td>
-          <td> <%= position.amount %> </td>
+          <td> <%= number_to_currency(position.amount, unit: 'R$', separator: ',', delimiter: '') %> </td>
         <% end %>
       </tbody>
     </table>

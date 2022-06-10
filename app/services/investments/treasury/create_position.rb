@@ -30,7 +30,11 @@ module Investments
 
       def position_params
         { treasury_id: treasury.id,
-          date: date, amount: amount.to_f.zero? ? invested : amount }
+          date: date, amount: amount.to_f.zero? ? set_amount : amount }
+      end
+
+      def set_amount
+        (treasury.current_value_cents + invested.to_f * 100) / 100
       end
 
       def set_date
