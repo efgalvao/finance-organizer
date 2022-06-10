@@ -46,7 +46,7 @@
 
     <div class="form-group">
       <%= form.label t('.value'), class: "input-group-text" %>
-      <%= form.text_field :value, :class => "form-control" %>
+      <%= form.number_field :value, as: :numeric, :class => "form-control" %>
     </div>
 
     <br >
