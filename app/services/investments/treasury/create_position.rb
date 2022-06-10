@@ -30,7 +30,7 @@ module Investments
 
       def position_params
         { treasury_id: treasury.id,
-          date: date, amount: amount.to_i.zero? ? invested : amount }
+          date: date, amount: amount.to_f.zero? ? invested : amount }
       end
 
       def set_date

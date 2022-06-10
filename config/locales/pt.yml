@@ -259,7 +259,7 @@ pt:
           cancel: Cancelar
       positions:
         new:
-          title: Novo preço
+          title: Nova posição
           date: Data
           amount: Valor
           save: Salvar

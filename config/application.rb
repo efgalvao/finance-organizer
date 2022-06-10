@@ -20,7 +20,7 @@ module FinanceOrganizer
     config.i18n.default_locale = :pt
 
     # config.eager_load_paths << Rails.root.join("extras")
-    Money.locale_backend = :i18n
+    Money.locale_backend = :currency
     Money.default_currency = Money::Currency.new('BRL')
     Money.rounding_mode = BigDecimal::ROUND_HALF_UP
   end

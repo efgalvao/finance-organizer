@@ -6,7 +6,8 @@ module Investments
         @date = set_date
         @invested = params.fetch(:invested, 0)
         @shares = params.fetch(:shares, 0)
-        @treasury = Investments::Treasury::Treasury.find(params.fetch('treasury_id'))
+        @kind = params.fetch(:kind, 'buy')
+        @treasury = Investments::Treasury::Treasury.find(params.fetch(:treasury_id))
       end
 
       def self.call(params)
@@ -19,16 +20,25 @@ module Investments
 
       private
 
-      def create_negotiation(params)
+      def create_negotiation(_params)
         ActiveRecord::Base.transaction do
-          a = Investments::Treasury::Negotiation.create(params)
-
+          Investments::Treasury::Negotiation.create(negotiation_params)
           Investments::Treasury::CreatePosition.call(create_position_params)
           Transactions::CreateExpense.call(expense_params)
         end
       end
 
-      attr_reader :params, :date, :invested, :treasury, :shares
+      attr_reader :params, :date, :invested, :treasury, :shares, :kind
+
+      def negotiation_params
+        {
+          treasury_id: treasury.id,
+          kind: kind,
+          date: date,
+          invested: invested,
+          shares: shares
+        }
+      end
 
       def expense_params
         {
