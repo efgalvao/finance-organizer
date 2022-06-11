@@ -10,10 +10,13 @@ RSpec.describe Account::Account, type: :model do
     it { is_expected.to have_many(:stocks) }
     it { is_expected.to have_many(:sender_transference) }
     it { is_expected.to have_many(:receiver_transference) }
+    it { is_expected.to have_many(:reports) }
   end
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:kind) }
+    it { is_expected.to define_enum_for(:kind) }
   end
 
   describe 'monetize' do

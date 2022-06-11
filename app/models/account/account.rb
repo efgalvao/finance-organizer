@@ -11,9 +11,12 @@ module Account
 
     monetize :balance_cents
 
+    enum kind: { savings: 0, broker: 1, card: 2 }
+
     scope :stocks_accounts, -> { where(savings: false) }
 
     validates :name, presence: true, uniqueness: true
+    validates :kind, presence: true
 
     def create_balance
       value = balances.newest_balance.first&.balance || balance
