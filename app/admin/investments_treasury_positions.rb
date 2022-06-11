@@ -4,7 +4,7 @@ ActiveAdmin.register Investments::Treasury::Position do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :treasury_id, :date, :amount_cents
+  permit_params :treasury_id, :date, :amount_cents
   #
   # or
   #

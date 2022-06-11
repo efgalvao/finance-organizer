@@ -4,7 +4,7 @@ ActiveAdmin.register Investments::Treasury::Treasury do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :account_id, :invested_value_cents, :current_value_cents, :shares
+  permit_params :name, :account_id, :invested_value_cents, :current_value_cents, :shares
   #
   # or
   #

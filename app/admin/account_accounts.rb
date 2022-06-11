@@ -4,12 +4,12 @@ ActiveAdmin.register Account::Account do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :savings, :balance_cents
+  permit_params :name, :savings, :user_id, :balance_cents, :kind
   #
   # or
   #
   # permit_params do
-  #   permitted = [:name, :savings, :user_id, :balance_cents]
+  #   permitted = [:name, :savings, :user_id, :balance_cents, :kind]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end

@@ -104,7 +104,7 @@ RSpec.describe 'Account', type: :request do
     subject(:update_account) { put account_path(account), params: { account: params } }
 
     context 'when logged' do
-      let(:params) { { name: 'Account 1', balance_cents: 111 } }
+      let(:params) { { name: 'Account 1', kind: 'broker' } }
 
       before { sign_in(user) }
 

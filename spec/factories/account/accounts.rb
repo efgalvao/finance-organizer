@@ -2,17 +2,17 @@ FactoryBot.define do
   factory :account, class: 'Account::Account' do
     name { Faker::Company.name }
     savings { true }
-    kind { 0 }
+    kind { 'savings' }
     balance { Faker::Number.number(digits: 7) }
     user
   end
 
   trait :broker_account do
-    kind { 1 }
+    kind { 'broker' }
   end
 
   trait :card_account do
-    kind { 2 }
+    kind { 'card' }
   end
 
   trait :stocks_account do

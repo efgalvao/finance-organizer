@@ -4,7 +4,7 @@ ActiveAdmin.register Investments::Treasury::Negotiation do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :treasury_id, :kind, :date, :invested_cents, :shares
+  permit_params :treasury_id, :kind, :date, :invested_cents, :shares
   #
   # or
   #
