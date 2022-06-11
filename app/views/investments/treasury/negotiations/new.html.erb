@@ -24,7 +24,7 @@
 
     <div class="form-group">
       <%= form.label t('.invested'), class: "input-group-text" %>
-      <%= form.number_field :invested, as: :numeric,  class: "form-control" %>
+      <%= form.number_field :invested, as: :numeric, step: :any,  class: "form-control" %>
     </div>
 
     <div class="form-group">
@@ -34,7 +34,7 @@
 
     <div class="form-group">
       <%= form.label t('.shares'), class: "input-group-text" %>
-      <%= form.number_field :shares, as: :numeric, class: "form-control" %>
+      <%= form.number_field :shares, as: :numeric, step: :any, class: "form-control" %>
     </div>
 
     <div class="form-group">
