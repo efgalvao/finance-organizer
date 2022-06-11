@@ -23,8 +23,9 @@
       </div>
 
       <div class="form-group">
-        <%= form.label t('.savings?'), class: "input-group-text" %>
-        <%= form.check_box :savings, class: "form-control" %>
+        <p class="input-group-text" ><%= t('.kind_of_account') %></p>
+      <%= form.select :kind, [[t('.kind_savings'), "savings"], [t('.kind_broker'), "broker"], [t('.kind_card'), "card"]], {}, { class: "form-control" } %>
+
       </div>
 
       <div class="form-group">

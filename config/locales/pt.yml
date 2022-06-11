@@ -55,12 +55,18 @@ pt:
         balance: Saldo
         save: Salvar
         cancel: Cancelar
-        savings?: "Conta poupança?"
+        kind_of_account: Tipo de Conta
+        kind_savings: Conta Corrente
+        kind_broker: Corretora
+        kind_card: Cartão
       edit:
         name: Nome
         save: Salvar
         cancel: Cancelar
-        savings?: "Conta poupança?"
+        kind_of_account: Tipo de Conta
+        kind_savings: Conta Corrente
+        kind_broker: Corretora
+        kind_card: Cartão
       savings:
         summary_for: Resumo para
         current_balance: Saldo atual

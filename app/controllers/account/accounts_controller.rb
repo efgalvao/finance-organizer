@@ -31,7 +31,7 @@ module Account
     def update
       authorize(@account)
 
-      if @account.update(name: params[:account][:name])
+      if @account.update(name: params[:account][:name], kind: params[:account][:kind])
         redirect_to account_path(@account), notice: 'Account successfully updated.'
       else
         render :edit
@@ -53,7 +53,7 @@ module Account
     end
 
     def account_params
-      params.require(:account).permit(:name, :balance, :savings).merge(user_id: current_user.id)
+      params.require(:account).permit(:name, :balance, :kind).merge(user_id: current_user.id)
     end
   end
 end

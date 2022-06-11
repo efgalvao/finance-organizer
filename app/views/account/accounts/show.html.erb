@@ -2,9 +2,9 @@
   <%= @account.name %>
 </div>
 
-<% if @account.savings? %>
-  <%= render 'savings' %>
-<% else %>
+<% if @account.broker? %>
   <%= render 'stocks' %>
   <%= render 'show_table' %>
+<% else %>
+  <%= render 'savings' %>
 <% end %>

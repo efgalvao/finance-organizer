@@ -5,7 +5,7 @@ module Account
     def initialize(params)
       @balance = params.fetch(:balance, 0)
       @name = params.fetch(:name, nil)
-      @savings = params.fetch(:savings, true)
+      @kind = params.fetch(:kind, 0)
       @user_id = params.fetch(:user_id, nil)
     end
 
@@ -19,11 +19,11 @@ module Account
 
     private
 
-    attr_reader :balance, :name, :savings, :user_id
+    attr_reader :balance, :name, :kind, :user_id
 
     def create_account
       ActiveRecord::Base.transaction do
-        account = Account.create!(name: name, balance: balance, savings: savings, user_id: user_id)
+        account = Account.create!(name: name, balance: balance, kind: kind, user_id: user_id)
         CreateBalance.call({ balance: balance, account_id: account.id })
         account
       end
