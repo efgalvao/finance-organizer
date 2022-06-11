@@ -2,9 +2,10 @@ module Account
   class AccountReport < ApplicationRecord
     belongs_to :account
 
-    monetize :savings_cents
-    monetize :stocks_cents
-    monetize :total_cents
+    monetize :incomes_cents
+    monetize :expenses_cents
+    monetize :invested_cents
+    monetize :final_cents
 
     validates :account_id, presence: true
 

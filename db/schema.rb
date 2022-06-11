@@ -17,9 +17,10 @@ ActiveRecord::Schema.define(version: 2022_06_11_000911) do
 
   create_table "account_reports", force: :cascade do |t|
     t.datetime "date"
-    t.integer "savings_cents", default: 0, null: false
-    t.integer "stocks_cents", default: 0, null: false
-    t.integer "total_cents", default: 0, null: false
+    t.integer "incomes_cents", default: 0, null: false
+    t.integer "expenses_cents", default: 0, null: false
+    t.integer "invested_cents", default: 0, null: false
+    t.integer "final_cents", default: 0, null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
