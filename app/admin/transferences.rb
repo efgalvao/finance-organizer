@@ -4,13 +4,13 @@ ActiveAdmin.register Transference do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :date
+  # permit_params :date
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:sender_id, :receiver_id, :user_id, :date, :amount_cents]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params do
+    permitted = %i[sender_id receiver_id user_id date amount_cents]
+    #   permitted << :other if params[:action] == 'create' && current_user.admin?
+    permitted
+  end
 end

@@ -6,30 +6,28 @@ RSpec.describe 'Investments::Treasury::Position', type: :request do
   let(:treasury) { create(:treasury, account: account) }
 
   describe 'POST /investments/treasuries/:id/positions' do
-    let(:new_position) do
-      post investments_treasury_positions_path(treasury), params: { investments_position: valid_params }
+    subject(:post_position) do
+      post treasury_positions_path(treasury), params: { position: params }
     end
-    let(:valid_params) { attributes_for(:position).merge(treasury_id: treasury.id) }
 
     before { sign_in(user) }
 
     context 'with valid data' do
+      let(:params) { attributes_for(:position).merge(treasury_id: treasury.id) }
+
       it 'creates a new position', :aggregate_failures do
-        expect { new_position }.to change(Investments::Treasury::Position, :count).by(1)
-        expect(new_position).to be(302)
+        expect { post_position }.to change(Investments::Treasury::Position, :count).by(1)
+        expect(post_position).to be(302)
       end
     end
 
     context 'with invalid data' do
-      let(:invalid_treasury) do
-        post investments_treasury_positions_path(treasury), params: { investments_position: invalid_params }
-      end
-      let(:invalid_params) { { amount: 9550, shares: 23, kind: :buy, treasury_id: treasury.id } }
+      let(:params) { { amount: 9550, shares: 23, kind: :buy, treasury_id: treasury.id } }
 
       it 'does not create a new position' do
-        invalid_treasury
+        post_position
 
-        expect { invalid_treasury }.not_to change(Investments::Treasury::Position, :count)
+        expect { post_position }.not_to change(Investments::Treasury::Position, :count)
       end
     end
   end

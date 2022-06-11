@@ -1,0 +1,10 @@
+<div class="title">
+  <%= @account.name %>
+</div>
+
+<% if @account.broker? %>
+  <%= render 'stocks' %>
+  <%= render 'show_table' %>
+<% else %>
+  <%= render 'savings' %>
+<% end %>

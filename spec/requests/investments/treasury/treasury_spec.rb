@@ -11,7 +11,7 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
       it 'can successfully access treasuries index page' do
         sign_in(user)
 
-        get investments_treasuries_path
+        get treasuries_path
 
         expect(response).to have_http_status(:success)
       end
@@ -19,7 +19,7 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access treasuries index page' do
-        get investments_treasuries_path
+        get treasuries_path
 
         expect(response).to redirect_to new_user_session_path
       end
@@ -34,7 +34,7 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
         it 'can successfully access treasury show page' do
           sign_in(user)
 
-          get investments_treasury_path(treasury)
+          get treasury_path(treasury)
 
           expect(response).to have_http_status(:success)
         end
@@ -44,7 +44,7 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
         xit 'cannot successfully access treasury show page' do
           sign_in(user)
 
-          get investments_treasury_path(treasury)
+          get treasury_path(treasury)
 
           expect(response).to have_http_status(:not_found)
         end
@@ -53,7 +53,7 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
 
     context 'with unauthenticated request' do
       it 'cannot access treasury show page' do
-        get investments_treasury_path(treasury)
+        get treasury_path(treasury)
 
         expect(response).to redirect_to new_user_session_path
       end
@@ -61,7 +61,7 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
   end
 
   describe 'POST /invetments/treasuries' do
-    let(:new_treasury) { post investments_treasuries_path, params: { investments_treasury: params } }
+    let(:new_treasury) { post treasuries_path, params: { treasury: params } }
     let(:params) { { account_id: account.id, name: 'New Treasury' } }
 
     before { sign_in(user) }
@@ -80,8 +80,8 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
     end
 
     context 'with invalid data' do
-      let(:invalid_treasury) { post investments_treasuries_path, params: { investments_treasury: invalid_params } }
-      let(:invalid_params) { { account_id: account.id } }
+      let(:invalid_treasury) { post treasuries_path, params: { treasury: invalid_params } }
+      let(:invalid_params) { { account_id: account.id, name: nil } }
 
       it 'does not create a new treasury' do
         invalid_treasury
@@ -97,8 +97,8 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
     context 'when logged' do
       let(:expected_name) { 'New Name' }
       let(:update_treasury) do
-        put investments_treasury_path(treasury), params: {
-          investments_treasury: {
+        put treasury_path(treasury), params: {
+          treasury: {
             name: expected_name,
             account_id: account.id
           }, id: treasury.id
@@ -117,8 +117,8 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
 
     context 'with invalid data' do
       let(:invalid_update) do
-        put investments_treasury_path(treasury), params: {
-          investments_treasury: {
+        put treasury_path(treasury), params: {
+          treasury: {
             name: nil,
             account_id: account.id
           }, id: treasury.id
@@ -137,8 +137,8 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
 
     context 'with unauthenticated request' do
       let(:update_treasury) do
-        put investments_treasury_path(treasury), params: {
-          investments_treasury: {
+        put treasury_path(treasury), params: {
+          treasury: {
             name: 'New Name',
             account_id: account.id
           }, id: treasury.id
@@ -158,7 +158,7 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
   describe 'DELETE /investments/treasuries/:id   ' do
     let!(:treasury) { create(:treasury, account_id: account.id) }
     let(:delete_treasury) do
-      delete investments_treasury_path(id: treasury.id)
+      delete treasury_path(id: treasury.id)
     end
 
     before { sign_in(user) }

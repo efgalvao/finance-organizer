@@ -4,21 +4,21 @@
 
 <div class="stock-summary">
   <div class="summary-item">
-    Current amount of shares:<br />
+    <%= t('.shares')%><br />
     <div class="item-value">
       <%= @treasury.shares %>
     </div>
   </div>
 
   <div class="summary-item green">
-    Total amount invested:<br />
+    <%= t('.total_invested')%><br />
     <div class="item-value">
       <%= number_to_currency(@treasury.invested_value, unit: 'R$', separator: ',', delimiter: '') %>
     </div>
   </div>
 
   <div class="summary-item">
-    Current value:<br />
+    <%= t('.current_amount')%><br />
     <div class="item-value">
       <%= number_to_currency(@treasury.current_value, unit: 'R$', separator: ',', delimiter: '') %>
     </div>
@@ -26,21 +26,21 @@
 </div>
 
 <div>
-  <%= link_to 'Back', investments_treasuries_path, :class => "btn btn-primary ml-3" %>
-  <%= link_to 'Create Negotiation', new_investments_treasury_negotiation_path(@treasury), class: 'btn btn-success' %>
-  <%= link_to 'Register new Position', new_investments_treasury_position_path(@treasury), class: 'btn btn-success' %>
+  <%= link_to t('.back'), :back , :class => "btn btn-primary ml-3" %>
+  <%= link_to t('.new_negotiation'), new_treasury_negotiation_path(@treasury), class: 'btn btn-success' %>
+  <%= link_to t('.new_position'), new_treasury_position_path(@treasury), class: 'btn btn-success' %>
 </div>
 
 <div class="summary-item">
   <% if @treasury.negotiations %>
-    <p class="summary-subtitle">Negotiations:</p>
+    <p class="summary-subtitle"><%= t('.negotiations')%></p>
     <table class="table table-hover">
       <thead>
         <tr>
-          <th> Negotiation Date </th>
-          <th> Negotiation Value </th>
-          <th> Kind </th>
-          <th> Shares </th>
+          <th><%= t('.date')%></th>
+          <th><%= t('.amount')%></th>
+          <th><%= t('.kind')%></th>
+          <th><%= t('.shares')%></th>
         </tr>
       </thead>
       <tbody>
@@ -54,6 +54,27 @@
       </tbody>
     </table>
   <% else %>
-  <h2> No negotiations for this treasury <h2>
+  <h2><%= t('.no_negotiations')%><h2>
+  <% end %>
+
+    <% if @treasury.positions %>
+    <p class="summary-subtitle"><%= t('.positions')%></p>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('.date')%></th>
+          <th><%= t('.value')%></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for position in @treasury.positions %>
+        <tr>
+          <td> <%= position.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= number_to_currency(position.amount, unit: 'R$', separator: ',', delimiter: '') %> </td>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <h2><%= t('.no_positions')%><h2>
   <% end %>
 <div>

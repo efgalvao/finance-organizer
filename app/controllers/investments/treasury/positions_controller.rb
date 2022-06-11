@@ -6,10 +6,10 @@ module Investments
       end
 
       def create
-        @position = Investments::Treasury::CreatePosition.new(position_params).perform
+        @position = Investments::Treasury::CreatePosition.call(position_params)
 
         if @position
-          redirect_to investments_treasury_path(id: position_params[:treasury_id]),
+          redirect_to treasury_path(id: position_params[:treasury_id]),
                       notice: 'Position successfully created.'
         else
           render :new
@@ -19,8 +19,8 @@ module Investments
       private
 
       def position_params
-        params.require(:investments_position).permit(:date, :amount,
-                                                     :treasury_id).merge(treasury_id: params[:treasury_id])
+        params.require(:position).permit(:date, :amount,
+                                         :treasury_id).merge(treasury_id: params[:treasury_id])
       end
     end
   end

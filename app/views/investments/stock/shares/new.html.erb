@@ -1,0 +1,42 @@
+<div class="title">
+  <%= t('.title') %>
+</div>
+
+<div class="form">
+  <%= form_with(url: stock_shares_path, scope: :share, local:true) do |form| %>
+    <% if @share.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@share.errors.count, "error") %> prohibited this share from being saved:</h2>
+
+        <ul>
+          <% @share.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <form>
+      <div class="form-group">
+        <%= form.label t('.date'), class: "input-group-text" %>
+        <%= form.date_field :date, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label t('.total_invested'), class: "input-group-text"%>
+        <%= form.number_field :invested, as: :numeric, class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <%= form.label t('.share_amount'), class: "input-group-text" %>
+        <%= form.number_field :quantity, as: :numeric, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit t('.save'), class: "btn btn-success" %>
+      </div>
+    </form>
+  <% end %>
+
+  <%= link_to t('.cancel'), :back, :class => "btn btn-primary" %>
+</div>

@@ -1,11 +1,49 @@
 <div class="title">
-  New Transference
+  <%= t('.title') %>
 </div>
 
 <div class="form">
 
-  <%= render 'form', transference: @transference %>
+  <%= form_for @transference do |form| %>
+    <% if @transference.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@transference.errors.count, "error") %> prohibited this transference from being saved:</h2>
 
-  <%= link_to 'Back', transferences_path, :class => "btn btn-info" %>
+        <ul>
+          <% @transference.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>il
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label t('.amount'), class: "input-group-text" %>
+      <%= form.number_field :amount, as: :numeric, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.date'), class: "input-group-text" %>
+      <%= form.date_field :date, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.sender'), class: "input-group-text" %>
+      <%= form.collection_select :sender_id, policy_scope(Account::Account).all.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.receiver'), class: "input-group-text" %>
+      <%= form.collection_select :receiver_id, policy_scope(Account::Account).all.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
+    </div>
+
+    <br >
+    <div class="actions">
+      <%= form.submit t('.save'), :class => "btn btn-success" %>
+    </div>
+    <br />
+  <% end %>
+
+  <%= link_to t('.cancel'), :back, :class => "btn btn-info" %>
 
 </div>

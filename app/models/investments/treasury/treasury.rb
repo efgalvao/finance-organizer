@@ -3,7 +3,7 @@ module Investments
     class Treasury < ApplicationRecord
       has_many :positions, dependent: :destroy
       has_many :negotiations, dependent: :destroy
-      belongs_to :account, touch: true
+      belongs_to :account, class_name: 'Account::Account', touch: true
 
       validates :name, :account, presence: true
 

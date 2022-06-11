@@ -1,35 +1,32 @@
 <div class="title">
-  Negotiations
+  <%= t('.title') %>
 </div>
 
-<% @negotiations.each do |negotiation| %>
 
   <div class="summary-subtitle">
-    <%= link_to "#{negotiation.treasury.name} (#{negotiation.treasury.account_name})",
-      investments_treasury_path(id: negotiation.treasury_id) %>
+    <%= link_to "#{@negotiations.first.treasury.name} (#{@negotiations.first.treasury.account_name})",
+      treasury_path(id: @negotiations.first.treasury_id) %>
   </div>
 
-  <table class="table table-hover">
-    <thead>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= t('.date') %></th>
+      <th><%= t('.amount') %></th>
+      <th><%= t('.kind') %></th>
+      <th><%= t('.shares') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @negotiations.each do |negotiation| %>
       <tr>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Kind</th>
-        <th>Shares</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-          <td><%= negotiation.date&.strftime('%B %d, %Y') %></td>
-          <td><%= negotiation.amount %></td>
-          <td><%= negotiation.kind %></td>
-          <td><%= negotiation.shares %></td>
-
-          </tr>
-    </tbody>
-  </table>
-
+        <td><%= negotiation.date&.strftime('%B %d, %Y') %></td>
+        <td><%= negotiation.invested %></td>
+        <td><%= negotiation.kind %></td>
+        <td><%= negotiation.shares %></td>
+        </tr>
+    <% end%>
+  </tbody>
+</table>
 <br>
-<% end%>

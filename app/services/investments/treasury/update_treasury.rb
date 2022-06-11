@@ -5,7 +5,11 @@ module Investments
         @params = params
       end
 
-      def perform
+      def self.call(params)
+        new(params).call
+      end
+
+      def call
         update_treasury(params)
       end
 

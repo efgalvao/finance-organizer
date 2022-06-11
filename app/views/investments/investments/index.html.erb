@@ -1,3 +1,8 @@
-Hello
+<div class="title">
+  <%= t('.investments') %>
+</div>
+
 <br>
-<%= link_to "Treasuries", investments_treasuries_path%>
+<%= link_to t('.treasuries'), treasuries_path, :class => "btn btn-success ml-3"%>
+
+<%= link_to t('.stocks'), stocks_path, :class => "btn btn-success ml-3"%>

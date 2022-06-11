@@ -1,0 +1,28 @@
+<div class="summary">
+  <div class="summary-subtitle">
+    <%= t('.summary_for') %> <%= @account.name %>
+  </div>
+
+  <div class="summary-item">
+    <%= t('.current_balance') %><br />
+    <div class="item-value">
+      <%= number_to_currency(@account.balance, unit: 'R$', separator: ',', delimiter: '') %>
+    </div>
+  </div>
+
+  <div class="summary-item">
+    <%= link_to t('.transactions'), account_transactions_path(@account), class:'btn btn-success' %>
+    <%= link_to t('.new_transaction'), new_account_transaction_path(@account), :class => "btn btn-success ml-3" %>
+    <%= link_to t('.new_transference'), new_transference_path, :class => "btn btn-success ml-3" %>
+  </div>
+
+  <%= render 'show_table' %>
+
+  <div class="chart-title">
+    <%= t('.monthly_balance') %><br />
+  </div>
+
+  <div class="summary-chart">
+    <%= line_chart @account.last_semester_balances, precision: 8 %>
+  </div>
+</div>
