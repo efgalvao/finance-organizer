@@ -1,0 +1,67 @@
+<div class="title">
+  <%= t('.title') %>
+</div>
+
+<div class="form">
+
+  <%= form_with(url: transactions_path, scope: :transaction) do |form| %>
+
+    <% if @transaction.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+        <ul>
+          <% @transaction.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label t('.description'), class: "input-group-text" %>
+      <%= form.text_field :title, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.account'), class: "input-group-text" %>
+      <%= form.collection_select :account_id, policy_scope(Account::Account).where.not(kind: 'card').order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.date') , class: "input-group-text" %>
+      <%= form.date_field :date, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.category'), class: "input-group-text" %>
+      <%= form.collection_select :category_id, policy_scope(Category).all.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
+    </div>
+
+    <br />
+
+    <div class="form-group" >
+      <p class="input-group-text" ><%= t('.kind_of_transaction') %></p>
+      <%= form.label :kind_income, t('.kind_income'), class: "form-check-label" %>
+      <%= form.radio_button :kind, "income", class: "form-check-input" %>
+      <br />
+      <%= form.label :kind_expense, t('.kind_expense'), class: "form-check-label" %>
+      <%= form.radio_button :kind, "expense", class: "form-check-input" %>
+    </div>
+    <br />
+
+    <div class="form-group">
+      <%= form.label t('.value'), class: "input-group-text" %>
+      <%= form.number_field :value, as: :numeric, step: :any, :class => "form-control" %>
+    </div>
+
+    <br >
+    <div class="actions">
+      <%= form.submit t('.save'), :class => "btn btn-success" %>
+    </div>
+    <br />
+  <% end %>
+
+  <%= link_to t('.cancel'), :back, :class => "btn btn-info" %>
+
+</div>

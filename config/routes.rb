@@ -32,5 +32,9 @@ Rails.application.routes.draw do
   resources :transferences, only: %i[index new create]
 
   resources :categories, except: %i[show]
+
+  get '/transactions/debit', to: 'transactions#debit'
+  get '/transactions/credit', to: 'transactions#credit'
+  post '/transactions', to: 'transactions#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
