@@ -2,31 +2,20 @@
   <%= t('.title') %>
 </div>
 
-  <div class="summary-subtitle user">
-    <%= link_to "#{current_user.name} summary", user_summary_path %>
-  </div>
+<div class="summary-subtitle user">
+  <%= link_to t('.summary'), user_summary_path %>
+</div>
 
 <% @accounts.each do |account| %>
   <div class="summary-subtitle">
     <%= link_to account.name, account_path(account) %>
-            <a href="" data-toggle="collapse" data-target="#collapse-<%= account.id %>" aria-expanded="false"
-                aria-controls="collapse"> &darr;</a>
-  </div>
-
-<div class="collapse" id="collapse-<%= account.id %>">
-  <div class="account">
-    <div class="chart-title">
-      <%= t('.monthly_balance') %>
-    </div>
-
-    <div class="summary-chart">
-      <%= line_chart account.last_semester_balances, precision: 8 %>
-    </div>
-
-    <% if account.savings == false %>
-      <%= render 'stock_chart', account: account %>
-    <% end %>
-
-  </div>
 </div>
 <% end%>
+
+  <div class="summary-subtitle">
+    <%= link_to t('.debit'), transactions_debit_path %>
+  </div>
+
+  <div class="summary-subtitle">
+    <%= link_to t('.credit'), transactions_credit_path %>
+  </div>

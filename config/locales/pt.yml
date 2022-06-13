@@ -152,6 +152,30 @@ pt:
         category: Categoria
         save: Salvar
         cancel: Cancelar
+      debit:
+        new_transaction: Nova transação
+        title: Título
+        date: Data
+        account: Conta
+        category: Categoria
+        kind_of_transaction: Tipo de transação
+        kind_income: Entrada
+        kind_expense: Saída
+        value: Valor
+        save: Salvar
+        cancel: Cancelar
+      credit:
+        new_transaction: Nova transação
+        title: Título
+        date: Data
+        card: Cartão
+        category: Categoria
+        kind_of_transaction: Tipo de transação
+        kind_income: Entrada
+        kind_expense: Saída
+        value: Valor
+        save: Salvar
+        cancel: Cancelar
   categories:
     index:
       categories: Categorias
@@ -332,8 +356,10 @@ pt:
       cancel: Cancelar
   users:
     overview:
-      title: Sumário
-      monthly_balance: Saldo mensal
+      title: Atalhos
+      summary: Visão geral
+      debit: Cadastrar débito
+      credit: Cadastrar crédito
     stock_chart:
       monthly_stock_value: Valor mensal das ações
     summary:
@@ -353,6 +379,31 @@ pt:
       expenses: Despesas
       invested: Investido
       total: Total
+  transactions:
+    debit:
+      title: Nova Transação no débito
+      description: Descrição
+      date: Data
+      account: Conta
+      category: Categoria
+      kind_of_transaction: Tipo de transação
+      kind_income: Entrada
+      kind_expense: Saída
+      value: Valor
+      save: Salvar
+      cancel: Cancelar
+    credit:
+      title: Nova Transação no crédito
+      description: Descrição
+      card: Cartão
+      date: Data
+      category: Categoria
+      kind_of_transaction: Tipo de transação
+      kind_income: Entrada
+      kind_expense: Saída
+      value: Valor
+      save: Salvar
+      cancel: Cancelar
   active_admin:
     dashboard: "Painel Administrativo"
     dashboard_welcome:
