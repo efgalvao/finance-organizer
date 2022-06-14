@@ -26,7 +26,7 @@ module Transactions
       ActiveRecord::Base.transaction do
         Account::Transaction.create(account: account, category_id: category_id, value: value, kind: kind, date: date,
                                     title: title)
-        Account::UpdateAccountBalance.call(account_id: account.id, amount: value)
+        Account::UpdateAccountBalance.call(account_id: account.id, amount: value.to_f)
       end
     end
 
