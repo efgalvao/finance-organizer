@@ -3,7 +3,7 @@
 module Account
   class UpdateBalance < ApplicationService
     def initialize(params)
-      @balance = Account.find(params[:account_id]).balances.current.first
+      @account = Account.find(params[:account_id])
       @amount = params.fetch(:amount, 0)
     end
 
@@ -17,7 +17,7 @@ module Account
 
     private
 
-    attr_reader :balance, :amount
+    attr_reader :account, :amount
 
     def update_balance
       balance = account.balances.find_by('date BETWEEN ? AND ?', DateTime.current.beginning_of_month,
