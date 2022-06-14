@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'with balance' do
-      let!(:stock_account) { create(:account, :stocks_account, user: user) }
+      let!(:stock_account) { create(:account, :broker_account, user: user) }
       let!(:stock) { create(:stock, account: stock_account, current_total_value: 15, shares_total: 1) }
       let!(:stock2) { create(:stock, account: stock_account, current_total_value: 20, shares_total: 1) }
 

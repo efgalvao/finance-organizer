@@ -15,7 +15,7 @@ users.each do |user|
 end
 
 accounts = Account.all
-stocks_accounts = Account.where(savings: false)
+broker_accounts = Account.where(kind: 'broker')
 
 accounts.each do |account|
   6.times do
@@ -30,7 +30,7 @@ accounts.each do |account|
   end
 end
 
-stocks_accounts.each do |account|
+broker_accounts.each do |account|
   2.times do
     stock = Stock.create(account_id: account.id, name: Faker::Finance.ticker)
     (0..3).each do |n|
