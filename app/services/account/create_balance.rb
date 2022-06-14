@@ -28,7 +28,7 @@ module Account
     end
 
     def set_date
-      return Time.zone.today if params.fetch(:date, '').empty?
+      return Time.zone.today if params.fetch(:date, '').blank?
 
       params.fetch(:date)
     end
