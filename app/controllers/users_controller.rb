@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   def overview
-    @accounts = policy_scope(Account::Account).includes(:stocks, :balances).order(name: :asc)
+    @accounts = policy_scope(Account::Account)
+                .where.not(kind: 'card')
+                .includes(:stocks, :balances)
+                .order(name: :asc)
   end
 
   def summary

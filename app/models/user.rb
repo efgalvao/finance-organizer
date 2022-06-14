@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   def total_in_stocks
     total = 0
-    accounts.stocks_accounts.each do |account|
+    accounts.broker_accounts.each do |account|
       total += account.total_stock_value
     end
     total
