@@ -1,5 +1,30 @@
+  <div class="summary-item">
+    <p class="summary-subtitle"><%= t('.current_month') %></p>
+    <table class='table table-hover'>
+      <thead>
+        <tr>
+          <th><%= t('.month') %></th>
+          <th><%= t('.incomes') %></th>
+          <th><%= t('.expenses') %></th>
+          <th><%= t('.invested') %></th>
+          <th><%= t('.balance') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% date = DateTime.current %>
+        <tr>
+          <td><%= date.strftime('%B, %Y') %></td>
+          <td><%= number_to_currency(@account.incomes(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@account.expenses(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@account.invested(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@account.total_balance(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 <div class="summary-item">
-  <p class="summary-subtitle"><%= t('.incomes_expenses') %></p>
+  <p class="summary-subtitle"><%= t('.past_months') %></p>
   <table class='table table-hover'>
     <thead>
       <tr>
@@ -11,7 +36,7 @@
       </tr>
     </thead>
     <tbody>
-      <% (0...6).each do |n| %>
+      <% (1..6).each do |n| %>
       <% date = DateTime.current - n.month%>
       <tr>
         <td><%= date.strftime('%B, %Y') %></td>

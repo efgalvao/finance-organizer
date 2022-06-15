@@ -30,6 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 pt:
+  dividend: 'Dividendo'
   layouts:
     header:
       accounts: CONTAS
@@ -75,7 +76,8 @@ pt:
         new_transference: Nova transferência
         monthly_balance: Saldo mensal(últimos 6 meses)
       show_table:
-        incomes_expenses: Receitas x Despesas
+        current_month: Mês atual
+        past_months: Últimos 6 meses
         month: Mês
         incomes: Receitas
         expenses: Despesas
