@@ -107,6 +107,10 @@ module Account
       total_stock_value + balance
     end
 
+    def current_account_report
+      reports.current_month
+    end
+
     private
 
     def semester_balances

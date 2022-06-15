@@ -1,7 +1,6 @@
 module Transactions
-  class CreateTransference < ApplicationService
+  class ProcessTransference < ApplicationService
     def initialize(params)
-      # receber um hash com os parametros
       @params = params
       @sender = Account::Account.find(params[:sender_id])
       @receiver = Account::Account.find(params[:receiver_id])
@@ -15,9 +14,9 @@ module Transactions
     end
 
     def call
-      # refatorar
       ActiveRecord::Base.transaction do
         Transference.create(transference_params)
+        # criar 'create_transference'
         Account::Transaction.create(sender_params)
         Account::UpdateAccountBalance.call(account_id: sender.id, amount: -amount)
         Account::Transaction.create(receiver_params)

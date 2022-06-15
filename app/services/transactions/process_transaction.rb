@@ -1,5 +1,5 @@
 module Transactions
-  class CreateTransaction < ApplicationService
+  class ProcessTransaction < ApplicationService
     def initialize(params)
       @params = params
     end
@@ -9,10 +9,13 @@ module Transactions
     end
 
     def call
-      if params[:kind] == 'income'
+      case params[:kind]
+      when 'income'
         Transactions::CreateIncome.call(params)
-      else
+      when 'expense'
         Transactions::CreateExpense.call(params)
+      else
+        'Invalid kind'
       end
     end
 

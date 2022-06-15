@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   def create
-    @transaction = Transactions::CreateTransaction.call(transactions_params)
+    @transaction = Transactions::ProcessTransaction.call(transactions_params)
 
     if @transaction
       redirect_to account_path(id: transactions_params[:account_id]), notice: 'Transaction successfully created.'

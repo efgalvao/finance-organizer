@@ -15,7 +15,7 @@ module Account
     end
 
     def create
-      @transaction = Transactions::CreateTransaction.call(transactions_params)
+      @transaction = Transactions::ProcessTransaction.call(transactions_params)
 
       if @transaction
         redirect_to account_transactions_path(params[:account_id]), notice: 'Transaction successfully created.'
