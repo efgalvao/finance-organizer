@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   get '/transactions/debit', to: 'transactions#debit'
   get '/transactions/credit', to: 'transactions#credit'
+  get '/transactions/income', to: 'transactions#income'
   post '/transactions', to: 'transactions#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

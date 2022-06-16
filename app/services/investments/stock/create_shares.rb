@@ -25,7 +25,7 @@ module Investments
         ActiveRecord::Base.transaction do
           Investments::Stock::Share.create(share_params)
           Investments::Stock::UpdateStock.call(update_stock_params)
-          # change to call ProcessTransaction
+          # refatorar para usar o create_transaction e o update_account_balance
           Transactions::CreateExpense.call({
                                              account_id: stock.account.id,
                                              value: invested,

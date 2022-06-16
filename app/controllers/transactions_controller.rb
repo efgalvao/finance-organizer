@@ -10,17 +10,21 @@ class TransactionsController < ApplicationController
   end
 
   def debit
-    @transaction = Account::Transaction.new
+    @transaction = Account::Transaction.new(kind: 'expense')
   end
 
   def credit
-    @transaction = Account::Transaction.new
+    @transaction = Account::Transaction.new(kind: 'expense')
+  end
+
+  def income
+    @transaction = Account::Transaction.new(kind: 'income')
   end
 
   private
 
   def transactions_params
     params.require(:transaction).permit(:title, :category_id, :account_id,
-                                        :value, :kind, :date)
+                                        :value, :date)
   end
 end

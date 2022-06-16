@@ -40,16 +40,6 @@
 
     <br />
 
-    <div class="form-group" >
-      <p class="input-group-text" ><%= t('.kind_of_transaction') %></p>
-      <%= form.label :kind_income, t('.kind_income'), class: "form-check-label" %>
-      <%= form.radio_button :kind, "income", class: "form-check-input" %>
-      <br />
-      <%= form.label :kind_expense, t('.kind_expense'), class: "form-check-label" %>
-      <%= form.radio_button :kind, "expense", class: "form-check-input" %>
-    </div>
-    <br />
-
     <div class="form-group">
       <%= form.label t('.value'), class: "input-group-text" %>
       <%= form.number_field :value, as: :numeric, step: :any, :class => "form-control" %>

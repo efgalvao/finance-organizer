@@ -15,6 +15,7 @@ module Investments
       def call
         return create_dividend unless create_dividend.valid?
 
+        #refatorar para usar o create_transaction e o update_account_balance
         Transactions::CreateIncome.call({
                                           account_id: stock.account.id,
                                           value: (value.to_f * stock.shares_total),

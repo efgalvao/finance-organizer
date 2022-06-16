@@ -30,7 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 pt:
-  dividend: 'Dividendo'
+  dividend: "Dividendo"
   layouts:
     header:
       accounts: CONTAS
@@ -362,6 +362,7 @@ pt:
       summary: Visão geral
       debit: Cadastrar débito
       credit: Cadastrar crédito
+      income: Cadastrar entrada
     stock_chart:
       monthly_stock_value: Valor mensal das ações
     summary:
@@ -388,9 +389,6 @@ pt:
       date: Data
       account: Conta
       category: Categoria
-      kind_of_transaction: Tipo de transação
-      kind_income: Entrada
-      kind_expense: Saída
       value: Valor
       save: Salvar
       cancel: Cancelar
@@ -400,9 +398,15 @@ pt:
       card: Cartão
       date: Data
       category: Categoria
-      kind_of_transaction: Tipo de transação
-      kind_income: Entrada
-      kind_expense: Saída
+      value: Valor
+      save: Salvar
+      cancel: Cancelar
+    income:
+      title: Nova entrada
+      description: Descrição
+      account: Conta
+      date: Data
+      category: Categoria
       value: Valor
       save: Salvar
       cancel: Cancelar
@@ -539,8 +543,8 @@ pt:
         resend_confirmation_instructions: "Reenviar instruções de confirmação"
     unsupported_browser:
       headline: "O ActiveAdmin não oferece suporte ao Internet Explorer versão 8 ou inferior."
-      recommendation: "Nós recomendamos atualizar para a última versão do <a href=\"http://windows.microsoft.com/ie\">Internet Explorer</a>, <a href=\"https://chrome.google.com/\">Google Chrome</a>, ou <a href=\"https://mozilla.org/firefox/\">Firefox</a>."
-      turn_off_compatibility_view: "Se você está usando o IE 9 ou superior, <a href=\"https://support.microsoft.com/pt-br/help/17471\">desligue o \"Modo de Exibição de Compatibilidade\"</a>."
+      recommendation: 'Nós recomendamos atualizar para a última versão do <a href="http://windows.microsoft.com/ie">Internet Explorer</a>, <a href="https://chrome.google.com/">Google Chrome</a>, ou <a href="https://mozilla.org/firefox/">Firefox</a>.'
+      turn_off_compatibility_view: 'Se você está usando o IE 9 ou superior, <a href="https://support.microsoft.com/pt-br/help/17471">desligue o "Modo de Exibição de Compatibilidade"</a>.'
     access_denied:
       message: "Você não tem permissão para realizar o solicitado"
     index_list:

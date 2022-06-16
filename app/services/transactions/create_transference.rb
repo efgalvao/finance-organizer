@@ -17,10 +17,10 @@ module Transactions
     def call
       # refatorar
       ActiveRecord::Base.transaction do
-        Transference.create(transference_params)
-        Account::Transaction.create(sender_params)
+        Transference.create!(transference_params)
+        Account::CreateTransaction.call(sender_params)
+        Account::CreateTransaction.call(receiver_params)
         Account::UpdateAccountBalance.call(account_id: sender.id, amount: -amount)
-        Account::Transaction.create(receiver_params)
         Account::UpdateAccountBalance.call(account_id: receiver.id, amount: amount)
       end
     end

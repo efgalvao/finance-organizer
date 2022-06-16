@@ -24,12 +24,14 @@ module Investments
         ActiveRecord::Base.transaction do
           Investments::Treasury::Negotiation.create(negotiation_params)
           Investments::Treasury::CreatePosition.call(create_position_params)
+          # refatorar para usar o create_transaction e o update_account_balance
           Transactions::CreateExpense.call(expense_params)
         end
       end
 
       attr_reader :params, :date, :invested, :treasury, :shares, :kind
 
+      # juntar esse com create_position_params ?
       def negotiation_params
         {
           treasury_id: treasury.id,

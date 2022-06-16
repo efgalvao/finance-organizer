@@ -14,6 +14,8 @@ module Transactions
         Transactions::CreateIncome.call(params)
       when 'expense'
         Transactions::CreateExpense.call(params)
+      when 'investment'
+        Transactions::CreateTransaction.call(params)
       else
         'Invalid kind'
       end

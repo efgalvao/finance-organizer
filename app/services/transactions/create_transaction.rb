@@ -1,10 +1,10 @@
 module Transactions
-  class CreateExpense < ApplicationService
+  class CreateTransaction < ApplicationService
     def initialize(params)
       @params = params
       @account = Account::Account.find(params[:account_id])
       @value = params.fetch(:value, 0)
-      @kind = params.fetch(:kind, 'expense')
+      @kind = params.fetch(:kind, 'income')
       @date = set_date
       @title = params.fetch(:title)
       @category_id = params.fetch(:category_id, nil)
@@ -24,10 +24,15 @@ module Transactions
 
     def create_transaction
       ActiveRecord::Base.transaction do
-        Account::Transaction.create(account: account, category_id: category_id,
-                                    value: value, kind: kind, date: date, title: title)
-        # refatorar para quem chamar o create chamar o updateAccountBalance
-        Account::UpdateAccountBalance.call(account_id: account.id, amount: -value.to_f)
+        Account::Transaction.create(
+          account: account,
+          category_id: category_id,
+          value: value,
+          kind: kind,
+          date: date,
+          title: title
+        )
+        Account::UpdateAccountBalance.call(account_id: account.id, amount: value.to_f)
       end
     end
 
