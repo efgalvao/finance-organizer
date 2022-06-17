@@ -14,7 +14,5 @@ module Account
             DateTime.current.beginning_of_month,
             DateTime.current.end_of_month).order('date asc').first
     }
-
-    scope :current_mes, -> { find_by(date: date.beginning_of_month...date.end_of_month) }
   end
 end

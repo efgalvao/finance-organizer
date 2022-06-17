@@ -12,12 +12,13 @@
       </thead>
       <tbody>
         <% date = DateTime.current %>
+        <% current_report = @account.find_current_report %>
         <tr>
           <td><%= date.strftime('%B, %Y') %></td>
-          <td><%= number_to_currency(@account.incomes(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(@account.expenses(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(@account.invested(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(@account.total_balance(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(current_report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(current_report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(current_report.invested, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(current_report.final, unit: 'R$ ', separator: ',', delimiter: '') %></td>
         </tr>
       </tbody>
     </table>
@@ -37,14 +38,15 @@
     </thead>
     <tbody>
       <% (1..6).each do |n| %>
-      <% date = DateTime.current - n.month%>
-      <tr>
-        <td><%= date.strftime('%B, %Y') %></td>
-        <td><%= number_to_currency(@account.incomes(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-        <td><%= number_to_currency(@account.expenses(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-        <td><%= number_to_currency(@account.invested(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-        <td><%= number_to_currency(@account.total_balance(date), unit: 'R$ ', separator: ',', delimiter: '') %></td>
-      </tr>
+        <% date = DateTime.current - n.month%>
+        <% report = @account.find_report_by_date(date)%>
+        <tr>
+          <td><%= date.strftime('%B, %Y') %></td>
+          <td><%= number_to_currency(report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(report.invested, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(report.final, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+        </tr>
       <% end %>
     </tbody>
   </table>

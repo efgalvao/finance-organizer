@@ -78,21 +78,21 @@ module Account
     #   transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
     # end
 
-    def incomes(date)
+    def incomes(date = DateTime.current)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
                                    kind: 'income').sum(:value_cents))
     end
 
-    def expenses(date)
+    def expenses(date = DateTime.current)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
                                    kind: 'expense').sum(:value_cents))
     end
 
-    def total_balance(date)
+    def total_balance(date = DateTime.current)
       Money.new(incomes(date) - expenses(date))
     end
 
-    def invested(date)
+    def invested(date = DateTime.current)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
                                    kind: 'investment').sum(:value_cents))
     end
@@ -107,11 +107,31 @@ module Account
       total_stock_value + balance
     end
 
-    def current_account_report
-      reports.current_month
+    def find_report_by_date(date = DateTime.current)
+      report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+
+      report = create_report(date) if report.nil?
+      report
+    end
+
+    def find_current_report(date = DateTime.current)
+      report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+
+      report = create_current_report if report.nil?
+      report
     end
 
     private
+
+    def create_report(date)
+      reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
+                      invested_cents: 0, final_cents: 0)
+    end
+
+    def create_current_report
+      reports.create!(date: Date.current, incomes_cents: incomes.cents, expenses_cents: expenses.cents,
+                      invested_cents: invested, final_cents: total_balance.cents)
+    end
 
     def semester_balances
       balances.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
