@@ -12,9 +12,10 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= number_to_currency(@user.total_amount, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-      <td><%= number_to_currency(@user.total_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-      <td><%= number_to_currency(@user.total_in_stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <% current_report = @user.current_user_report %>
+      <td><%= number_to_currency(current_report.total, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(current_report.savings, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      <td><%= number_to_currency(current_report.stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
     </tr>
   </tbody>
 </table>
@@ -58,4 +59,13 @@
 </div>
 <div class="summary-chart">
   <%= line_chart @user.last_semester_total_dividends, precision: 8 %>
+</div>
+
+
+ novo modelo
+
+<div class="summary">
+  <div class="summary-subtitle">
+    <%= t('.summary_for') %> <%= @user.name %>
+  </div>
 </div>

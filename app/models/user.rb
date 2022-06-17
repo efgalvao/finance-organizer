@@ -3,8 +3,6 @@ class User < ApplicationRecord
   has_many :accounts, class_name: 'Account::Account', dependent: :destroy
   has_many :transferences, dependent: :destroy
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -53,10 +51,14 @@ class User < ApplicationRecord
     Statements::CreateIncomesExpenses.new(self).perform
   end
 
+  def current_user_report
+    user_reports.current_month
+  end
+
   private
 
   def update_current_user_report
-    user_report = user_reports.current_month
+    user_report = current_user_report
 
     user_report.date = DateTime.current
     user_report.total = total_amount
