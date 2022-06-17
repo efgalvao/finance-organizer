@@ -130,7 +130,7 @@ module Account
 
     def create_current_report
       reports.create!(date: Date.current, incomes_cents: incomes.cents, expenses_cents: expenses.cents,
-                      invested_cents: invested, final_cents: total_balance.cents)
+                      invested_cents: invested.cents, final_cents: total_balance.cents)
     end
 
     def semester_balances
