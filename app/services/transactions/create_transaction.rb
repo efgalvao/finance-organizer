@@ -23,17 +23,14 @@ module Transactions
     attr_reader :params, :account, :value, :kind, :date, :title, :category_id
 
     def create_transaction
-      ActiveRecord::Base.transaction do
-        Account::Transaction.create(
-          account: account,
-          category_id: category_id,
-          value: value,
-          kind: kind,
-          date: date,
-          title: title
-        )
-        Account::UpdateAccountBalance.call(account_id: account.id, amount: value.to_f)
-      end
+      Account::Transaction.create!(
+        account: account,
+        category_id: category_id,
+        value: value,
+        kind: kind,
+        date: date,
+        title: title
+      )
     end
 
     def set_date

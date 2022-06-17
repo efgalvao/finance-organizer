@@ -1,7 +1,6 @@
 module Transactions
   class CreateTransference < ApplicationService
     def initialize(params)
-      # receber um hash com os parametros
       @params = params
       @sender = Account::Account.find(params[:sender_id])
       @receiver = Account::Account.find(params[:receiver_id])
@@ -15,13 +14,10 @@ module Transactions
     end
 
     def call
-      # refatorar
       ActiveRecord::Base.transaction do
         Transference.create!(transference_params)
-        Account::CreateTransaction.call(sender_params)
-        Account::CreateTransaction.call(receiver_params)
-        Account::UpdateAccountBalance.call(account_id: sender.id, amount: -amount)
-        Account::UpdateAccountBalance.call(account_id: receiver.id, amount: amount)
+        Account::ProcessTransaction.call(sender_params)
+        Account::ProcessTransaction.call(receiver_params)
       end
     end
 
@@ -30,16 +26,17 @@ module Transactions
     attr_reader :params, :sender, :receiver, :amount, :date, :user_id
 
     def transference_params
-      { sender_id: sender.id, receiver_id: receiver.id, amount: amount, date: date, user_id: user_id }
+      { sender_id: sender.id, receiver_id: receiver.id, amount: amount, date: date,
+        user_id: user_id }
     end
 
     def sender_params
-      { account_id: sender.id, value: amount, kind: 'transfer',
+      { account_id: sender.id, value: amount, kind: 'transfer', receiver: false,
         title: "Transference to #{receiver.name}", date: date }
     end
 
     def receiver_params
-      { account_id: receiver.id, value: amount, kind: 'transfer',
+      { account_id: receiver.id, value: amount, kind: 'transfer', receiver: true,
         title: "Transference from #{sender.name}", date: date }
     end
 
