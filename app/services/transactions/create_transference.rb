@@ -16,8 +16,8 @@ module Transactions
     def call
       ActiveRecord::Base.transaction do
         Transference.create!(transference_params)
-        Account::ProcessTransaction.call(sender_params)
-        Account::ProcessTransaction.call(receiver_params)
+        Transactions::ProcessTransaction.call(sender_params)
+        Transactions::ProcessTransaction.call(receiver_params)
       end
     end
 

@@ -23,9 +23,9 @@ module Investments
 
       def create_share
         ActiveRecord::Base.transaction do
-          Investments::Stock::Share.create!(share_params)
           Transactions::ProcessTransaction.call(transactions_params)
           Investments::Stock::UpdateStock.call(update_stock_params)
+          Investments::Stock::Share.create!(share_params)
         end
       end
 

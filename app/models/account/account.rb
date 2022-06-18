@@ -13,10 +13,10 @@ module Account
 
     enum kind: { savings: 0, broker: 1, card: 2 }
 
-    scope :card_accounts, -> { where(kind: 'card') }
+    # scope :card_accounts, -> { where(kind: 'card') }
     scope :except_card_accounts, -> { where.not(kind: 'card') }
     scope :broker_accounts, -> { where(kind: 'broker') }
-    scope :savings_accounts, -> { where(kind: 'savings') }
+    # scope :savings_accounts, -> { where(kind: 'savings') }
 
     validates :name, presence: true, uniqueness: true
     validates :kind, presence: true
@@ -73,10 +73,6 @@ module Account
       current_month_balance.save
       current_month_balance
     end
-
-    # def current_month_transactions
-    #   transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
-    # end
 
     def incomes(date = DateTime.current)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,

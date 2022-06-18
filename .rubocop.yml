@@ -32,6 +32,7 @@ Style/Documentation:
   Enabled: false
 
 Metrics/CyclomaticComplexity:
+  Max: 9
   Exclude:
     - 'lib/tasks/**/*'
 

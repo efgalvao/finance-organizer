@@ -5,7 +5,7 @@ module Investments
 
       # before_create :set_date, :set_first_price
 
-      scope :past_date, ->(date) { where('date <= ?', date - 7.days) }
+      # scope :past_date, ->(date) { where('date <= ?', date - 7.days) }
 
       monetize :invested_cents
 

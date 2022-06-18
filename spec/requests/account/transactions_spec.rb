@@ -75,7 +75,9 @@ RSpec.describe 'Transaction', type: :request do
       let(:params) { attributes_for(:transaction, title: nil) }
 
       it 'does not create a new transaction' do
-        expect { new_transaction }.to change(Account::Transaction, :count).by(0)
+        expect { new_transaction }.to raise_error(ActiveRecord::RecordInvalid)
+
+        # expect { new_transaction }.to change(Account::Transaction, :count).by(0)
       end
     end
   end
