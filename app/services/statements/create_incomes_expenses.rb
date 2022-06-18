@@ -1,31 +1,34 @@
 module Statements
   class CreateIncomesExpenses
-    attr_reader :user
-
     def initialize(user)
       @user = user
     end
 
     def perform
-      mount_income_expense
+      get_reports
     end
 
     private
 
-    def mount_income_expense
+    attr_reader :user
+
+    def get_reports(date = DateTime.current)
       table = {}
-      (0..6).each do |i|
+      (1..6).each do |i|
         date = Time.zone.today - i.month
-        data = { incomes: 0, expenses: 0, invested: 0, total: 0 }
-        user.accounts.map do |account|
-          data[:incomes] += account.incomes(date)
-          data[:expenses] += account.expenses(date)
-          data[:invested] += account.invested(date)
-          data[:total] += account.total_balance(date)
-        end
-        table[date.strftime('%B, %Y').to_s] = data
+        report = user.reports.find_by(date: date.beginning_of_month...date.end_of_month)
+        report = create_report(date) if report.nil?
+        table[date.strftime('%B, %Y').to_s] = report
+        # report = create_report(date) if report.nil?
       end
       table
     end
+
+    def create_report(date)
+      user.reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
+                           invested_cents: 0, final_cents: 0)
+    end
+
+    def mount_income_expense; end
   end
 end

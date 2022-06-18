@@ -370,9 +370,11 @@ pt:
       total_cash: Em caixa
       total_stocks: Em ações
       account: Conta
+      accounts: Contas
       balance: Saldo
       value_in_stocks: Valor em ações
       total: Total
+      past_months: Últimos mêses
       monthly_balance: Saldo mensal
       monthly_dividends: Dividendos mensal
     incomes_expenses:

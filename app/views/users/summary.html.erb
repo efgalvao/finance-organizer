@@ -2,70 +2,90 @@
   <%= @user.name %>
 </div>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t('.total_balance') %></th>
-      <th><%= t('.total_cash') %></th>
-      <th><%= t('.total_stocks') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <% current_report = @user.current_user_report %>
-      <td><%= number_to_currency(current_report.total, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-      <td><%= number_to_currency(current_report.savings, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-      <td><%= number_to_currency(current_report.stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-    </tr>
-  </tbody>
-</table>
+  <div class="summary-item">
+    <p class="summary-subtitle"><%=  @user.formated_date %></p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= t('.total_balance') %></th>
+            <th><%= t('.total_cash') %></th>
+            <th><%= t('.total_stocks') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= number_to_currency(@user.current_month_report.total, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+            <td><%= number_to_currency(@user.current_month_report.savings, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+            <td><%= number_to_currency(@user.current_month_report.stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          </tr>
+        </tbody>
+      </table>
 
+    <table class='table table-hover'>
+      <thead>
+        <tr>
+          <th><%= t('.incomes') %></th>
+          <th><%= t('.expenses') %></th>
+          <th><%= t('.invested') %></th>
+          <th><%= t('.balance') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= number_to_currency(@user.current_month_report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@user.current_month_report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@user.current_month_report.invested, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@user.current_month_report.final, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+        </tr>
+      </tbody>
+    </table>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t('.account') %></th>
-      <th><%= t('.balance') %></th>
-      <th><%= t('.value_in_stocks') %></th>
-      <th><%= t('.total') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user.accounts.except_card_accounts.each do |account| %>
-    <tr>
-      <td><%= link_to account.name, account_path(account) %></td>
-      <td><%= number_to_currency(account.balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-      <td><%= number_to_currency(account.total_stock_value, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-      <td><%= number_to_currency(account.stock_plus_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="chart-title">
+      <%= t('.accounts') %><br />
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><%= t('.account') %></th>
+          <th><%= t('.balance') %></th>
+          <th><%= t('.value_in_stocks') %></th>
+          <th><%= t('.total') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.accounts.except_card_accounts.each do |account| %>
+        <tr>
+          <td><%= link_to account.name, account_path(account) %></td>
+          <td><%= number_to_currency(account.balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(account.total_stock_value, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(account.stock_plus_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<%= render 'incomes_expenses' %>
+<div class="summary-item">
+  <p class="summary-subtitle"><%=  t('.past_months') %></p>
+  <%= render 'incomes_expenses' %>
+</div>
+
+  ----
+
 
 <div class="chart-title">
   <%= t('.monthly_balance') %><br />
 </div>
 <div class="summary-chart">
- <%= line_chart [
-      { name: 'Total', data: @user.semester_summary[:total] },
-      { name: 'Savings', data: @user.semester_summary[:savings] },
-      { name: 'Stocks', data: @user.semester_summary[:stocks] }
-      ], precision: 8 %></div>
-
+ <%# <%= line_chart [
+      # { name: 'Total', data: @user.semester_summary[:total] },
+      # { name: 'Savings', data: @user.semester_summary[:savings] },
+      # { name: 'Stocks', data: @user.semester_summary[:stocks] }
+      # ], precision: 8 %></div>
+ %>
 <div class="chart-title">
   <%= t('.monthly_dividends') %><br />
 </div>
 <div class="summary-chart">
   <%= line_chart @user.last_semester_total_dividends, precision: 8 %>
-</div>
-
-
- novo modelo
-
-<div class="summary">
-  <div class="summary-subtitle">
-    <%= t('.summary_for') %> <%= @user.name %>
-  </div>
 </div>
