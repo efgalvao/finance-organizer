@@ -236,6 +236,9 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
+    oprah (0.3.0)
+      actionpack (>= 5.0.0)
+      activesupport (>= 5.0.0)
     orm_adapter (0.5.0)
     parallel (1.21.0)
     parser (3.0.3.2)
@@ -509,6 +512,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   money-rails (~> 1.12)
+  oprah
   pg
   pry-byebug
   pry-rails
