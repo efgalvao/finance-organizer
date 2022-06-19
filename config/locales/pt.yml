@@ -87,10 +87,11 @@ pt:
         summary_for: Resumo para
         current_total_balance: Saldo atual total
         account_balance: Saldo da conta
-        current_balance_in_stocks: Saldo atual em ações
+        current_balance_in_stocks: Saldo atual em Renda Variável
+        current_balance_in_treasuries: Saldo atual em Renda fixa
         total_invested: Total investido
-        stocks_amount: Quantidade de ações
-        treasuries_amount: Quantidade de tesouros
+        stocks_amount: Quantidade de renda variável
+        treasuries_amount: Quantidade de renda fixa
         transactions: Transações
         new_transaction: Nova transação
         new_transference: Nova transferência
@@ -360,8 +361,8 @@ pt:
     overview:
       title: Atalhos
       summary: Visão geral
-      debit: Cadastrar débito
-      credit: Cadastrar crédito
+      debit: Cadastrar compra no débito
+      credit: Cadastrar compra no crédito
       income: Cadastrar entrada
     stock_chart:
       monthly_stock_value: Valor mensal das ações

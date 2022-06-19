@@ -110,23 +110,11 @@ module Account
       report
     end
 
-    def find_current_report(date = DateTime.current)
-      report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
-
-      report = create_current_report if report.nil?
-      report
-    end
-
     private
 
     def create_report(date)
       reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
                       invested_cents: 0, final_cents: 0)
-    end
-
-    def create_current_report
-      reports.create!(date: Date.current, incomes_cents: incomes.cents, expenses_cents: expenses.cents,
-                      invested_cents: invested.cents, final_cents: total_balance.cents)
     end
 
     def semester_balances
