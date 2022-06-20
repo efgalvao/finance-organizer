@@ -13,10 +13,10 @@ module Account
 
     enum kind: { savings: 0, broker: 1, card: 2 }
 
-    scope :card_accounts, -> { where(kind: 'card') }
+    # scope :card_accounts, -> { where(kind: 'card') }
     scope :except_card_accounts, -> { where.not(kind: 'card') }
     scope :broker_accounts, -> { where(kind: 'broker') }
-    scope :savings_accounts, -> { where(kind: 'savings') }
+    # scope :savings_accounts, -> { where(kind: 'savings') }
 
     validates :name, presence: true, uniqueness: true
     validates :kind, presence: true
@@ -74,25 +74,21 @@ module Account
       current_month_balance
     end
 
-    # def current_month_transactions
-    #   transactions.where(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
-    # end
-
-    def incomes(date)
+    def incomes(date = DateTime.current)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
                                    kind: 'income').sum(:value_cents))
     end
 
-    def expenses(date)
+    def expenses(date = DateTime.current)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
                                    kind: 'expense').sum(:value_cents))
     end
 
-    def total_balance(date)
+    def total_balance(date = DateTime.current)
       Money.new(incomes(date) - expenses(date))
     end
 
-    def invested(date)
+    def invested(date = DateTime.current)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
                                    kind: 'investment').sum(:value_cents))
     end
@@ -107,7 +103,19 @@ module Account
       total_stock_value + balance
     end
 
+    def find_report_by_date(date = DateTime.current)
+      report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+
+      report = create_report(date) if report.nil?
+      report
+    end
+
     private
+
+    def create_report(date)
+      reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
+                      invested_cents: 0, final_cents: 0)
+    end
 
     def semester_balances
       balances.where('date > ?', Time.zone.today - 6.months).order(date: :asc)

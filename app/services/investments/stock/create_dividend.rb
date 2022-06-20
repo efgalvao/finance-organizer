@@ -13,27 +13,29 @@ module Investments
       end
 
       def call
-        return create_dividend unless create_dividend.valid?
+        ActiveRecord::Base.transaction do
+          Investments::Stock::Dividend.create!(dividend_params)
 
-        Transactions::CreateIncome.call({
-                                          account_id: stock.account.id,
-                                          value: (value.to_f * stock.shares_total),
-                                          title: "#{stock.ticker} dividends",
-                                          date: date,
-                                          kind: 'income'
-                                        })
+          Transactions::ProcessTransaction.call(transactions_params)
+        end
       end
 
       private
 
       attr_reader :value, :date, :stock, :params
 
-      def create_dividend
-        Investments::Stock::Dividend.create(dividend_params)
-      end
-
       def dividend_params
         { value: value, date: date, stock_id: stock.id }
+      end
+
+      def transactions_params
+        {
+          account_id: stock.account.id,
+          value: (value.to_f * stock.shares_total),
+          title: "#{stock.ticker} dividends",
+          date: date,
+          kind: 'income'
+        }
       end
 
       def set_date

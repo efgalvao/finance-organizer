@@ -58,9 +58,8 @@ RSpec.describe 'Dividend', type: :request do
              params: { dividend: invalid_params }
       end
 
-      it 'does not create a new dividend', :aggregate_failures do
-        expect { invalid_dividend }.not_to change(Account::Transaction, :count)
-        expect { invalid_dividend }.not_to change(Investments::Stock::Dividend, :count)
+      it 'does not create a new dividend' do
+        expect { invalid_dividend }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
   end

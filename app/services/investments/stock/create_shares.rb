@@ -23,15 +23,9 @@ module Investments
 
       def create_share
         ActiveRecord::Base.transaction do
-          Investments::Stock::Share.create(share_params)
+          Transactions::ProcessTransaction.call(transactions_params)
           Investments::Stock::UpdateStock.call(update_stock_params)
-          Transactions::CreateExpense.call({
-                                             account_id: stock.account.id,
-                                             value: invested,
-                                             title: "Invested in #{stock.ticker} shares",
-                                             date: date,
-                                             kind: 'investment'
-                                           })
+          Investments::Stock::Share.create!(share_params)
         end
       end
 
@@ -39,8 +33,19 @@ module Investments
         { date: date, quantity: quantity, invested: invested, stock_id: stock.id }
       end
 
+      def transactions_params
+        {
+          account_id: stock.account.id,
+          value: invested,
+          title: "Invested in #{stock.ticker} shares",
+          date: date,
+          kind: 'investment'
+        }
+      end
+
       def update_stock_params
-        { date: date, quantity: quantity, invested: invested, stock_id: stock.id, value: (invested / quantity) }
+        { date: date, quantity: quantity, invested: invested, stock_id: stock.id,
+          value: (invested / quantity) }
       end
 
       def set_date

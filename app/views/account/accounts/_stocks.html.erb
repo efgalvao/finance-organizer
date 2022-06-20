@@ -7,7 +7,7 @@
 <div class="summary-item">
   <%= t('.current_total_balance') %><br />
   <div class="item-value">
-  <%= number_to_currency(@account.stock_plus_balance, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(@account.account_total, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
@@ -21,7 +21,14 @@
 <div class="summary-item">
   <%= t('.current_balance_in_stocks') %><br />
   <div class="item-value">
-  <%= number_to_currency(@account.total_stock_value, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(@account.current_value_in_stocks, unit: 'R$', separator: ',', delimiter: '') %>
+  </div>
+</div>
+
+<div class="summary-item">
+  <%= t('.current_balance_in_treasuries') %><br />
+  <div class="item-value">
+  <%= number_to_currency(@account.current_value_in_treasuries, unit: 'R$', separator: ',', delimiter: '') %>
   </div>
 </div>
 
@@ -35,14 +42,14 @@
 <div class="summary-item">
   <%= t('.stocks_amount') %><br />
   <div class="item-value">
-  <%= @account.stocks.size %>
+  <%= @account.stocks_count %>
   </div>
 </div>
 
 <div class="summary-item">
   <%= t('.treasuries_amount') %><br />
   <div class="item-value">
-  <%= @account.treasuries.size %>
+  <%= @account.treasuries_count %>
   </div>
 </div>
 
@@ -56,12 +63,12 @@
 
 </br>
 
-<% if @account.stocks.size > 0 %>
+<% if @account.stocks_count > 0 %>
   <%= render 'stocks_list' %>
 <% end %>
 
 </br>
 
-<% if @account.treasuries.size > 0 %>
+<% if @account.treasuries_count > 0 %>
   <%= render 'treasuries_list' %>
 <% end %>

@@ -7,6 +7,6 @@ class UsersController < ApplicationController
   end
 
   def summary
-    @user = current_user
+    @user = present current_user
   end
 end

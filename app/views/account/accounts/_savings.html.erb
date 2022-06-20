@@ -16,13 +16,15 @@
     <%= link_to t('.new_transference'), new_transference_path, :class => "btn btn-success ml-3" %>
   </div>
 
-  <%= render 'show_table' %>
+  <% if @account.kind == 'savings' %>
+    <%= render 'show_table' %>
 
-  <div class="chart-title">
-    <%= t('.monthly_balance') %><br />
-  </div>
+    <div class="chart-title">
+      <%= t('.monthly_balance') %><br />
+    </div>
 
-  <div class="summary-chart">
-    <%= line_chart @account.last_semester_balances, precision: 8 %>
-  </div>
+    <div class="summary-chart">
+      <%= line_chart @account.last_semester_balances, precision: 8 %>
+    </div>
+  <% end %>
 </div>

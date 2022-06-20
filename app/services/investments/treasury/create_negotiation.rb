@@ -22,9 +22,9 @@ module Investments
 
       def create_negotiation(_params)
         ActiveRecord::Base.transaction do
-          Investments::Treasury::Negotiation.create(negotiation_params)
+          Investments::Treasury::Negotiation.create!(negotiation_params)
           Investments::Treasury::CreatePosition.call(create_position_params)
-          Transactions::CreateExpense.call(expense_params)
+          Transactions::ProcessTransaction.call(transactions_params)
         end
       end
 
@@ -40,7 +40,7 @@ module Investments
         }
       end
 
-      def expense_params
+      def transactions_params
         {
           account_id: treasury.account.id,
           value: invested,

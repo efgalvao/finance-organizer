@@ -16,15 +16,15 @@ module Investments
       #   end
       # end
 
-      def create_transaction
-        Transactions::CreateTransaction.call(
-          account: stock.account,
-          value: (value * stock.shares.past_date(date).count),
-          kind: 'income',
-          title: "#{stock.ticker} Dividend",
-          date: date
-        ).save
-      end
+      # def create_transaction
+      #   Transactions::ProcessTransaction.call(
+      #     account: stock.account,
+      #     value: (value * stock.shares.past_date(date).count),
+      #     kind: 'income',
+      #     title: "#{stock.ticker} #{t('dividend')}",
+      #     date: date
+      #   ).save
+      # end
     end
   end
 end

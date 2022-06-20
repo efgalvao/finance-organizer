@@ -4,8 +4,8 @@ class TransferencesController < ApplicationController
   end
 
   def create
-    @transference = Transactions::CreateTransference.call(transferences_params)
-
+    @transference = Transactions::ProcessTransference.call(transferences_params)
+    # testar o retorno
     if @transference
       redirect_to transferences_path,
                   notice: 'Transference successfully created.'
