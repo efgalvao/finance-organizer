@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/user/summary', to: 'users#summary'
 
   scope module: 'account' do
+    get '/cards', to: 'accounts#cards'
     resources :accounts do
       resources :balances, only: %i[index new create]
       resources :transactions, only: %i[index new create edit update]
