@@ -99,10 +99,6 @@ module Account
       total
     end
 
-    def stock_plus_balance
-      total_stock_value + balance
-    end
-
     def find_report_by_date(date = DateTime.current)
       report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
 

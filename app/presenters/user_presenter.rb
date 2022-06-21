@@ -18,24 +18,24 @@ class UserPresenter < Oprah::Presenter
 
   def total_amount
     total = 0
-    accounts.find_each do |account|
-      total += account.stock_plus_balance
+    except_card_accounts.each do |account|
+      total += account.account_total
     end
     total
   end
 
   def total_balance
     total = 0
-    accounts.find_each do |account|
+    except_card_accounts.each do |account|
       total += account.balance
     end
     total
   end
 
-  def total_in_stocks
+  def total_invested
     total = 0
-    accounts.broker_accounts.each do |account|
-      total += account.total_stock_value
+    except_card_accounts.each do |account|
+      total += account.total_invested
     end
     total
   end
@@ -57,10 +57,7 @@ class UserPresenter < Oprah::Presenter
 
   def incomes_expenses_report
     Statements::CreateIncomesExpenses.new(self).perform
-    # binding.pry
   end
-
-  private
 
   def update_current_user_report
     user_report = current_month_report
@@ -68,9 +65,11 @@ class UserPresenter < Oprah::Presenter
     user_report.date = DateTime.current
     user_report.total = total_amount
     user_report.savings = total_balance
-    user_report.stocks = total_in_stocks
+    user_report.stocks = total_invested
     user_report.save
   end
+
+  private
 
   def semester_reports
     reports.where('date > ?', Time.zone.today - 6.months).order(date: :asc)

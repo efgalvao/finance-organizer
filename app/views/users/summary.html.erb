@@ -9,7 +9,7 @@
           <tr>
             <th><%= t('.total_balance') %></th>
             <th><%= t('.total_cash') %></th>
-            <th><%= t('.total_stocks') %></th>
+            <th><%= t('.total_invested') %></th>
           </tr>
         </thead>
         <tbody>
@@ -58,7 +58,7 @@
           <td><%= link_to account.name, account_path(account) %></td>
           <td><%= number_to_currency(account.balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(account.total_invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(account.stock_plus_balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(account.account_total, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
         </tr>
         <% end %>
       </tbody>

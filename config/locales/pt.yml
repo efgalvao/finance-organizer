@@ -379,7 +379,7 @@ pt:
     summary:
       total_balance: Saldo total
       total_cash: Em caixa
-      total_stocks: Em ações
+      total_invested: Investido
       account: Conta
       accounts: Contas
       balance: Saldo
