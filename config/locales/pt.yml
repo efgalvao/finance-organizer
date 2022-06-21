@@ -34,6 +34,7 @@ pt:
   layouts:
     header:
       accounts: CONTAS
+      cards_accounts: CARTÕES
       categories: CATEGORIAS
       investments: INVESTIMENTOS
       transferences: TRANSFERÊNCIAS
@@ -115,6 +116,15 @@ pt:
         current_value: Valor atual
         shares: Cotas
         last_update: Última atualização
+      cards:
+        title: Cartões
+        name: Nome
+        balance: Saldo
+        last_balance_date: Data do último saldo
+        actions: Ações
+        new_card: Novo cartão
+        edit_account: Editar cartão
+        delete_account: Excluir cartão
     balances:
       index:
         balances_for: Balanços de

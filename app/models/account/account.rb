@@ -13,7 +13,7 @@ module Account
 
     enum kind: { savings: 0, broker: 1, card: 2 }
 
-    # scope :card_accounts, -> { where(kind: 'card') }
+    scope :card_accounts, -> { where(kind: 'card') }
     scope :except_card_accounts, -> { where.not(kind: 'card') }
     scope :broker_accounts, -> { where(kind: 'broker') }
     # scope :savings_accounts, -> { where(kind: 'savings') }

@@ -40,6 +40,10 @@ module Account
       end
     end
 
+    def cards
+      @accounts = policy_scope(Account).card_accounts.order(name: :asc)
+    end
+
     def destroy
       authorize(@account)
 
