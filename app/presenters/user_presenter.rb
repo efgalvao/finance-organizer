@@ -1,4 +1,13 @@
 class UserPresenter < Oprah::Presenter
+  presents_many :accounts
+
+  def except_card_accounts
+    accounts = []
+    self.accounts.select do |account|
+      account[:kind] != 'card'
+    end
+  end
+
   def formated_date
     I18n.l(current_month_report.date)
   end

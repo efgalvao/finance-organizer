@@ -1,7 +1,12 @@
 module Account
   class AccountPresenter < Oprah::Presenter
+    presents_one :user
+    # def except_card_accounts
+    #   accounts.where.not(name: 'card').order(:name)
+    # end
+
     def account_total
-      total = (treasuries.sum(:current_value_cents) + stocks.sum(:current_total_value_cents))
+      total = (treasuries.sum(:current_value_cents) + stocks.sum(:current_total_value_cents)) + balance_cents
       total / 100.0
     end
 
