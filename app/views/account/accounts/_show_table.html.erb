@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <% date = DateTime.current %>
-        <% current_report = @account.find_current_report %>
+        <% current_report = @account.current_report %>
         <tr>
           <td><%= date.strftime('%B, %Y') %></td>
           <td><%= number_to_currency(current_report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
