@@ -23,6 +23,11 @@ module Account
       total / 100.0
     end
 
+    def updated_invested_value
+      total = treasuries.sum(:current_value_cents) + stocks.sum(:current_total_value_cents)
+      total / 100.0
+    end
+
     def stocks_count
       stocks.size
     end

@@ -9,10 +9,11 @@ class UserPresenter < Oprah::Presenter
   end
 
   def formated_date
-    I18n.l(current_month_report.date)
+    I18n.l(updated_current_month_report.date)
   end
 
-  def current_month_report
+  def updated_current_month_report
+    update_current_user_report
     reports.current_month
   end
 
@@ -59,6 +60,12 @@ class UserPresenter < Oprah::Presenter
     Statements::CreateIncomesExpenses.new(self).perform
   end
 
+  private
+
+  def current_month_report
+    reports.current_month
+  end
+
   def update_current_user_report
     user_report = current_month_report
 
@@ -68,8 +75,6 @@ class UserPresenter < Oprah::Presenter
     user_report.stocks = total_invested
     user_report.save
   end
-
-  private
 
   def semester_reports
     reports.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
