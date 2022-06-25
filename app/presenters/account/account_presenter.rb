@@ -47,12 +47,41 @@ module Account
       report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
 
       report = create_current_report if report.nil?
+      update_account_report(report)
       report
     end
 
     def create_current_report
       reports.create!(date: Date.current, incomes_cents: incomes.cents, expenses_cents: expenses.cents,
                       invested_cents: invested.cents, final_cents: total_balance.cents)
+    end
+
+    def update_account_report(report)
+      report.date = DateTime.current
+      report.incomes_cents = incomes.cents
+      report.expenses_cents = expenses.cents
+      report.invested_cents = invested.cents
+      report.final_cents = total_balance.cents
+      report
+    end
+
+    def incomes(date = DateTime.current)
+      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                   kind: 'income').sum(:value_cents))
+    end
+
+    def expenses(date = DateTime.current)
+      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                   kind: 'expense').sum(:value_cents))
+    end
+
+    def invested(date = DateTime.current)
+      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                   kind: 'investment').sum(:value_cents))
+    end
+
+    def total_balance(date = DateTime.current)
+      Money.new(incomes(date) - expenses(date) - invested(date))
     end
   end
 end

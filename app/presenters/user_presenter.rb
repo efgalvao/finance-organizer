@@ -2,9 +2,8 @@ class UserPresenter < Oprah::Presenter
   presents_many :accounts
 
   def except_card_accounts
-    accounts = []
-    self.accounts.select do |account|
-      account[:kind] != 'card'
+    self.accounts.reject do |account|
+      account[:kind] == 'card'
     end
   end
 
@@ -41,6 +40,8 @@ class UserPresenter < Oprah::Presenter
     total
   end
 
+  # check below here
+
   def semester_summary
     create_report if reports.empty? || reports.last.date.month != DateTime.current.month
     update_current_user_report
@@ -73,8 +74,26 @@ class UserPresenter < Oprah::Presenter
     user_report.total = total_amount
     user_report.savings = total_balance
     user_report.stocks = total_invested
+    update_user_report(user_report)
     user_report.save
   end
+
+  def update_user_report(report)
+    report.incomes_cents = 0
+    report.expenses_cents = 0
+    report.invested_cents = 0
+    report.final_cents = 0
+    except_card_accounts.each do |account|
+      report.incomes_cents += account.incomes.cents
+      report.expenses_cents += account.expenses.cents
+      report.invested_cents += account.invested.cents
+      report.final_cents += account.total_balance.cents
+      report.save
+    end
+    report
+  end
+
+  # check below here
 
   def semester_reports
     reports.where('date > ?', Time.zone.today - 6.months).order(date: :asc)

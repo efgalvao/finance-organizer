@@ -74,25 +74,6 @@ module Account
       current_month_balance
     end
 
-    def incomes(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'income').sum(:value_cents))
-    end
-
-    def expenses(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'expense').sum(:value_cents))
-    end
-
-    def total_balance(date = DateTime.current)
-      Money.new(incomes(date) - expenses(date))
-    end
-
-    def invested(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'investment').sum(:value_cents))
-    end
-
     def total_stock_value
       total = 0
       total += stocks.inject(0) { |sum, stock| stock.current_total_value + sum }
