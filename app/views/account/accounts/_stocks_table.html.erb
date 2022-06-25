@@ -34,11 +34,9 @@
       </tr>
     </thead>
     <tbody>
-      <% (1..6).each do |n| %>
-        <% date = DateTime.current - n.month%>
-        <% report = @account.find_report_by_date(date)%>
+      <% @account.past_reports.each do |report| %>
         <tr>
-          <td><%= date.strftime('%B, %Y') %></td>
+          <td><%= l(report.date, format: :short) %></td>
           <td><%= number_to_currency(report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
           <td><%= number_to_currency(report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
           <td><%= number_to_currency(report.invested.cents, unit: 'R$ ', separator: ',', delimiter: '') %></td>

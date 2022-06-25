@@ -11,14 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <% date = DateTime.current %>
-        <% current_report = @account.current_report %>
         <tr>
-          <td><%= date.strftime('%B, %Y') %></td>
-          <td><%= number_to_currency(current_report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(current_report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(current_report.invested, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(current_report.final, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= @account.current_report_date %></td>
+          <td><%= number_to_currency(@account.current_report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@account.current_report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@account.current_report.invested, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@account.current_report.final, unit: 'R$ ', separator: ',', delimiter: '') %></td>
         </tr>
       </tbody>
     </table>
@@ -37,11 +35,10 @@
       </tr>
     </thead>
     <tbody>
-      <% (1..6).each do |n| %>
-        <% date = DateTime.current - n.month%>
-        <% report = @account.find_report_by_date(date)%>
+      <% @account.past_reports.each do |report| %>
+
         <tr>
-          <td><%= date.strftime('%B, %Y') %></td>
+          <td><%= l(report.date, format: :short) %></td>
           <td><%= number_to_currency(report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
           <td><%= number_to_currency(report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
           <td><%= number_to_currency(report.invested, unit: 'R$ ', separator: ',', delimiter: '') %></td>
