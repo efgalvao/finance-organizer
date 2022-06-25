@@ -39,7 +39,7 @@ module Account
     #------
 
     def current_report_date
-      I18n.l(current_report.date)
+      I18n.l(current_report.date, format: :long)
     end
 
     def current_report
@@ -82,6 +82,32 @@ module Account
 
     def total_balance(date = DateTime.current)
       Money.new(incomes(date) - expenses(date) - invested(date))
+    end
+
+    def past_reports
+      past_reports = []
+      (1..6).each do |n|
+        date = DateTime.current - n.month
+        report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+
+        report = create_report(date) if report.nil?
+        past_reports << report
+      end
+      past_reports
+    end
+
+    def find_report_by_date(date = DateTime.current)
+      report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+
+      report = create_report(date) if report.nil?
+      report
+    end
+
+    private
+
+    def create_report(date)
+      reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
+                      invested_cents: 0, final_cents: 0)
     end
   end
 end
