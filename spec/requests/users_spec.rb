@@ -5,6 +5,9 @@ RSpec.describe 'User', type: :request do
 
   describe 'GET /summary' do
     context 'when logged in' do
+      let!(:user) { create(:user) }
+      # let!(:user) { create(:report) }
+
       it 'can successfully access an user summary page' do
         sign_in(user)
 

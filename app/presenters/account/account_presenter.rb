@@ -96,12 +96,12 @@ module Account
       past_reports
     end
 
-    def find_report_by_date(date = DateTime.current)
-      report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+    # def find_report_by_date(date = DateTime.current)
+    #   report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
 
-      report = create_report(date) if report.nil?
-      report
-    end
+    #   report = create_report(date) if report.nil?
+    #   report
+    # end
 
     private
 

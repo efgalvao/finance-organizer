@@ -31,14 +31,6 @@ RSpec.describe Investments::Stock::CreateDividend, type: :service do
       it 'does not create a new dividend' do
         expect { described_class.call(invalid_params) }.to raise_error(ActiveRecord::RecordInvalid)
       end
-
-      it 'does not update the account balance' do
-        expect { described_class.call(invalid_params) }.to raise_error(ActiveRecord::RecordInvalid)
-      end
-
-      it 'does not create a new transaction' do
-        expect { described_class.call(invalid_params) }.to raise_error(ActiveRecord::RecordInvalid)
-      end
     end
   end
 end
