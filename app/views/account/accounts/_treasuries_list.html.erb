@@ -9,7 +9,7 @@
         <th><%= t('.total_invested') %></th>
         <th><%= t('.current_value') %></th>
         <th><%= t('.shares') %></th>
-        <th><%= t('.last_updated') %></th>
+        <th><%= t('.last_update') %></th>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
           <td><%= treasury.invested_value %></td>
           <td><%= treasury.current_value %></td>
           <td><%= treasury.shares %></td>
-          <td><%= treasury.updated_at %></td>
+          <td><%= l(treasury.updated_at, format: :long) %></td>
         </tr>
       <% end %>
     </tbody>

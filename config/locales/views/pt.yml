@@ -1,0 +1,160 @@
+pt:
+  account:
+    accounts:
+      index:
+        accounts: Contas
+        name: Nome
+        balance: Saldo
+        last_balance_date: Data do último saldo
+        actions: Ações
+        new_account: Nova conta
+        edit_account: Editar conta
+        delete_account: Excluir conta
+      new:
+        new_account: Nova conta
+        name: Nome
+        balance: Saldo
+        save: Salvar
+        cancel: Cancelar
+        kind_of_account: Tipo de Conta
+        kind_savings: Conta Corrente
+        kind_broker: Corretora
+        kind_card: Cartão
+      edit:
+        name: Nome
+        save: Salvar
+        cancel: Cancelar
+        kind_of_account: Tipo de Conta
+        kind_savings: Conta Corrente
+        kind_broker: Corretora
+        kind_card: Cartão
+      savings:
+        summary_for: Resumo para
+        current_balance: Saldo atual
+        transactions: Transações
+        new_transaction: Nova transação
+        new_transference: Nova transferência
+        monthly_balance: Saldo mensal(últimos 6 meses)
+      show_table:
+        current_month: Mês atual
+        last_update: Última atualizacão
+        past_months: Últimos 6 meses
+        month: Mês
+        incomes: Receitas
+        expenses: Despesas
+        invested: Investido
+        balance: Saldo
+      stocks:
+        summary_for: Resumo para
+        current_total_balance: Saldo atual total
+        account_balance: Saldo da conta
+        current_balance_in_stocks: Saldo atual em Renda Variável
+        current_balance_in_treasuries: Saldo atual em Renda fixa
+        total_invested: Total investido
+        stocks_amount: Quantidade de renda variável
+        treasuries_amount: Quantidade de renda fixa
+        transactions: Transações
+        new_transaction: Nova transação
+        new_transference: Nova transferência
+        new_stock: Nova ação
+        new_treasury: Novo tesouro
+        monthly_balance: Saldo mensal(últimos 6 meses)
+      stocks_list:
+        stocks: Renda variável
+        name: Nome
+        shares: Cotas
+        total_invested: Total investido
+        average_price: Preço médio de aquisição
+        current_share_value: Valor atual da cota
+        current_total_value: Valor total atual
+        dividends_received: Dividendos recebidos(últimos 6 meses)
+        stock_prices: Preços das ações(últimos 6 meses)
+      treasuries_list:
+        treasuries: Renda fixa
+        name: Nome
+        total_invested: Total investido
+        current_value: Valor atual
+        shares: Cotas
+        last_update: Última atualização
+      stocks_table:
+        current_month: Mês atual
+        last_update: Última atualizacão
+        past_months: Últimos 6 meses
+        month: Mês
+        incomes: Receitas
+        expenses: Despesas
+        invested: Investido
+        balance: Saldo
+      cards:
+        title: Cartões
+        name: Nome
+        balance: Saldo
+        last_balance_date: Data do último saldo
+        actions: Ações
+        new_card: Novo cartão
+        edit_account: Editar cartão
+        delete_account: Excluir cartão
+    balances:
+      index:
+        balances_for: Balanços de
+        balance: Saldo
+        date: Data
+      new:
+        new_balance: Novo saldo
+        balance: Saldo
+        date: Data
+        save: Salvar
+        cancel: Cancelar
+    transactions:
+      index:
+        title: Transações
+        name: Nome
+        value: Valor
+        date: Data
+        type: Tipo
+        category: Categoria
+        account: Conta
+        actions: Ações
+        edit: Editar
+        new_transaction: Nova transação
+      new:
+        new_transaction: Nova transação
+        title: Título
+        date: Data
+        category: Categoria
+        kind_of_transaction: Tipo de transação
+        kind_income: Entrada
+        kind_expense: Saída
+        value: Valor
+        save: Salvar
+        cancel: Cancelar
+      edit:
+        title: Título
+        date: Data
+        category: Categoria
+        save: Salvar
+        cancel: Cancelar
+      debit:
+        new_transaction: Nova transação
+        title: Título
+        date: Data
+        account: Conta
+        category: Categoria
+        kind_of_transaction: Tipo de transação
+        kind_income: Entrada
+        kind_expense: Saída
+        value: Valor
+        save: Salvar
+        cancel: Cancelar
+      credit:
+        new_transaction: Nova transação
+        title: Título
+        date: Data
+        card: Cartão
+        category: Categoria
+        kind_of_transaction: Tipo de transação
+        kind_income: Entrada
+        kind_expense: Saída
+        value: Valor
+        save: Salvar
+        cancel: Cancelar
