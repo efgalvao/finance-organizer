@@ -100,11 +100,10 @@ pt:
       balance: Saldo em conta
       updated_invested_value: Valor atual dos investimentos
       total: Total
-      past_months: Últimos mêses
       monthly_balance: Saldo mensal
       monthly_dividends: Dividendos mensal
     incomes_expenses:
-      title: Receitas e despesas
+      past_months: Últimos 6 meses
       month: Mês
       incomes: Receitas
       expenses: Despesas
