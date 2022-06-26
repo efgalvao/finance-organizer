@@ -74,25 +74,25 @@ module Account
       current_month_balance
     end
 
-    def total_stock_value
-      total = 0
-      total += stocks.inject(0) { |sum, stock| stock.current_total_value + sum }
-      total
-    end
+    # def total_stock_value
+    #   total = 0
+    #   total += stocks.inject(0) { |sum, stock| stock.current_total_value + sum }
+    #   total
+    # end
 
-    def find_report_by_date(date = DateTime.current)
-      report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+    # def find_report_by_date(date = DateTime.current)
+    #   report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
 
-      report = create_report(date) if report.nil?
-      report
-    end
+    #   report = create_report(date) if report.nil?
+    #   report
+    # end
 
     private
 
-    def create_report(date)
-      reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
-                      invested_cents: 0, final_cents: 0)
-    end
+    # def create_report(date)
+    #   reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
+    #                   invested_cents: 0, final_cents: 0)
+    # end
 
     def semester_balances
       balances.where('date > ?', Time.zone.today - 6.months).order(date: :asc)

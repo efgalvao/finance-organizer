@@ -2,7 +2,7 @@ class UserPresenter < Oprah::Presenter
   presents_many :accounts
 
   def except_card_accounts
-    self.accounts.reject do |account|
+    accounts.reject do |account|
       account[:kind] == 'card'
     end
   end
@@ -12,6 +12,8 @@ class UserPresenter < Oprah::Presenter
   end
 
   def updated_current_month_report
+    # binding.pry
+    create_report if current_month_report.blank?
     update_current_user_report
     reports.current_month
   end
@@ -64,6 +66,7 @@ class UserPresenter < Oprah::Presenter
   private
 
   def current_month_report
+    # binding.pry
     reports.current_month
   end
 
@@ -100,6 +103,6 @@ class UserPresenter < Oprah::Presenter
   end
 
   def create_report
-    reports.create(total: total_amount, savings: total_balance, stocks: total_in_stocks)
+    reports.create(date: Date.current, total: total_amount, savings: total_balance, stocks: total_invested)
   end
 end

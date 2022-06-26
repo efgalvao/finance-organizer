@@ -10,9 +10,4 @@ RSpec.describe UserReport, type: :model do
     it { is_expected.to monetize(:stocks) }
     it { is_expected.to monetize(:total) }
   end
-
-  describe '.set_date' do
-    let(:user) { create(:user) }
-    let(:user_report) { build(:user_report, date: nil) }
-  end
 end
