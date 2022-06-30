@@ -97,6 +97,9 @@ pt:
       total_invested: Em investimentos
       account: Conta
       accounts: Contas
+      incomes: Receitas
+      expenses: Despesas
+      invested: Investido
       balance: Saldo em conta
       updated_invested_value: Valor atual dos investimentos
       total: Total
