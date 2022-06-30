@@ -1,17 +1,18 @@
 module Account
   class AccountPresenter < Oprah::Presenter
     presents_one :user
+    presents_many :treasuries
     # def except_card_accounts
     #   accounts.where.not(name: 'card').order(:name)
     # end
 
     def account_total
-      total = (treasuries.sum(:current_value_cents) + stocks.sum(:current_total_value_cents)) + balance_cents
+      total = (sum_current_value + stocks.sum(:current_total_value_cents) + balance_cents)
       total / 100.0
     end
 
     def current_value_in_treasuries
-      treasuries.sum(:current_value_cents) / 100.0
+      sum_current_value / 100.0
     end
 
     def current_value_in_stocks
@@ -19,12 +20,12 @@ module Account
     end
 
     def total_invested
-      total = (treasuries.sum(:invested_value_cents) + stocks.sum(:invested_value_cents))
+      total = sum_invested_value + stocks.sum(:invested_value_cents)
       total / 100.0
     end
 
     def updated_invested_value
-      total = treasuries.sum(:current_value_cents) + stocks.sum(:current_total_value_cents)
+      total = sum_current_value + stocks.sum(:current_total_value_cents)
       total / 100.0
     end
 
@@ -103,11 +104,32 @@ module Account
     #   report
     # end
 
+    # def last_semester_positions
+    #   grouped_positions = {}
+    #   binding.pry
+    #   semester_positions.each do |position|
+    #     grouped_positions[position.date.strftime('%B %d, %Y').to_s] = position.amount.to_f
+    #   end
+    #   grouped_positions
+    # end
+
     private
+
+    # def semester_positions
+    #   positions.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
+    # end
 
     def create_report(date)
       reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
                       invested_cents: 0, final_cents: 0)
+    end
+
+    def sum_current_value
+      treasuries.inject(0) { |sum, elem| sum + elem.current_value_cents }
+    end
+
+    def sum_invested_value
+      treasuries.inject(0) { |sum, elem| sum + elem.invested_value_cents }
     end
   end
 end

@@ -20,13 +20,13 @@ module Account
     attr_reader :account, :amount
 
     def update_balance
-      balance = account.balances.find_by('date BETWEEN ? AND ?', DateTime.current.beginning_of_month,
-                                         DateTime.current.end_of_month)
+      balance = account.balances.find_by('date >= ?', DateTime.current - 1.day)
       if balance.nil?
-        balance = account.balances.create(balance: amount, date: DateTime.current)
+        updated_balance = account.balance.cents / 100.0
+        balance = account.balances.create(balance: updated_balance, date: DateTime.current)
         balance
       else
-        balance.balance_cents += amount.to_f * 100
+        balance.balance_cents += (amount * 100)
       end
       balance.save
     end
