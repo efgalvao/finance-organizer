@@ -11,9 +11,9 @@ class UserReport < ApplicationRecord
 
   validates :user_id, presence: true
 
-  scope :current_month, lambda {
-    where('date >= ? AND date <= ?',
-          DateTime.current.beginning_of_month,
-          DateTime.current.end_of_month).order('date asc').first
-  }
+  # scope :current_month, lambda {
+  #   where('date >= ? AND date <= ?',
+  #         DateTime.current.beginning_of_month,
+  #         DateTime.current.end_of_month).order('date asc').first
+  # }
 end

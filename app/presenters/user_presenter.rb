@@ -12,9 +12,9 @@ class UserPresenter < Oprah::Presenter
   end
 
   def updated_current_month_report
-    create_report if reports.current_month.blank?
+    create_report if current_month_user_report.nil?
     update_current_user_report
-    reports.current_month
+    current_month_user_report
   end
 
   def total_amount
@@ -57,14 +57,19 @@ class UserPresenter < Oprah::Presenter
   end
 
   def incomes_expenses_report
-    # binding.pry
     Statements::CreateIncomesExpenses.new(self).perform
   end
 
   private
 
+  def current_month_user_report
+    reports.where('date >= ? AND date <= ?',
+                  DateTime.current.beginning_of_month,
+                  DateTime.current.end_of_month).order('date asc').first
+  end
+
   def update_current_user_report
-    user_report = reports.current_month
+    user_report = current_month_user_report
 
     user_report.date = DateTime.current
     user_report.total = total_amount
