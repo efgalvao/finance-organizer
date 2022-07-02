@@ -32,10 +32,10 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= number_to_currency(@user.updated_current_month_report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(@user.updated_current_month_report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(@user.updated_current_month_report.invested, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(@user.updated_current_month_report.final, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@user.updated_current_month_report.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@user.updated_current_month_report.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@user.updated_current_month_report.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@user.updated_current_month_report.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
         </tr>
       </tbody>
     </table>

@@ -13,21 +13,21 @@
   <div class="summary-item green">
     <%= t('.total_invested') %><br />
     <div class="item-value">
-      <%= number_to_currency(@stock.invested_value_cents / 100.0, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency(@stock.invested_value_cents / 100.0, unit: 'R$', separator: ',', delimiter: '.') %>
     </div>
   </div>
 
   <div class="summary-item">
     <%= t('.average_paid_price') %><br />
     <div class="item-value">
-      <%= number_to_currency((@stock.average_aquisition_price), unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency((@stock.average_aquisition_price), unit: 'R$', separator: ',', delimiter: '.') %>
     </div>
   </div>
 
   <div class="summary-item">
     <%= t('.current_total_value') %><br />
     <div class="item-value">
-      <%= number_to_currency(@stock.current_total_value, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency(@stock.current_total_value, unit: 'R$', separator: ',', delimiter: '.') %>
     </div>
   </div>
 </div>
@@ -35,7 +35,7 @@
 <div class="summary-item">
   <%= t('.current_share_value') %><br />
   <div class="item-value">
-    <%= number_to_currency(@stock.current_value, unit: 'R$', separator: ',', delimiter: '') %>
+    <%= number_to_currency(@stock.current_value, unit: 'R$', separator: ',', delimiter: '.') %>
   </div>
 </div>
 

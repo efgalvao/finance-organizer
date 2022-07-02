@@ -7,35 +7,35 @@
 <div class="summary-item">
   <%= t('.current_total_balance') %><br />
   <div class="item-value">
-  <%= number_to_currency(@account.account_total, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(@account.account_total, unit: 'R$', separator: ',', delimiter: '.') %>
   </div>
 </div>
 
 <div class="summary-item">
   <%= t('.account_balance') %><br />
   <div class="item-value">
-  <%= number_to_currency((@account.balance), unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency((@account.balance), unit: 'R$', separator: ',', delimiter: '.') %>
   </div>
 </div>
 
 <div class="summary-item">
   <%= t('.current_balance_in_stocks') %><br />
   <div class="item-value">
-  <%= number_to_currency(@account.current_value_in_stocks, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(@account.current_value_in_stocks, unit: 'R$', separator: ',', delimiter: '.') %>
   </div>
 </div>
 
 <div class="summary-item">
   <%= t('.current_balance_in_treasuries') %><br />
   <div class="item-value">
-  <%= number_to_currency(@account.current_value_in_treasuries, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(@account.current_value_in_treasuries, unit: 'R$', separator: ',', delimiter: '.') %>
   </div>
 </div>
 
 <div class="summary-item">
   <%= t('.total_invested') %><br />
   <div class="item-value">
-  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '') %>
+  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '.') %>
   </div>
 </div>
 

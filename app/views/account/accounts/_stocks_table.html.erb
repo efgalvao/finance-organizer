@@ -13,9 +13,9 @@
 
         <tr>
           <td><%= @account.current_report_date %></td>
-          <td><%= number_to_currency(@account.current_report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(@account.current_report.invested, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(@account.current_report.final, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(@account.current_report.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@account.current_report.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@account.current_report.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
         </tr>
       </tbody>
     </table>
@@ -37,10 +37,10 @@
       <% @account.past_reports.each do |report| %>
         <tr>
           <td><%= l(report.date, format: :short) %></td>
-          <td><%= number_to_currency(report.incomes, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(report.expenses, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(report.invested.cents, unit: 'R$ ', separator: ',', delimiter: '') %></td>
-          <td><%= number_to_currency(report.final, unit: 'R$ ', separator: ',', delimiter: '') %></td>
+          <td><%= number_to_currency(report.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(report.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(report.invested.cents, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(report.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
         </tr>
       <% end %>
     </tbody>

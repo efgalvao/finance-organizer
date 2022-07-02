@@ -100,7 +100,7 @@ pt:
       incomes: Receitas
       expenses: Despesas
       invested: Investido
-      balance: Saldo em conta
+      balance: Balanço
       updated_invested_value: Valor atual dos investimentos
       total: Total
       monthly_balance: Saldo mensal

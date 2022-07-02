@@ -6,7 +6,7 @@
   <div class="summary-item">
     <%= t('.current_balance') %><br />
     <div class="item-value">
-      <%= number_to_currency(@account.balance, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency(@account.balance, unit: 'R$', separator: ',', delimiter: '.') %>
     </div>
   </div>
 

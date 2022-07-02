@@ -13,14 +13,14 @@
   <div class="summary-item green">
     <%= t('.total_invested')%><br />
     <div class="item-value">
-      <%= number_to_currency(@treasury.invested_value, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency(@treasury.invested_value, unit: 'R$', separator: ',', delimiter: '.') %>
     </div>
   </div>
 
   <div class="summary-item">
     <%= t('.current_amount')%><br />
     <div class="item-value">
-      <%= number_to_currency(@treasury.current_value, unit: 'R$', separator: ',', delimiter: '') %>
+      <%= number_to_currency(@treasury.current_value, unit: 'R$', separator: ',', delimiter: '.') %>
     </div>
   </div>
 </div>
@@ -70,7 +70,7 @@
         <% for position in @treasury.positions %>
         <tr>
           <td> <%= position.date.strftime('%B %d, %Y') %> </td>
-          <td> <%= number_to_currency(position.amount, unit: 'R$', separator: ',', delimiter: '') %> </td>
+          <td> <%= number_to_currency(position.amount, unit: 'R$', separator: ',', delimiter: '.') %> </td>
         <% end %>
       </tbody>
     </table>

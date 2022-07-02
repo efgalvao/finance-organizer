@@ -84,7 +84,7 @@ class UserPresenter < Oprah::Presenter
     report.expenses_cents = 0
     report.invested_cents = 0
     report.final_cents = 0
-    except_card_accounts.each do |account|
+    accounts.each do |account|
       report.incomes_cents += account.incomes.cents
       report.expenses_cents += account.expenses.cents
       report.invested_cents += account.invested.cents
