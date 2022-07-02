@@ -12,8 +12,7 @@ class UserPresenter < Oprah::Presenter
   end
 
   def updated_current_month_report
-    # binding.pry
-    create_report if current_month_report.blank?
+    create_report if reports.current_month.blank?
     update_current_user_report
     reports.current_month
   end
@@ -42,8 +41,6 @@ class UserPresenter < Oprah::Presenter
     total
   end
 
-  # check below here
-
   def semester_summary
     create_report if reports.empty? || reports.last.date.month != DateTime.current.month
     update_current_user_report
@@ -60,18 +57,14 @@ class UserPresenter < Oprah::Presenter
   end
 
   def incomes_expenses_report
+    # binding.pry
     Statements::CreateIncomesExpenses.new(self).perform
   end
 
   private
 
-  def current_month_report
-    # binding.pry
-    reports.current_month
-  end
-
   def update_current_user_report
-    user_report = current_month_report
+    user_report = reports.current_month
 
     user_report.date = DateTime.current
     user_report.total = total_amount
@@ -95,8 +88,6 @@ class UserPresenter < Oprah::Presenter
     end
     report
   end
-
-  # check below here
 
   def semester_reports
     reports.where('date > ?', Time.zone.today - 6.months).order(date: :asc)

@@ -16,7 +16,7 @@ module FinanceOrganizer
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    config.time_zone = 'Brasilia'
+    config.time_zone = 'UTC'
     config.i18n.default_locale = :pt
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 

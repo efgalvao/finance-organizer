@@ -19,7 +19,6 @@ module Statements
         report = user.reports.find_by(date: date.beginning_of_month...date.end_of_month)
         report = create_report(date) if report.nil?
         table[date.strftime('%B, %Y').to_s] = report
-        # report = create_report(date) if report.nil?
       end
       table
     end
@@ -28,7 +27,4 @@ module Statements
       user.reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
                            invested_cents: 0, final_cents: 0)
     end
-
-    def mount_income_expense; end
-  end
 end
