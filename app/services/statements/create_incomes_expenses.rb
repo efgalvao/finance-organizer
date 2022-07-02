@@ -27,4 +27,5 @@ module Statements
       user.reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
                            invested_cents: 0, final_cents: 0)
     end
+  end
 end
