@@ -2,9 +2,6 @@ module Account
   class AccountPresenter < Oprah::Presenter
     presents_one :user
     presents_many :treasuries
-    # def except_card_accounts
-    #   accounts.where.not(name: 'card').order(:name)
-    # end
 
     def account_total
       total = (sum_current_value + stocks.sum(:current_total_value_cents) + balance_cents)
@@ -36,8 +33,6 @@ module Account
     def treasuries_count
       treasuries.size
     end
-
-    #------
 
     def current_report_date
       I18n.l(current_report.date, format: :long)
@@ -97,27 +92,16 @@ module Account
       past_reports
     end
 
-    # def find_report_by_date(date = DateTime.current)
-    #   report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+    def semester_summary
+      create_report if reports.empty? || reports.last.date.month != DateTime.current.month
+      Statements::CreateAccountSummary.call(semester_reports)
+    end
 
-    #   report = create_report(date) if report.nil?
-    #   report
-    # end
-
-    # def last_semester_positions
-    #   grouped_positions = {}
-    #   binding.pry
-    #   semester_positions.each do |position|
-    #     grouped_positions[position.date.strftime('%B %d, %Y').to_s] = position.amount.to_f
-    #   end
-    #   grouped_positions
-    # end
+    def semester_reports
+      reports.where('date > ?', Time.zone.today - 6.months).order(date: :desc)
+    end
 
     private
-
-    # def semester_positions
-    #   positions.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
-    # end
 
     def create_report(date)
       reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,

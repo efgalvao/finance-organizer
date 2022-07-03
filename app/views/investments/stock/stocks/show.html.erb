@@ -120,6 +120,10 @@
   <% end %>
 </div>
 
+    <div class="summary-chart">
+      <%= line_chart @stock.last_semester_prices, precision: 8 %>
+    </div>
+
 <div class="buttons">
   <%= link_to t('.back'), :back, :class => "btn btn-primary ml-3" %>
 </div>

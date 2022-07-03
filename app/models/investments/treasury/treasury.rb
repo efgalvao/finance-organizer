@@ -12,24 +12,19 @@ module Investments
 
       delegate :user, :name, to: :account, prefix: 'account'
 
-      # def name_with_account
-      #   "#{name} (#{account.name})"
-      # end
+      def last_semester_positions
+        grouped_positions = {}
+        semester_positions.each do |position|
+          grouped_positions[position.date.strftime('%B %d, %Y').to_s] = position.amount.to_f
+        end
+        grouped_positions
+      end
 
-      # def last_semester_positions
-      #   grouped_positions = {}
-      #   binding.pry
-      #   semester_positions.each do |position|
-      #     grouped_positions[position.date.strftime('%B %d, %Y').to_s] = position.amount.to_f
-      #   end
-      #   grouped_positions
-      # end
+      private
 
-      # private
-
-      # def semester_positions
-      #   positions.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
-      # end
+      def semester_positions
+        positions.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
+      end
     end
   end
 end

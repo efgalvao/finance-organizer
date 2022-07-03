@@ -35,7 +35,7 @@ pt:
         new_transaction: Nova transação
         new_transference: Nova transferência
         monthly_balance: Saldo mensal(últimos 6 meses)
-      show_table:
+      savings_table:
         current_month: Mês atual
         last_update: Última atualizacão
         past_months: Últimos 6 meses
