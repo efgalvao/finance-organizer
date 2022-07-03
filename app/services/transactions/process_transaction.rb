@@ -11,16 +11,15 @@ module Transactions
     end
 
     def call
-      case params.fetch(:kind)
-      when 'income'
+      if params.fetch(:kind) == 'income'
         Account::UpdateAccountBalance.call(account_id: account_id, amount: value.to_f)
-      when 'expense'
+      elsif params.fetch(:kind) == 'expense'
         Account::UpdateAccountBalance.call(account_id: account_id, amount: -value.to_f)
-      when 'investment'
+      elsif params.fetch(:kind) == 'investment'
         Account::UpdateAccountBalance.call(account_id: account_id, amount: -value.to_f)
-      when 'transfer' && params[:receiver] == true
+      elsif params.fetch(:kind) == 'transfer' && params[:receiver] == true
         Account::UpdateAccountBalance.call(account_id: account_id, amount: value.to_f)
-      when 'transfer' && params[:receiver] == false
+      elsif params.fetch(:kind) == 'transfer' && params[:receiver] == false
         Account::UpdateAccountBalance.call(account_id: account_id, amount: -value.to_f)
       else
         'Invalid kind'
