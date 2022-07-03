@@ -16,7 +16,6 @@ module Account
     scope :card_accounts, -> { where(kind: 'card') }
     scope :except_card_accounts, -> { where.not(kind: 'card') }
     scope :broker_accounts, -> { where(kind: 'broker') }
-    # scope :savings_accounts, -> { where(kind: 'savings') }
 
     validates :name, presence: true, uniqueness: true
     validates :kind, presence: true
@@ -43,15 +42,6 @@ module Account
       total
     end
 
-    def last_semester_balances
-      create_balance if balances.empty?
-      grouped_balances = {}
-      semester_balances.find_each do |balance|
-        grouped_balances[balance.date.strftime('%B %d, %Y').to_s] = balance.balance.to_f
-      end
-      grouped_balances
-    end
-
     def last_semester_total_dividends_received
       grouped_dividends = {}
       stocks.each do |stock|
@@ -72,30 +62,6 @@ module Account
       current_month_balance.date = DateTime.current
       current_month_balance.save
       current_month_balance
-    end
-
-    # def total_stock_value
-    #   total = 0
-    #   total += stocks.inject(0) { |sum, stock| stock.current_total_value + sum }
-    #   total
-    # end
-
-    # def find_report_by_date(date = DateTime.current)
-    #   report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
-
-    #   report = create_report(date) if report.nil?
-    #   report
-    # end
-
-    private
-
-    # def create_report(date)
-    #   reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
-    #                   invested_cents: 0, final_cents: 0)
-    # end
-
-    def semester_balances
-      balances.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
     end
   end
 end

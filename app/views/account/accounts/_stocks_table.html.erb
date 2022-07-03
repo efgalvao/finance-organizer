@@ -39,7 +39,7 @@
           <td><%= l(report.date, format: :short) %></td>
           <td><%= number_to_currency(report.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(report.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(report.invested.cents, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(report.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(report.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
         </tr>
       <% end %>

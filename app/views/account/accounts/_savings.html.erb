@@ -17,14 +17,19 @@
   </div>
 
   <% if @account.kind == 'savings' %>
-    <%= render 'show_table' %>
+    <%= render 'savings_table' %>
 
     <div class="chart-title">
       <%= t('.monthly_balance') %><br />
     </div>
 
     <div class="summary-chart">
-      <%= line_chart @account.last_semester_balances, precision: 8 %>
+     <%= line_chart [
+      { name: 'Income', data: @account.semester_summary[:income] },
+      { name: 'Expense', data: @account.semester_summary[:expense] },
+      { name: 'Invested', data: @account.semester_summary[:invested] },
+      { name: 'Final', data: @account.semester_summary[:final] }
+       ], precision: 8 %>
     </div>
   <% end %>
 </div>
