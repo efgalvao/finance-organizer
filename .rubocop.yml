@@ -37,6 +37,7 @@ Metrics/CyclomaticComplexity:
     - 'lib/tasks/**/*'
 
 Metrics/PerceivedComplexity:
+  Max: 9
   Exclude:
     - 'lib/tasks/**/*'
 

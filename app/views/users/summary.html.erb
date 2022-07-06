@@ -69,19 +69,18 @@
   <%= render 'incomes_expenses' %>
 </div>
 
-  ----
-
 
 <div class="chart-title">
   <%= t('.monthly_balance') %><br />
 </div>
 <div class="summary-chart">
- <%# <%= line_chart [
-      # { name: 'Total', data: @user.semester_summary[:total] },
-      # { name: 'Savings', data: @user.semester_summary[:savings] },
-      # { name: 'Stocks', data: @user.semester_summary[:stocks] }
-      # ], precision: 8 %></div>
- %>
+ <%= line_chart [
+      { name: t('.total_balance'), data: @user.semester_summary[:total] },
+      { name: t('.total_cash'), data: @user.semester_summary[:savings] },
+      { name: t('.total_invested'), data: @user.semester_summary[:stocks] }
+      ], precision: 8 %>
+
+</div>
 <div class="chart-title">
   <%= t('.monthly_dividends') %><br />
 </div>

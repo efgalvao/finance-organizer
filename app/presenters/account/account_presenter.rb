@@ -58,6 +58,7 @@ module Account
       report.expenses_cents = expenses.cents
       report.invested_cents = invested.cents
       report.final_cents = total_balance.cents
+      report.save
       report
     end
 
@@ -93,7 +94,7 @@ module Account
     end
 
     def semester_summary
-      create_report if reports.empty? || reports.last.date.month != DateTime.current.month
+      current_report
       Statements::CreateAccountSummary.call(semester_reports)
     end
 
@@ -103,7 +104,7 @@ module Account
 
     private
 
-    def create_report(date)
+    def create_report(date = DateTime.current)
       reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
                       invested_cents: 0, final_cents: 0)
     end

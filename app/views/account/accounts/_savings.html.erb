@@ -25,10 +25,10 @@
 
     <div class="summary-chart">
      <%= line_chart [
-      { name: 'Income', data: @account.semester_summary[:income] },
-      { name: 'Expense', data: @account.semester_summary[:expense] },
-      { name: 'Invested', data: @account.semester_summary[:invested] },
-      { name: 'Final', data: @account.semester_summary[:final] }
+      { name: t('.incomes'), data: @account.semester_summary[:income] },
+      { name: t('.expenses'), data: @account.semester_summary[:expense] },
+      { name: t('.invested'), data: @account.semester_summary[:invested] },
+      { name: t('.balance'), data: @account.semester_summary[:final] }
        ], precision: 8 %>
     </div>
   <% end %>
