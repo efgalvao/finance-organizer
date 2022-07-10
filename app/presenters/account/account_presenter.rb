@@ -4,25 +4,25 @@ module Account
     presents_many :treasuries
 
     def account_total
-      total = (sum_current_value + stocks.sum(:current_total_value_cents) + balance_cents)
+      total = (sum_current_treasuries + sum_current_total_stocks + balance_cents)
       total / 100.0
     end
 
     def current_value_in_treasuries
-      sum_current_value / 100.0
+      sum_current_treasuries / 100.0
     end
 
     def current_value_in_stocks
-      stocks.sum(:current_total_value_cents) / 100.0
+      sum_current_total_stocks / 100.0
     end
 
     def total_invested
-      total = sum_invested_value + stocks.sum(:invested_value_cents)
+      total = sum_invested_treasuries + sum_invested_stocks
       total / 100.0
     end
 
     def updated_invested_value
-      total = sum_current_value + stocks.sum(:current_total_value_cents)
+      total = sum_current_treasuries + sum_current_total_stocks
       total / 100.0
     end
 
@@ -102,19 +102,27 @@ module Account
       reports.where('date > ?', Time.zone.today - 6.months).order(date: :desc)
     end
 
-    private
+    # private
 
     def create_report(date = DateTime.current)
       reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
                       invested_cents: 0, final_cents: 0)
     end
 
-    def sum_current_value
+    def sum_current_treasuries
       treasuries.inject(0) { |sum, elem| sum + elem.current_value_cents }
     end
 
-    def sum_invested_value
+    def sum_invested_treasuries
       treasuries.inject(0) { |sum, elem| sum + elem.invested_value_cents }
+    end
+
+    def sum_invested_stocks
+      stocks.inject(0) { |sum, elem| sum + elem.invested_value_cents }
+    end
+
+    def sum_current_total_stocks
+      stocks.inject(0) { |sum, elem| sum + elem.current_total_value_cents }
     end
   end
 end
