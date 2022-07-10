@@ -36,7 +36,7 @@ class UserPresenter < Oprah::Presenter
   def total_invested
     total = 0
     except_card_accounts.each do |account|
-      total += account.total_invested
+      total += account.updated_invested_value
     end
     total
   end
