@@ -3,10 +3,12 @@ module Account
     before_action :set_transaction, only: %i[edit update]
 
     def index
+      @account = Account.find(params[:account_id])
       @transactions = policy_scope(Transaction).where(account_id: params[:account_id]).current_month.order(date: :desc)
     end
 
     def new
+      @account = Account.find(params[:account_id])
       @transaction = Transaction.new
     end
 

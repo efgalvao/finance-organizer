@@ -1,6 +1,7 @@
 module Investments
   module Stock
     class SharesController < ApplicationController
+      before_action :set_stock, only: %i[new create]
       def new
         @share = Investments::Stock::Share.new
       end
@@ -15,6 +16,10 @@ module Investments
       end
 
       private
+
+      def set_stock
+        @stock = Investments::Stock::Stock.find(params[:stock_id])
+      end
 
       def share_params
         params.require(:share).permit(:date, :invested, :quantity).merge(stock_id: params[:stock_id])

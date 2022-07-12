@@ -111,7 +111,7 @@ pt:
         cancel: Cancelar
     transactions:
       index:
-        title: Transações
+        title: '- Transações'
         name: Nome
         value: Valor
         date: Data
@@ -122,7 +122,7 @@ pt:
         edit: Editar
         new_transaction: Nova transação
       new:
-        new_transaction: Nova transação
+        new_transaction: '- Nova transação'
         title: Título
         date: Data
         category: Categoria

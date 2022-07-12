@@ -12,6 +12,7 @@ module Investments
       end
 
       def new
+        @account = Account::Account.find(params[:account_id])
         @treasury = Investments::Treasury::Treasury.new
       end
 
