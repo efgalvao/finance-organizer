@@ -2,6 +2,7 @@ module Investments
   module Treasury
     class PositionsController < ApplicationController
       def new
+        @treasury = Investments::Treasury::Treasury.find(params[:treasury_id])
         @position = Investments::Treasury::Position.new(treasury_id: params[:treasury_id])
       end
 

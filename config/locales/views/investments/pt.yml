@@ -13,21 +13,21 @@ pt:
           value: Valor
           new_dividend: Novo dividendo
         new:
-          title: Novo dividendo
+          title: '- Novo dividendo'
           date: Data
-          value: Valor
+          value: Valor por cota
           save: Salvar
           cancel: Cancelar
       prices:
         new:
-          title: Novo preço
+          title: '- Novo preço'
           date: Data
           value: Valor
           save: Salvar
           cancel: Cancelar
       shares:
         new:
-          title: Nova cota
+          title: '- Nova cota'
           date: Data
           total_invested: Total investido
           share_amount: Quantidade de cotas
@@ -48,7 +48,7 @@ pt:
           remove: Remover
           new_stock: Nova ação
         new:
-          title: Nova ação
+          title: '- Nova ação'
           ticker: Ticker
           account: Conta
           choose_account: Escolha uma conta
@@ -89,7 +89,7 @@ pt:
           kind: Tipo
           shares: Cotas
         new:
-          title: Nova negociação
+          title: '- Nova negociação'
           date: Data
           invested: Valor
           kind: Tipo
@@ -98,7 +98,7 @@ pt:
           cancel: Cancelar
       positions:
         new:
-          title: Nova posição
+          title: '- Nova posição'
           date: Data
           amount: Valor
           save: Salvar
@@ -117,7 +117,7 @@ pt:
           remove: Remover
           new_treasury: Novo tesouro
         new:
-          title: Novo tesouro
+          title: '- Novo tesouro'
           name: Nome
           account: Conta
           choose_account: Escolha uma conta
