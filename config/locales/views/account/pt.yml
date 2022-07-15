@@ -2,7 +2,7 @@ pt:
   account:
     accounts:
       index:
-        accounts: Contas
+        title: Contas
         name: Nome
         balance: Saldo
         last_balance_date: Data do último saldo
@@ -11,7 +11,7 @@ pt:
         edit_account: Editar conta
         delete_account: Excluir conta
       new:
-        new_account: Nova conta
+        title: Nova conta
         name: Nome
         balance: Saldo
         save: Salvar
@@ -21,6 +21,7 @@ pt:
         kind_broker: Corretora
         kind_card: Cartão
       edit:
+        title: Editar conta
         name: Nome
         save: Salvar
         cancel: Cancelar
@@ -111,6 +112,7 @@ pt:
         cancel: Cancelar
     transactions:
       index:
+        header: Transações
         title: '- Transações'
         name: Nome
         value: Valor
@@ -122,6 +124,7 @@ pt:
         edit: Editar
         new_transaction: Nova transação
       new:
+        header: ' Nova transação'
         new_transaction: '- Nova transação'
         title: Título
         date: Data
