@@ -21,6 +21,7 @@ module Investments
       end
 
       def create
+        @account = Account::Account.find(stock_params[:account_id])
         @stock = Investments::Stock::CreateStock.call(stock_params)
 
         if @stock.valid?
