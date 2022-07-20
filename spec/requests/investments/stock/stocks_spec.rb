@@ -74,13 +74,14 @@ RSpec.describe 'Stock', type: :request do
   end
 
   describe 'POST /stocks' do
-    let!(:account) { create(:account) }
-    let!(:params) { { ticker: 'SLFI', account_id: account.id } }
-    let(:new_stock) { post stocks_path, params: { stock: params } }
+    let(:account) { create(:account) }
 
     before { sign_in(user) }
 
     context 'with valid data' do
+      let(:new_stock) { post stocks_path, params: { stock: params } }
+      let(:params) { { ticker: 'SLFI', account_id: account.id } }
+
       it 'creates a new Stock' do
         expect { new_stock }.to change(Investments::Stock::Stock, :count).by(1)
       end
@@ -167,7 +168,7 @@ RSpec.describe 'Stock', type: :request do
       it 'can successfully access an new stock page' do
         sign_in(user)
 
-        get new_stock_path
+        get new_stock_path(account_id: account.id)
 
         expect(response).to be_successful
       end
