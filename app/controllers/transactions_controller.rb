@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   def create
-    @transaction = Transactions::ProcessTransaction.call(transactions_params)
+    @transaction = Transactions::ProcessCreditTransaction.call(transactions_params)
 
     if @transaction
       redirect_to account_path(id: transactions_params[:account_id]), notice: 'Transaction successfully created.'
@@ -25,6 +25,6 @@ class TransactionsController < ApplicationController
 
   def transactions_params
     params.require(:transaction).permit(:title, :category_id, :account_id, :kind,
-                                        :value, :date)
+                                        :value, :parcels, :date)
   end
 end

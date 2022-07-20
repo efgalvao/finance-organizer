@@ -30,6 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 pt:
+  parcel: Parcela
   dates:
     formats:
       short: '%B, %Y'
@@ -129,6 +130,7 @@ pt:
       date: Data
       category: Categoria
       value: Valor
+      parcels: Parcelas
       save: Salvar
       cancel: Cancelar
     income:
