@@ -1,0 +1,39 @@
+<% content_for :title, t('.title') %>
+
+<div class="title">
+  <%= t('.title') %>
+</div>
+
+<div class="form">
+
+  <%= form_for :invoice_payment, url: "invoice_payment" do |form| %>
+    <div class="form-group">
+      <%= form.label t('.value'), class: "input-group-text" %>
+      <%= form.number_field :value, as: :numeric, step: :any, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.date'), class: "input-group-text" %>
+      <%= form.date_field :date, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.sender'), class: "input-group-text" %>
+      <%= form.collection_select :sender_id, policy_scope(Account::Account).except_card_accounts.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label t('.receiver'), class: "input-group-text" %>
+      <%= form.collection_select :receiver_id, policy_scope(Account::Account).card_accounts.order(:name),:id,:name, { include_blank: true }, :class => "form-control" %>
+    </div>
+
+    <br >
+    <div class="actions">
+      <%= form.submit t('.save'), :class => "btn btn-success" %>
+    </div>
+    <br />
+  <% end %>
+
+  <%= link_to t('.cancel'), :back, :class => "btn btn-info" %>
+
+</div>

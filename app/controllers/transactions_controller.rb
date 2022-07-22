@@ -21,10 +21,18 @@ class TransactionsController < ApplicationController
     @transaction = Account::Transaction.new
   end
 
+  def invoice_payment
+    Transactions::ProcessInvoicePayment.call(invoice_params)
+  end
+
   private
 
   def transactions_params
     params.require(:transaction).permit(:title, :category_id, :account_id, :kind,
                                         :value, :parcels, :date)
+  end
+
+  def invoice_params
+    params.require(:invoice_payment).permit(:value, :sender_id, :receiver_id, :date)
   end
 end
