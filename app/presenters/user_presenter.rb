@@ -7,6 +7,11 @@ class UserPresenter < Oprah::Presenter
     end
   end
 
+  def card_accounts
+    accounts.reject do |account|
+      account[:kind] != 'card'
+    end
+  end
   def formated_date
     I18n.l(updated_current_month_report.date)
   end
@@ -82,15 +87,19 @@ class UserPresenter < Oprah::Presenter
   def update_user_report(report)
     report.incomes_cents = 0
     report.expenses_cents = 0
+    report.card_expenses_cents = 0
     report.invested_cents = 0
     report.final_cents = 0
-    accounts.each do |account|
+    except_card_accounts.each do |account|
       report.incomes_cents += account.incomes.cents
       report.expenses_cents += account.expenses.cents
       report.invested_cents += account.invested.cents
       report.final_cents += account.total_balance.cents
-      report.save
     end
+    card_accounts.each do |account|
+      report.card_expenses_cents += account.expenses.cents
+    end
+    report.save
     report
   end
 

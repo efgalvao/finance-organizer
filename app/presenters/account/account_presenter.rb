@@ -72,6 +72,11 @@ module Account
                                    kind: 'expense').sum(:value_cents))
     end
 
+    def card_expenses(date = DateTime.current)
+      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+        kind: 'expense').sum(:value_cents))
+    end
+
     def invested(date = DateTime.current)
       Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
                                    kind: 'investment').sum(:value_cents))
