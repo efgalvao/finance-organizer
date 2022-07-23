@@ -23,8 +23,8 @@ class TransactionsController < ApplicationController
 
   def invoice_payment
     Transactions::ProcessInvoicePayment.call(invoice_params)
-    @user = current_user
-    render 'users/summary'
+    @user = present current_user
+    redirect_to user_summary_url
   end
 
   private

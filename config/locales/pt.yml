@@ -101,6 +101,7 @@ pt:
       accounts: Contas
       incomes: Receitas
       expenses: Despesas
+      card_expenses: Despesas no crédito
       invested: Investido
       balance: Balanço
       updated_invested_value: Valor atual dos investimentos
@@ -112,6 +113,7 @@ pt:
       month: Mês
       incomes: Receitas
       expenses: Despesas
+      card_expenses: Despesas no crédito
       invested: Investido
       total: Total
   transactions:
