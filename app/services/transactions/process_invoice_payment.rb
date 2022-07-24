@@ -25,7 +25,7 @@ module Transactions
 
     def sender_params
       { account_id: sender.id, value: value, kind: 'expense', receiver: false,
-        title: "#{I18n.t('transactions.invoice.invoice_payment')} {receiver.name}", date: date }
+        title: "#{I18n.t('transactions.invoice.invoice_payment')} #{receiver.name}", date: date }
     end
 
     def receiver_params
