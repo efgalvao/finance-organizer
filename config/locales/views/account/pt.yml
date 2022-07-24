@@ -55,6 +55,7 @@ pt:
         account_balance: Saldo da conta
         current_balance_in_stocks: Saldo atual em Renda Variável
         current_balance_in_treasuries: Saldo atual em Renda fixa
+        updated_invested_value: Valor investido atualizado
         total_invested: Total investido
         stocks_amount: Quantidade de renda variável
         treasuries_amount: Quantidade de renda fixa
