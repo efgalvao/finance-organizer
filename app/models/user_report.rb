@@ -5,6 +5,7 @@ class UserReport < ApplicationRecord
   monetize :stocks_cents
   monetize :incomes_cents
   monetize :expenses_cents
+  monetize :card_expenses_cents
   monetize :invested_cents
   monetize :final_cents
   monetize :total_cents

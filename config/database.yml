@@ -3,8 +3,8 @@ default: &default
   pool: 5
   timeout: 5000
   encoding: utf8
-  username: <%= ENV['DB_USERNAME'] || 'root' %>
-  password: "<%= ENV['DB_PASSWORD'] || 'root' %>"
+  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
+  password: "<%= ENV['DB_PASSWORD'] || 'postgres' %>"
   host: <%= ENV['DB_HOST'] || '127.0.0.1' %>
 
 development:

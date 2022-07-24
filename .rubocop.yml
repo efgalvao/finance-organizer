@@ -31,6 +31,9 @@ Rails:
 Style/Documentation:
   Enabled: false
 
+Layout/AccessModifierIndentation:
+  EnforcedStyle: indent
+
 Metrics/CyclomaticComplexity:
   Max: 9
   Exclude:
@@ -49,6 +52,7 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Exclude:
     - lib/tasks/*.rake
+    - app/presenters/**/*
 
 Layout/LineLength:
   Exclude:
@@ -115,13 +119,8 @@ RSpec/InstanceVariable:
 RSpec/NamedSubject:
   Enabled: true
 
-
 RSpec/AnyInstance:
   Enabled: true
-
-RSpec/MultipleExpectations:
-  Exclude:
-    - spec/controllers/**/*
 
 Style/FrozenStringLiteralComment:
   Enabled: false

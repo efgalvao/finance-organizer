@@ -28,6 +28,7 @@
         <tr>
           <th><%= t('.incomes') %></th>
           <th><%= t('.expenses') %></th>
+          <th><%= t('.card_expenses') %></th>
           <th><%= t('.invested') %></th>
           <th><%= t('.balance') %></th>
         </tr>
@@ -36,6 +37,7 @@
         <tr>
           <td><%= number_to_currency(@user.updated_current_month_report.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(@user.updated_current_month_report.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@user.updated_current_month_report.card_expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(@user.updated_current_month_report.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(@user.updated_current_month_report.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
         </tr>

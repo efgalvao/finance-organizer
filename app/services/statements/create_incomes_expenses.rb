@@ -24,7 +24,7 @@ module Statements
     end
 
     def create_report(date)
-      user.reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
+      user.reports.create!(date: date, incomes_cents: 0, expenses_cents: 0, card_expenses_cents: 0,
                            invested_cents: 0, final_cents: 0)
     end
   end
