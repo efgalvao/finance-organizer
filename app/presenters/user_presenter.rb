@@ -8,10 +8,11 @@ class UserPresenter < Oprah::Presenter
   end
 
   def card_accounts
-    accounts.reject do |account|
-      account[:kind] != 'card'
+    accounts.select do |account|
+      account[:kind] == 'card'
     end
   end
+
   def formated_date
     I18n.l(updated_current_month_report.date)
   end

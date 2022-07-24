@@ -52,6 +52,7 @@ Metrics/AbcSize:
 Metrics/ClassLength:
   Exclude:
     - lib/tasks/*.rake
+    - app/presenters/**/*
 
 Layout/LineLength:
   Exclude:

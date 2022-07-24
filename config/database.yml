@@ -6,7 +6,6 @@ default: &default
   username: <%= ENV['DB_USERNAME'] || 'postgres' %>
   password: "<%= ENV['DB_PASSWORD'] || 'postgres' %>"
   host: <%= ENV['DB_HOST'] || '127.0.0.1' %>
-  # host: db
 
 development:
   <<: *default

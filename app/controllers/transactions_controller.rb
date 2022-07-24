@@ -25,6 +25,9 @@ class TransactionsController < ApplicationController
     Transactions::ProcessInvoicePayment.call(invoice_params)
     @user = present current_user
     redirect_to user_summary_url
+  rescue StandardError => e
+    @user = present current_user
+    redirect_to user_summary_url, notice: e.message.to_s, status: :unprocessable_entity
   end
 
   private
