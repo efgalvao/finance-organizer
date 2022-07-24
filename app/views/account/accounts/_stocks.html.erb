@@ -4,54 +4,41 @@
   </div>
 </div>
 
-<div class="summary-item">
-  <%= t('.current_total_balance') %><br />
-  <div class="item-value">
-  <%= number_to_currency(@account.account_total, unit: 'R$', separator: ',', delimiter: '.') %>
-  </div>
+<div class="chart-title">
+  Resumo
 </div>
 
 <div class="summary-item">
-  <%= t('.account_balance') %><br />
-  <div class="item-value">
-  <%= number_to_currency((@account.balance), unit: 'R$', separator: ',', delimiter: '.') %>
-  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Saldo</th>
+        <th>Saldo + Investimentos</th>
+        <th>Investido</th>
+        <th><%= t('.updated_invested_value') %></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= number_to_currency(@account.balance, unit: 'R$', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@account.account_total, unit: 'R$', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '.') %></td>
+          <td> <%= number_to_currency(@account.updated_invested_value, unit: 'R$', separator: ',', delimiter: '.') %>
+        </tr>
+    </tbody>
+  </table>
 </div>
 
-<div class="summary-item">
-  <%= t('.current_balance_in_stocks') %><br />
-  <div class="item-value">
-  <%= number_to_currency(@account.current_value_in_stocks, unit: 'R$', separator: ',', delimiter: '.') %>
-  </div>
-</div>
 
-<div class="summary-item">
-  <%= t('.current_balance_in_treasuries') %><br />
-  <div class="item-value">
-  <%= number_to_currency(@account.current_value_in_treasuries, unit: 'R$', separator: ',', delimiter: '.') %>
-  </div>
-</div>
+<% if @account.stocks_count > 0 %>
+  <%= render 'stocks_summary' %>
+<% end %>
 
-<div class="summary-item">
-  <%= t('.total_invested') %><br />
-  <div class="item-value">
-  <%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '.') %>
-  </div>
-</div>
+</br>
 
-<div class="summary-item">
-  <%= t('.stocks_amount') %><br />
-  <div class="item-value">
-  <%= @account.stocks_count %>
-  </div>
-</div>
-
-<div class="summary-item">
-  <%= t('.treasuries_amount') %><br />
-  <div class="item-value">
-  <%= @account.treasuries_count %>
-  </div>
-</div>
+<% if @account.treasuries_count > 0 %>
+  <%= render 'treasuries_summary' %>
+<% end %>
 
 <div>
   <%= link_to t('.transactions'), account_transactions_path(@account), class:'btn btn-success' %>
