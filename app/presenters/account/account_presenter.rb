@@ -4,26 +4,23 @@ module Account
     presents_many :treasuries
 
     def account_total
-      total = (sum_current_treasuries + sum_current_total_stocks + balance_cents)
-      total / 100.0
+      (sum_current_treasuries + sum_current_total_stocks + balance_cents / 100.0)
     end
 
     def current_value_in_treasuries
-      sum_current_treasuries / 100.0
+      sum_current_treasuries
     end
 
     def current_value_in_stocks
-      sum_current_total_stocks / 100.0
+      sum_current_total_stocks
     end
 
     def total_invested
-      total = sum_invested_treasuries + sum_invested_stocks
-      total / 100.0
+      sum_invested_treasuries + sum_invested_stocks
     end
 
     def updated_invested_value
-      total = sum_current_treasuries + sum_current_total_stocks
-      total / 100.0
+      sum_current_treasuries + sum_current_total_stocks
     end
 
     def stocks_count
@@ -115,19 +112,19 @@ module Account
     end
 
     def sum_current_treasuries
-      treasuries.inject(0) { |sum, elem| sum + elem.current_value_cents }
+      treasuries.inject(0) { |sum, elem| sum + elem.current_value_cents } / 100
     end
 
     def sum_invested_treasuries
-      treasuries.inject(0) { |sum, elem| sum + elem.invested_value_cents }
+      treasuries.inject(0) { |sum, elem| sum + elem.invested_value_cents } / 100
     end
 
     def sum_invested_stocks
-      stocks.inject(0) { |sum, elem| sum + elem.invested_value_cents }
+      stocks.inject(0) { |sum, elem| sum + elem.invested_value_cents } / 100
     end
 
     def sum_current_total_stocks
-      stocks.inject(0) { |sum, elem| sum + elem.current_total_value_cents }
+      stocks.inject(0) { |sum, elem| sum + elem.current_total_value_cents } / 100
     end
   end
 end
