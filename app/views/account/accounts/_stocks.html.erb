@@ -5,16 +5,16 @@
 </div>
 
 <div class="chart-title">
-  Resumo
+  <%= t('.summary') %>
 </div>
 
 <div class="summary-item">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Saldo</th>
-        <th>Saldo + Investimentos</th>
-        <th>Investido</th>
+        <th><%= t('.balance') %></th>
+        <th><%= t('.balance_plus_investments') %></th>
+        <th><%= t('.invested') %></th>
         <th><%= t('.updated_invested_value') %></th>
       </tr>
     </thead>
@@ -40,7 +40,7 @@
   <%= render 'treasuries_summary' %>
 <% end %>
 
-<div>
+<div class="summary-item">
   <%= link_to t('.transactions'), account_transactions_path(@account), class:'btn btn-success' %>
   <%= link_to t('.new_transaction'), new_account_transaction_path(@account), :class => "btn btn-success ml-3" %>
   <%= link_to t('.new_transference'), new_transference_path, :class => "btn btn-success ml-3" %>

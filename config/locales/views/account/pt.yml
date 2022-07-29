@@ -51,20 +51,27 @@ pt:
         balance: Saldo
       stocks:
         summary_for: Resumo para
-        current_total_balance: Saldo atual total
-        account_balance: Saldo da conta
-        current_balance_in_stocks: Saldo atual em Renda Variável
-        current_balance_in_treasuries: Saldo atual em Renda fixa
+        summary: Resumo
+        balance: Saldo
+        balance_plus_investments: Saldo + Investimentos
+        invested: Investido
         updated_invested_value: Valor investido atualizado
-        total_invested: Total investido
-        stocks_amount: Quantidade de renda variável
-        treasuries_amount: Quantidade de renda fixa
         transactions: Transações
         new_transaction: Nova transação
         new_transference: Nova transferência
         new_stock: Nova ação
         new_treasury: Novo tesouro
         monthly_balance: Saldo mensal(últimos 6 meses)
+      stocks_summary:
+        title: Renda variável
+        invested: Investido
+        updated: Atualizado
+        quantity: Quantidade
+      treasuries_summary:
+        title: Renda fixa
+        invested: Investido
+        updated: Atualizado
+        quantity: Quantidade
       stocks_list:
         stocks: Renda variável
         name: Nome
