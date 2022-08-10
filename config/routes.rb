@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     end
 
     resources :treasuries, controller: 'treasury/treasuries' do
+      get 'release_form', on: :member
+      post 'release', on: :member
       resources :negotiations, only: %i[index new create], controller: 'treasury/negotiations'
       resources :positions, only: %i[new create], controller: 'treasury/positions'
     end

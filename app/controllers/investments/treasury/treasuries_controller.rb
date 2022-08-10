@@ -1,7 +1,7 @@
 module Investments
   module Treasury
     class TreasuriesController < ApplicationController
-      before_action :set_treasury, only: %i[show edit update destroy]
+      before_action :set_treasury, only: %i[show edit update destroy release release_form]
 
       def index
         @treasuries = policy_scope(Investments::Treasury::Treasury).all.includes(:positions).order(name: :asc)
@@ -51,6 +51,26 @@ module Investments
                     notice: 'Treasury successfully removed.'
       end
 
+      def release_form
+        # binding.pry
+        authorize @treasury
+
+        # Investments::Treasury::ReleaseTreasury.call(@treasury)
+
+        # redirect_to account_path(id: @treasury.account_id),
+        #             notice: 'Treasury successfully released.'
+      end
+
+      def release
+        # binding.pry
+        authorize @treasury
+
+        Investments::Treasury::ReleaseTreasury.call(release_params)
+
+        redirect_to account_path(id: @treasury.account_id),
+                    notice: 'Treasury successfully released.'
+      end
+
       private
 
       def set_treasury
@@ -59,6 +79,10 @@ module Investments
 
       def treasury_params
         params.require(:treasury).permit(:name, :account_id).merge(treasury_id: params[:id])
+      end
+
+      def release_params
+        params.require(:treasury).permit(:released_at, :released_value).merge(treasury_id: params[:id])
       end
     end
   end

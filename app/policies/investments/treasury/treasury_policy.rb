@@ -29,6 +29,14 @@ module Investments
         owner?
       end
 
+      def release_form?
+        owner?
+      end
+
+      def release?
+        owner?
+      end
+
       class Scope < Scope
         def resolve
           Treasury.includes(:account).where(account: { user_id: @user.id })

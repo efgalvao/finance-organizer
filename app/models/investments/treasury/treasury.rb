@@ -9,6 +9,7 @@ module Investments
 
       monetize :invested_value_cents
       monetize :current_value_cents
+      monetize :released_value_cents
 
       delegate :user, :name, to: :account, prefix: 'account'
 
@@ -25,6 +26,10 @@ module Investments
       def semester_positions
         positions.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
       end
+
+      # def not_released
+      #   where(released_at: nil)
+      # end
     end
   end
 end
