@@ -62,7 +62,7 @@ RSpec.describe 'Transferences', type: :request do
           receiver_id: sender.id, user_id: user.id }
       end
 
-      it 'does not create a new transaction' do
+      it 'does not create a new transference' do
         post_transference
 
         expect { post_transference }.not_to change(Transference, :count)

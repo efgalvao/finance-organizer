@@ -63,5 +63,9 @@ module Account
       current_month_balance.save
       current_month_balance
     end
+
+    def not_released_treasuries
+      treasuries.where(released_at: nil)
+    end
   end
 end

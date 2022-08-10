@@ -28,7 +28,7 @@ module Account
     end
 
     def treasuries_count
-      treasuries.size
+      not_released_treasuries.size
     end
 
     def current_report_date
@@ -112,11 +112,11 @@ module Account
     end
 
     def sum_current_treasuries
-      treasuries.inject(0) { |sum, elem| sum + elem.current_value_cents } / 100
+      not_released_treasuries.inject(0) { |sum, elem| sum + elem.current_value_cents } / 100
     end
 
     def sum_invested_treasuries
-      treasuries.inject(0) { |sum, elem| sum + elem.invested_value_cents } / 100
+      not_released_treasuries.inject(0) { |sum, elem| sum + elem.invested_value_cents } / 100
     end
 
     def sum_invested_stocks
