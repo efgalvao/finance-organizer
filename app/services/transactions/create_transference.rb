@@ -14,11 +14,14 @@ module Transactions
     end
 
     def call
+      transference = Transference.new(transference_params)
       ActiveRecord::Base.transaction do
-        Transference.create!(transference_params)
+        transference.save!
         Transactions::ProcessTransaction.call(sender_params)
         Transactions::ProcessTransaction.call(receiver_params)
       end
+    rescue StandardError
+      transference
     end
 
     private

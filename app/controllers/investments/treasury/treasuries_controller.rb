@@ -4,7 +4,9 @@ module Investments
       before_action :set_treasury, only: %i[show edit update destroy release release_form]
 
       def index
-        @treasuries = policy_scope(Investments::Treasury::Treasury).all.includes(:positions).order(name: :asc)
+        @treasuries = policy_scope(Investments::Treasury::Treasury)
+                      .where(released_at: nil)
+                      .includes(:positions).order(name: :asc)
       end
 
       def show

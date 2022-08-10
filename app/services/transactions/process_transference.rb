@@ -11,9 +11,6 @@ module Transactions
     end
 
     def call
-      # tratar retorno no controller
-      return 'Sender and receiver are the same' if sender == receiver
-
       Transactions::CreateTransference.call(params)
     end
 

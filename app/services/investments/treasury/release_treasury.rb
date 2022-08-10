@@ -22,10 +22,8 @@ module Investments
 
       def release_treasury(_params)
         ActiveRecord::Base.transaction do
-          # treasury = Investments::Treasury::Treasury.find(params[:treasury_id])
           treasury.released_at = released_at
           treasury.released_value = released_value
-          binding.pry
           Transactions::ProcessTransaction.call(transaction_params)
           treasury.save!
         end

@@ -48,7 +48,7 @@
 </div>
 
 <div class="summary-chart">
-  <%= line_chart @account.treasuries.map { |treasury| {
+  <%= line_chart @account.not_released_treasuries.map { |treasury| {
       name: treasury.name, data: treasury.last_semester_positions
       } }, precision: 8 %>
 </div>

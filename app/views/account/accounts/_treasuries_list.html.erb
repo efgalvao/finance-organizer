@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @account.treasuries.each do |treasury| %>
+      <% @account.not_released_treasuries.each do |treasury| %>
         <tr>
           <td><%= link_to treasury.name, treasury_path(treasury) %></td>
           <td><%= treasury.invested_value %></td>
