@@ -11,9 +11,8 @@ module Account
     enum kind: { expense: 0, income: 1, transfer: 2, investment: 3 }
 
     scope :current_month, lambda {
-      where('date >= ? AND date <= ?',
-            Date.current.beginning_of_month,
-            Date.current.end_of_month)
+      where('date >= ?',
+            Date.current - 30.days)
     }
 
     delegate :user, :name, to: :account, prefix: 'account'
