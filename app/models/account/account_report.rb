@@ -6,7 +6,7 @@ module Account
     monetize :expenses_cents
     monetize :invested_cents
     monetize :final_cents
-
+    monetize :dividends_cents
     validates :account_id, presence: true
 
     scope :current_month, lambda {
