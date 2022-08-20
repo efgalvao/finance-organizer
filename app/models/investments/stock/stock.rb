@@ -42,8 +42,9 @@ module Investments
       def semester_total_dividends
         grouped_dividends = {}
         last_semester_dividends.each do |dividend|
+          # binding.pry
           grouped_dividends[dividend.date.strftime('%B/%Y').to_s] =
-            dividend.value.to_f * shares.where('date <= ?', dividend.date).count
+            dividend.value.to_f * shares.where('date <= ?', dividend.date).sum(:quantity)
         end
         grouped_dividends
       end

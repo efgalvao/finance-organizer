@@ -40,23 +40,35 @@ module Account
       report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
 
       report = create_current_report if report.nil?
-      update_account_report(report)
+      # update_account_report(report: report)
       report
     end
 
     def create_current_report
-      reports.create!(date: Date.current, incomes_cents: incomes.cents, expenses_cents: expenses.cents,
-                      invested_cents: invested.cents, final_cents: total_balance.cents)
+      reports.create!(account_report_params)
     end
 
-    def update_account_report(report)
-      report.date = DateTime.current
-      report.incomes_cents = incomes.cents
-      report.expenses_cents = expenses.cents
-      report.invested_cents = invested.cents
-      report.final_cents = total_balance.cents
-      report.save
-      report
+    # move to service Account::UpdateAccountReport.call(report, params)
+    def update_account_report(report:)
+      # Account::UpdateAccountReport.call(report: report, params: account_report_params)
+      # report.date = DateTime.current
+      # report.incomes_cents = incomes.cents
+      # report.expenses_cents = expenses.cents
+      # report.invested_cents = invested.cents
+      # report.final_cents = total_balance.cents
+      # report.save
+      # report
+    end
+
+    def account_report_params
+      {
+        date: DateTime.current,
+        incomes_cents: incomes.cents,
+        expenses_cents: expenses.cents,
+        invested_cents: invested.cents,
+        dividends_cents: dividend.cents,
+        final_cents: total_balance.cents
+      }
     end
 
     def incomes(date = DateTime.current)
@@ -83,6 +95,7 @@ module Account
       Money.new(incomes(date) - expenses(date) - invested(date))
     end
 
+    # VERIFY
     def past_reports
       past_reports = []
       (1..6).each do |n|
@@ -95,13 +108,36 @@ module Account
       past_reports
     end
 
+    # def semester_reports
+    #   past_reports = []
+    #   (0..6).each do |n|
+    #     date = DateTime.current - n.month
+    #     report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+
+    #     report = create_report(date) if report.nil?
+    #     past_reports << report
+    #   end
+    #   past_reports
+    # end
+
     def semester_summary
       current_report
       Statements::CreateAccountSummary.call(semester_reports)
     end
 
     def semester_reports
+      # binding.pry
       reports.where('date > ?', Time.zone.today - 6.months).order(date: :desc)
+    end
+
+    def last_semester_total_dividends_received
+      grouped_dividends = {}
+      semester_reports.each do |report|
+        # dividends = report.dividends_cents
+        grouped_dividends[report.date.strftime('%B %d, %Y').to_s] = report.dividends.to_f
+      end
+      # binding.pry
+      grouped_dividends
     end
 
     # private

@@ -17,6 +17,8 @@ module Investments
           Investments::Stock::Dividend.create!(dividend_params)
 
           Transactions::ProcessTransaction.call(transactions_params)
+
+          AccountReport::UpdateAccountReport.call(account_id: stock.account_id, params: update_report_params)
         end
       end
 
@@ -35,6 +37,13 @@ module Investments
           title: "#{stock.ticker} dividends",
           date: date,
           kind: 'income'
+        }
+      end
+
+      def update_report_params
+        {
+          date: date,
+          dividends_cents: (value.to_f * stock.shares_total) * 100
         }
       end
 
