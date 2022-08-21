@@ -42,14 +42,14 @@ module Account
       total
     end
 
-    def last_semester_total_dividends_received
-      grouped_dividends = {}
-      stocks.each do |stock|
-        dividends = stock.semester_total_dividends
-        grouped_dividends = grouped_dividends.merge(dividends) { |_k, a_value, b_value| a_value + b_value }
-      end
-      grouped_dividends
-    end
+    # def last_semester_total_dividends_received
+    #   grouped_dividends = {}
+    #   stocks.each do |stock|
+    #     dividends = stock.semester_total_dividends
+    #     grouped_dividends = grouped_dividends.merge(dividends) { |_k, a_value, b_value| a_value + b_value }
+    #   end
+    #   grouped_dividends
+    # end
 
     def owner?(asker)
       user == asker

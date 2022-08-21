@@ -55,9 +55,8 @@ class UserPresenter < Oprah::Presenter
 
   def last_semester_total_dividends
     grouped_dividends = {}
-    accounts.each do |account|
-      dividends = account.last_semester_total_dividends_received
-      grouped_dividends = grouped_dividends.merge(dividends) { |_k, a_value, b_value| a_value + b_value }
+    semester_reports.each do |report|
+      grouped_dividends[report.date.strftime('%B %Y').to_s] = report.dividends.to_f
     end
     grouped_dividends
   end

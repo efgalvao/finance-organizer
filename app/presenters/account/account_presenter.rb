@@ -40,23 +40,22 @@ module Account
       report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
 
       report = create_current_report if report.nil?
-      update_account_report(report)
       report
     end
 
     def create_current_report
-      reports.create!(date: Date.current, incomes_cents: incomes.cents, expenses_cents: expenses.cents,
-                      invested_cents: invested.cents, final_cents: total_balance.cents)
+      reports.create!(account_report_params)
     end
 
-    def update_account_report(report)
-      report.date = DateTime.current
-      report.incomes_cents = incomes.cents
-      report.expenses_cents = expenses.cents
-      report.invested_cents = invested.cents
-      report.final_cents = total_balance.cents
-      report.save
-      report
+    def account_report_params
+      {
+        date: DateTime.current,
+        incomes_cents: incomes.cents,
+        expenses_cents: expenses.cents,
+        invested_cents: invested.cents,
+        dividends_cents: dividend.cents,
+        final_cents: total_balance.cents
+      }
     end
 
     def incomes(date = DateTime.current)
@@ -83,6 +82,7 @@ module Account
       Money.new(incomes(date) - expenses(date) - invested(date))
     end
 
+    # VERIFY
     def past_reports
       past_reports = []
       (1..6).each do |n|
@@ -104,7 +104,13 @@ module Account
       reports.where('date > ?', Time.zone.today - 6.months).order(date: :desc)
     end
 
-    # private
+    def last_semester_total_dividends_received
+      grouped_dividends = {}
+      semester_reports.each do |report|
+        grouped_dividends[report.date.strftime('%B %d, %Y').to_s] = report.dividends.to_f
+      end
+      grouped_dividends
+    end
 
     def create_report(date = DateTime.current)
       reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,

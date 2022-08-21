@@ -9,6 +9,7 @@ RSpec.describe Account::AccountReport, type: :model do
     it { is_expected.to monetize(:incomes) }
     it { is_expected.to monetize(:expenses) }
     it { is_expected.to monetize(:invested) }
+    it { is_expected.to monetize(:dividends) }
     it { is_expected.to monetize(:final) }
   end
 

@@ -12,6 +12,7 @@ module Investments
       validates :account, presence: true
 
       delegate :user, :name, to: :account, prefix: 'account'
+      delegate :id, to: :'account.user', prefix: 'user'
 
       def ticker_with_account
         "#{ticker} (#{account.name})"
@@ -39,14 +40,15 @@ module Investments
       #   grouped_dividends
       # end
 
-      def semester_total_dividends
-        grouped_dividends = {}
-        last_semester_dividends.each do |dividend|
-          grouped_dividends[dividend.date.strftime('%B/%Y').to_s] =
-            dividend.value.to_f * shares.where('date <= ?', dividend.date).count
-        end
-        grouped_dividends
-      end
+      # def semester_total_dividends
+      #   grouped_dividends = {}
+      #   last_semester_dividends.each do |dividend|
+      #     # binding.pry
+      #     grouped_dividends[dividend.date.strftime('%B/%Y').to_s] =
+      #       dividend.value.to_f * shares.where('date <= ?', dividend.date).sum(:quantity)
+      #   end
+      #   grouped_dividends
+      # end
 
       private
 
@@ -54,9 +56,9 @@ module Investments
         prices.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
       end
 
-      def last_semester_dividends
-        dividends.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
-      end
+      # def last_semester_dividends
+      #   dividends.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
+      # end
     end
   end
 end

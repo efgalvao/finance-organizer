@@ -6,7 +6,7 @@ RSpec.describe Investments::Stock::CreateDividend, type: :service do
 
   describe '#call' do
     context 'with valid data' do
-      let(:params) { { stock_id: stock.id, value: 1, date: Date.current } }
+      let(:params) { { stock_id: stock.id, value: 1, date: '2019-09-22' } }
 
       it 'creates a new dividend' do
         expect { described_class.call(params) }.to change(Investments::Stock::Dividend, :count).by(1)

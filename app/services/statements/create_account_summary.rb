@@ -17,12 +17,13 @@ module Statements
     private
 
     def mount_summary
-      summary = { income: {}, expense: {}, invested: {}, final: {} }
+      summary = { income: {}, expense: {}, invested: {}, final: {}, dividends: {} }
       semester_reports.each do |report|
         summary[:income][report.date.strftime('%B %d, %Y').to_s] = report.incomes.to_f
         summary[:expense][report.date.strftime('%B %d, %Y').to_s] = report.expenses.to_f
         summary[:invested][report.date.strftime('%B %d, %Y').to_s] = report.invested.to_f
         summary[:final][report.date.strftime('%B %d, %Y').to_s] = report.final.to_f
+        summary[:dividends][report.date.strftime('%B %d, %Y').to_s] = report.dividends.to_f
       end
       summary
     end
