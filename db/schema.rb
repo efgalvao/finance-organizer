@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_17_104614) do
+ActiveRecord::Schema.define(version: 2022_08_21_114830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(version: 2022_08_17_104614) do
     t.integer "invested_cents", default: 0, null: false
     t.integer "final_cents", default: 0, null: false
     t.integer "card_expenses_cents", default: 0, null: false
+    t.integer "dividends_cents", default: 0, null: false
     t.index ["user_id"], name: "index_user_reports_on_user_id"
   end
 
