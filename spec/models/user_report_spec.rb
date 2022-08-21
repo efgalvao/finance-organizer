@@ -9,5 +9,6 @@ RSpec.describe UserReport, type: :model do
     it { is_expected.to monetize(:savings) }
     it { is_expected.to monetize(:stocks) }
     it { is_expected.to monetize(:total) }
+    it { is_expected.to monetize(:dividends) }
   end
 end
