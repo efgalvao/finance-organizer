@@ -4,7 +4,7 @@ ActiveAdmin.register UserReport do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :date, :savings_cents, :stocks_cents, :total_cents
+  permit_params :date, :savings_cents, :stocks_cents, :total_cents, :dividends_cents
   #
   # or
   #

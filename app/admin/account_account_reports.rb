@@ -4,7 +4,7 @@ ActiveAdmin.register Account::AccountReport do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :date, :incomes_cents, :expenses_cents, :invested_cents, :final_cents, :account_id
+  permit_params :date, :incomes_cents, :expenses_cents, :invested_cents, :final_cents, :account_id, :dividends_cents
   #
   # or
   #
