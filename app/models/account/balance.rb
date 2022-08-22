@@ -10,8 +10,6 @@ module Account
                               DateTime.current.end_of_month)
                     }
 
-    scope :newest_balance, -> { order('date desc').limit(1) }
-
     delegate :name, to: :account, prefix: 'account'
   end
 end
