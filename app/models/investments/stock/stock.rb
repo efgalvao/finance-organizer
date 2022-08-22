@@ -32,33 +32,11 @@ module Investments
         grouped_prices
       end
 
-      # def last_semester_individual_dividends
-      #   grouped_dividends = {}
-      #   last_semester_dividends.each do |dividend|
-      #     grouped_dividends[dividend.date.strftime('%B/%Y').to_s] = dividend.value.to_f
-      #   end
-      #   grouped_dividends
-      # end
-
-      # def semester_total_dividends
-      #   grouped_dividends = {}
-      #   last_semester_dividends.each do |dividend|
-      #     # binding.pry
-      #     grouped_dividends[dividend.date.strftime('%B/%Y').to_s] =
-      #       dividend.value.to_f * shares.where('date <= ?', dividend.date).sum(:quantity)
-      #   end
-      #   grouped_dividends
-      # end
-
       private
 
       def semester_prices
         prices.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
       end
-
-      # def last_semester_dividends
-      #   dividends.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
-      # end
     end
   end
 end

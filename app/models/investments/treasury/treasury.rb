@@ -26,10 +26,6 @@ module Investments
       def semester_positions
         positions.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
       end
-
-      # def not_released
-      #   where(released_at: nil)
-      # end
     end
   end
 end
