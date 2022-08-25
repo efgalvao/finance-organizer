@@ -1,8 +1,5 @@
 module Account
-  class AccountPresenter < Oprah::Presenter
-    presents_one :user
-    presents_many :treasuries
-
+  class AccountPresenter < SimpleDelegator
     def account_total
       (sum_current_treasuries + sum_current_total_stocks + balance_cents / 100.0)
     end

@@ -1,15 +1,22 @@
-class UserPresenter < Oprah::Presenter
-  presents_many :accounts
+class UserPresenter < SimpleDelegator
+  def memoized_accounts
+    @memoized_accounts ||= accounts.includes([:stocks])
+  end
 
   def except_card_accounts
-    accounts.reject do |account|
+    @except_card_accounts ||= memoized_accounts.reject do |account|
+      # binding.pry
       account[:kind] == 'card'
+    end.map do |account|
+      Account::AccountPresenter.new(account)
     end
   end
 
   def card_accounts
-    accounts.select do |account|
+    @card_accounts ||= memoized_accounts.select do |account|
       account[:kind] == 'card'
+    end.map do |account|
+      Account::AccountPresenter.new(account)
     end
   end
 
@@ -26,6 +33,7 @@ class UserPresenter < Oprah::Presenter
   def total_amount
     total = 0
     except_card_accounts.each do |account|
+      account = Account::AccountPresenter.new(account)
       total += account.account_total
     end
     total
@@ -34,6 +42,7 @@ class UserPresenter < Oprah::Presenter
   def total_balance
     total = 0
     except_card_accounts.each do |account|
+      account = Account::AccountPresenter.new(account)
       total += account.balance
     end
     total
@@ -42,6 +51,7 @@ class UserPresenter < Oprah::Presenter
   def total_invested
     total = 0
     except_card_accounts.each do |account|
+      account = Account::AccountPresenter.new(account)
       total += account.updated_invested_value
     end
     total
@@ -91,12 +101,14 @@ class UserPresenter < Oprah::Presenter
     report.invested_cents = 0
     report.final_cents = 0
     except_card_accounts.each do |account|
+      account = Account::AccountPresenter.new(account)
       report.incomes_cents += account.incomes.cents
       report.expenses_cents += account.expenses.cents
       report.invested_cents += account.invested.cents
       report.final_cents += account.total_balance.cents
     end
     card_accounts.each do |account|
+      account = Account::AccountPresenter.new(account)
       report.card_expenses_cents += account.expenses.cents
     end
     report.save
