@@ -1,8 +1,6 @@
 module Investments
   module Treasury
-    class TreasuryPresenter < Oprah::Presenter
-      presents_one :account
-
+    class TreasuryPresenter < SimpleDelegator
       def last_semester_positions
         grouped_positions = {}
         semester_positions.each do |position|

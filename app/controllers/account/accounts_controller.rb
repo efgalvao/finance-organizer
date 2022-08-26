@@ -1,13 +1,13 @@
 module Account
   class AccountsController < ApplicationController
-    before_action :set_account, only: %i[edit update destroy]
+    before_action :set_account, only: %i[edit update destroy show]
 
     def index
       @accounts = policy_scope(Account).except_card_accounts.order(name: :asc)
     end
 
     def show
-      @account = present Account.find(params[:id])
+      @account = AccountPresenter.new(@account)
       authorize(@account)
     end
 
