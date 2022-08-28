@@ -1,6 +1,6 @@
 class UserPresenter < SimpleDelegator
   def memoized_accounts
-    @memoized_accounts ||= accounts.includes([:stocks])
+    @memoized_accounts ||= accounts.includes([:stocks]).order('name')
   end
 
   def except_card_accounts
