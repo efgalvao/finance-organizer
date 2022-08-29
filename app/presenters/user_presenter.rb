@@ -1,22 +1,20 @@
 class UserPresenter < SimpleDelegator
   def memoized_accounts
-    @memoized_accounts ||= accounts.includes([:stocks]).order('name')
+    @memoized_accounts ||= accounts.includes([:stocks]).order('name').map do |account|
+      Account::AccountPresenter.new(account)
+    end
   end
 
   def except_card_accounts
-    @except_card_accounts ||= memoized_accounts.reject do |account|
-      # binding.pry
-      account[:kind] == 'card'
-    end.map do |account|
-      Account::AccountPresenter.new(account)
+    binding.pry
+    @except_card_accounts ||= memoized_accounts.select do |account|
+      account[:kind] == 'broker' || account[:kind] == 'savings'
     end
   end
 
   def card_accounts
     @card_accounts ||= memoized_accounts.select do |account|
       account[:kind] == 'card'
-    end.map do |account|
-      Account::AccountPresenter.new(account)
     end
   end
 
