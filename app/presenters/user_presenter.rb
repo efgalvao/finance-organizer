@@ -4,19 +4,16 @@ class UserPresenter < SimpleDelegator
   end
 
   def except_card_accounts
-    @except_card_accounts ||= memoized_accounts.reject do |account|
-      # binding.pry
-      account[:kind] == 'card'
-    end.map do |account|
-      Account::AccountPresenter.new(account)
+    @except_card_accounts ||= begin
+      accounts = memoized_accounts.reject { |account| account[:kind] == 'card' }
+      present_accounts(accounts: accounts)
     end
   end
 
   def card_accounts
-    @card_accounts ||= memoized_accounts.select do |account|
-      account[:kind] == 'card'
-    end.map do |account|
-      Account::AccountPresenter.new(account)
+    @card_accounts ||= begin
+      accounts = memoized_accounts.select { |account| account[:kind] == 'card' }
+      present_accounts(accounts: accounts)
     end
   end
 
@@ -76,6 +73,12 @@ class UserPresenter < SimpleDelegator
   end
 
   private
+
+  def present_accounts(accounts:)
+    accounts.map do |account|
+      Account::AccountPresenter.new(account)
+    end
+  end
 
   def current_month_user_report
     reports.where('date >= ? AND date <= ?',

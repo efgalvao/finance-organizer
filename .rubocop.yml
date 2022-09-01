@@ -50,7 +50,7 @@ Metrics/AbcSize:
     - 'lib/tasks/import.rake'
 
 Metrics/ClassLength:
-  Max: 105
+  Max: 110
   Exclude:
     - lib/tasks/*.rake
 
