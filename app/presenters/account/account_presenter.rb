@@ -50,7 +50,7 @@ module Account
         incomes_cents: incomes.cents,
         expenses_cents: expenses.cents,
         invested_cents: invested.cents,
-        dividends_cents: dividend.cents,
+        # dividends_cents: dividend.cents,
         final_cents: total_balance.cents
       }
     end
