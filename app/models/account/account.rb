@@ -32,8 +32,8 @@ module Account
       user == asker
     end
 
-    def not_released_treasuries
-      treasuries.where(released_at: nil)
-    end
+    # def not_released_treasuries
+    #   treasuries.where(released_at: nil)
+    # end
   end
 end

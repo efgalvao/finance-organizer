@@ -21,11 +21,11 @@ module Account
     end
 
     def stocks_count
-      stocks.size
+      ordered_stocks.size
     end
 
     def treasuries_count
-      not_released_treasuries.size
+      ordered_not_released_treasuries.size
     end
 
     def current_report_date
@@ -33,11 +33,12 @@ module Account
     end
 
     def current_report
-      date = DateTime.current
-      report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
+      @current_report ||= begin
+        report = reports.find_by(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
 
-      report = create_current_report if report.nil?
-      report
+        report = create_current_report if report.nil?
+        report
+      end
     end
 
     def create_current_report
@@ -98,7 +99,7 @@ module Account
     end
 
     def semester_reports
-      reports.where('date > ?', Time.zone.today - 6.months).order(date: :desc)
+      @semester_reports ||= reports.where('date > ?', Time.zone.today - 6.months).order(date: :desc)
     end
 
     def last_semester_total_dividends_received
@@ -115,19 +116,35 @@ module Account
     end
 
     def sum_current_treasuries
-      not_released_treasuries.inject(0) { |sum, elem| sum + elem.current_value_cents } / 100
+      @sum_current_treasuries ||= ordered_not_released_treasuries.inject(0) do |sum, elem|
+        sum + elem.current_value_cents
+      end / 100
     end
 
     def sum_invested_treasuries
-      not_released_treasuries.inject(0) { |sum, elem| sum + elem.invested_value_cents } / 100
+      @sum_invested_treasuries ||= ordered_not_released_treasuries.inject(0) do |sum, elem|
+        sum + elem.invested_value_cents
+      end / 100
     end
 
     def sum_invested_stocks
-      stocks.inject(0) { |sum, elem| sum + elem.invested_value_cents } / 100
+      @sum_invested_stocks ||= stocks.inject(0) do |sum, elem|
+        sum + elem.invested_value_cents
+      end / 100
     end
 
     def sum_current_total_stocks
-      stocks.inject(0) { |sum, elem| sum + elem.current_total_value_cents } / 100
+      @sum_current_total_stocks ||= stocks.inject(0) do |sum, elem|
+        sum + elem.current_total_value_cents
+      end / 100
+    end
+
+    def ordered_stocks
+      @ordered_stocks ||= stocks.order(ticker: :asc)
+    end
+
+    def ordered_not_released_treasuries
+      @ordered_not_released_treasuries ||= treasuries.where(released_at: nil).order(name: :asc)
     end
   end
 end

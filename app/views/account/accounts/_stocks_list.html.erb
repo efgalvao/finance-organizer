@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @account.stocks.each do |stock| %>
+      <% @account.ordered_stocks.each do |stock| %>
         <tr>
           <td><%= link_to stock.ticker, stock_path(stock) %></td>
           <td><%= stock.shares_total %></td>
