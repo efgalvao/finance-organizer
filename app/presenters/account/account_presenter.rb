@@ -42,45 +42,9 @@ module Account
     end
 
     def create_current_report
-      reports.create!(account_report_params)
+      AccountReport::CreateAccountReport.call(account_id: account.id)
     end
 
-    def account_report_params
-      {
-        date: DateTime.current,
-        incomes_cents: incomes.cents,
-        expenses_cents: expenses.cents,
-        invested_cents: invested.cents,
-        # dividends_cents: dividend.cents,
-        final_cents: total_balance.cents
-      }
-    end
-
-    def incomes(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'income').sum(:value_cents))
-    end
-
-    def expenses(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'expense').sum(:value_cents))
-    end
-
-    def card_expenses(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'expense').sum(:value_cents))
-    end
-
-    def invested(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'investment').sum(:value_cents))
-    end
-
-    def total_balance(date = DateTime.current)
-      Money.new(incomes(date) - expenses(date) - invested(date))
-    end
-
-    # VERIFY
     def past_reports
       past_reports = []
       (1..6).each do |n|
