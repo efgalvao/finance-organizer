@@ -81,9 +81,7 @@ class UserPresenter < SimpleDelegator
   end
 
   def current_month_user_report
-    reports.where('date >= ? AND date <= ?',
-                  DateTime.current.beginning_of_month,
-                  DateTime.current.end_of_month).order('date asc').first
+    reports.order(date: :desc).first
   end
 
   def update_current_user_report
@@ -123,6 +121,7 @@ class UserPresenter < SimpleDelegator
   end
 
   def create_report
-    reports.create(date: Date.current, total: total_amount, savings: total_balance, stocks: total_invested)
+    UserReports::Commands::CreateUserReport.call(user_id: id, params: report_params)
+    # reports.create(date: Date.current, total: total_amount, savings: total_balance, stocks: total_invested)
   end
 end
