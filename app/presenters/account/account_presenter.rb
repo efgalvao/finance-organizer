@@ -34,7 +34,7 @@ module Account
 
     def current_report
       @current_report ||= begin
-        report = reports.find_by(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
+        report = reports.order(date: :desc).first
 
         report = create_current_report if report.nil?
         report
@@ -46,15 +46,7 @@ module Account
     end
 
     def past_reports
-      past_reports = []
-      (1..6).each do |n|
-        date = DateTime.current - n.month
-        report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
-
-        report = create_report(date) if report.nil?
-        past_reports << report
-      end
-      past_reports
+      @past_reports ||= semester_reports.slice(1, 6)
     end
 
     def semester_summary
@@ -63,7 +55,7 @@ module Account
     end
 
     def semester_reports
-      @semester_reports ||= reports.where('date > ?', Time.zone.today - 6.months).order(date: :desc)
+      @semester_reports ||= reports.order(date: :desc).limit(7)
     end
 
     def last_semester_total_dividends_received
@@ -72,11 +64,6 @@ module Account
         grouped_dividends[report.date.strftime('%B %d, %Y').to_s] = report.dividends.to_f
       end
       grouped_dividends
-    end
-
-    def create_report(date = DateTime.current)
-      reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
-                      invested_cents: 0, final_cents: 0)
     end
 
     def sum_current_treasuries
