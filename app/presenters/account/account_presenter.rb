@@ -95,7 +95,11 @@ module Account
     end
 
     def ordered_not_released_treasuries
-      @ordered_not_released_treasuries ||= treasuries.where(released_at: nil).order(name: :asc)
+      @ordered_not_released_treasuries ||= begin
+        treasuries.where(released_at: nil).order(name: :asc).map do |treasury|
+          treasury = Investments::Treasury::TreasuryPresenter.new(treasury)
+        end
+      end
     end
   end
 end

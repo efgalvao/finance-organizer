@@ -17,7 +17,7 @@
       <tr>
         <td><%= link_to account.name, account_path(account), class:"account" %></td>
         <td >$ <%= account.balance %></td>
-        <td ><%= account.updated_at.strftime('%B %d, %Y') %></td>
+        <td ><%= format_date(account.updated_at) %></td>
         <td>
           <%= link_to t('.transactions'), account_transactions_path(account), class:"btn btn-primary" %>
           <%= link_to t('.edit_account'), edit_account_path(account), class:"btn btn-primary" %>
