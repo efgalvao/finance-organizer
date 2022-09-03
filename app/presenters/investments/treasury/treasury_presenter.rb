@@ -9,10 +9,18 @@ module Investments
         grouped_positions
       end
 
+      def ordered_positions
+        positions.order(date: :desc).limit(6)
+      end
+
+      def ordered_negotiations
+        negotiations.order(date: :desc).limit(6)
+      end
+
       private
 
       def semester_positions
-        positions.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
+        positions.order(date: :desc).limit(12)
       end
     end
   end

@@ -11,6 +11,7 @@ module Investments
 
       def show
         authorize @treasury
+        @treasury = Investments::Treasury::TreasuryPresenter.new(@treasury)
       end
 
       def new
