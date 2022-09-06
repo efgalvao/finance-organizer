@@ -20,7 +20,7 @@ module Investments
 
           AccountReport::UpdateAccountReport.call(account_id: stock.account_id, params: update_report_params)
 
-          UserReports::Commands::UpdateUserReport.call(user_id: stock.user_id, params: update_report_params)
+          # UserReports::Commands::UpdateUserReport.call(user_id: stock.user_id, params: update_report_params)
         end
       end
 
@@ -42,12 +42,12 @@ module Investments
         }
       end
 
-      def update_report_params
-        {
-          date: date,
-          dividends_cents: (value.to_f * stock.shares_total) * 100
-        }
-      end
+      # def update_report_params
+      #   {
+      #     date: date,
+      #     dividends_cents: (value.to_f * stock.shares_total) * 100
+      #   }
+      # end
 
       def set_date
         return Time.zone.today if params.fetch(:date) == ''

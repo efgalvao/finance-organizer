@@ -1,7 +1,7 @@
 module Account
   class AccountPresenter < SimpleDelegator
     def account_total
-      (sum_current_treasuries + sum_current_total_stocks + balance_cents / 100.0)
+      (sum_current_treasuries + sum_current_total_stocks + balance_cents)
     end
 
     def current_value_in_treasuries
@@ -95,10 +95,8 @@ module Account
     end
 
     def ordered_not_released_treasuries
-      @ordered_not_released_treasuries ||= begin
-        treasuries.where(released_at: nil).order(name: :asc).map do |treasury|
-          treasury = Investments::Treasury::TreasuryPresenter.new(treasury)
-        end
+      @ordered_not_released_treasuries ||= treasuries.where(released_at: nil).order(name: :asc).map do |treasury|
+        treasury = Investments::Treasury::TreasuryPresenter.new(treasury)
       end
     end
   end
