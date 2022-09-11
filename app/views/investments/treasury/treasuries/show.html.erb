@@ -35,7 +35,7 @@
 </div>
 
 <div class="summary-item">
-  <% if @treasury.negotiations %>
+  <% if @treasury.negotiations.exists? %>
     <p class="summary-subtitle"><%= t('.negotiations')%></p>
     <table class="table table-hover">
       <thead>
@@ -47,9 +47,9 @@
         </tr>
       </thead>
       <tbody>
-        <% for negotiation in @treasury.negotiations %>
+        <% for negotiation in @treasury.ordered_negotiations %>
         <tr>
-          <td> <%= negotiation.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= format_date(negotiation.date) %> </td>
           <td> <%= negotiation.invested %> </td>
           <td> <%= negotiation.kind %> </td>
           <td> <%= negotiation.shares %> </td>
@@ -60,7 +60,7 @@
   <h2><%= t('.no_negotiations')%><h2>
   <% end %>
 
-    <% if @treasury.positions %>
+    <% if @treasury.positions.exists? %>
     <p class="summary-subtitle"><%= t('.positions')%></p>
     <table class="table table-hover">
       <thead>
@@ -70,9 +70,9 @@
         </tr>
       </thead>
       <tbody>
-        <% for position in @treasury.positions %>
+        <% for position in @treasury.ordered_positions %>
         <tr>
-          <td> <%= position.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= format_date(position.date) %> </td>
           <td> <%= number_to_currency(position.amount, unit: 'R$', separator: ',', delimiter: '.') %> </td>
         <% end %>
       </tbody>

@@ -1,7 +1,7 @@
 module Account
   class AccountPresenter < SimpleDelegator
     def account_total
-      (sum_current_treasuries + sum_current_total_stocks + balance_cents / 100.0)
+      (sum_current_treasuries + sum_current_total_stocks + balance_cents)
     end
 
     def current_value_in_treasuries
@@ -34,7 +34,7 @@ module Account
 
     def current_report
       @current_report ||= begin
-        report = reports.find_by(date: DateTime.current.beginning_of_month...DateTime.current.end_of_month)
+        report = reports.order(date: :desc).first
 
         report = create_current_report if report.nil?
         report
@@ -42,55 +42,11 @@ module Account
     end
 
     def create_current_report
-      reports.create!(account_report_params)
+      ::AccountReport::CreateAccountReport.call(account_id: id)
     end
 
-    def account_report_params
-      {
-        date: DateTime.current,
-        incomes_cents: incomes.cents,
-        expenses_cents: expenses.cents,
-        invested_cents: invested.cents,
-        # dividends_cents: dividend.cents,
-        final_cents: total_balance.cents
-      }
-    end
-
-    def incomes(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'income').sum(:value_cents))
-    end
-
-    def expenses(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'expense').sum(:value_cents))
-    end
-
-    def card_expenses(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'expense').sum(:value_cents))
-    end
-
-    def invested(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
-                                   kind: 'investment').sum(:value_cents))
-    end
-
-    def total_balance(date = DateTime.current)
-      Money.new(incomes(date) - expenses(date) - invested(date))
-    end
-
-    # VERIFY
     def past_reports
-      past_reports = []
-      (1..6).each do |n|
-        date = DateTime.current - n.month
-        report = reports.find_by(date: date.beginning_of_month...date.end_of_month)
-
-        report = create_report(date) if report.nil?
-        past_reports << report
-      end
-      past_reports
+      @past_reports ||= semester_reports.slice(1, 6)
     end
 
     def semester_summary
@@ -99,7 +55,7 @@ module Account
     end
 
     def semester_reports
-      @semester_reports ||= reports.where('date > ?', Time.zone.today - 6.months).order(date: :desc)
+      @semester_reports ||= reports.order(date: :desc).limit(7)
     end
 
     def last_semester_total_dividends_received
@@ -108,11 +64,6 @@ module Account
         grouped_dividends[report.date.strftime('%B %d, %Y').to_s] = report.dividends.to_f
       end
       grouped_dividends
-    end
-
-    def create_report(date = DateTime.current)
-      reports.create!(date: date, incomes_cents: 0, expenses_cents: 0,
-                      invested_cents: 0, final_cents: 0)
     end
 
     def sum_current_treasuries
@@ -144,7 +95,9 @@ module Account
     end
 
     def ordered_not_released_treasuries
-      @ordered_not_released_treasuries ||= treasuries.where(released_at: nil).order(name: :asc)
+      @ordered_not_released_treasuries ||= treasuries.where(released_at: nil).order(name: :asc).map do |treasury|
+        Investments::Treasury::TreasuryPresenter.new(treasury)
+      end
     end
   end
 end

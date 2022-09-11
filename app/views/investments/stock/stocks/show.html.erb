@@ -63,7 +63,7 @@
       <tbody>
         <% for share in @stock.shares.order('date desc').limit(5) %>
         <tr>
-          <td> <%= share.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= format_date(share.date) %> </td>
           <td> <%= (share.invested_cents.to_f / 100) %> </td>
           <td> <%= (share.quantity) %> </td>
         <% end %>
@@ -88,7 +88,7 @@
       <tbody>
         <% for price in @stock.prices.order('date desc').limit(5) %>
         <tr>
-          <td> <%= price.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= format_date(price.date) %> </td>
           <td> <%= (price.value_cents.to_d / 100) %> </td>
         <% end %>
       </tbody>
@@ -112,7 +112,7 @@
       <tbody>
         <% for dividend in @stock.dividends.order('date desc').limit(5) %>
         <tr>
-          <td> <%= dividend.date.strftime('%B %d, %Y') %> </td>
+          <td> <%= format_date(dividend.date) %> </td>
           <td> <%= (dividend.value_cents.to_f / 100) %> </td>
         <% end %>
       </tbody>

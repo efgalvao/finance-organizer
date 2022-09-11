@@ -14,7 +14,7 @@
     <% @balances.limit(12).each do |balance| %>
       <tr>
         <td> $ <%= balance.balance %></td>
-        <td><%= balance.date.strftime('%B %d, %Y') %></td>
+        <td><%= format_date(balance.date) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -42,15 +42,5 @@ RSpec.describe 'Investments::Treasury::Negotiation', type: :request do
         expect(post_negotiation).to be(302)
       end
     end
-
-    context 'with invalid data' do
-      let(:params) { { amount: 9550, shares: 23, kind: :buy, treasury_id: treasury.id } }
-
-      it 'does not create a new negotiation' do
-        post_negotiation
-
-        expect { post_negotiation }.not_to change(Investments::Treasury::Negotiation, :count)
-      end
-    end
   end
 end

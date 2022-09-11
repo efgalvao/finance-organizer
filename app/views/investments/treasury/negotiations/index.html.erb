@@ -23,7 +23,7 @@
   <tbody>
     <% @negotiations.each do |negotiation| %>
       <tr>
-        <td><%= negotiation.date&.strftime('%B %d, %Y') %></td>
+        <td><%= format_date(negotiation.date) %></td>
         <td><%= negotiation.invested %></td>
         <td><%= negotiation.kind %></td>
         <td><%= negotiation.shares %></td>

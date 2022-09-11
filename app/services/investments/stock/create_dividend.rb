@@ -19,8 +19,6 @@ module Investments
           Transactions::ProcessTransaction.call(transactions_params)
 
           AccountReport::UpdateAccountReport.call(account_id: stock.account_id, params: update_report_params)
-
-          UserReports::Commands::UpdateUserReport.call(user_id: stock.user_id, params: update_report_params)
         end
       end
 

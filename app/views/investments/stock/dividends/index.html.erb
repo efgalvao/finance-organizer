@@ -21,7 +21,7 @@
     <tbody>
       <% stock.dividends.order('date desc').limit(5).each do |dividend| %>
         <tr>
-          <td><%= dividend.date&.strftime('%B %d, %Y') %></td>
+          <td><%= format_date(dividend.date) %></td>
           <td><%= dividend.value %></td>
       <% end %>
     </tbody>
