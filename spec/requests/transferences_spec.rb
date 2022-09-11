@@ -28,8 +28,8 @@ RSpec.describe 'Transferences', type: :request do
   describe 'POST /transferences' do
     subject(:post_transference) { post transferences_path, params: { transference: params } }
 
-    let!(:sender) { create(:account, :with_balance) }
-    let!(:receiver) { create(:account, :with_balance) }
+    let!(:sender) { create(:account) }
+    let!(:receiver) { create(:account) }
 
     before { sign_in(user) }
 

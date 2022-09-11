@@ -13,7 +13,6 @@ module Account
 
     def call
       update_account_balance
-      UpdateBalance.call(account_id: account.id, amount: amount)
     end
 
     private

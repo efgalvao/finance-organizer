@@ -16,7 +16,7 @@ RSpec.describe Category, type: :request do
     end
 
     context 'with unauthenticated request' do
-      it 'cannot access a balances index page' do
+      it 'cannot access a categories index page' do
         get categories_path
 
         expect(response).to redirect_to new_user_session_path

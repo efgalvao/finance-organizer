@@ -46,7 +46,7 @@ RSpec.describe 'Transaction', type: :request do
   end
 
   describe 'POST /transactions' do
-    let!(:account) { create(:account, :with_balance) }
+    let!(:account) { create(:account) }
     let(:new_transaction) { post account_transactions_path(account.id), params: { account_transaction: params } }
 
     before { sign_in(user) }

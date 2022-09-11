@@ -107,17 +107,6 @@ pt:
         new_card: Novo cartão
         edit_account: Editar cartão
         delete_account: Excluir cartão
-    balances:
-      index:
-        balances_for: Balanços de
-        balance: Saldo
-        date: Data
-      new:
-        new_balance: Novo saldo
-        balance: Saldo
-        date: Data
-        save: Salvar
-        cancel: Cancelar
     transactions:
       index:
         header: Transações

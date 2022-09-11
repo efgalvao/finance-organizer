@@ -14,10 +14,4 @@ FactoryBot.define do
   trait :card_account do
     kind { 'card' }
   end
-
-  trait :with_balance do
-    after(:build) do |account|
-      account.balances << FactoryBot.build(:balance)
-    end
-  end
 end
