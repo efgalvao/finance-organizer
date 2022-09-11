@@ -24,11 +24,19 @@ module Transactions
       else
         'Invalid kind'
       end
+      AccountReport::UpdateAccountReport.call(account_id: account_id, params: update_report_params)
       Transactions::CreateTransaction.call(params)
     end
 
     private
 
     attr_reader :params, :account_id, :value
+
+    def update_report_params
+      {
+        date: params.fetch(:date),
+        "#{params[:kind]}": value.to_f * 100
+      }
+    end
   end
 end

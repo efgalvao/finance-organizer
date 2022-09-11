@@ -2,12 +2,13 @@
 
 module AccountReport
   class CreateAccountReport < ApplicationService
-    def initialize(account_id:)
+    def initialize(account_id:, date:)
       @account_id = account_id
+      @date = date
     end
 
-    def self.call(account_id:)
-      new(account_id: account_id).call
+    def self.call(account_id:, date: DateTime.current)
+      new(account_id: account_id, date: date).call
     end
 
     def call
@@ -16,7 +17,7 @@ module AccountReport
 
     private
 
-    attr_reader :account_id
+    attr_reader :account_id, :date
 
     def create_account_report
       account.reports.create!(account_report_params)
@@ -36,16 +37,24 @@ module AccountReport
       }
     end
 
-    def incomes
-      @incomes ||= Money.new(transactions.where(kind: 'income').sum(:value_cents))
+    def incomes(date = DateTime.current)
+      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                   kind: 'income').sum(:value_cents))
     end
 
-    def expenses
-      @expenses ||= Money.new(transactions.where(kind: 'expense').sum(:value_cents))
+    def expenses(date = DateTime.current)
+      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                   kind: 'expense').sum(:value_cents))
     end
 
-    def invested
-      @invested ||= Money.new(transactions.where(kind: 'investment').sum(:value_cents))
+    def card_expenses(date = DateTime.current)
+      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                   kind: 'expense').sum(:value_cents))
+    end
+
+    def invested(date = DateTime.current)
+      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+                                   kind: 'investment').sum(:value_cents))
     end
 
     def total_balance
@@ -54,10 +63,6 @@ module AccountReport
 
     def transactions
       @transactions ||= account.transactions.where(date: date.beginning_of_month...date.end_of_month)
-    end
-
-    def date
-      @date ||= DateTime.current
     end
   end
 end

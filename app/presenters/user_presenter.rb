@@ -21,44 +21,19 @@ class UserPresenter < SimpleDelegator
     I18n.l(updated_current_month_report.date)
   end
 
-  # -----
   def updated_current_month_report
-    create_report if current_month_user_report.nil?
-    update_current_user_report
+    if current_month_user_report.nil?
+      create_report
+    else
+      update_current_user_report
+    end
     current_month_user_report
   end
-
-  # def total_amount
-  #   total = 0
-  #   except_card_accounts.each do |account|
-  #     account = Account::AccountPresenter.new(account)
-  #     total += account.account_total
-  #   end
-  #   total
-  # end
-
-  # def total_balance
-  #   total = 0
-  #   except_card_accounts.each do |account|
-  #     account = Account::AccountPresenter.new(account)
-  #     total += account.balance
-  #   end
-  #   total
-  # end
-
-  # def total_invested
-  #   total = 0
-  #   except_card_accounts.each do |account|
-  #     account = Account::AccountPresenter.new(account)
-  #     total += account.updated_invested_value
-  #   end
-  #   total
-  # end
 
   def semester_summary
     create_report if reports.empty? || reports.last.date.month != DateTime.current.month
     update_current_user_report
-    Statements::CreateUserSummary.new(semester_reports).perform
+    Statements::CreateUserSummary.call(reports: semester_reports)
   end
 
   def last_semester_total_dividends
@@ -70,10 +45,10 @@ class UserPresenter < SimpleDelegator
   end
 
   def incomes_expenses_report
-    Statements::CreateIncomesExpenses.new(self).perform
+    Statements::CreateIncomesExpenses.call(user: self)
   end
 
-  # private
+  private
 
   def present_accounts(accounts:)
     accounts.map do |account|
@@ -82,44 +57,18 @@ class UserPresenter < SimpleDelegator
   end
 
   def current_month_user_report
-    reports.order(date: :desc).first
+    reports.find_by('date >= ? AND date <= ?', DateTime.current.beginning_of_month,
+                    DateTime.current.end_of_month)
   end
 
-  # AQUI - montando os params para fazer o update - criar um método para pegar informação de cada account e devolver já somado
   def update_current_user_report
-    user_report = UserReports::Commands::UpdateUserReport.call(report: current_month_user_report,
-                                                               params: update_user_report_params)
-    # user_report = current_month_user_report
+    # binding.pry
 
-    # update_user_report(user_report)
-    user_report.save
+    UserReports::Commands::UpdateUserReport.call(report: current_month_user_report,
+                                                 params: updated_report_params)
   end
 
-  def update_user_report
-    # params = {
-    #   incomes_cents: 0,
-    #   expenses_cents: 0,
-    #   card_expenses_cents: 0,
-    #   invested_cents: 0,
-    #   final_cents: 0
-    # }
-    except_card_accounts.each do |account|
-      # binding.pry
-      # account = Account::AccountPresenter.new(account)
-      # report.incomes_cents += account.incomes.cents
-      # report.expenses_cents += account.expenses.cents
-      # report.invested_cents += account.invested.cents
-      # report.final_cents += account.total_balance.cents
-    end
-    card_accounts.each do |account|
-      # account = Account::AccountPresenter.new(account)
-      # report.card_expenses_cents += account.expenses.cents
-    end
-    # report.save
-    # report
-  end
-
-  def update_user_report_params
+  def updated_report_params
     report = {
       total_cents: 0,
       savings_cents: 0,
@@ -131,12 +80,8 @@ class UserPresenter < SimpleDelegator
       final_cents: 0
     }
     except_card_accounts.each do |account|
-      binding.pry
-
-      # binding.pry
-      # account = Account::AccountPresenter.new(account)
       report[:total_cents] += account.account_total
-      report[:savings_cents] += account.balance
+      report[:savings_cents] += account.balance_cents
       report[:stocks_cents] += account.updated_invested_value
       report[:incomes_cents] += account.current_report.incomes_cents
       report[:expenses_cents] += account.current_report.expenses_cents
@@ -144,7 +89,6 @@ class UserPresenter < SimpleDelegator
       report[:final_cents] += account.current_report.final_cents
     end
     card_accounts.each do |account|
-      # account = Account::AccountPresenter.new(account)
       report[:card_expenses_cents] += account.current_report.expenses_cents
     end
 
@@ -156,7 +100,6 @@ class UserPresenter < SimpleDelegator
   end
 
   def create_report
-    UserReports::Commands::CreateUserReport.call(user_id: id, params: report_params)
-    # reports.create(date: Date.current, total: total_amount, savings: total_balance, stocks: total_invested)
+    UserReports::Commands::CreateUserReport.call(user_id: id, params: updated_report_params)
   end
 end

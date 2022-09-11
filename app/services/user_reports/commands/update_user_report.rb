@@ -25,29 +25,17 @@ module UserReports
         report.update(new_attributes)
       end
 
-      def report
-        @report ||= user.reports.where(date: date.beginning_of_month...date.end_of_month).first_or_initialize
-      end
-
-      def user
-        @user ||= User.find(report)
-      end
-
-      # def set_date
-      #   return Time.zone.today if params.fetch(:date) == ''
-
-      #   DateTime.parse(params.fetch(:date))
-      # end
-
       def dividends
         params.fetch(:dividends_cents, 0) + report.dividends_cents
       end
 
       def new_attributes
-        {
-          date: date,
-          dividends_cents: dividends
-        }
+        params.merge!(
+          {
+            date: date,
+            dividends_cents: dividends
+          }
+        )
       end
     end
   end

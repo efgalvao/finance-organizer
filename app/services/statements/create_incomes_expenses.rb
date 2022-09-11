@@ -1,10 +1,14 @@
 module Statements
   class CreateIncomesExpenses
-    def initialize(user)
+    def initialize(user:)
       @user = user
     end
 
-    def perform
+    def self.call(user:)
+      new(user: user).call
+    end
+
+    def call
       create_reports_hash
     end
 

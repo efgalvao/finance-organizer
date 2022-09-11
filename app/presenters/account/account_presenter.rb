@@ -42,7 +42,7 @@ module Account
     end
 
     def create_current_report
-      AccountReport::CreateAccountReport.call(account_id: account.id)
+      ::AccountReport::CreateAccountReport.call(account_id: id)
     end
 
     def past_reports
@@ -96,7 +96,7 @@ module Account
 
     def ordered_not_released_treasuries
       @ordered_not_released_treasuries ||= treasuries.where(released_at: nil).order(name: :asc).map do |treasury|
-        treasury = Investments::Treasury::TreasuryPresenter.new(treasury)
+        Investments::Treasury::TreasuryPresenter.new(treasury)
       end
     end
   end
