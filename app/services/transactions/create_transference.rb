@@ -5,7 +5,7 @@ module Transactions
       @sender = Account::Account.find(params[:sender_id])
       @receiver = Account::Account.find(params[:receiver_id])
       @amount = params.fetch(:amount, 0).to_f
-      @date = set_date
+      @date = params.fetch(:date, '')
       @user_id = params.fetch(:user_id)
     end
 
@@ -41,12 +41,6 @@ module Transactions
     def receiver_params
       { account_id: receiver.id, value: amount, kind: 'transfer', receiver: true,
         title: "Transference from #{sender.name}", date: date }
-    end
-
-    def set_date
-      return Time.zone.today if params.fetch(:date, '').empty?
-
-      params.fetch(:date)
     end
   end
 end

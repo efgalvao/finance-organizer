@@ -16,7 +16,7 @@ module UserReports
 
       private
 
-      attr_reader :user_id, params:
+      attr_reader :user_id, :params
 
       def create_user_report
         user.reports.create!(params)

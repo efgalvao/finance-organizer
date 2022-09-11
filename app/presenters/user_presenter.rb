@@ -69,16 +69,10 @@ class UserPresenter < SimpleDelegator
   end
 
   def updated_report_params
-    report = {
-      total_cents: 0,
-      savings_cents: 0,
-      stocks_cents: 0,
-      incomes_cents: 0,
-      expenses_cents: 0,
-      card_expenses_cents: 0,
-      invested_cents: 0,
-      final_cents: 0
-    }
+    report = { date: DateTime.current, total_cents: 0, savings_cents: 0, stocks_cents: 0,
+               incomes_cents: 0, expenses_cents: 0, card_expenses_cents: 0, invested_cents: 0,
+               final_cents: 0 }
+
     except_card_accounts.each do |account|
       report[:total_cents] += account.account_total
       report[:savings_cents] += account.balance_cents
@@ -88,6 +82,7 @@ class UserPresenter < SimpleDelegator
       report[:invested_cents] += account.current_report.invested_cents
       report[:final_cents] += account.current_report.final_cents
     end
+
     card_accounts.each do |account|
       report[:card_expenses_cents] += account.current_report.expenses_cents
     end
