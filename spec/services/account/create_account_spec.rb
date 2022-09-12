@@ -11,10 +11,6 @@ RSpec.describe Account::CreateAccount, type: :service do
     it 'creates an Account' do
       expect { create_account }.to change(Account::Account, :count).by(1)
     end
-
-    it 'creates a Balance' do
-      expect { create_account }.to change(Account::Balance, :count).by(1)
-    end
   end
 
   context 'with invalid data' do
@@ -22,10 +18,6 @@ RSpec.describe Account::CreateAccount, type: :service do
 
     it 'does not create an Account' do
       expect { create_account }.not_to change(Account::Account, :count)
-    end
-
-    it 'does not create a Balance' do
-      expect { create_account }.not_to change(Account::Balance, :count)
     end
   end
 end

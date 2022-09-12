@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Dividend', type: :request do
   let(:user) { create(:user) }
-  let(:account) { create(:account, :with_balance, user: user) }
+  let(:account) { create(:account, user: user) }
   let(:stock) { create(:stock, account: account) }
 
   describe 'GET /investments/stocks/:id/dividends' do

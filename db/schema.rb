@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_21_114830) do
+ActiveRecord::Schema.define(version: 2022_09_11_231318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,15 +64,6 @@ ActiveRecord::Schema.define(version: 2022_08_21_114830) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
-  end
-
-  create_table "balances", force: :cascade do |t|
-    t.integer "balance_cents", default: 0, null: false
-    t.datetime "date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "account_id"
-    t.index ["account_id"], name: "index_balances_on_account_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -215,7 +206,6 @@ ActiveRecord::Schema.define(version: 2022_08_21_114830) do
 
   add_foreign_key "account_reports", "accounts"
   add_foreign_key "accounts", "users"
-  add_foreign_key "balances", "accounts"
   add_foreign_key "categories", "users"
   add_foreign_key "dividends", "stocks"
   add_foreign_key "negotiations", "treasuries"
