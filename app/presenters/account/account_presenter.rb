@@ -1,7 +1,7 @@
 module Account
   class AccountPresenter < SimpleDelegator
     def account_total
-      (sum_current_treasuries + sum_current_total_stocks + balance_cents)
+      Money.new(sum_current_treasuries + sum_current_total_stocks + balance)
     end
 
     def current_value_in_treasuries
@@ -17,7 +17,7 @@ module Account
     end
 
     def updated_invested_value
-      sum_current_treasuries + sum_current_total_stocks
+      Money.new(sum_current_treasuries + sum_current_total_stocks)
     end
 
     def stocks_count
@@ -67,27 +67,39 @@ module Account
     end
 
     def sum_current_treasuries
-      @sum_current_treasuries ||= ordered_not_released_treasuries.inject(0) do |sum, elem|
-        sum + elem.current_value_cents
-      end / 100
+      @sum_current_treasuries ||= begin
+        current_sum = ordered_not_released_treasuries.inject(0) do |sum, elem|
+          sum + elem.current_value_cents
+        end
+        Money.new(current_sum)
+      end
     end
 
     def sum_invested_treasuries
-      @sum_invested_treasuries ||= ordered_not_released_treasuries.inject(0) do |sum, elem|
-        sum + elem.invested_value_cents
-      end / 100
+      @sum_invested_treasuries ||= begin
+        treasuries_sum = ordered_not_released_treasuries.inject(0) do |sum, elem|
+          sum + elem.invested_value_cents
+        end
+        Money.new(treasuries_sum)
+      end
     end
 
     def sum_invested_stocks
-      @sum_invested_stocks ||= stocks.inject(0) do |sum, elem|
-        sum + elem.invested_value_cents
-      end / 100
+      @sum_invested_stocks ||= begin
+        sum_invested = stocks.inject(0) do |sum, elem|
+          sum + elem.invested_value_cents
+        end
+        Money.new(sum_invested)
+      end
     end
 
     def sum_current_total_stocks
-      @sum_current_total_stocks ||= stocks.inject(0) do |sum, elem|
-        sum + elem.current_total_value_cents
-      end / 100
+      @sum_current_total_stocks ||= begin
+        current_sum = stocks.inject(0) do |sum, elem|
+          sum + elem.current_total_value_cents
+        end
+        Money.new(current_sum)
+      end
     end
 
     def ordered_stocks

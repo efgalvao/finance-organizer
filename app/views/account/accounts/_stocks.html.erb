@@ -23,7 +23,7 @@
           <td><%= number_to_currency(@account.balance, unit: 'R$', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(@account.account_total, unit: 'R$', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '.') %></td>
-          <td> <%= number_to_currency(@account.updated_invested_value, unit: 'R$', separator: ',', delimiter: '.') %>
+          <td> <%= number_to_currency(@account.updated_invested_value, unit: 'R$', separator: ',', delimiter: '.') %></td>
         </tr>
     </tbody>
   </table>

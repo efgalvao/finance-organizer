@@ -74,9 +74,9 @@ class UserPresenter < SimpleDelegator
                final_cents: 0 }
 
     except_card_accounts.each do |account|
-      report[:total_cents] += account.account_total
+      report[:total_cents] += account.account_total.cents
       report[:savings_cents] += account.balance_cents
-      report[:stocks_cents] += account.updated_invested_value
+      report[:stocks_cents] += account.updated_invested_value.cents
       report[:incomes_cents] += account.current_report.incomes_cents
       report[:expenses_cents] += account.current_report.expenses_cents
       report[:invested_cents] += account.current_report.invested_cents
