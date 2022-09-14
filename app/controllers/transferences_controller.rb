@@ -9,6 +9,7 @@ class TransferencesController < ApplicationController
       redirect_to transferences_path,
                   notice: 'Transference successfully created.'
     else
+      @transference = Transference.new
       render :new,
              notice: 'Transference not created.'
     end
