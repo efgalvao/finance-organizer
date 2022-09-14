@@ -36,7 +36,7 @@ RSpec.describe 'Transferences', type: :request do
     context 'with valid data' do
       let!(:params) do
         { amount: 100, sender_id: sender.id,
-          receiver_id: receiver.id, user_id: user.id }
+          receiver_id: receiver.id, user_id: user.id, date: Date.current }
       end
 
       it 'creates a new transference' do

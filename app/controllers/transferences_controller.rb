@@ -5,11 +5,12 @@ class TransferencesController < ApplicationController
 
   def create
     @transference = Transactions::ProcessTransference.call(transferences_params)
-    if @transference.valid?
+    if !@transference.nil?
       redirect_to transferences_path,
                   notice: 'Transference successfully created.'
     else
-      render :new
+      render :new,
+             notice: 'Transference not created.'
     end
   end
 

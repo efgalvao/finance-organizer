@@ -29,7 +29,7 @@ module Transactions
     attr_reader :params, :sender, :receiver, :amount, :date, :user_id
 
     def transference_params
-      { sender_id: sender.id, receiver_id: receiver.id, amount: amount, date: date,
+      { sender_id: sender.id, receiver_id: receiver.id, amount: amount, date: set_date,
         user_id: user_id }
     end
 
@@ -41,6 +41,12 @@ module Transactions
     def receiver_params
       { account_id: receiver.id, value: amount, kind: 'transfer', receiver: true,
         title: "Transference from #{sender.name}", date: date }
+    end
+
+    def set_date
+      return Time.zone.today if params.fetch(:date) == ''
+
+      DateTime.parse(params.fetch(:date))
     end
   end
 end
