@@ -3,7 +3,7 @@ FactoryBot.define do
     account
     title { Faker::Commerce.product_name }
     value { Faker::Number.number(digits: 7) }
-    date { DateTime.current }
+    date { '2022-04-18' }
     kind { 'income' }
   end
 

@@ -62,8 +62,6 @@ class UserPresenter < SimpleDelegator
   end
 
   def update_current_user_report
-    # binding.pry
-
     UserReports::Commands::UpdateUserReport.call(report: current_month_user_report,
                                                  params: updated_report_params)
   end
@@ -71,7 +69,7 @@ class UserPresenter < SimpleDelegator
   def updated_report_params
     report = { date: DateTime.current, total_cents: 0, savings_cents: 0, stocks_cents: 0,
                incomes_cents: 0, expenses_cents: 0, card_expenses_cents: 0, invested_cents: 0,
-               final_cents: 0 }
+               final_cents: 0, dividends_cents: 0 }
 
     except_card_accounts.each do |account|
       report[:total_cents] += account.account_total.cents
@@ -81,6 +79,7 @@ class UserPresenter < SimpleDelegator
       report[:expenses_cents] += account.current_report.expenses_cents
       report[:invested_cents] += account.current_report.invested_cents
       report[:final_cents] += account.current_report.final_cents
+      report[:dividends_cents] += account.current_report.dividends_cents
     end
 
     card_accounts.each do |account|

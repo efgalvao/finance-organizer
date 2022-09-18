@@ -33,9 +33,9 @@ module AccountReport
     end
 
     def set_date
-      return Time.zone.today if params.fetch(:date) == ''
+      return DateTime.parse(params.fetch(:date)) if params.fetch(:date).instance_of?(String)
 
-      DateTime.parse(params.fetch(:date))
+      params.fetch(:date)
     end
 
     def new_attributes

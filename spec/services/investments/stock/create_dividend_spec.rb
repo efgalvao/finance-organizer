@@ -26,7 +26,7 @@ RSpec.describe Investments::Stock::CreateDividend, type: :service do
     end
 
     context 'with invalid data' do
-      let(:invalid_params) { { stock_id: stock.id, value: 'abc', date: Date.current } }
+      let(:invalid_params) { { stock_id: stock.id, value: 'abc', date: '2019-09-22' } }
 
       it 'does not create a new dividend' do
         expect { described_class.call(invalid_params) }.to raise_error(ActiveRecord::RecordInvalid)

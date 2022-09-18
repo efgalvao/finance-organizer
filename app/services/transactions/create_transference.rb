@@ -6,6 +6,7 @@ module Transactions
       @receiver = Account::Account.find(params[:receiver_id])
       @amount = params.fetch(:amount, 0).to_f
       @date = params.fetch(:date, '')
+      @date = set_date
       @user_id = params.fetch(:user_id)
     end
 
@@ -29,7 +30,7 @@ module Transactions
     attr_reader :params, :sender, :receiver, :amount, :date, :user_id
 
     def transference_params
-      { sender_id: sender.id, receiver_id: receiver.id, amount: amount, date: set_date,
+      { sender_id: sender.id, receiver_id: receiver.id, amount: amount, date: date,
         user_id: user_id }
     end
 

@@ -22,20 +22,7 @@ module UserReports
       attr_reader :report, :params, :date
 
       def update_user_report
-        report.update(new_attributes)
-      end
-
-      def dividends
-        params.fetch(:dividends_cents, 0) + report.dividends_cents
-      end
-
-      def new_attributes
-        params.merge!(
-          {
-            date: date,
-            dividends_cents: dividends
-          }
-        )
+        report.update(params)
       end
     end
   end
