@@ -143,3 +143,9 @@ pt:
           value: Valor
           no_negotiations: Não há negociações cadastradas
           no_positions: Não há posições cadastradas
+        release_form:
+          title: '- Liberação de Investimento'
+          released_at: Data
+          released_value: Valor
+          save: Salvar
+          cancel: Cancelar
