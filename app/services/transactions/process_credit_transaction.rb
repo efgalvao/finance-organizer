@@ -32,7 +32,7 @@ module Transactions
         account_id: params.fetch(:account_id),
         kind: params.fetch(:kind),
         value: params.fetch(:value).to_f / parcels,
-        date: date + parcel.months
+        date: Date.parse(date) + parcel.months
       }
     end
 
