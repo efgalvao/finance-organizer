@@ -10,9 +10,9 @@ module Files
     end
 
     def call
-      process_transactions if content[:transactions].any?
-      process_transferences if content[:transferences].any?
-      process_parcels_transactions if content[:credit].any?
+      process_transactions if (content[:transactions].presence || []).any?
+      process_transferences if (content[:transferences].presence || []).any?
+      process_parcels_transactions if (content[:credit].presence || []).any?
     end
 
     private
