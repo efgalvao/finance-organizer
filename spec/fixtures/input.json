@@ -1,0 +1,47 @@
+{
+  "transactions": [
+    {
+      "kind": "income",
+      "title": "Salario",
+      "account": "NuConta",
+      "category": "Recebimentos",
+      "value": 1.1,
+      "date": "2022-10-30"
+    },
+    {
+      "kind": "expense",
+      "title": "Marmita",
+      "account": "NuConta",
+      "category": "alimentacao",
+      "value": 1.2,
+      "date": "2022-10-30"
+    },
+    {
+      "kind": "investment",
+      "title": "BBPO11",
+      "account": "XPI Solfi",
+      "category": "Investimento",
+      "value": 1.3,
+      "date": "2022-10-30"
+    }
+  ],
+  "credit": [
+    {
+      "kind": "expense",
+      "title": "Netflix",
+      "account": "Cartao XP Fer",
+      "category": "Diversao",
+      "date": "2022-10-30",
+      "value": 2.2,
+      "parcels": 2
+    }
+  ],
+  "transferences": [
+    {
+      "sender": "NuConta",
+      "receiver": "BB Fer",
+      "date": "2022-10-29",
+      "amount": 12.34
+    }
+  ]
+}

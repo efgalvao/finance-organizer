@@ -41,5 +41,7 @@ Rails.application.routes.draw do
   get '/transactions/invoice', to: 'transactions#invoice'
   post '/transactions/invoice_payment', to: 'transactions#invoice_payment'
   post '/transactions', to: 'transactions#create'
+  get '/file_upload', to: 'files#file_upload'
+  post '/upload', to: 'files#upload'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
