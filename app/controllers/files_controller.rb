@@ -1,10 +1,7 @@
 class FilesController < ApplicationController
-
-  def file_upload
-
-  end
+  def file_upload; end
 
   def upload
-    response = Files::ParseFile.call(params[:file])
+    Files::ProcessFile.call(params[:file], current_user.id)
   end
 end

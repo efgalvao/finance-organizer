@@ -17,7 +17,7 @@ module Files
     attr_reader :file
 
     def parse_file
-      content = JSON.parse(file.read).deep_symbolize_keys!
+      JSON.parse(file.read).deep_symbolize_keys!
     end
   end
 end
