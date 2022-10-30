@@ -11,8 +11,7 @@ module Files
 
     def call
       process_transactions if content[:transactions].any?
-      # TODO
-      # process_transferences if content[:transferences].any?
+      process_transferences if content[:transferences].any?
     end
 
     private
@@ -27,10 +26,9 @@ module Files
     end
 
     def process_transferences
-      # TODO: create
-      transferences = build_transferences
+      transferences = Transferences::BuildTransferences.call(content[:transferences], user_id)
       transferences.each do |transference|
-        Transactions::ProcessTransference.call(transference, user_id)
+        Transactions::ProcessTransference.call(transference)
       end
     end
   end

@@ -5,7 +5,6 @@ module Transactions
       @sender = Account::Account.find(params[:sender_id])
       @receiver = Account::Account.find(params[:receiver_id])
       @amount = params.fetch(:amount, 0).to_f
-      @date = params.fetch(:date, '')
       @date = set_date
       @user_id = params.fetch(:user_id)
     end
@@ -47,7 +46,7 @@ module Transactions
     def set_date
       return Time.zone.today if params.fetch(:date) == ''
 
-      DateTime.parse(params.fetch(:date))
+      params.fetch(:date)
     end
   end
 end

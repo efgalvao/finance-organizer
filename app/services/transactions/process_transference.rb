@@ -2,8 +2,6 @@ module Transactions
   class ProcessTransference < ApplicationService
     def initialize(params)
       @params = params
-      @sender = Account::Account.find(params[:sender_id])
-      @receiver = Account::Account.find(params[:receiver_id])
     end
 
     def self.call(params)
@@ -16,6 +14,6 @@ module Transactions
 
     private
 
-    attr_reader :params, :sender, :receiver
+    attr_reader :params
   end
 end
