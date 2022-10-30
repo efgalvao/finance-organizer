@@ -12,6 +12,7 @@ module Files
     def call
       process_transactions if content[:transactions].any?
       process_transferences if content[:transferences].any?
+      process_parcels_transactions if content[:credit].any?
     end
 
     private
@@ -29,6 +30,13 @@ module Files
       transferences = Transferences::BuildTransferences.call(content[:transferences], user_id)
       transferences.each do |transference|
         Transactions::ProcessTransference.call(transference)
+      end
+    end
+
+    def process_parcels_transactions
+      transactions = Transactions::BuildParcelsTransactions.call(content[:credit])
+      transactions.each do |transaction|
+        Transactions::ProcessCreditTransaction.call(transaction)
       end
     end
   end

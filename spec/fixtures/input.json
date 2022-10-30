@@ -25,6 +25,17 @@
       "date": "2022-10-30"
     }
   ],
+  "credit": [
+    {
+      "kind": "expense",
+      "title": "Netflix",
+      "account": "Cartao XP Fer",
+      "category": "Diversao",
+      "date": "2022-10-30",
+      "value": 2.2,
+      "parcels": 2
+    }
+  ],
   "transferences": [
     {
       "sender": "NuConta",
