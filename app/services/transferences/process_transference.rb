@@ -1,4 +1,4 @@
-module Transactions
+module Transferences
   class ProcessTransference < ApplicationService
     def initialize(params)
       @params = params
@@ -9,7 +9,7 @@ module Transactions
     end
 
     def call
-      Transactions::CreateTransference.call(params)
+      Transferences::CreateTransference.call(params)
     end
 
     private
