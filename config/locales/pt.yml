@@ -42,6 +42,7 @@ pt:
   dividend: 'Dividendo'
   layouts:
     header:
+      shortcuts: ATALHOS
       accounts: CONTAS
       cards_accounts: CARTÕES
       categories: CATEGORIAS
