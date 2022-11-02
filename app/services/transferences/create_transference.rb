@@ -1,4 +1,4 @@
-module Transactions
+module Transferences
   class CreateTransference < ApplicationService
     def initialize(params)
       @params = params

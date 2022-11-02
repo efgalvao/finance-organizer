@@ -29,7 +29,7 @@ module Files
     def process_transferences
       transferences = Transferences::BuildTransferences.call(content[:transferences], user_id)
       transferences.each do |transference|
-        Transactions::ProcessTransference.call(transference)
+        Transferences::ProcessTransference.call(transference)
       end
     end
 
