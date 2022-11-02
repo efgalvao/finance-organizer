@@ -1,10 +1,10 @@
 <div class="title">
-   <%= t('.categories') %>
+  <%= t('.categories') %>
 </div>
 
 
 <% if !@categories.blank? %>
-<table class="table table-hover">
+<table class="striped responsive-table">
   <thead>
     <tr>
       <th> <%= t('.name') %> </th>
@@ -15,8 +15,8 @@
       <% for category in @categories %>
         <tr>
           <td> <%= link_to category.name, category_path(category) %></td>
-          <td> <%= link_to t('.edit'), edit_category_path(id: category.id), :class => "btn btn-primary"  %>
-          <%= link_to t('.remove'), category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+          <td> <%= link_to t('.edit'), edit_category_path(id: category.id), :class => "btn"  %>
+          <%= link_to t('.remove'), category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn danger-btn" %>
           </td>
         </tr>
       <% end %>
@@ -26,4 +26,6 @@
     </tbody>
 </table>
 
-  <%= link_to t('.new_category'), new_category_path, :class => "btn btn-success ml-3" %><br />
+<button class="waves-effect waves-light btn primary-btn">
+  <%= link_to t('.new_category'), new_category_path, :class => "white-text" %><i class="material-icons right">add</i>
+</button>

@@ -1,6 +1,8 @@
 @import "materialize/components/color-variables";
 $primary-color: color("blue", "lighten-2") !default;
-$secondary-color: color("yellow", "base") !default;
+// $secondary-color: color("yellow", "base") !default;
+$secondary-color: color("lime", "accent-3") !default;
+$danger-color: color("red", "accent-3") !default;
 @import 'materialize';
 
 body {
@@ -11,4 +13,27 @@ body {
 
 main {
   flex: 1 0 auto;
+}
+
+.title {
+  color: $primary-color;
+  font-size: 4em;
+  margin: 20px 0 20px 20px;
+}
+
+footer {
+  color: #fff;
+  background-color: #64B5F6;
+  margin-top: 30px;
+}
+
+.primary-btn {
+  margin-top: 30px;
+  margin-left: 50px;
+  background-color: $primary-color;
+  color: #fff;
+}
+
+.danger-btn {
+  background-color: $danger-color;
 }
