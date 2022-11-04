@@ -1,4 +1,4 @@
-module Transactions
+module Invoices
   class ProcessInvoicePayment < ApplicationService
     def initialize(params)
       @params = params
