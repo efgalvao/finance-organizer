@@ -22,7 +22,7 @@ class TransactionsController < ApplicationController
   end
 
   def invoice_payment
-    Transactions::ProcessInvoicePayment.call(invoice_params)
+    Invoices::ProcessInvoicePayment.call(invoice_params)
     @user = UserPresenter.new(current_user)
     redirect_to user_summary_url
   rescue StandardError => e

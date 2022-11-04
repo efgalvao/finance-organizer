@@ -13,6 +13,7 @@ module Files
       process_transactions if (content[:transactions].presence || []).any?
       process_transferences if (content[:transferences].presence || []).any?
       process_parcels_transactions if (content[:credit].presence || []).any?
+      process_invoice_payments if (content[:invoices].presence || []).any?
     end
 
     private
@@ -37,6 +38,13 @@ module Files
       transactions = Transactions::BuildParcelsTransactions.call(content[:credit])
       transactions.each do |transaction|
         Transactions::ProcessCreditTransaction.call(transaction)
+      end
+    end
+
+    def process_invoice_payments
+      payments = Invoices::BuildInvoicePayments.call(content[:invoices])
+      payments.each do |payment|
+        Invoices::ProcessInvoicePayment.call(payment)
       end
     end
   end
