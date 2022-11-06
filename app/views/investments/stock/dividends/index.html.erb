@@ -10,7 +10,7 @@
     <%= link_to "#{stock.ticker} (#{stock.account_name})", stock_path(stock) %>
   </div>
 
-  <table class="table table-hover">
+  <table class="striped responsive-table">
     <thead>
       <tr>
         <th><%= t('.date') %></th>
@@ -30,4 +30,4 @@
 <br>
 <% end%>
 
-<%= link_to t('.new_dividend'), new_stock_dividend_path, class: 'btn btn-success ml-3'%>
+<%= link_to t('.new_dividend'), new_stock_dividend_path, class: 'btn primary-btn ml-3'%>

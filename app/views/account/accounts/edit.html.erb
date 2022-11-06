@@ -4,7 +4,7 @@
   <%= @account.name %>
 </div>
 
-<div class="form">
+<div class="account-item">
   <%= form_with(url: account_path(@account), method: :patch, scope: :account, local: true) do |form| %>
     <% if @account.errors.any? %>
       <div id="error_explanation">
@@ -19,22 +19,26 @@
     <% end %>
 
     <form>
-      <div class="form-group">
-        <%= form.label t('.name'), class: "input-group-text" %>
-        <%= form.text_field :name, class: "form-control" %>
+      <div class="input-field col s6">
+        <%= form.label t('.name') %>
+        <%= form.text_field :name, class: "validate" %>
       </div>
 
-      <div class="form-group">
-        <p class="input-group-text" ><%= t('.kind_of_account') %></p>
-      <%= form.select :kind, [[t('.kind_savings'), "savings"], [t('.kind_broker'), "broker"], [t('.kind_card'), "card"]], {}, { class: "form-control" } %>
-
+      <div class="input-field col s12">
+        <%= form.label t('.kind_of_account')%>
+        <%= form.select :kind, [[t('.kind_savings'), "savings"], [t('.kind_broker'), "broker"], [t('.kind_card'), "card"]], {}, { class: "browser-default select"} %>
       </div>
 
-      <div class="form-group">
-        <%= form.submit t('.save'), class: "btn btn-success" %>
+      <div class="account-item">
+        <%= form.submit t('.save'), class: "btn primary-btn" %>
+        <%= link_to t('.cancel'), :back, class: "btn danger-btn" %>
       </div>
     </form>
   <% end %>
-
-<%= link_to t('.cancel'), :back, class: "btn btn-primary" %>
 </div>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    $('select').material_select();
+  })
+</script>

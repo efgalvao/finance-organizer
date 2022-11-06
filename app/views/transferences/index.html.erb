@@ -7,7 +7,7 @@
 <br />
 
 <% if !@transferences.blank? %>
-<table class="table table-hover">
+<table class="striped responsive-table">
   <thead>
     <tr>
       <th><%= t('.date') %></th>
@@ -31,4 +31,4 @@
     </tbody>
 </table>
 
-<%= link_to t('.new_transference'), new_transference_path, class:"btn btn-success ml-3" %>
+<%= link_to t('.new_transference'), new_transference_path, class:"btn primary-btn ml-3" %>

@@ -8,7 +8,7 @@
 <br />
 
 <% if !@transactions.blank? %>
-<table class="table table-hover">
+<table class="striped responsive-table">
   <thead>
     <tr>
       <th> <%= t('.name') %> </th>
@@ -39,4 +39,4 @@
     </tbody>
 </table>
 
-<%= link_to t('.new_transaction'), new_account_transaction_path(params[:account_id]), class:"btn btn-success ml-3" %>
+<%= link_to t('.new_transaction'), new_account_transaction_path(params[:account_id]), class:"btn primary-btn ml-3" %>

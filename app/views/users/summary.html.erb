@@ -4,90 +4,96 @@
   <%= @user.name %>
 </div>
 
-  <div class="summary-item">
-    <p class="summary-subtitle"><%=  @user.formated_date %></p>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th><%= t('.total_balance') %></th>
-            <th><%= t('.total_cash') %></th>
-            <th><%= t('.total_invested') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= number_to_currency(@user.updated_current_month_report.total, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-            <td><%= number_to_currency(@user.updated_current_month_report.savings, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-            <td><%= number_to_currency(@user.updated_current_month_report.stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          </tr>
-        </tbody>
-      </table>
+<div class="summary-item">
+  <p class="summary-subtitle"><%=  @user.formated_date %></p>
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+        <th><%= t('.total_balance') %></th>
+        <th><%= t('.total_cash') %></th>
+        <th><%= t('.total_invested') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= number_to_currency(@user.updated_current_month_report.total, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(@user.updated_current_month_report.savings, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(@user.updated_current_month_report.stocks, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      </tr>
+    </tbody>
+  </table>
 
-    <table class='table table-hover'>
-      <thead>
-        <tr>
-          <th><%= t('.incomes') %></th>
-          <th><%= t('.expenses') %></th>
-          <th><%= t('.card_expenses') %></th>
-          <th><%= t('.invested') %></th>
-          <th><%= t('.balance') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= number_to_currency(@user.updated_current_month_report.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(@user.updated_current_month_report.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(@user.updated_current_month_report.card_expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(@user.updated_current_month_report.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(@user.updated_current_month_report.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="chart-title">
-      <%= t('.accounts') %><br />
-    </div>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th><%= t('.account') %></th>
-          <th><%= t('.balance') %></th>
-          <th><%= t('.updated_invested_value') %></th>
-          <th><%= t('.total') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @user.except_card_accounts.each do |account| %>
-        <tr>
-          <td><%= link_to account.name, account_path(account) %></td>
-          <td><%= number_to_currency(account.balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(account.updated_invested_value, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(account.account_total, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+        <th><%= t('.incomes') %></th>
+        <th><%= t('.expenses') %></th>
+        <th><%= t('.card_expenses') %></th>
+        <th><%= t('.invested') %></th>
+        <th><%= t('.balance') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= number_to_currency(@user.updated_current_month_report.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(@user.updated_current_month_report.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(@user.updated_current_month_report.card_expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(@user.updated_current_month_report.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(@user.updated_current_month_report.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <div class="summary-item">
   <%= render 'incomes_expenses' %>
 </div>
 
+<div class="summary-item">
+  <div class="summary-subtitle">
+    <%= t('.accounts') %><br />
+  </div>
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+        <th><%= t('.account') %></th>
+        <th><%= t('.balance') %></th>
+        <th><%= t('.updated_invested_value') %></th>
+        <th><%= t('.total') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.except_card_accounts.each do |account| %>
+      <tr>
+        <td><%= link_to account.name, account_path(account) %></td>
+        <td><%= number_to_currency(account.balance, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(account.updated_invested_value, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(account.account_total, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<div class="chart-title">
-  <%= t('.monthly_balance') %><br />
+<div class="summary-item">
+  <div class="summary-subtitle">
+    <%= t('.monthly_balance') %><br />
+  </div>
+  <div class="chart">
+  <%= line_chart [
+        { name: t('.total_balance'), data: @user.semester_summary[:total] },
+        { name: t('.total_cash'), data: @user.semester_summary[:savings] },
+        { name: t('.total_invested'), data: @user.semester_summary[:stocks] }
+        ], precision: 8 %>
+  </div>
 </div>
-<div class="summary-chart">
- <%= line_chart [
-      { name: t('.total_balance'), data: @user.semester_summary[:total] },
-      { name: t('.total_cash'), data: @user.semester_summary[:savings] },
-      { name: t('.total_invested'), data: @user.semester_summary[:stocks] }
-      ], precision: 8 %>
 
-</div>
-<div class="chart-title">
-  <%= t('.monthly_dividends') %><br />
-</div>
-<div class="summary-chart">
-  <%= line_chart @user.last_semester_total_dividends, precision: 8 %>
+<div class="summary-item">
+
+  <div class="summary-subtitle">
+    <%= t('.monthly_dividends') %><br />
+  </div>
+  <div class="chart">
+    <%= line_chart @user.last_semester_total_dividends, precision: 8 %>
+  </div>
 </div>

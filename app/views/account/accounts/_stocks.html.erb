@@ -1,15 +1,11 @@
-<div class="summary">
-  <div class="summary-subtitle">
-    <%= t('.summary_for') %> <%= @account.name %>
+<div class="account-item">
+  <div class="account-subtitle">
+    <%= t('.summary') %>
   </div>
 </div>
 
-<div class="chart-title">
-  <%= t('.summary') %>
-</div>
-
-<div class="summary-item">
-  <table class="table table-hover">
+<div class="account-item">
+  <table class="striped responsive-table">
     <thead>
       <tr>
         <th><%= t('.balance') %></th>
@@ -23,39 +19,45 @@
           <td><%= number_to_currency(@account.balance, unit: 'R$', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(@account.account_total, unit: 'R$', separator: ',', delimiter: '.') %></td>
           <td><%= number_to_currency(@account.total_invested, unit: 'R$', separator: ',', delimiter: '.') %></td>
-          <td> <%= number_to_currency(@account.updated_invested_value, unit: 'R$', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(@account.updated_invested_value, unit: 'R$', separator: ',', delimiter: '.') %></td>
         </tr>
     </tbody>
   </table>
 </div>
 
-
-<% if @account.stocks_count > 0 %>
-  <%= render 'stocks_summary' %>
-<% end %>
-
-</br>
-
-<% if @account.treasuries_count > 0 %>
-  <%= render 'treasuries_summary' %>
-<% end %>
-
-<div class="summary-item">
-  <%= link_to t('.transactions'), account_transactions_path(@account), class:'btn btn-success' %>
-  <%= link_to t('.new_transaction'), new_account_transaction_path(@account), :class => "btn btn-success ml-3" %>
-  <%= link_to t('.new_transference'), new_transference_path, :class => "btn btn-success ml-3" %>
-  <%= link_to t('.new_stock'), new_stock_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
-  <%= link_to t('.new_treasury'), new_treasury_path(account_id: @account.id), :class => "btn btn-success ml-3" %>
+<div class="account-item">
+  <% if @account.stocks_count > 0 %>
+    <%= render 'stocks_summary' %>
+  <% end %>
 </div>
 
-</br>
+<div class="account-item">
+  <% if @account.treasuries_count > 0 %>
+    <%= render 'treasuries_summary' %>
+  <% end %>
+</div>
 
-<% if @account.stocks_count > 0 %>
-  <%= render 'stocks_list' %>
-<% end %>
+<div class="account-item">
+  <%= render 'stocks_table' %>
+</div>
 
-</br>
+<div class="account-item">
+  <%= link_to t('.transactions'), account_transactions_path(@account), class:'btn primary-btn' %>
+  <%= link_to t('.new_transaction'), new_account_transaction_path(@account), :class => "btn primary-btn" %>
+  <%= link_to t('.new_transference'), new_transference_path, :class => "btn primary-btn" %>
+  <%= link_to t('.new_stock'), new_stock_path(account_id: @account.id), :class => "btn primary-btn" %>
+  <%= link_to t('.new_treasury'), new_treasury_path(account_id: @account.id), :class => "btn primary-btn" %>
+</div>
 
-<% if @account.treasuries_count > 0 %>
-  <%= render 'treasuries_list' %>
-<% end %>
+
+<div class="account-item">
+  <% if @account.stocks_count > 0 %>
+    <%= render 'stocks_list' %>
+  <% end %>
+</div>
+
+<div class="account-item">
+  <% if @account.treasuries_count > 0 %>
+    <%= render 'treasuries_list' %>
+  <% end %>
+</div>
