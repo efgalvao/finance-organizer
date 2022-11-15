@@ -2,6 +2,7 @@
 
 <div class="title">
   <%= t('.title') %>
+  <%= link_to t('.new_transference'), new_transference_path, class:"btn primary-btn right" %>
 </div>
 
 <br />
@@ -30,5 +31,3 @@
     <% end %>
     </tbody>
 </table>
-
-<%= link_to t('.new_transference'), new_transference_path, class:"btn primary-btn ml-3" %>

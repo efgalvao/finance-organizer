@@ -36,4 +36,25 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@materializecss/materialize@1.1.0/dist/js/materialize.min.js"></script>
 
+  <script>
+  $( document ).ready(function() {
+    $('.datepicker').datepicker({
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      selectMonths: true,
+      yearRange: 2,
+      format: 'yyyy-mm-dd',
+      autoClose: true
+    });
+    $('.dropdown-trigger').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on click
+      alignment: 'right', // Aligns dropdown to left or right edge (works with constrain_width)
+      gutter: 100, // Spacing from edge
+      coverTrigger: false // Displays dropdown below the button
+    });
+  });
+  </script>
 </html>

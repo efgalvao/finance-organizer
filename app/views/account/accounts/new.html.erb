@@ -19,20 +19,22 @@
     <% end %>
 
     <form>
-      <div class="input-field col s6">
+      <div class="form-group">
         <%= form.label t('.name')%>
         <%= form.text_field :name, class: "validate" %>
       </div>
 
-      <div class="input-field col s6" >
+      <div class="form-group" >
         <%= form.label t('.kind_of_account') %>
-        <%= form.select :kind, [[t('.kind_savings'), "savings"], [t('.kind_broker'), "broker"], [t('.kind_card'), "card"]], { selected: "savings" }, { class: "browser-default select" } %>
+        <%= form.select :kind, [[t('.kind_savings'), "savings"], [t('.kind_broker'), "broker"], [t('.kind_card'), "card"]], { selected: "savings" }, { class: "browser-default form-select" } %>
       </div>
 
-      <div class="input-field col s6">
+      <div class="form-group">
         <%= form.label t('.balance') %>
         <%= form.number_field :balance, class: "validate" %>
       </div>
+
+    <br />
 
       <div class="form-group">
         <%= form.submit t('.save'), class: "btn primary-btn" %>

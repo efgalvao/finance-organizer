@@ -23,19 +23,18 @@
   <form>
     <div class="form-group">
       <%= form.label t('.name'), class: "input-group-text" %>
-      <%= form.text_field :name, class: "form-control" %>
+      <%= form.text_field :name, class: "validate" %>
     </div>
 
     <div class="form-group">
       <%= form.label t('.account'), class: "input-group-text" %>
-      <%= form.collection_select(:account_id, policy_scope(Account::Account), :id, :name, { prompt: t('.choose_account'), selected: params[:account_id] }, {class: "custom-select"}) %>
+      <%= form.collection_select(:account_id, policy_scope(Account::Account), :id, :name, { prompt: t('.choose_account'), selected: params[:account_id] }, {class: "browser-default form-select"}) %>
     </div>
 
     <div class="form-group">
       <%= form.submit t('.save'), class: "btn primary-btn" %>
+      <%= link_to t('.cancel'), :back, class: "btn danger-btn" %>
     </div>
   </form>
 <% end %>
-
-<%= link_to t('.cancel'), :back, class: "btn primary-btn" %>
 </div>

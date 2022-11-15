@@ -6,6 +6,7 @@ $danger-color: color("red", "accent-3") !default;
 @import 'materialize';
 @import 'summary';
 @import 'accounts';
+@import 'forms';
 
 body {
   display: flex;
@@ -34,6 +35,11 @@ footer {
   margin-right: 10px;
   background-color: $primary-color;
   color: #fff;
+}
+
+.btn-info {
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .danger-btn {

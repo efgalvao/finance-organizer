@@ -2,6 +2,7 @@
 
 <div class="title">
   <%= t('.title') %>
+  <%= link_to t('.new_stock'), new_stock_path, class:"btn primary-btn right" %>
 </div>
 
 <table class="striped responsive-table table-condensed">
@@ -27,12 +28,10 @@
         <td> $ <%= stock.current_total_value_cents / 100.0 %> </td>
         <td> $ <%= stock.current_value_cents / 100.0 %> </td>
         <td> <%= stock.shares_total %> </td>
-        <td> <%= link_to t('.details'), stock_path(stock), class:"btn btn-info" %>
-             <%= link_to t('.edit'), edit_stock_path(stock), class:"btn btn-warning" %>
+        <td> <%= link_to t('.details'), stock_path(stock), class:"btn primary-btn" %>
+             <%= link_to t('.edit'), edit_stock_path(stock), class:"btn primary-btn" %>
              <%= link_to t('.remove'), stock_path(stock), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn danger-btn" %> </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new_stock'), new_stock_path, class:"btn primary-btn ml-3" %>
