@@ -35,7 +35,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.submit "Update", class: "btn btn-success ml-3" %>
+      <%= f.submit "Update", class: "btn primary-btn ml-3" %>
     </div>
   <% end %>
   <br>
@@ -43,8 +43,8 @@
   Unhappy ?
   </div>
   <div class='devise-links'>
-  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger ml-3" %>
+  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn danger-btn ml-3" %>
 
-  <%= link_to "Back", :back, class: "btn btn-primary ml-3" %>
+  <%= link_to "Back", :back, class: "btn primary-btn ml-3" %>
   </div>
 </div>

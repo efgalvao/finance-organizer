@@ -22,7 +22,7 @@
   <form>
     <div class="form-group">
       <%= form.label t('.date'), class: "input-group-text" %>
-      <%= form.date_field :date, class: "form-control", value: Time.now.strftime('%Y-%m-%d') %>
+      <%= form.text_field :date, class: "datepicker" %>
     </div>
 
     <div class="form-group">
@@ -32,7 +32,7 @@
 
     <div class="form-group">
       <%= form.label t('.kind'), class: "input-group-text" %>
-      <%= form.text_field :kind, class: "form-control" %>
+      <%= form.text_field :kind, class: "validate" %>
     </div>
 
     <div class="form-group">
@@ -41,10 +41,10 @@
     </div>
 
     <div class="form-group">
-      <%= form.submit t('.save'),class: "btn btn-success" %>
+      <%= form.submit t('.save'),class: "btn primary-btn" %>
+      <%= link_to t('.cancel'), :back, :class => "btn btn-info" %>
     </div>
   </form>
 <% end %>
 
-  <%= link_to t('.cancel'), :back, :class => "btn btn-primary" %>
 </div>

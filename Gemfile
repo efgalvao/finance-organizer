@@ -30,7 +30,8 @@ gem 'pg'
 gem 'rest-client'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-gem 'solargraph'
+gem 'materialize-sass', '~> 1.0.0'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -46,6 +47,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0'
   gem 'shoulda-matchers'
   gem 'rails-erd' # Visualize the database structure with `bundle exec erd --open`
+  gem 'solargraph'
 end
 
 group :development do

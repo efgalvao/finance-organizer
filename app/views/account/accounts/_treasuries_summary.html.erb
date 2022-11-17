@@ -1,22 +1,20 @@
-<div class="chart-title">
+<div class="account-subtitle">
   <%= t('.title') %>
 </div>
 
-<div class="summary-item">
-  <table class="table table-hover">
-    <thead>
+<table class="striped responsive-table">
+  <thead>
+    <tr>
+      <th><%= t('.invested') %></th>
+      <th><%= t('.updated') %></th>
+      <th><%= t('.quantity') %></th>
+    </tr>
+  </thead>
+  <tbody>
       <tr>
-        <th><%= t('.invested') %></th>
-        <th><%= t('.updated') %></th>
-        <th><%= t('.quantity') %></th>
+        <td><%= number_to_currency(@account.sum_invested_treasuries, unit: 'R$', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(@account.sum_current_treasuries, unit: 'R$', separator: ',', delimiter: '.') %></td>
+        <td><%= @account.treasuries_count %></td>
       </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><%= number_to_currency(@account.sum_invested_treasuries, unit: 'R$', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(@account.sum_current_treasuries, unit: 'R$', separator: ',', delimiter: '.') %></td>
-          <td><%= @account.treasuries_count %></td>
-        </tr>
-    </tbody>
-  </table>
-</div>
+  </tbody>
+</table>

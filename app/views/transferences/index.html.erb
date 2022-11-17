@@ -2,12 +2,13 @@
 
 <div class="title">
   <%= t('.title') %>
+  <%= link_to t('.new_transference'), new_transference_path, class:"btn primary-btn right" %>
 </div>
 
 <br />
 
 <% if !@transferences.blank? %>
-<table class="table table-hover">
+<table class="striped responsive-table">
   <thead>
     <tr>
       <th><%= t('.date') %></th>
@@ -30,5 +31,3 @@
     <% end %>
     </tbody>
 </table>
-
-<%= link_to t('.new_transference'), new_transference_path, class:"btn btn-success ml-3" %>

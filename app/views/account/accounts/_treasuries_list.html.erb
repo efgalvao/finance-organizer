@@ -1,27 +1,32 @@
-<div class="chart-title">
+<div class="account-subtitle">
   <%= t('.treasuries') %>
-  </div>
-<div class="summary-item">
-  <table class="table table-hover">
-    <thead>
+</div>
+
+<table class="striped responsive-table">
+  <thead>
+    <tr>
+      <th><%= t('.name') %></th>
+      <th><%= t('.total_invested') %></th>
+      <th><%= t('.current_value') %></th>
+      <th><%= t('.shares') %></th>
+      <th><%= t('.last_update') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @account.ordered_not_released_treasuries.each do |treasury| %>
       <tr>
-        <th><%= t('.name') %></th>
-        <th><%= t('.total_invested') %></th>
-        <th><%= t('.current_value') %></th>
-        <th><%= t('.shares') %></th>
-        <th><%= t('.last_update') %></th>
+        <td><%= link_to treasury.name, treasury_path(treasury) %></td>
+        <td><%= treasury.invested_value %></td>
+        <td><%= treasury.current_value %></td>
+        <td><%= treasury.shares %></td>
+        <td><%= l(treasury.updated_at, format: :long) %></td>
       </tr>
-    </thead>
-    <tbody>
-      <% @account.ordered_not_released_treasuries.each do |treasury| %>
-        <tr>
-          <td><%= link_to treasury.name, treasury_path(treasury) %></td>
-          <td><%= treasury.invested_value %></td>
-          <td><%= treasury.current_value %></td>
-          <td><%= treasury.shares %></td>
-          <td><%= l(treasury.updated_at, format: :long) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="chart">
+  <%= line_chart @account.ordered_not_released_treasuries.map { |treasury| {
+      name: treasury.name, data: treasury.last_semester_positions
+      } }, precision: 8 %>
 </div>

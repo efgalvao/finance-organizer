@@ -1,33 +1,32 @@
 <div class="title">
   <%= t('.title') %>
+  <%= link_to t('.new_card'), new_account_path, :class => "btn btn primary-btn right" %>
 </div>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th><%= t('.name') %></th>
-      <th><%= t('.balance') %></th>
-      <th><%= t('.last_balance_date') %></th>
-      <th><%= t('.actions') %> </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @accounts.each do |account| %>
+<div class="account-item">
+  <table class="striped responsive-table">
+    <thead>
       <tr>
-        <td><%= link_to account.name, account_path(account), class:"account" %></td>
-        <td >$ <%= account.balance %></td>
-        <td ><%= format_date(account.updated_at) %></td>
-        <td>
-          <%= link_to t('.transactions'), account_transactions_path(account), class:"btn btn-primary" %>
-          <%= link_to t('.edit_account'), edit_account_path(account), class:"btn btn-primary" %>
-          <%= link_to t('.delete_account'), account_path(account), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %> </td>
-
+        <th><%= t('.name') %></th>
+        <th><%= t('.balance') %></th>
+        <th><%= t('.last_balance_date') %></th>
+        <th><%= t('.actions') %> </th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= link_to account.name, account_path(account), class:"account" %></td>
+          <td >$ <%= account.balance %></td>
+          <td ><%= format_date(account.updated_at) %></td>
+          <td>
+            <%= link_to t('.transactions'), account_transactions_path(account), class:"btn primary-btn" %>
+            <%= link_to t('.edit_account'), edit_account_path(account), class:"btn primary-btn" %>
+            <%= link_to t('.delete_account'), account_path(account), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn danger-btn" %> </td>
 
-<%= link_to t('.new_card'), new_account_path, :class => "btn btn-success ml-3" %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

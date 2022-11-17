@@ -4,7 +4,7 @@
   <%= t('.title') %>
 </div>
 
-<table class="table table-hover table-condensed">
+<table class="striped responsive-table table-condensed">
   <thead>
     <tr>
       <th><%= t('.name') %></th>
@@ -23,9 +23,9 @@
         <td> <%= treasury.current_value %> </td>
         <td> <%= treasury.shares %> </td>
         <td> <%= treasury.account_name %> </td>
-        <td> <%= link_to t('.details'), treasury_path(treasury), class:"btn btn-info" %>
-             <%= link_to t('.edit'), edit_treasury_path(id: treasury.id), class:"btn btn-warning" %>
-             <%= link_to t('.remove'), treasury_path(treasury), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %> </td>
+        <td> <%= link_to t('.details'), treasury_path(treasury), class:"btn primary-btn" %>
+             <%= link_to t('.edit'), edit_treasury_path(id: treasury.id), class:"btn primary-btn" %>
+             <%= link_to t('.remove'), treasury_path(treasury), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn danger-btn" %> </td>
       </tr>
     <% end %>
   </tbody>

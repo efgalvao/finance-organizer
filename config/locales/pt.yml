@@ -42,11 +42,13 @@ pt:
   dividend: 'Dividendo'
   layouts:
     header:
+      shortcuts: ATALHOS
       accounts: CONTAS
       cards_accounts: CARTÕES
       categories: CATEGORIAS
       investments: INVESTIMENTOS
       transferences: TRANSFERÊNCIAS
+      file_upload: UPLOAD DE ARQUIVO
       edit_profile: EDITAR PERFIL
       logout: SAIR
   categories:
@@ -61,11 +63,18 @@ pt:
     new:
       new_category: Nova categoria
       cancel: Cancelar
-    edit:
-      cancel: Cancelar
-    form:
       name: Nome
       save: Salvar
+    edit:
+      cancel: Cancelar
+      name: Nome
+      save: Salvar
+  files:
+    file_upload:
+      title: Fazer upload de arquivo
+      disclaimer: Somente arquivos no formato JSON sao aceitos
+      upload: Fazer upload
+      cancel: Voltar
   transferences:
     index:
       title: Transferências

@@ -2,9 +2,29 @@
   <%= t('.new_category') %>
 </div>
 
-<div class="form">
 
-  <%= render 'form', category: @category %>
+<%= form_for @category do |form| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
-  <%= link_to t('.cancel'), :back, :class => "btn btn-info" %>
-</div>
+      <ul>
+        <% @category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label t('.name'), class: "input-group-text" %>
+    <%= form.text_field :name, :class => "validate" %>
+  </div>
+
+  <br />
+
+  <div class="actions">
+    <%= form.submit t('.save'), :class => "btn primary-btn" %>
+    <%= link_to t('.cancel'), :back, :class => "btn danger-btn" %>
+  </div>
+<% end %>

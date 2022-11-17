@@ -5,28 +5,6 @@ RSpec.describe 'Dividend', type: :request do
   let(:account) { create(:account, user: user) }
   let(:stock) { create(:stock, account: account) }
 
-  describe 'GET /investments/stocks/:id/dividends' do
-    let(:dividend) { create(:dividend, stock: stock) }
-
-    context 'when logged in' do
-      it 'can successfully access dividends index page' do
-        sign_in(user)
-
-        get stock_dividends_path(stock)
-
-        expect(response).to have_http_status(:success)
-      end
-    end
-
-    context 'with unauthenticated request' do
-      it 'cannot access dividends index page' do
-        get stock_dividends_path(stock)
-
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
-
   describe 'POST /investents/stock/:id/dividends' do
     let!(:params) { { stock_id: stock.id, value: 1_000, date: Date.current } }
     let(:new_dividend) { post stock_dividends_path(stock_id: stock.id), params: { dividend: params } }

@@ -1,27 +1,26 @@
-<nav class="navbar navbar-dark dark-blue darken-4">
-  <% if current_user %>
-    <a class="navbar-brand" href="/user/overview">ZUKUNFT: <%= current_user.name.upcase %> </a>
+<nav>
+  <div class="nav-wrapper">
+      <% if current_user %>
+    <a class="brand-logo" href="/user/overview">ZUKUNFT: <%= current_user.name.upcase %> </a>
   <% else %>
-    <a class="navbar-brand" href="/">ZUKUNFT</a>
+    <a class="brand-logo" href="/">ZUKUNFT</a>
   <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
-    aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-    <ul class='navbar-nav mr-auto'>
-
-      <a class="btn btn-outline-primary" href="/accounts"><%= t('.accounts')%></a>
-
-      <a class="btn btn-outline-primary" href="/cards"><%= t('.cards_accounts')%></a>
-
-      <a class="btn btn-outline-primary" href="/categories"><%= t('.categories')%></a>
-
-      <a class="btn btn-outline-primary" href="/investments"><%= t('.investments')%></a>
-
-      <a class="btn btn-outline-primary" href="/transferences"><%= t('.transferences')%></a>
-
-      <%= link_to t('.edit_profile'), edit_user_registration_path, class:'btn btn-outline-primary' %>
-      <%= link_to t('.logout'), destroy_user_session_path, method: :delete, class:'btn btn-outline-primary'  %>
+    <ul class="right">
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown"><%= t('.shortcuts')%><i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
   </div>
 </nav>
+
+<ul id="dropdown" class="dropdown-content">
+  <li><a href="/accounts"><%= t('.accounts')%></a></li>
+  <li><a href="/cards"><%= t('.cards_accounts')%></a></li>
+  <li><a href="/categories"><%= t('.categories')%></a></li>
+  <li><a href="/investments"><%= t('.investments')%></a></li>
+  <li><a href="/transferences"><%= t('.transferences')%></a></li>
+    <li><a href="/file_upload"><%= t('.file_upload')%></a></li>
+
+  <li class="divider"></li>
+  <li><%= link_to t('.edit_profile'), edit_user_registration_path %></li>
+  <li><%= link_to t('.logout'), destroy_user_session_path, method: :delete %></li>
+</ul>

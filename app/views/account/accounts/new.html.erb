@@ -4,42 +4,48 @@
   <%= t('.title') %>
 </div>
 
-<div class="form">
-<%= form_with(url: accounts_path, scope: :account, local: true) do |form| %>
-  <% if @account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+<div class="account-item">
+  <%= form_with(url: accounts_path, scope: :account, local: true) do |form| %>
+    <% if @account.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
 
-      <ul>
-        <% @account.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+        <ul>
+          <% @account.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <form>
+      <div class="form-group">
+        <%= form.label t('.name')%>
+        <%= form.text_field :name, class: "validate" %>
+      </div>
+
+      <div class="form-group" >
+        <%= form.label t('.kind_of_account') %>
+        <%= form.select :kind, [[t('.kind_savings'), "savings"], [t('.kind_broker'), "broker"], [t('.kind_card'), "card"]], { selected: "savings" }, { class: "browser-default form-select" } %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label t('.balance') %>
+        <%= form.number_field :balance, class: "validate" %>
+      </div>
+
+    <br />
+
+      <div class="form-group">
+        <%= form.submit t('.save'), class: "btn primary-btn" %>
+        <%= link_to t('.cancel'), :back, class: "btn danger-btn" %>
+      </div>
+    </form>
   <% end %>
-
-  <form>
-    <div class="form-group">
-      <%= form.label t('.name'), class: "input-group-text" %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
-
-    <div class="form-group" >
-      <p class="input-group-text" ><%= t('.kind_of_account') %></p>
-      <%= form.select :kind, [[t('.kind_savings'), "savings"], [t('.kind_broker'), "broker"], [t('.kind_card'), "card"]], { selected: "savings" }, { class: "form-control" } %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label t('.balance') , class: "input-group-text" %>
-      <%= form.number_field :balance, as: :numeric, step: :any, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-
-      <%= form.submit t('.save'), class: "btn btn-success" %>
-    </div>
-  </form>
-<% end %>
-
-  <%= link_to t('.cancel'), :back, class: "btn btn-primary" %>
 </div>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    $('select').material_select();
+  })
+</script>

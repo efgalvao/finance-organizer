@@ -1,3 +1,37 @@
 // Place all the styles related to the Accounts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+$primary-color: color("blue", "lighten-2") !default;
+
+.account-subtitle {
+  font-size: 25px;
+  font-weight: 900;
+  padding: 15px;
+  background-color: $primary-color;
+  color: white;
+
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+  }
+}
+
+.account-item {
+  font-size: 18px;
+  padding: 8px;
+
+  .item-value {
+    padding-top: 5px;
+    color: red;
+    font-weight: bolder;
+  }
+}
+
+.select {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}

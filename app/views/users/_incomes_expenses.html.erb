@@ -1,28 +1,26 @@
-<div class="summary-item">
-  <p class="summary-subtitle"><%=  t('.past_months') %></p>
+<p class="summary-subtitle"><%=  t('.past_months') %></p>
 
-  <table class='table table-hover'>
-    <thead>
+<table class="striped responsive-table">
+  <thead>
+    <tr>
+      <th><%= t('.month') %></th>
+      <th><%= t('.incomes') %></th>
+      <th><%= t('.expenses') %></th>
+      <th><%= t('.card_expenses') %></th>
+      <th><%= t('.invested') %></th>
+      <th><%= t('.total') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.incomes_expenses_report.each do |month, data| %>
       <tr>
-        <th><%= t('.month') %></th>
-        <th><%= t('.incomes') %></th>
-        <th><%= t('.expenses') %></th>
-        <th><%= t('.card_expenses') %></th>
-        <th><%= t('.invested') %></th>
-        <th><%= t('.total') %></th>
+        <td><%= month %></td>
+        <td><%= number_to_currency(data.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(data.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(data.card_expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(data.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        <td><%= number_to_currency(data.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
       </tr>
-    </thead>
-    <tbody>
-      <% @user.incomes_expenses_report.each do |month, data| %>
-        <tr>
-          <td><%= month %></td>
-          <td><%= number_to_currency(data.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(data.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(data.card_expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(data.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-          <td><%= number_to_currency(data.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+    <% end %>
+  </tbody>
+</table>

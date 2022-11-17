@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
     resources :stocks, controller: 'stock/stocks' do
       get 'current_price', on: :member
-      resources :dividends, controller: 'stock/dividends', only: %i[index new create]
+      resources :dividends, controller: 'stock/dividends', only: %i[new create]
       resources :prices, controller: 'stock/prices', only: %i[new create]
       resources :shares, controller: 'stock/shares', only: %i[new create]
     end
