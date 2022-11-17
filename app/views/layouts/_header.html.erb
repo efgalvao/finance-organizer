@@ -18,24 +18,9 @@
   <li><a href="/categories"><%= t('.categories')%></a></li>
   <li><a href="/investments"><%= t('.investments')%></a></li>
   <li><a href="/transferences"><%= t('.transferences')%></a></li>
+    <li><a href="/file_upload"><%= t('.file_upload')%></a></li>
 
   <li class="divider"></li>
   <li><%= link_to t('.edit_profile'), edit_user_registration_path %></li>
   <li><%= link_to t('.logout'), destroy_user_session_path, method: :delete %></li>
 </ul>
-
-
-
-<%# <script>
-  $( document ).ready(function() {
-      $('.dropdown-trigger').dropdown({
-        inDuration: 300,
-        outDuration: 225,
-        constrainWidth: false, // Does not change width of dropdown to that of the activator
-        hover: false, // Activate on click
-        alignment: 'right', // Aligns dropdown to left or right edge (works with constrain_width)
-        gutter: 100, // Spacing from edge
-        coverTrigger: false // Displays dropdown below the button
-      });
-  });
-</script> %>

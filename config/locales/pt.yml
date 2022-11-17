@@ -48,6 +48,7 @@ pt:
       categories: CATEGORIAS
       investments: INVESTIMENTOS
       transferences: TRANSFERÊNCIAS
+      file_upload: UPLOAD DE ARQUIVO
       edit_profile: EDITAR PERFIL
       logout: SAIR
   categories:

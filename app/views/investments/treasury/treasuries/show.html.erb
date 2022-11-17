@@ -28,7 +28,6 @@
 </div>
 
 <div>
-  <%= link_to t('.back'), :back , :class => "btn primary-btn ml-3" %>
   <%= link_to t('.new_negotiation'), new_treasury_negotiation_path(@treasury), class: 'btn primary-btn' %>
   <%= link_to t('.new_position'), new_treasury_position_path(@treasury), class: 'btn primary-btn' %>
   <%= link_to t('.release_treasury'), release_form_treasury_path(@treasury), class: 'btn primary-btn' %>
@@ -84,4 +83,5 @@
   <% else %>
   <h2><%= t('.no_positions')%><h2>
   <% end %>
+    <%= link_to t('.back'), :back , :class => "btn btn-info" %>
 <div>

@@ -3,10 +3,6 @@ module Investments
     class DividendsController < ApplicationController
       before_action :set_stock, only: %i[new create]
 
-      def index
-        @stocks = policy_scope(Dividend)
-      end
-
       def new
         @dividend = @stock.dividends.new
       end
