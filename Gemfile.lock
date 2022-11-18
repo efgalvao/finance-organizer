@@ -75,6 +75,8 @@ GEM
       activesupport (>= 3.0.0, < 7.1)
       ruby2_keywords (>= 0.0.2, < 1.0)
     ast (2.4.2)
+    autoprefixer-rails (10.4.7.0)
+      execjs (~> 2)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -140,6 +142,7 @@ GEM
     equalizer (0.0.11)
     erubi (1.11.0)
     erubis (2.7.0)
+    execjs (2.8.1)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
     factory_bot_rails (4.11.1)
@@ -215,6 +218,8 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    materialize-sass (1.0.0.1)
+      autoprefixer-rails (>= 6.0.3)
     matrix (0.4.2)
     method_source (1.0.0)
     mime-types (3.4.1)
@@ -511,6 +516,7 @@ DEPENDENCIES
   groupdate
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  materialize-sass (~> 1.0.0)
   money-rails (~> 1.12)
   pg
   pry-byebug
