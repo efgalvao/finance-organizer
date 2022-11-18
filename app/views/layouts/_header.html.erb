@@ -12,15 +12,16 @@
   </div>
 </nav>
 
-<ul id="dropdown" class="dropdown-content">
+<ul id="dropdown" class="dropdown-content dropdown-box">
   <li><a href="/accounts"><%= t('.accounts')%></a></li>
   <li><a href="/cards"><%= t('.cards_accounts')%></a></li>
   <li><a href="/categories"><%= t('.categories')%></a></li>
   <li><a href="/investments"><%= t('.investments')%></a></li>
   <li><a href="/transferences"><%= t('.transferences')%></a></li>
-    <li><a href="/file_upload"><%= t('.file_upload')%></a></li>
+  <li><a href="/file_upload"><%= t('.file_upload')%></a></li>
 
   <li class="divider"></li>
+
   <li><%= link_to t('.edit_profile'), edit_user_registration_path %></li>
   <li><%= link_to t('.logout'), destroy_user_session_path, method: :delete %></li>
 </ul>
