@@ -6,7 +6,7 @@
 
 <div class="summary-item">
   <p class="summary-subtitle"><%=  @user.formated_date %></p>
-  <table class="striped responsive-table">
+  <table class="striped">
     <thead>
       <tr>
         <th><%= t('.total_balance') %></th>
@@ -22,8 +22,10 @@
       </tr>
     </tbody>
   </table>
+</div>
 
-  <table class="striped responsive-table">
+<div>
+  <table class="striped">
     <thead>
       <tr>
         <th><%= t('.incomes') %></th>
