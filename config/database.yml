@@ -17,5 +17,6 @@ test:
 
 production:
   <<: *default
+  url: <%= ENV['DB_URL'] %>
   database: <%= ENV['DB_DATABASE'] || 'finance_production' %>
   pool: 10
