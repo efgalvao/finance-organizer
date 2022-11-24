@@ -3,5 +3,7 @@ class FilesController < ApplicationController
 
   def upload
     Files::ProcessFile.call(params[:file], current_user.id)
+
+    redirect_to user_summary_path, notice: 'File uploaded succesfully.'
   end
 end
