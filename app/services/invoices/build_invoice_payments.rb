@@ -27,7 +27,7 @@ module Invoices
         "sender_id": account_id(payment[:sender]),
         "receiver_id": account_id(payment[:receiver]),
         "date": payment[:date],
-        "value": payment[:amount]
+        "value": payment[:value]
       }
     end
 

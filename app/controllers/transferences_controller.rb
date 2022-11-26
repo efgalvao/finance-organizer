@@ -22,7 +22,7 @@ class TransferencesController < ApplicationController
   private
 
   def transferences_params
-    params.require(:transference).permit(:amount, :sender_id, :receiver_id, :date)
+    params.require(:transference).permit(:value, :sender_id, :receiver_id, :date)
           .merge(user_id: current_user.id)
   end
 end

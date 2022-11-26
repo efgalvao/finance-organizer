@@ -2,7 +2,7 @@ module Invoices
   class ProcessInvoicePayment < ApplicationService
     def initialize(params)
       @params = params
-      @sender = Account::Account.find(params[:sender_id])
+      @sender_id = params[:sender_id]
       @receiver = Account::Account.find(params[:receiver_id])
       @value = params.fetch(:value, 0).to_f
       @date = set_date
@@ -21,10 +21,10 @@ module Invoices
 
     private
 
-    attr_reader :params, :sender, :receiver, :value, :date
+    attr_reader :params, :sender_id, :receiver, :value, :date
 
     def sender_params
-      { account_id: sender.id, value: value, kind: 'expense', receiver: false,
+      { account_id: sender_id, value: value, kind: 'expense', receiver: false,
         title: "#{I18n.t('transactions.invoice.invoice_payment')} - #{receiver.name}", date: date }
     end
 

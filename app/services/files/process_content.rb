@@ -23,6 +23,12 @@ module Files
     def process_transactions
       transactions = Transactions::BuildTransactions.call(content[:transactions])
       transactions.each do |transaction|
+        next unless process_transaction?(
+          date: transaction[:date],
+          value: transaction[:value],
+          account_id: transaction[:account_id]
+        )
+
         Transactions::ProcessTransaction.call(transaction)
       end
     end
@@ -30,6 +36,8 @@ module Files
     def process_transferences
       transferences = Transferences::BuildTransferences.call(content[:transferences], user_id)
       transferences.each do |transference|
+        next unless process_transference?(transference: transference)
+
         Transferences::ProcessTransference.call(transference)
       end
     end
@@ -37,6 +45,12 @@ module Files
     def process_parcels_transactions
       transactions = Transactions::BuildParcelsTransactions.call(content[:credit])
       transactions.each do |transaction|
+        next unless process_transaction?(
+          date: transaction[:date],
+          value: transaction[:value],
+          account_id: transaction[:account_id]
+        )
+
         Transactions::ProcessCreditTransaction.call(transaction)
       end
     end
@@ -44,8 +58,28 @@ module Files
     def process_invoice_payments
       payments = Invoices::BuildInvoicePayments.call(content[:invoices])
       payments.each do |payment|
+        next unless process_transaction?(
+          date: payment[:date],
+          value: payment[:value],
+          account_id: payment[:sender_id]
+        )
+
         Invoices::ProcessInvoicePayment.call(payment)
       end
+    end
+
+    def process_transaction?(date: nil, value: nil, account_id: nil)
+      Account::Transaction.find_by(date: date, value_cents: to_cents(value),
+                                   account_id: account_id).nil?
+    end
+
+    def process_transference?(transference:)
+      Transference.find_by(sender_id: transference[:sender_id], receiver_id: transference[:receiver_id], date: transference[:date],
+                           value_cents: to_cents(transference[:value])).nil?
+    end
+
+    def to_cents(value)
+      value * 100
     end
   end
 end
