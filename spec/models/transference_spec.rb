@@ -8,6 +8,6 @@ RSpec.describe Transference, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to monetize(:amount) }
+    it { is_expected.to monetize(:value) }
   end
 end

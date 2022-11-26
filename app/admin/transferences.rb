@@ -9,7 +9,7 @@ ActiveAdmin.register Transference do
   # or
   #
   permit_params do
-    permitted = %i[sender_id receiver_id user_id date amount_cents]
+    permitted = %i[sender_id receiver_id user_id date value_cents]
     #   permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
   end

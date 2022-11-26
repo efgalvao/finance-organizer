@@ -28,7 +28,7 @@ module Transferences
         "sender_id": account_id(transference[:sender]),
         "receiver_id": account_id(transference[:receiver]),
         "date": transference[:date],
-        "amount": transference[:amount],
+        "value": transference[:value],
         "user_id": user_id
       }
     end

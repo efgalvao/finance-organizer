@@ -3,9 +3,9 @@ class Transference < ApplicationRecord
   belongs_to :receiver, class_name: 'Account::Account'
   belongs_to :user
 
-  monetize :amount_cents
+  monetize :value_cents
 
-  validates :amount, presence: true
+  validates :value, presence: true
   validate :different_accounts
 
   scope :current_month, -> { where('date >= ?', Date.current.beginning_of_month) }
