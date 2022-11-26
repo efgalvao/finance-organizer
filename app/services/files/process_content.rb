@@ -74,8 +74,11 @@ module Files
     end
 
     def process_transference?(transference:)
-      Transference.find_by(sender_id: transference[:sender_id], receiver_id: transference[:receiver_id], date: transference[:date],
-                           value_cents: to_cents(transference[:value])).nil?
+      Transference.find_by(
+        sender_id: transference[:sender_id],
+        receiver_id: transference[:receiver_id], date: transference[:date],
+        value_cents: to_cents(transference[:value])
+      ).nil?
     end
 
     def to_cents(value)
