@@ -30,9 +30,5 @@ module Account
     def owner?(asker)
       user == asker
     end
-
-    # def not_released_treasuries
-    #   treasuries.where(released_at: nil)
-    # end
   end
 end

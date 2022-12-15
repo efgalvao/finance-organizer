@@ -38,22 +38,22 @@ module AccountReport
     end
 
     def incomes(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+      Money.new(transactions.where(date: date.beginning_of_month..date.end_of_month,
                                    kind: 'income').sum(:value_cents))
     end
 
     def expenses(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+      Money.new(transactions.where(date: date.beginning_of_month..date.end_of_month,
                                    kind: 'expense').sum(:value_cents))
     end
 
     def card_expenses(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+      Money.new(transactions.where(date: date.beginning_of_month..date.end_of_month,
                                    kind: 'expense').sum(:value_cents))
     end
 
     def invested(date = DateTime.current)
-      Money.new(transactions.where(date: date.beginning_of_month...date.end_of_month,
+      Money.new(transactions.where(date: date.beginning_of_month..date.end_of_month,
                                    kind: 'investment').sum(:value_cents))
     end
 
@@ -62,7 +62,7 @@ module AccountReport
     end
 
     def transactions
-      @transactions ||= account.transactions.where(date: date.beginning_of_month...date.end_of_month)
+      @transactions ||= account.transactions.where(date: date.beginning_of_month..date.end_of_month)
     end
   end
 end
