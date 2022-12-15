@@ -25,7 +25,7 @@ module AccountReport
     end
 
     def report
-      @report ||= account.reports.where(date: date.beginning_of_month...date.end_of_month).first_or_initialize
+      @report ||= account.reports.find_or_create_by(date: date.beginning_of_month..date.end_of_month)
     end
 
     def account
