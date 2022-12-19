@@ -4,11 +4,11 @@ class UserPresenter < SimpleDelegator
   end
 
   def except_card_accounts
-    @except_card_accounts ||= accounts = memoized_accounts.reject { |account| account[:kind] == 'card' }
+    @except_card_accounts ||= memoized_accounts.reject { |account| account[:kind] == 'card' }
   end
 
   def card_accounts
-    @card_accounts ||= accounts = memoized_accounts.select { |account| account[:kind] == 'card' }
+    @card_accounts ||= memoized_accounts.select { |account| account[:kind] == 'card' }
   end
 
   def formated_date
