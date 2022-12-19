@@ -32,6 +32,6 @@ class CategoryPolicy < ApplicationPolicy
   private
 
   def owner?
-    record.user == user
+    record.user_id == user.id
   end
 end

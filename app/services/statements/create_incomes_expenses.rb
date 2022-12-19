@@ -20,7 +20,7 @@ module Statements
       table = {}
       (1..6).each do |i|
         date = Time.zone.now - i.month
-        report = user.reports.find_by(date: date.beginning_of_month...date.end_of_month)
+        report = user.reports.find_by(date: date.beginning_of_month..date.end_of_month)
         report = create_report(date) if report.nil?
         table[date.strftime('%B, %Y').to_s] = report
       end

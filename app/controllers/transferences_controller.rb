@@ -16,7 +16,7 @@ class TransferencesController < ApplicationController
   end
 
   def index
-    @transferences = policy_scope(Transference).current_month.order(date: :desc)
+    @transferences = policy_scope(Transference).includes(:sender, :receiver).current_month.order(date: :desc)
   end
 
   private

@@ -49,7 +49,7 @@
 </div>
 
 <div class="summary-item">
-  <% if !@stock.shares.blank? %>
+  <% if @stock.shares.present? %>
     <p class="summary-subtitle"><%= t('.shares') %></p>
     <table class="striped responsive-table">
       <thead>
@@ -75,7 +75,7 @@
 </div>
 
 <div class="summary-item">
-  <% if !@stock.prices.blank? %>
+  <% if @stock.prices.present? %>
     <p class="summary-subtitle"><%= t('.prices') %></p>
     <table class="striped responsive-table">
       <thead>
@@ -99,7 +99,7 @@
 </div>
 
 <div class="summary-item">
-  <% if !@stock.dividends.blank? %>
+  <% if @stock.dividends.present? %>
     <p class="summary-subtitle"><%= t('.dividends') %></p>
     <table class="striped responsive-table">
       <thead>

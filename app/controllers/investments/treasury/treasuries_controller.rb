@@ -55,17 +55,10 @@ module Investments
       end
 
       def release_form
-        # binding.pry
         authorize @treasury
-
-        # Investments::Treasury::ReleaseTreasury.call(@treasury)
-
-        # redirect_to account_path(id: @treasury.account_id),
-        #             notice: 'Treasury successfully released.'
       end
 
       def release
-        # binding.pry
         authorize @treasury
 
         Investments::Treasury::ReleaseTreasury.call(release_params)
