@@ -1,24 +1,18 @@
 class UserPresenter < SimpleDelegator
   def memoized_accounts
-    @memoized_accounts ||= accounts.includes([:stocks]).order('name')
+    @memoized_accounts ||= present_accounts(accounts: accounts.includes([:stocks]).order('name'))
   end
 
   def except_card_accounts
-    @except_card_accounts ||= begin
-      accounts = memoized_accounts.reject { |account| account[:kind] == 'card' }
-      present_accounts(accounts: accounts)
-    end
+    @except_card_accounts ||= accounts = memoized_accounts.reject { |account| account[:kind] == 'card' }
   end
 
   def card_accounts
-    @card_accounts ||= begin
-      accounts = memoized_accounts.select { |account| account[:kind] == 'card' }
-      present_accounts(accounts: accounts)
-    end
+    @card_accounts ||= accounts = memoized_accounts.select { |account| account[:kind] == 'card' }
   end
 
   def formated_date
-    I18n.l(updated_current_month_report.date)
+    @formated_date ||= I18n.l(updated_current_month_report.date)
   end
 
   def updated_current_month_report
@@ -31,8 +25,7 @@ class UserPresenter < SimpleDelegator
   end
 
   def semester_summary
-    create_report if reports.empty? || reports.last.date.month != DateTime.current.month
-    update_current_user_report
+    create_report if current_month_user_report.date.month != DateTime.current.month
     Statements::CreateUserSummary.call(reports: semester_reports)
   end
 
@@ -57,8 +50,8 @@ class UserPresenter < SimpleDelegator
   end
 
   def current_month_user_report
-    reports.find_by('date >= ? AND date <= ?', DateTime.current.beginning_of_month,
-                    DateTime.current.end_of_month)
+    @current_month_user_report ||= reports.find_by('date >= ? AND date <= ?', DateTime.current.beginning_of_month,
+                                                   DateTime.current.end_of_month)
   end
 
   def update_current_user_report
@@ -67,30 +60,32 @@ class UserPresenter < SimpleDelegator
   end
 
   def updated_report_params
-    report = { date: DateTime.current, total_cents: 0, savings_cents: 0, stocks_cents: 0,
-               incomes_cents: 0, expenses_cents: 0, card_expenses_cents: 0, invested_cents: 0,
-               final_cents: 0, dividends_cents: 0 }
+    @updated_report_params ||= begin
+      report = { date: DateTime.current, total_cents: 0, savings_cents: 0, stocks_cents: 0,
+                 incomes_cents: 0, expenses_cents: 0, card_expenses_cents: 0, invested_cents: 0,
+                 final_cents: 0, dividends_cents: 0 }
 
-    except_card_accounts.each do |account|
-      report[:total_cents] += account.account_total.cents
-      report[:savings_cents] += account.balance_cents
-      report[:stocks_cents] += account.updated_invested_value.cents
-      report[:incomes_cents] += account.current_report.incomes_cents
-      report[:expenses_cents] += account.current_report.expenses_cents
-      report[:invested_cents] += account.current_report.invested_cents
-      report[:final_cents] += account.current_report.final_cents
-      report[:dividends_cents] += account.current_report.dividends_cents
+      except_card_accounts.each do |account|
+        report[:total_cents] += account.account_total.cents
+        report[:savings_cents] += account.balance_cents
+        report[:stocks_cents] += account.updated_invested_value.cents
+        report[:incomes_cents] += account.current_report.incomes_cents
+        report[:expenses_cents] += account.current_report.expenses_cents
+        report[:invested_cents] += account.current_report.invested_cents
+        report[:final_cents] += account.current_report.final_cents
+        report[:dividends_cents] += account.current_report.dividends_cents
+      end
+
+      card_accounts.each do |account|
+        report[:card_expenses_cents] += account.current_report.expenses_cents
+      end
+
+      report
     end
-
-    card_accounts.each do |account|
-      report[:card_expenses_cents] += account.current_report.expenses_cents
-    end
-
-    report
   end
 
   def semester_reports
-    reports.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
+    @semester_reports ||= reports.where('date > ?', Time.zone.today - 6.months).order(date: :asc)
   end
 
   def create_report

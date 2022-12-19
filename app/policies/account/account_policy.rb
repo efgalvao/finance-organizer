@@ -41,7 +41,7 @@ module Account
     private
 
     def account_owner?
-      record.owner?(user)
+      record.user_id == user.id
     end
   end
 end

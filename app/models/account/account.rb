@@ -26,9 +26,5 @@ module Account
       end
       total
     end
-
-    def owner?(asker)
-      user == asker
-    end
   end
 end

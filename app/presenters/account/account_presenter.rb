@@ -37,7 +37,7 @@ module Account
         report = reports.find_by('date >= ? AND date <= ?', DateTime.current.beginning_of_month,
                                  DateTime.current.end_of_month)
 
-        report = create_current_report if report.nil?
+        report = create_current_report if report.blank?
         report
       end
     end

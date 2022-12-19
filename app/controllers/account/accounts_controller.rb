@@ -7,8 +7,8 @@ module Account
     end
 
     def show
-      @account = AccountPresenter.new(@account)
       authorize(@account)
+      @account = AccountPresenter.new(@account)
     end
 
     def new

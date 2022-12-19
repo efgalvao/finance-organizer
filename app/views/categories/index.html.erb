@@ -3,7 +3,7 @@
   <%= link_to t('.new_category'), new_category_path, :class => "btn primary-btn right" %>
 </div>
 
-<% if @categories.any? %>
+<% if @categories.present? %>
 <table class="striped">
   <thead>
     <tr>
