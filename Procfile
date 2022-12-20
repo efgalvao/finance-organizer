@@ -1,2 +1,1 @@
-web: rake assets:precompile && rake db:migrate && bin/rails server
-
+web: bundle exec rake db:migrate && bundle exec bin/rails server -b 0.0.0.0 -p $PORT
