@@ -9,10 +9,10 @@ RUN bundle install
 RUN apk add \
     tzdata \
     nodejs \
-    postgresql-dev
-RUN bundle exec rake RAILS_ENV=production assets:precompile
+    postgresql-dev \
+    yarn
 WORKDIR /app
 COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
 COPY . .
 EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
+ENTRYPOINT ["entrypoint.sh"]
