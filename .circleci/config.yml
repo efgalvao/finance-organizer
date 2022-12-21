@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.0.3-node
+      - image: cimg/ruby:3.0.5-node
     steps:
       - checkout
       - ruby/install-deps
@@ -19,7 +19,7 @@ jobs:
     environment:
       CC_TEST_REPORTER_ID: aec1c3a2f65889063c46c4c53040381548d8915af5964adb4f188a0bff376e9f
     docker:
-      - image: cimg/ruby:3.0.3-node
+      - image: cimg/ruby:3.0.5-node
         environment:
           RAILS_ENV: test
           DB_USERNAME: postgres
@@ -56,7 +56,7 @@ jobs:
 
   rubocop:
     docker:
-      - image: cimg/ruby:3.0.3-node
+      - image: cimg/ruby:3.0.5-node
         environment:
           RAILS_ENV: test
           DB_USERNAME: postgres
@@ -76,7 +76,7 @@ jobs:
 
   rails_best_practices:
     docker:
-      - image: cimg/ruby:3.0.3-node
+      - image: cimg/ruby:3.0.5-node
         environment:
           RAILS_ENV: test
           DB_USERNAME: postgres
