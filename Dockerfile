@@ -10,7 +10,6 @@ RUN apk add \
     tzdata \
     nodejs \
     postgresql-dev
-RUN bundle exec rake assets:precompile
 WORKDIR /app
 COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
 COPY . .
