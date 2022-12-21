@@ -1,18 +1,18 @@
 FROM ruby:3.0-alpine AS builder
-RUN apk add \
-  build-base \
-  postgresql-dev
-COPY Gemfile .
-COPY Gemfile.lock .
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update -qq && apt-get install -y build-essential nodejs yarn
+
+ENV APP_HOME /app
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+RUN gem install bundler:2.1.2
+ADD Gemfile* $APP_HOME/
 RUN bundle install
-  FROM ruby:3.0-alpine AS runner
-RUN apk add \
-    tzdata \
-    nodejs \
-    postgresql-dev \
-    yarn
-WORKDIR /app
-COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
-COPY . .
-EXPOSE 3000
-CMD entrypoint.sh
+
+ADD . $APP_HOME
+RUN yarn install --check-files
+CMD ["rails","server","-b","0.0.0.0"]
+RUN RAILS_ENV=production bundle exec rake assets:precompile
