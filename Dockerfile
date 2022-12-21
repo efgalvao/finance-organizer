@@ -15,4 +15,4 @@ WORKDIR /app
 COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
 COPY . .
 EXPOSE 3000
-ENTRYPOINT ["entrypoint.sh"]
+CMD entrypoint.sh
