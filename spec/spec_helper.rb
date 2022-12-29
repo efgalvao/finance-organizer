@@ -5,7 +5,7 @@ require 'dotenv'
 require 'money-rails/test_helpers'
 
 SimpleCov.start 'rails' do
-  minimum_coverage 50
+  minimum_coverage 10
 
   add_filter 'node_modules/'
 
