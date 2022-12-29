@@ -7,7 +7,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.0.5-node
+      - image: cimg/ruby:3.0.3-node
     steps:
       - checkout
       - ruby/install-deps
@@ -19,13 +19,13 @@ jobs:
     environment:
       CC_TEST_REPORTER_ID: aec1c3a2f65889063c46c4c53040381548d8915af5964adb4f188a0bff376e9f
     docker:
-      - image: cimg/ruby:3.0.5-node
+      - image: cimg/ruby:3.0.3-node
         environment:
           RAILS_ENV: test
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
 
-      - image: circleci/postgres:9.6.2-alpine
+      - image: cimg/postgres:9.6.22
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: finance_test
@@ -48,6 +48,9 @@ jobs:
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
       - run:
+          name: Install webpacker
+          command: bundle exec rails webpacker:compile
+      - run:
           name: Rspec
           command: |
             ./cc-test-reporter before-build
@@ -56,13 +59,13 @@ jobs:
 
   rubocop:
     docker:
-      - image: cimg/ruby:3.0.5-node
+      - image: cimg/ruby:3.0.3-node
         environment:
           RAILS_ENV: test
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
 
-      - image: circleci/postgres:9.6.2-alpine
+      - image: cimg/postgres:9.6.22
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: finance_test
@@ -76,13 +79,13 @@ jobs:
 
   rails_best_practices:
     docker:
-      - image: cimg/ruby:3.0.5-node
+      - image: cimg/ruby:3.0.3-node
         environment:
           RAILS_ENV: test
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
 
-      - image: circleci/postgres:9.6.2-alpine
+      - image: cimg/postgres:9.6.22
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: finance_test

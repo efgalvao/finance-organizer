@@ -1,4 +1,4 @@
-FROM ruby:3.0-alpine AS builder
+FROM ruby:3.0-alpine
 
 RUN apk add \
   build-base \
