@@ -1,4 +1,4 @@
-FROM cimg/ruby:3.0.3-node
+FROM ruby:3.0-alpine
 
 RUN apk add \
   build-base \
