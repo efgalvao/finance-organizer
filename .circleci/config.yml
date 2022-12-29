@@ -49,7 +49,7 @@ jobs:
             chmod +x ./cc-test-reporter
       - run:
           name: Install webpacker
-          command: NODE_ENV=test bundle exec rails webpacker:compile
+          command: bundle exec rails webpacker:compile
       - run:
           name: Rspec
           command: |
