@@ -5,14 +5,6 @@ orbs:
   node: circleci/node@5.0.3
 
 jobs:
-  build:
-    docker:
-      - image: cimg/ruby:3.0.5-node
-    steps:
-      - checkout
-      - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
 
   rspec:
     environment:
@@ -47,7 +39,9 @@ jobs:
             chmod +x ./cc-test-reporter
       - run:
           name: Assets procompile
-          command: bundle exec rails assets:precompile
+          command: |
+            npm --depth 20 update --save caniuse-lite browserslist
+            bundle exec rails assets:precompile
       - run:
           name: Rspec
           command: |
@@ -98,13 +92,6 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build
-      - rspec:
-          requires:
-            - build
-      - rubocop:
-          requires:
-            - build
-      - rails_best_practices:
-          requires:
-            - build
+      - rspec
+      - rubocop
+      - rails_best_practices
