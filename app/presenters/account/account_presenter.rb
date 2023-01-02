@@ -68,39 +68,19 @@ module Account
     end
 
     def sum_current_treasuries
-      @sum_current_treasuries ||= begin
-        current_sum = ordered_not_released_treasuries.inject(0) do |sum, elem|
-          sum + elem.current_value_cents
-        end
-        Money.new(current_sum)
-      end
+      @sum_current_treasuries ||= Money.new(ordered_not_released_treasuries.sum(&:current_value_cents))
     end
 
     def sum_invested_treasuries
-      @sum_invested_treasuries ||= begin
-        treasuries_sum = ordered_not_released_treasuries.inject(0) do |sum, elem|
-          sum + elem.invested_value_cents
-        end
-        Money.new(treasuries_sum)
-      end
+      @sum_invested_treasuries ||= Money.new(ordered_not_released_treasuries.sum(&:invested_value_cents))
     end
 
     def sum_invested_stocks
-      @sum_invested_stocks ||= begin
-        sum_invested = stocks.inject(0) do |sum, elem|
-          sum + elem.invested_value_cents
-        end
-        Money.new(sum_invested)
-      end
+      @sum_invested_stocks ||= Money.new(stocks.sum(&:invested_value_cents))
     end
 
     def sum_current_total_stocks
-      @sum_current_total_stocks ||= begin
-        current_sum = stocks.inject(0) do |sum, elem|
-          sum + elem.current_total_value_cents
-        end
-        Money.new(current_sum)
-      end
+      @sum_current_total_stocks ||= Money.new(stocks.sum(&:current_total_value_cents))
     end
 
     def ordered_stocks
