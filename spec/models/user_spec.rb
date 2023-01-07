@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # let(:account) { create(:account, user: user) }
-  let(:user) { create(:user) }
-
   describe 'associations' do
     it { is_expected.to have_many(:accounts) }
     it { is_expected.to have_many(:reports) }
