@@ -111,7 +111,7 @@ pt:
       incomes: Receitas
       expenses: Despesas
       card_expenses: Despesas no crédito
-      invested: Investido
+      invested: Investimento feito
       balance: Balanço
       updated_invested_value: Valor atual
       total: Total
@@ -123,7 +123,7 @@ pt:
       incomes: Receitas
       expenses: Despesas
       card_expenses: Despesas no crédito
-      invested: Investido
+      invested: Investimento feito
       total: Total
   transactions:
     debit:
