@@ -112,8 +112,8 @@ pt:
       expenses: Despesas
       card_expenses: Despesas no crédito
       invested: Investimento feito
-      balance: Balanço
-      updated_invested_value: Valor atual
+      balance: Saldo
+      updated_invested_value: Em investimentos
       total: Total
       monthly_balance: Saldo mensal
       monthly_dividends: Dividendos mensal
