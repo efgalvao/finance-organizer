@@ -2,11 +2,10 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transactions::ProcessCreditTransaction.call(transactions_params)
 
-    if @transaction
-      redirect_to account_path(id: transactions_params[:account_id]), notice: 'Transaction successfully created.'
-    else
-      render :debit
-    end
+    redirect_to account_path(id: transactions_params[:account_id]), notice: 'Transaction successfully created.'
+  rescue ActiveRecord::RecordInvalid
+    flash[:notice] = 'Transaction not created.'
+    render :debit
   end
 
   def debit

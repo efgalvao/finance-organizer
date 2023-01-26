@@ -12,11 +12,13 @@ module Transactions
 
     def call
       ActiveRecord::Base.transaction do
-        return process_transaction(params) if parcels == 1
-
-        parcels.times do |parcel|
-          transaction = build_transaction(parcel)
-          process_transaction(transaction)
+        if parcels == 1
+          process_transaction(params)
+        else
+          parcels.times do |parcel|
+            transaction = build_transaction(parcel)
+            process_transaction(transaction)
+          end
         end
       end
     end
