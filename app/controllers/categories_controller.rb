@@ -14,6 +14,7 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_path, notice: 'Category successfully created.'
     else
+      flash[:notice] = 'Category not created.'
       render :new
     end
   end
