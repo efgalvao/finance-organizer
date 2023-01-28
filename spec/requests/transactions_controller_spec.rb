@@ -130,4 +130,60 @@ RSpec.describe Transactions, type: :request do
       end
     end
   end
+
+  describe 'POST /transactions/invoice_payment' do
+    let(:account1) { create(:account, balance: 100) }
+    let(:account2) { create(:account, balance: 0) }
+    let(:pay_invoice) { post transactions_invoice_payment_path, params: { invoice_payment: params } }
+
+    before { sign_in(user) }
+
+    context 'with valid data' do
+      let(:params) do
+        { value: 100, sender_id: account1.id, receiver_id: account2.id, date: '2023-01-25' }
+      end
+
+      it 'creates 2 new Transactions' do
+        expect { pay_invoice }.to change(Account::Transaction, :count).by(2)
+      end
+
+      it 'has flash notice' do
+        pay_invoice
+
+        expect(flash[:notice]).to eq('Invoice paid successfully.')
+      end
+
+      it 'redirects to user_summary_path' do
+        pay_invoice
+
+        expect(response).to redirect_to user_summary_path
+      end
+
+      it 'update correctly account balance' do
+        pay_invoice
+
+        account1.reload
+        account2.reload
+
+        expect(account1.balance).to eq(0)
+        expect(account2.balance).to eq(Money.new(10_000))
+      end
+    end
+
+    context 'with invalid data' do
+      let(:params) do
+        {}
+      end
+
+      it 'does not create a new transaction', :aggregate_failures do
+        expect { pay_invoice }.to change(Account::Transaction, :count).by(0)
+      end
+
+      it 'has flash notice' do
+        pay_invoice
+
+        expect(flash[:notice]).to eq('Invoice not paid.')
+      end
+    end
+  end
 end
