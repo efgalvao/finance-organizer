@@ -73,7 +73,7 @@ RSpec.describe Category, type: :request do
       let(:params) { { name: nil } }
 
       it 'does not create a new transaction', :aggregate_failures do
-        expect { new_category }.to change(Category, :count).by(0)
+        expect { new_category }.to change(described_class, :count).by(0)
       end
 
       it 'has flash notice' do

@@ -26,6 +26,82 @@ RSpec.describe 'Investments::Treasury::Treasury', type: :request do
     end
   end
 
+  describe 'GET /investments/treasuries/new' do
+    subject(:get_new_treasury) do
+      get new_treasury_path, params: { treasury: {} }.merge(account_id: account.id)
+    end
+
+    context 'when logged in' do
+      it 'can successfully access new treasury form' do
+        sign_in(user)
+
+        get_new_treasury
+
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access access new treasury form' do
+        get_new_treasury
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe 'GET /investments/treasuries/edit' do
+    subject(:get_edit_treasury) do
+      get edit_treasury_path(treasury.id), params: { treasury: {} }
+    end
+
+    let(:treasury) { create(:treasury, account: account) }
+
+    context 'when logged in' do
+      it 'can successfully access edit treasury form' do
+        sign_in(user)
+
+        get_edit_treasury
+
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access access edit treasury form' do
+        get_edit_treasury
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe 'GET /investments/treasuries/id:/release_form' do
+    subject(:get_release_treasury_form) do
+      get release_form_treasury_path(treasury.id), params: { treasury: {} }
+    end
+
+    let(:treasury) { create(:treasury, account: account) }
+
+    context 'when logged in' do
+      it 'can successfully access release treasury form' do
+        sign_in(user)
+
+        get_release_treasury_form
+
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'with unauthenticated request' do
+      it 'cannot access access release treasury form' do
+        get_release_treasury_form
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
   describe 'GET /investments/treasuries/:id/' do
     let(:treasury) { create(:treasury, account: account) }
 

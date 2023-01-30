@@ -326,3 +326,6 @@ RSpec/MultipleExpectations:
 
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+RSpec/FilePath:
+  Enabled: false
