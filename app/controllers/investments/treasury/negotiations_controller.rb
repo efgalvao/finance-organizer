@@ -12,13 +12,11 @@ module Investments
 
       def create
         @negotiation = Investments::Treasury::CreateNegotiation.call(negotiation_params)
-
-        if @negotiation
-          redirect_to treasury_path(id: negotiation_params[:treasury_id]),
-                      notice: 'Negotiation successfully created.'
-        else
-          render :new
-        end
+        redirect_to treasury_path(id: negotiation_params[:treasury_id]),
+                    notice: 'Negotiation successfully created.'
+      rescue StandardError
+        redirect_to treasury_path(id: negotiation_params[:treasury_id]),
+                    notice: 'Negotiation not created.'
       end
 
       private
