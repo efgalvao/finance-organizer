@@ -24,7 +24,7 @@ class TransactionsController < ApplicationController
     Invoices::ProcessInvoicePayment.call(invoice_params)
     @user = UserPresenter.new(current_user)
     redirect_to user_summary_url, notice: 'Invoice paid successfully.'
-  rescue StandardError => e
+  rescue StandardError
     @user = UserPresenter.new(current_user)
     redirect_to user_summary_url, notice: 'Invoice not paid.', status: :unprocessable_entity
   end
