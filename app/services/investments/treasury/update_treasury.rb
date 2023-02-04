@@ -20,17 +20,9 @@ module Investments
           treasury = Investments::Treasury::Treasury.find(params[:treasury_id])
           treasury.name = params.fetch(:name) { treasury.name }
           treasury.shares += params.fetch(:shares, 0).to_i
-          treasury.invested_value_cents += (params.fetch(:invested, 0).to_f * 100)
-          treasury.current_value_cents = new_current_value(treasury.current_value_cents)
+          treasury.invested_value_cents = params.fetch(:updated_invested, 0)
+          treasury.current_value_cents = params.fetch(:updated_current, 0)
           treasury.save
-        end
-      end
-
-      def new_current_value(value)
-        if params[:amount]
-          params[:amount].to_f * 100
-        else
-          value + params[:invested].to_f * 100
         end
       end
 

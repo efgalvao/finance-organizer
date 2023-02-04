@@ -6,6 +6,6 @@ class FilesController < ApplicationController
 
     redirect_to user_summary_path, notice: 'File uploaded succesfully.'
   rescue StandardError
-    redirect_to user_summary_path, notice: 'File not uploaded'
+    redirect_to user_summary_path, notice: 'File not uploaded.'
   end
 end

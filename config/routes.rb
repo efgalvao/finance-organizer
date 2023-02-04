@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   scope module: 'investments', path: '/investments' do
-    get '/', to: 'investments#index'
+    get '/', to: 'investments#index', as: 'investments'
 
     resources :stocks, controller: 'stock/stocks' do
       get 'current_price', on: :member

@@ -8,17 +8,6 @@
 
   <%= form_with(url: transactions_path, scope: :transaction) do |form| %>
 
-    <% if @transaction.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
-
-        <ul>
-          <% @transaction.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
 
     <div class="form-group">
       <%= form.label t('.description'), class: "input-group-text" %>

@@ -2,11 +2,10 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transactions::ProcessCreditTransaction.call(transactions_params)
 
-    if @transaction
-      redirect_to account_path(id: transactions_params[:account_id]), notice: 'Transaction successfully created.'
-    else
-      render :debit
-    end
+    redirect_to account_path(id: transactions_params[:account_id]), notice: 'Transaction successfully created.'
+  rescue ActiveRecord::RecordInvalid
+    flash[:notice] = 'Transaction not created.'
+    render :debit
   end
 
   def debit
@@ -24,10 +23,10 @@ class TransactionsController < ApplicationController
   def invoice_payment
     Invoices::ProcessInvoicePayment.call(invoice_params)
     @user = UserPresenter.new(current_user)
-    redirect_to user_summary_url
-  rescue StandardError => e
+    redirect_to user_summary_url, notice: 'Invoice paid successfully.'
+  rescue StandardError
     @user = UserPresenter.new(current_user)
-    redirect_to user_summary_url, notice: e.message.to_s, status: :unprocessable_entity
+    redirect_to user_summary_url, notice: 'Invoice not paid.', status: :unprocessable_entity
   end
 
   private

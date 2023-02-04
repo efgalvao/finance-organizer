@@ -45,12 +45,12 @@ RSpec.describe Category, type: :request do
   end
 
   describe 'POST /categories' do
-    let(:new_category) { post categories_path, params: { category: { name: Faker::Commerce.department }, user: user } }
+    let(:new_category) { post categories_path, params: { category: params, user: user } }
 
     before { sign_in(user) }
 
     context 'with valid data' do
-      let(:params) { attributes_for(:category) }
+      let(:params) { { name: Faker::Commerce.department } }
 
       it 'creates a new category' do
         expect { new_category }.to change(described_class, :count).by(1)
@@ -70,12 +70,16 @@ RSpec.describe Category, type: :request do
     end
 
     context 'with invalid data' do
-      let(:invalid_category) { build(:category) }
+      let(:params) { { name: nil } }
 
-      it 'does not create a new category' do
-        invalid_category.name = nil
+      it 'does not create a new transaction', :aggregate_failures do
+        expect { new_category }.to change(described_class, :count).by(0)
+      end
 
-        expect(invalid_category).not_to be_valid
+      it 'has flash notice' do
+        new_category
+
+        expect(flash[:notice]).to eq('Category not created.')
       end
     end
   end
@@ -103,20 +107,29 @@ RSpec.describe Category, type: :request do
   describe 'PUT /cateories/:id' do
     context 'when logged' do
       let(:expected_name) { Faker::Books::Dune.title }
+      let(:put_category) do
+        put category_path(category), params: { category: { name: expected_name } }
+      end
 
       before { sign_in(user) }
 
       it 'can successfully update a category', :aggregate_failures do
-        put category_path(category), params: {
-          category: {
-            name: expected_name
-          }
-        }
+        put_category
 
         category.reload
         expect(category.name).to eq(expected_name)
+      end
+
+      it 'has flash notice' do
+        put_category
+
+        expect(flash[:notice]).to eq('Category successfully updated.')
+      end
+
+      it 'redirects to categories_path' do
+        put_category
+
         expect(response).to redirect_to categories_path
-        expect(response.request.flash[:notice]).to eq 'Category successfully updated.'
       end
     end
 
@@ -150,13 +163,24 @@ RSpec.describe Category, type: :request do
 
   describe 'DELETE /category/id:/delete' do
     let!(:new_category) { create(:category, user: user) }
+    let(:delete_category) { delete category_path(new_category) }
 
     before { sign_in(user) }
 
     context 'when successfully' do
       it 'deletes a category', :aggregate_failures do
-        expect { delete category_path(new_category) }.to change(described_class, :count).by(-1)
-        expect(flash[:notice]).to eq 'Category successfully removed.'
+        expect { delete_category }.to change(described_class, :count).by(-1)
+      end
+
+      it 'has flash notice' do
+        delete_category
+
+        expect(flash[:notice]).to eq('Category successfully removed.')
+      end
+
+      it 'redirects to categories_path' do
+        delete_category
+
         expect(response).to redirect_to categories_path
       end
     end
