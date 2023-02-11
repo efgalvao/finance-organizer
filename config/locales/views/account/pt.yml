@@ -35,7 +35,9 @@ pt:
         transactions: Transações
         new_transaction: Nova transação
         new_transference: Nova transferência
-        monthly_balance: Saldo mensal(últimos 6 meses)
+        monthly_total_balance: Balanço total(últimos 6 meses)
+        total_balance: Balanço
+        monthly_balance: Resumo mensal(últimos 6 meses)
         incomes: Receitas
         expenses: Despesas
         invested: Investido
@@ -48,12 +50,16 @@ pt:
         incomes: Receitas
         expenses: Despesas
         invested: Investido
-        balance: Saldo
+        balance: Balanço
       stocks:
         summary_for: Resumo para
         summary: Resumo
         balance: Saldo
+        monthly_total_balance: Balanço total(últimos 6 meses)
+        total_balance: Balanço
         balance_plus_investments: Saldo + Investimentos
+        incomes: Receitas
+        expenses: Despesas
         invested: Investido
         updated_invested_value: Valor investido atualizado
         transactions: Transações
@@ -61,7 +67,7 @@ pt:
         new_transference: Nova transferência
         new_stock: Nova ação
         new_treasury: Novo tesouro
-        monthly_balance: Saldo mensal(últimos 6 meses)
+        monthly_balance: Resumo mensal(últimos 6 meses)
       stocks_summary:
         title: Renda variável
         invested: Investido
@@ -97,11 +103,11 @@ pt:
         incomes: Receitas
         expenses: Despesas
         invested: Investido
-        balance: Saldo
+        balance: Balanço
       cards:
         title: Cartões
         name: Nome
-        balance: Saldo
+        balance: Balanço
         last_balance_date: Data do último saldo
         actions: Ações
         new_card: Novo cartão
