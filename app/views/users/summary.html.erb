@@ -22,9 +22,7 @@
       </tr>
     </tbody>
   </table>
-</div>
 
-<div>
   <table class="striped">
     <thead>
       <tr>
@@ -48,13 +46,36 @@
 </div>
 
 <div class="summary-item">
-  <%= render 'incomes_expenses' %>
+  <p class="summary-subtitle"><%=  t('.past_months') %></p>
+
+  <table class="striped responsive-table">
+    <thead>
+      <tr>
+        <th><%= t('.month') %></th>
+        <th><%= t('.incomes') %></th>
+        <th><%= t('.expenses') %></th>
+        <th><%= t('.card_expenses') %></th>
+        <th><%= t('.invested') %></th>
+        <th><%= t('.total') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.incomes_expenses_report.each do |month, data| %>
+        <tr>
+          <td><%= month %></td>
+          <td><%= number_to_currency(data.incomes, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(data.expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(data.card_expenses, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(data.invested, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+          <td><%= number_to_currency(data.final, unit: 'R$ ', separator: ',', delimiter: '.') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <div class="summary-item">
-  <div class="summary-subtitle">
-    <%= t('.accounts') %><br />
-  </div>
+  <p class="summary-subtitle"><%= t('.accounts') %></p>
   <table class="striped responsive-table">
     <thead>
       <tr>
@@ -78,9 +99,7 @@
 </div>
 
 <div class="summary-item">
-  <div class="summary-subtitle">
-    <%= t('.monthly_balance') %><br />
-  </div>
+  <p class="summary-subtitle"><%= t('.monthly_balance') %></p>
   <div class="chart">
   <%= line_chart [
         { name: t('.total_balance'), data: @user.semester_summary[:total] },
@@ -91,10 +110,7 @@
 </div>
 
 <div class="summary-item">
-
-  <div class="summary-subtitle">
-    <%= t('.monthly_dividends') %><br />
-  </div>
+  <p class="summary-subtitle"><%= t('.monthly_dividends') %></p>
   <div class="chart">
     <%= line_chart @user.last_semester_total_dividends, precision: 8 %>
   </div>

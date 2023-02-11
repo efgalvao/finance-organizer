@@ -29,50 +29,39 @@ pt:
         kind_savings: Conta Corrente
         kind_broker: Corretora
         kind_card: Cartão
-      savings:
-        summary_for: Resumo para
-        current_balance: Saldo atual
-        transactions: Transações
-        new_transaction: Nova transação
-        new_transference: Nova transferência
-        monthly_total_balance: Balanço total(últimos 6 meses)
-        total_balance: Balanço
-        monthly_balance: Resumo mensal(últimos 6 meses)
-        incomes: Receitas
-        expenses: Despesas
-        invested: Investido
-        balance: Saldo
-      savings_table:
-        current_month: Mês atual
-        last_update: Última atualizacão
-        past_months: Últimos 6 meses
-        month: Mês
-        incomes: Receitas
-        expenses: Despesas
-        invested: Investido
-        balance: Balanço
-      stocks:
-        summary_for: Resumo para
-        summary: Resumo
-        balance: Saldo
-        monthly_total_balance: Balanço total(últimos 6 meses)
-        total_balance: Balanço
-        balance_plus_investments: Saldo + Investimentos
-        incomes: Receitas
-        expenses: Despesas
-        invested: Investido
-        updated_invested_value: Valor investido atualizado
+      show:
         transactions: Transações
         new_transaction: Nova transação
         new_transference: Nova transferência
         new_stock: Nova ação
         new_treasury: Novo tesouro
-        monthly_balance: Resumo mensal(últimos 6 meses)
+      stocks:
+        # summary_for: Resumo para
+        # transactions: Transações
+        # new_transaction: Nova transação
+        # new_transference: Nova transferência
+        # new_stock: Nova ação
+        # new_treasury: Novo tesouro
+        # monthly_balance: Resumo mensal(últimos 6 meses)
       stocks_summary:
         title: Renda variável
         invested: Investido
         updated: Atualizado
         quantity: Quantidade
+      summary:
+        summary: Resumo
+        balance: Saldo
+        balance_plus_investments: Saldo + Investimentos
+        updated_invested_value: Valor investido atualizado
+        invested: Valor Investido
+        current_month: Mês atual
+        last_update: Última atualizacão
+        incomes: Receitas
+        expenses: Despesas
+        month_balance: Balanço
+        last_six_months: Últimos 6 meses
+        total_balance: Balanço
+        month: Mês
       treasuries_summary:
         title: Renda fixa
         invested: Investido
@@ -87,7 +76,7 @@ pt:
         current_share_value: Valor atual da cota
         current_total_value: Valor total atual
         dividends_received: Dividendos recebidos(últimos 6 meses)
-        stock_prices: Preços das ações(últimos 6 meses)
+        prices_last_six_months: Cotação - Últimos 6 meses
       treasuries_list:
         treasuries: Renda fixa
         name: Nome
@@ -95,15 +84,7 @@ pt:
         current_value: Valor atual
         shares: Cotas
         last_update: Última atualização
-      stocks_table:
-        current_month: Mês atual
-        last_update: Última atualizacão
-        past_months: Últimos 6 meses
-        month: Mês
-        incomes: Receitas
-        expenses: Despesas
-        invested: Investido
-        balance: Balanço
+        position_last_six_months: Posição - Últimos 6 meses
       cards:
         title: Cartões
         name: Nome

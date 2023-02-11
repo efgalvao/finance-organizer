@@ -117,14 +117,9 @@ pt:
       total: Total
       monthly_balance: Saldo mensal
       monthly_dividends: Dividendos mensal
-    incomes_expenses:
-      past_months: Últimos 6 meses
+      past_months: Resumo - Últimos 6 meses
       month: Mês
-      incomes: Receitas
-      expenses: Despesas
-      card_expenses: Despesas no crédito
       invested: Investimento feito
-      total: Total
   transactions:
     debit:
       title: Nova Transação no débito
