@@ -1,6 +1,6 @@
 module Account
   class Transaction < ApplicationRecord
-    belongs_to :account
+    belongs_to :account, touch: true
 
     monetize :value_cents
 

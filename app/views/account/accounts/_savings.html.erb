@@ -27,9 +27,16 @@
   <%= link_to t('.new_transference'), new_transference_path, :class => "btn primary-btn" %>
 </div>
 
-<div class="account-item">
-  <% if @account.kind == 'savings' %>
-    <%= render 'savings_table' %>
+<div class="summary-item">
+  <div class="summary-subtitle">
+    <%= t('.monthly_total_balance') %><br />
+  </div>
+
+  <div class="chart">
+  <%= line_chart [
+    { name: t('.total_balance'), data: @account.semester_summary[:total_balance] }
+  ], precision: 8 %>
+  </div>
 </div>
 
 <div class="account-item">
@@ -39,12 +46,18 @@
 
   <div class="chart">
     <%= line_chart [
-    { name: t('.incomes'), data: @account.semester_summary[:income] },
-    { name: t('.expenses'), data: @account.semester_summary[:expense] },
-    { name: t('.invested'), data: @account.semester_summary[:invested] },
-    { name: t('.balance'), data: @account.semester_summary[:final] }
-      ], precision: 8 %>
+      { name: t('.incomes'), data: @account.semester_summary[:income] },
+      { name: t('.expenses'), data: @account.semester_summary[:expense] },
+      { name: t('.invested'), data: @account.semester_summary[:invested] },
+      { name: t('.balance'), data: @account.semester_summary[:final] }
+    ], precision: 8 %>
   </div>
 </div>
+
+<div class="account-item">
+  <% if @account.kind == 'savings' %>
+    <%= render 'savings_table' %>
+</div>
+
   <% end %>
 </div>

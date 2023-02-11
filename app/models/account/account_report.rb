@@ -7,6 +7,8 @@ module Account
     monetize :invested_cents
     monetize :final_cents
     monetize :dividends_cents
+    monetize :total_balance_cents
+
     validates :account_id, presence: true
   end
 end

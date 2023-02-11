@@ -2,12 +2,11 @@ module Investments
   module Stock
     class UpdateStock < ApplicationService
       def initialize(params)
-        @params = params
-        @ticker = params.fetch(:ticker, '')
+        @stock_id = params.fetch(:stock_id)
+        @date = params.fetch(:date, Time.current)
+        @value = params.fetch(:value, 0).to_f
         @quantity = params.fetch(:quantity, 0)
         @invested = params.fetch(:invested, 0).to_f * 100
-        @value = params.fetch(:value, nil)
-        @stock = Investments::Stock::Stock.find(params[:stock_id])
       end
 
       def self.call(params)
@@ -16,37 +15,47 @@ module Investments
 
       def call
         update_stock
+        update_account_report
       end
 
       private
 
-      attr_reader :params, :stock, :ticker, :quantity, :invested, :value
+      attr_reader :stock_id, :date, :value, :quantity, :invested
 
       def update_stock
         ActiveRecord::Base.transaction do
-          stock.ticker = ticker.empty? ? stock.ticker : ticker
           stock.shares_total += quantity.to_i
           stock.invested_value_cents += invested
-          stock.current_value_cents = new_current_value
-          stock.current_total_value_cents = new_current_total_value
-          stock.save
+          stock.current_value_cents = new_current_value_cents
+          stock.current_total_value_cents = new_current_total_value_cents
+          stock.save!
         end
       end
 
-      def new_current_value
-        if value.nil?
-          stock.current_value_cents
+      def new_current_value_cents
+        value * 100
+      end
+
+      def new_current_total_value_cents
+        if value.zero?
+          stock.current_total_value_cents
         else
-          value.to_f * 100.0
+          (value * 100) * stock.shares_total
         end
       end
 
-      def new_current_total_value
-        if value.nil?
-          stock.current_value_cents * stock.shares_total
-        else
-          (value.to_f * 100) * stock.shares_total
-        end
+      def update_account_report
+        AccountReport::UpdateAccountReport.call(account_id: stock.account_id, params: update_report_params)
+      end
+
+      def update_report_params
+        {
+          date: date
+        }
+      end
+
+      def stock
+        @stock ||= Investments::Stock::Stock.find(stock_id)
       end
     end
   end
