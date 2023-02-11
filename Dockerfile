@@ -13,5 +13,6 @@ COPY . .
 EXPOSE 3000
 RUN bin/rails webpacker:install
 RUN bundle exec rake assets:precompile
+RUN bundle exec rails db:migrate
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
