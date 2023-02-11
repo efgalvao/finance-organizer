@@ -9,7 +9,7 @@ RUN apk add \
 WORKDIR /app
 COPY Gemfile* .
 RUN bundle install
-RUN bundle exec rails db:migrate
+RUN bundle exec rake db:migrate
 COPY . .
 EXPOSE 3000
 RUN bin/rails webpacker:install
