@@ -1,6 +1,4 @@
-<div class="account-subtitle">
-  <%= t('.stocks') %>
-  </div>
+<p class="summary-subtitle"><%= t('.stocks') %></p>
 <div class="account-item">
   <table class="striped responsive-table">
     <thead>
@@ -27,17 +25,12 @@
     </tbody>
   </table>
 
-  <div class="account-subtitle">
-    <%= t('.dividends_received') %><br />
-  </div>
+  <p class="summary-subtitle"><%= t('.dividends_received') %></p>
   <div class="chart">
     <%= line_chart @account.last_semester_total_dividends_received, precision: 8 %>
   </div>
 
-  <div class="account-subtitle">
-    <%= t('.stock_prices') %>:
-  </div>
-
+  <p class="summary-subtitle"><%= t('.prices_last_six_months') %></p>
   <div class="chart">
     <%= line_chart @account.stocks.map { |stock| {
         name: stock.ticker, data: stock.last_semester_prices
