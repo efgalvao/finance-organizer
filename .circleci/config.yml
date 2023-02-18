@@ -23,7 +23,8 @@ jobs:
           POSTGRES_PASSWORD: postgres
     steps:
       - checkout
-      - ruby/install-deps
+      - ruby/install-deps:
+          with-cache: true
       - node/install:
           install-yarn: true
           node-version: '16.13'
