@@ -38,7 +38,7 @@ module Transactions
     end
 
     def category_id(category_name)
-      Category.find_by(name: category_name)&.id.presence || Category.find_by(name: 'Diversos')&.id
+      Category.find_by(name: category_name.capitalize)&.id.presence || Category.find_by(name: 'Diversos')&.id
     end
   end
 end
