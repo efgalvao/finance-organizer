@@ -19,7 +19,13 @@ module Files
     attr_reader :file, :user_id
 
     def parse_file
-      Files::JsonParser.call(file) if file.content_type == 'application/json'
+      if file.content_type == 'application/json'
+        Files::JsonParser.call(file)
+      elsif file.content_type == 'text/csv'
+        Files::CsvParser.call(file)
+      else
+        raise StandardError, 'Invalid content type'
+      end
     end
 
     def process_file(content)
