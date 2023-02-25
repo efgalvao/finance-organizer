@@ -23,8 +23,17 @@ jobs:
           POSTGRES_PASSWORD: postgres
     steps:
       - checkout
-      - ruby/install-deps:
-          with-cache: true
+      - restore_cache:
+          keys:
+          - bundle-cache-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install gems
+          command:  bundle install --path vendor/bundle
+      # Cache Dependencies
+      - save_cache:
+          key: bundle-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - node/install:
           install-yarn: true
           node-version: '16.13'
@@ -65,7 +74,17 @@ jobs:
           POSTGRES_PASSWORD: postgres
     steps:
       - checkout
-      - ruby/install-deps
+      - restore_cache:
+          keys:
+          - bundle-cache-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install gems
+          command:  bundle install --path vendor/bundle
+      # Cache Dependencies
+      - save_cache:
+          key: bundle-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run:
           name: rubocop
           command: bundle exec rubocop
@@ -85,7 +104,17 @@ jobs:
           POSTGRES_PASSWORD: postgres
     steps:
       - checkout
-      - ruby/install-deps
+      - restore_cache:
+          keys:
+          - bundle-cache-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install gems
+          command:  bundle install --path vendor/bundle
+      # Cache Dependencies
+      - save_cache:
+          key: bundle-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run:
           name: rails_best_practices
           command: bundle exec rails_best_practices
