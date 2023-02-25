@@ -72,7 +72,9 @@ pt:
   files:
     file_upload:
       title: Fazer upload de arquivo
-      disclaimer: Somente arquivos nos formatos JSON e CSV sao aceitos
+      disclaimer: |
+        Somente arquivos nos formatos JSON e CSV sao aceitos.
+        * Arquivos CSV somente para importar transações.
       csv: CSV
       json: JSON
       upload: Fazer upload
