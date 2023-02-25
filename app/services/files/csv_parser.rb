@@ -12,6 +12,8 @@ module Files
 
     def call
       parse_file
+    rescue NoMethodError
+      'Invalid CSV file'
     end
 
     private

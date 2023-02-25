@@ -19,9 +19,10 @@ module Files
     attr_reader :file, :user_id
 
     def parse_file
-      if file.content_type == 'application/json'
+      case file.content_type
+      when 'application/json'
         Files::JsonParser.call(file)
-      elsif file.content_type == 'text/csv'
+      when 'text/csv'
         Files::CsvParser.call(file)
       else
         raise StandardError, 'Invalid content type'
