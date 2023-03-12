@@ -11,7 +11,7 @@ module Investments
         if @share
           redirect_to stock_path(id: params[:stock_id]), notice: 'Share successfully created.'
         else
-          render :new
+          redirect_to stock_path(id: params[:stock_id]), notice: 'Share not created.'
         end
       end
 

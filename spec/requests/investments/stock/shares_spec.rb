@@ -31,7 +31,7 @@ RSpec.describe 'Share', type: :request do
     end
 
     context 'with invalid data' do
-      let(:params) { { stock_id: stock.id, invested: 0, quantity: 0, date: '2022-09-19' } }
+      let(:params) { { stock_id: stock.id, invested: 'a', quantity: 0, date: '2022-09-19' } }
 
       it 'does not create a new share' do
         expect { post_share }.not_to change(Investments::Stock::Share, :count)
