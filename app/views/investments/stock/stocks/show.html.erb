@@ -44,6 +44,7 @@
 <div>
   <%= link_to t('.new_dividend'), new_stock_dividend_path(@stock), class: 'btn primary-btn' %>
   <%= link_to t('.new_share'), new_stock_share_path(@stock), class: 'btn primary-btn' %>
+  <%= link_to t('.sell_share'), stock_sell_path(@stock), class: 'btn primary-btn' %>
   <%= link_to t('.new_price'), new_stock_price_path(stock_id: @stock.id), class: 'btn primary-btn' %>
   <%= link_to t('.get_new_price'), current_price_stock_path(@stock), class: 'btn primary-btn' %>
 </div>

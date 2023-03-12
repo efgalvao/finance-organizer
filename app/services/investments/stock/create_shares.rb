@@ -4,7 +4,7 @@ module Investments
       def initialize(params)
         @params = params
         @stock = Investments::Stock::Stock.find(params[:stock_id])
-        @quantity = params.fetch(:quantity, 1).to_i
+        @quantity = params.fetch(:quantity, 0).to_i
         @date = set_date
         @invested = params.fetch(:invested, 0).to_f
       end
@@ -14,6 +14,8 @@ module Investments
       end
 
       def call
+        return false if invested.zero? && quantity.zero?
+
         create_share
       end
 

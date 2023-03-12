@@ -28,12 +28,17 @@ module Investments
           stock.invested_value_cents += invested
           stock.current_value_cents = new_current_value_cents
           stock.current_total_value_cents = new_current_total_value_cents
+
           stock.save!
         end
       end
 
       def new_current_value_cents
-        value * 100
+        if value.zero?
+          stock.current_value_cents
+        else
+          value * 100
+        end
       end
 
       def new_current_total_value_cents

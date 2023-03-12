@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       resources :dividends, controller: 'stock/dividends', only: %i[new create]
       resources :prices, controller: 'stock/prices', only: %i[new create]
       resources :shares, controller: 'stock/shares', only: %i[new create]
+      get '/sell', to: 'stock/shares#sell'
+      post '/sell_shares', to: 'stock/shares#sell_shares'
     end
 
     resources :treasuries, controller: 'treasury/treasuries' do

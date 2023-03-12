@@ -6,7 +6,8 @@
 </div>
 
 <div class="form">
-  <%= form_with(url: stock_shares_path, scope: :share, local:true) do |form| %>
+  <%= form_with(url: stock_sell_shares_path, scope: :sell, local:true) do |form| %>
+
     <form>
       <div class="form-group">
         <%= form.label t('.date'), class: "input-group-text" %>
@@ -14,13 +15,13 @@
       </div>
 
       <div class="form-group">
-        <%= form.label t('.total_invested'), class: "input-group-text"%>
-        <%= form.number_field :invested, as: :numeric, step: :any, class: "form-control"%>
+        <%= form.label t('.total_received'), class: "input-group-text"%>
+        <%= form.number_field :received, as: :numeric, step: :any, class: "form-control"%>
       </div>
 
       <div class="form-group">
         <%= form.label t('.share_amount'), class: "input-group-text" %>
-        <%= form.number_field :quantity, as: :numeric, step: :any, class: "form-control" %>
+        <%= form.number_field :quantity, as: :numeric, in: 1..@stock.shares_total, step: 1, class: "form-control" %>
       </div>
 
       <div class="form-group">
