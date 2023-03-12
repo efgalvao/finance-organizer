@@ -33,7 +33,11 @@ module Investments
       end
 
       def new_current_value_cents
-        value * 100
+        if value.zero?
+          stock.current_value_cents
+        else
+          value * 100
+        end
       end
 
       def new_current_total_value_cents

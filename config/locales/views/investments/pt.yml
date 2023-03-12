@@ -27,9 +27,16 @@ pt:
           cancel: Cancelar
       shares:
         new:
-          title: ' Nova cota'
+          title: ' Comprar cota'
           date: Data
           total_invested: Total investido
+          share_amount: Quantidade de cotas
+          save: Salvar
+          cancel: Cancelar
+        sell:
+          title: ' Vender cota'
+          date: Data
+          total_received: Total recebido
           share_amount: Quantidade de cotas
           save: Salvar
           cancel: Cancelar
@@ -67,7 +74,8 @@ pt:
           current_total_value: Valor total atual
           current_share_value: Valor médio atual
           new_dividend: Novo dividendo
-          new_share: Nova cota
+          new_share: Comprar cota
+          sell_share: Vender cota
           new_price: Novo preço
           get_new_price: Obter preço
           shares: Cotas
